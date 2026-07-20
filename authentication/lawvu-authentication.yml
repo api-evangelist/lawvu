@@ -1,0 +1,78 @@
+generated: '2026-07-19'
+method: searched
+source: https://api-docs.lawvu.com/docs/guides/authentication
+docs: https://api-docs.lawvu.com/docs/guides/authentication
+client_management_docs: https://api-docs.lawvu.com/docs/guides/integration-clients
+note: >-
+  The published OpenAPI documents for the LawVu API declare no components.securitySchemes,
+  so this profile is searched from the authentication guide rather than derived from the specs.
+summary:
+  types:
+  - oauth2
+  oauth2_flows:
+  - authorizationCode
+  bearer_token: true
+  api_keys: false
+schemes:
+- name: OAuth2 Authorization Code
+  type: oauth2
+  flow: authorizationCode
+  authorization_url_template: https://{web_host}/#/authorize
+  token_url_template: https://{api_host}/account-apis/v1/auth/token
+  token_operation: openapi/lawvu-account-openapi-original.json#post-v1-auth-token
+  hosts:
+    web_host:
+      production: go.lawvu.com
+      sandbox: demo.lawvu.com
+    api_host:
+      production: api.lawvu.com
+      sandbox: api-sandbox.lawvu.com
+  grant_types:
+  - authorization_code
+  - refresh_token
+  client_secret: optional
+  pkce: not documented
+  scopes_documented: false
+  token_format: JWT (base64-encoded), carries sub / name / organisationId / exp / iat claims
+  token_presentation: 'Authorization: Bearer {access_token}'
+  request_encoding: application/x-www-form-urlencoded
+refresh_tokens:
+  single_use: true
+  rotation: a new access_token + refresh_token pair is issued on every refresh; the
+    previous refresh token is invalidated
+  lifetimes:
+  - condition: client_secret supplied in token requests
+    lifetime: 30 days
+  - condition: no client_secret supplied (public clients / SPAs)
+    lifetime: 1 day
+  unattended_use: >-
+    after the first interactive authorization the refresh token can maintain server-to-server
+    access indefinitely; the first token pair must always be obtained interactively
+redirect_uris:
+  scheme: HTTPS absolute URLs only (or http://localhost)
+  relative_paths_allowed: false
+  exact_match_required: true
+  per_request_data: use the OAuth `state` parameter, not a varying redirect_uri
+  whitelisting:
+    sandbox: any redirect URI accepted, no pre-registration
+    production: must be whitelisted by LawVu when the client is registered
+security_model:
+  delegated: true
+  description: >-
+    every call made with a token issued through the authorization code flow executes under
+    the security context of the user who granted consent; that user's roles, permissions and
+    data-access restrictions apply to every request
+client_registration:
+  self_service: true
+  location: LawVu app > Integrations > Custom Integrations
+  required_permission: Manage Integrations
+  client_secret_shown_once: true
+  client_secret_expires: true
+  sandbox_clients_migratable_to_production: false
+deprecated_mechanisms:
+- name: Ocp-Apim-Subscription-Key
+  status: removed
+  date: '2024-02-26'
+  note: subscription keys are no longer required; the header is ignored if supplied
+  source: https://api-docs.lawvu.com/docs/changelog
+errors_reference: errors/lawvu-problem-types.yml
