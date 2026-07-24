@@ -1,0 +1,65 @@
+openapi: 3.0.1
+info:
+  title: LawVu Account Auth ContractStatusMessage API
+  description: Apis for account related resources (authentication, profiles, organisation details etc)
+  version: '1.0'
+servers:
+- url: https://api-sandbox.lawvu.com/account-apis
+  description: Sandbox API
+- url: https://api.lawvu.com/account-apis
+  description: Production API
+tags:
+- name: ContractStatusMessage
+paths:
+  /v1/contracts/{contractId}/statusMessages:
+    post:
+      tags:
+      - ContractStatusMessage
+      summary: Add a status message to a contract
+      description: Add status message to a contract
+      operationId: post-v1-contracts-contractid-statusmessages
+      parameters:
+      - name: contractId
+        in: path
+        description: The Id of the contract
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        description: The status message to add
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/ContractStatusMessageModel'
+            example:
+              StatusMessage: Test status message
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContractStatusMessageModel'
+            example:
+              StatusMessage: Test status message
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ContractStatusMessageModel'
+            example:
+              StatusMessage: Test status message
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ContractStatusMessageModel'
+            example:
+              StatusMessage: Test status message
+        required: true
+      responses:
+        '204':
+          description: No Content
+components:
+  schemas:
+    ContractStatusMessageModel:
+      required:
+      - statusMessage
+      type: object
+      properties:
+        statusMessage:
+          type: string
+      additionalProperties: false

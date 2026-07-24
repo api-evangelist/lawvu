@@ -1,0 +1,51 @@
+openapi: 3.0.1
+info:
+  title: LawVu Account Auth Features API
+  description: Apis for account related resources (authentication, profiles, organisation details etc)
+  version: '1.0'
+servers:
+- url: https://api-sandbox.lawvu.com/account-apis
+  description: Sandbox API
+- url: https://api.lawvu.com/account-apis
+  description: Production API
+tags:
+- name: Features
+paths:
+  /v1/features/{featureCode}:
+    get:
+      tags:
+      - Features
+      summary: Get feature
+      description: Retrieves a feature by feature code based on the current authorised users organisation context
+      operationId: get-v1-features-featurecode
+      parameters:
+      - name: featureCode
+        in: path
+        description: The code of the feature
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/FeatureModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FeatureModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/FeatureModel'
+components:
+  schemas:
+    FeatureModel:
+      type: object
+      properties:
+        isEnabled:
+          type: boolean
+        featureCode:
+          type: string
+          nullable: true
+      additionalProperties: false

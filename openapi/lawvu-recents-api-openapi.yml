@@ -1,0 +1,241 @@
+openapi: 3.0.1
+info:
+  title: LawVu Account Auth Recents API
+  description: Apis for account related resources (authentication, profiles, organisation details etc)
+  version: '1.0'
+servers:
+- url: https://api-sandbox.lawvu.com/account-apis
+  description: Sandbox API
+- url: https://api.lawvu.com/account-apis
+  description: Production API
+tags:
+- name: Recents
+paths:
+  /v1/my/recents:
+    get:
+      tags:
+      - Recents
+      summary: Get recent items
+      description: ''
+      operationId: get-v1-my-recents
+      parameters:
+      - name: take
+        in: query
+        description: 'The maximum number of recent items to return<p>Default: 5</p>'
+        schema:
+          type: integer
+          format: int32
+          default: 5
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/RecentItemModelArray'
+              example:
+              - type: file
+                id: 414236
+                title: NDA contract for John Doe - V2.pdf
+                description: LV1762-00001 - Advice on Matter
+                lastActivityDate: '2023-11-07T01:51:41.903'
+                matterId: 164476
+                contractId: null
+                contentType: application/pdf
+                documentId: LV1762-0000004.1
+                ownerId: ''
+                managerId: ''
+                contractStatus: null
+                matterCategoryName: null
+              - type: matter
+                id: 164476
+                title: Advice on Matter
+                description: LV1762-00001
+                lastActivityDate: '2023-11-07T01:51:39.68'
+                matterId: null
+                contractId: null
+                contentType: ''
+                documentId: null
+                ownerId: GUID
+                managerId: null
+                contractStatus: null
+                matterCategoryName: Advice
+              - type: contract
+                id: 78173
+                title: NDA for Contract
+                description: 'Contract ID: 78173'
+                lastActivityDate: '2023-11-06T21:16:25.45'
+                matterId: null
+                contractId: null
+                contentType: ''
+                documentId: null
+                ownerId: GUID
+                managerId: ''
+                contractStatus: Negotiating
+                matterCategoryName: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecentItemModelArray'
+              example:
+              - type: file
+                id: 414236
+                title: NDA contract for John Doe - V2.pdf
+                description: LV1762-00001 - Advice on Matter
+                lastActivityDate: '2023-11-07T01:51:41.903'
+                matterId: 164476
+                contractId: null
+                contentType: application/pdf
+                documentId: LV1762-0000004.1
+                ownerId: ''
+                managerId: ''
+                contractStatus: null
+                matterCategoryName: null
+              - type: matter
+                id: 164476
+                title: Advice on Matter
+                description: LV1762-00001
+                lastActivityDate: '2023-11-07T01:51:39.68'
+                matterId: null
+                contractId: null
+                contentType: ''
+                documentId: null
+                ownerId: GUID
+                managerId: null
+                contractStatus: null
+                matterCategoryName: Advice
+              - type: contract
+                id: 78173
+                title: NDA for Contract
+                description: 'Contract ID: 78173'
+                lastActivityDate: '2023-11-06T21:16:25.45'
+                matterId: null
+                contractId: null
+                contentType: ''
+                documentId: null
+                ownerId: GUID
+                managerId: ''
+                contractStatus: Negotiating
+                matterCategoryName: null
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RecentItemModelArray'
+              example:
+              - type: file
+                id: 414236
+                title: NDA contract for John Doe - V2.pdf
+                description: LV1762-00001 - Advice on Matter
+                lastActivityDate: '2023-11-07T01:51:41.903'
+                matterId: 164476
+                contractId: null
+                contentType: application/pdf
+                documentId: LV1762-0000004.1
+                ownerId: ''
+                managerId: ''
+                contractStatus: null
+                matterCategoryName: null
+              - type: matter
+                id: 164476
+                title: Advice on Matter
+                description: LV1762-00001
+                lastActivityDate: '2023-11-07T01:51:39.68'
+                matterId: null
+                contractId: null
+                contentType: ''
+                documentId: null
+                ownerId: GUID
+                managerId: null
+                contractStatus: null
+                matterCategoryName: Advice
+              - type: contract
+                id: 78173
+                title: NDA for Contract
+                description: 'Contract ID: 78173'
+                lastActivityDate: '2023-11-06T21:16:25.45'
+                matterId: null
+                contractId: null
+                contentType: ''
+                documentId: null
+                ownerId: GUID
+                managerId: ''
+                contractStatus: Negotiating
+                matterCategoryName: null
+components:
+  schemas:
+    RecentItemModelArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/RecentItemModel'
+    RecentItemModel:
+      type: object
+      properties:
+        recordType:
+          enum:
+          - Matter
+          - Milestone
+          - Task
+          - Organisation
+          - Contract
+          - File
+          - InvoiceBatch
+          - KnowledgeArticle
+          - Folder
+          - FolderTemplate
+          - KnowledgeLibrary
+          - InboundEmail
+          - User
+          - MessageThread
+          - TimelineEntry
+          - MatterStatus
+          - ContractStatus
+          - Message
+          - Comment
+          type: string
+          description: <p>Options:</p><ul><li>Matter</li><li>Milestone</li><li>Task</li><li>Organisation</li><li>Contract</li><li>File</li><li>InvoiceBatch</li><li>KnowledgeArticle</li><li>Folder</li><li>FolderTemplate</li><li>KnowledgeLibrary</li><li>InboundEmail</li><li>User</li><li>MessageThread</li><li>TimelineEntry</li><li>MatterStatus</li><li>ContractStatus</li><li>Message</li><li>Comment</li></ul>
+        recordId:
+          type: integer
+          format: int32
+        title:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        lastActivityDateUtc:
+          type: string
+          format: date-time
+        matterId:
+          type: integer
+          format: int32
+          nullable: true
+        contractId:
+          type: integer
+          format: int32
+          nullable: true
+        fileContentType:
+          type: string
+          nullable: true
+        fileId:
+          type: string
+          nullable: true
+        ownerId:
+          type: string
+          nullable: true
+        managerId:
+          type: string
+          nullable: true
+        contractStatus:
+          enum:
+          - Draft
+          - Negotiating
+          - Approval
+          - Signing
+          - Executed
+          - Expired
+          - Void
+          type: string
+          description: <p>Options:</p><ul><li>Draft</li><li>Negotiating</li><li>Approval</li><li>Signing</li><li>Executed</li><li>Expired</li><li>Void</li></ul>
+          nullable: true
+        matterCategoryName:
+          type: string
+          nullable: true
+      additionalProperties: false

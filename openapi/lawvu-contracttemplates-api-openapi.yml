@@ -1,0 +1,159 @@
+openapi: 3.0.1
+info:
+  title: LawVu Account Auth ContractTemplates API
+  description: Apis for account related resources (authentication, profiles, organisation details etc)
+  version: '1.0'
+servers:
+- url: https://api-sandbox.lawvu.com/account-apis
+  description: Sandbox API
+- url: https://api.lawvu.com/account-apis
+  description: Production API
+tags:
+- name: ContractTemplates
+paths:
+  /v1/contractsTemplates:
+    get:
+      tags:
+      - ContractTemplates
+      summary: Get contract templates
+      description: Gets a list of contract templates
+      operationId: get-v1-contractstemplates
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: object
+                additionalProperties:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ContractTemplate'
+              example:
+                Parent 1:
+                - id: 1
+                  name: Template 1
+                  hasWizard: false
+                  team: null
+                  teamRequired: false
+                  hasRules: false
+                - id: 2
+                  name: Template 2
+                  hasWizard: false
+                  team: null
+                  teamRequired: false
+                  hasRules: false
+                Parent 2:
+                - id: 3
+                  name: Template 3
+                  hasWizard: false
+                  team: null
+                  teamRequired: false
+                  hasRules: false
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ContractTemplate'
+              example:
+                Parent 1:
+                - id: 1
+                  name: Template 1
+                  hasWizard: false
+                  team: null
+                  teamRequired: false
+                  hasRules: false
+                - id: 2
+                  name: Template 2
+                  hasWizard: false
+                  team: null
+                  teamRequired: false
+                  hasRules: false
+                Parent 2:
+                - id: 3
+                  name: Template 3
+                  hasWizard: false
+                  team: null
+                  teamRequired: false
+                  hasRules: false
+            text/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ContractTemplate'
+              example:
+                Parent 1:
+                - id: 1
+                  name: Template 1
+                  hasWizard: false
+                  team: null
+                  teamRequired: false
+                  hasRules: false
+                - id: 2
+                  name: Template 2
+                  hasWizard: false
+                  team: null
+                  teamRequired: false
+                  hasRules: false
+                Parent 2:
+                - id: 3
+                  name: Template 3
+                  hasWizard: false
+                  team: null
+                  teamRequired: false
+                  hasRules: false
+  /v1/contractsTemplates/{templateId}/uploadSchema:
+    get:
+      tags:
+      - ContractTemplates
+      summary: Get upload schema
+      description: Gets the schema for creating a new contract from file upload
+      operationId: get-v1-contractstemplates-templateid-uploadschema
+      parameters:
+      - name: templateId
+        in: path
+        description: The ID of the contract template
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Success
+components:
+  schemas:
+    Team:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+      additionalProperties: false
+    ContractTemplate:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+          nullable: true
+        hasWizard:
+          type: boolean
+        team:
+          $ref: '#/components/schemas/Team'
+        teamRequired:
+          type: boolean
+        hasRules:
+          type: boolean
+      additionalProperties: false

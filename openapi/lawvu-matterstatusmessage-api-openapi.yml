@@ -1,0 +1,66 @@
+openapi: 3.0.1
+info:
+  title: LawVu Account Auth MatterStatusMessage API
+  description: Apis for account related resources (authentication, profiles, organisation details etc)
+  version: '1.0'
+servers:
+- url: https://api-sandbox.lawvu.com/account-apis
+  description: Sandbox API
+- url: https://api.lawvu.com/account-apis
+  description: Production API
+tags:
+- name: MatterStatusMessage
+paths:
+  /v1/matters/{matterId}/statusMessages:
+    post:
+      tags:
+      - MatterStatusMessage
+      summary: Add a status message to a matter
+      description: Adds a status message to a matter
+      operationId: post-v1-matters-matterid-statusmessages
+      parameters:
+      - name: matterId
+        in: path
+        description: The Id of the matter
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        description: The status message to add
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/MatterStatusMessageModel'
+            example:
+              StatusMessage: Test status message
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MatterStatusMessageModel'
+            example:
+              StatusMessage: Test status message
+          text/json:
+            schema:
+              $ref: '#/components/schemas/MatterStatusMessageModel'
+            example:
+              StatusMessage: Test status message
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/MatterStatusMessageModel'
+            example:
+              StatusMessage: Test status message
+        required: true
+      responses:
+        '204':
+          description: No Content
+components:
+  schemas:
+    MatterStatusMessageModel:
+      required:
+      - statusMessage
+      type: object
+      properties:
+        statusMessage:
+          minLength: 1
+          type: string
+      additionalProperties: false

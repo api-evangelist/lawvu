@@ -1,0 +1,133 @@
+openapi: 3.0.1
+info:
+  title: LawVu Account Auth MatterTaskTemplates API
+  description: Apis for account related resources (authentication, profiles, organisation details etc)
+  version: '1.0'
+servers:
+- url: https://api-sandbox.lawvu.com/account-apis
+  description: Sandbox API
+- url: https://api.lawvu.com/account-apis
+  description: Production API
+tags:
+- name: MatterTaskTemplates
+paths:
+  /v1/matters/tasktemplates:
+    get:
+      tags:
+      - MatterTaskTemplates
+      summary: Get task templates
+      description: Gets task templates
+      operationId: get-v1-matters-tasktemplates
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/TaskTemplatesArray'
+              example:
+              - id: 1
+                name: name task template 1
+                description: description task template 1
+                createdDateUtc: '2025-01-21T00:44:46.8310951+00:00'
+              - id: 2
+                name: name task template 2
+                description: description task template 2
+                createdDateUtc: '2025-01-21T00:44:46.8311252+00:00'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskTemplatesArray'
+              example:
+              - id: 1
+                name: name task template 1
+                description: description task template 1
+                createdDateUtc: '2025-01-21T00:44:46.8310951+00:00'
+              - id: 2
+                name: name task template 2
+                description: description task template 2
+                createdDateUtc: '2025-01-21T00:44:46.8311252+00:00'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/TaskTemplatesArray'
+              example:
+              - id: 1
+                name: name task template 1
+                description: description task template 1
+                createdDateUtc: '2025-01-21T00:44:46.8310951+00:00'
+              - id: 2
+                name: name task template 2
+                description: description task template 2
+                createdDateUtc: '2025-01-21T00:44:46.8311252+00:00'
+  /v1/matters/{matterId}/taskTemplates:
+    post:
+      tags:
+      - MatterTaskTemplates
+      summary: Add a task template to matter
+      description: Adds a task template to a matter
+      operationId: post-v1-matters-matterid-tasktemplates
+      parameters:
+      - name: matterId
+        in: path
+        description: The ID of the matter
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        description: The ID of the task template
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/AddTaskFromTemplateModel'
+            example:
+              templateId: 1
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddTaskFromTemplateModel'
+            example:
+              templateId: 1
+          text/json:
+            schema:
+              $ref: '#/components/schemas/AddTaskFromTemplateModel'
+            example:
+              templateId: 1
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/AddTaskFromTemplateModel'
+            example:
+              templateId: 1
+        required: true
+      responses:
+        '204':
+          description: No Content
+components:
+  schemas:
+    AddTaskFromTemplateModel:
+      required:
+      - templateId
+      type: object
+      properties:
+        templateId:
+          type: integer
+          format: int32
+      additionalProperties: false
+    TaskTemplatesArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/TaskTemplates'
+    TaskTemplates:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        createdDateUtc:
+          type: string
+          format: date-time
+      additionalProperties: false

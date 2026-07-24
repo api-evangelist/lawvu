@@ -1,0 +1,383 @@
+openapi: 3.0.1
+info:
+  title: LawVu Account Auth Invoices API
+  description: Apis for account related resources (authentication, profiles, organisation details etc)
+  version: '1.0'
+servers:
+- url: https://api-sandbox.lawvu.com/account-apis
+  description: Sandbox API
+- url: https://api.lawvu.com/account-apis
+  description: Production API
+tags:
+- name: Invoices
+paths:
+  /v1/invoices:
+    get:
+      tags:
+      - Invoices
+      summary: Get invoices
+      operationId: get-v1-invoices
+      parameters:
+      - name: skip
+        in: query
+        description: The number of invoices to skip (used for paging)
+        schema:
+          type: integer
+          format: int32
+      - name: filtering.field
+        in: query
+        description: Field to filter by (optional)
+        schema:
+          type: string
+      - name: filtering.operator
+        in: query
+        description: Operator used for filtering (optional)
+        schema:
+          enum:
+          - eq
+          - neq
+          - lt
+          - lte
+          - gt
+          - gte
+          - startswith
+          - endswith
+          - contains
+          - doesnotcon
+          - isnull
+          type: string
+      - name: filtering.value
+        in: query
+        description: Value to filter by (optional)
+        schema:
+          type: string
+      - name: sorting.direction
+        in: query
+        description: Set the sorting direction
+        schema:
+          enum:
+          - asc
+          - desc
+          type: string
+      - name: sorting.field
+        in: query
+        description: Set the sorting fields
+        schema:
+          type: string
+      - name: take
+        in: query
+        description: 'The maximum number of invoices to return<p>Default: 50</p>'
+        schema:
+          type: integer
+          format: int32
+          default: 50
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/InvoiceDataSourceResult'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvoiceDataSourceResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/InvoiceDataSourceResult'
+  /v1/invoices/{invoiceId}:
+    patch:
+      tags:
+      - Invoices
+      summary: Update invoice
+      operationId: patch-v1-invoices-invoiceid
+      parameters:
+      - name: invoiceId
+        in: path
+        description: The invoice Id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        description: The update definition (json patch)
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/OperationArray'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OperationArray'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OperationArray'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/OperationArray'
+      responses:
+        '200':
+          description: Success
+  /v1/invoices/recipients:
+    get:
+      tags:
+      - Invoices
+      summary: Retrieve Invoice Recipients
+      operationId: get-v1-invoices-recipients
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BillingRecipient'
+              example:
+              - id: 1
+                name: Jeff
+                addressLine1: 123 Sesame Street
+                addressLine2: Narnia
+                addressLine3: Antarctica
+                taxType: GST
+                taxNumber: '4'
+                contactName: Bill
+                contactPhone: '17'
+                contactEmail: emailaddress@gmail.com
+              - id: 2
+                name: Steve
+                addressLine1: 124 Sesame Street
+                addressLine2: South Narnia
+                addressLine3: Antarctica
+                taxType: TAX
+                taxNumber: '40'
+                contactName: Stan
+                contactPhone: '71'
+                contactEmail: anotheremailaddress@gmail.com
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BillingRecipient'
+              example:
+              - id: 1
+                name: Jeff
+                addressLine1: 123 Sesame Street
+                addressLine2: Narnia
+                addressLine3: Antarctica
+                taxType: GST
+                taxNumber: '4'
+                contactName: Bill
+                contactPhone: '17'
+                contactEmail: emailaddress@gmail.com
+              - id: 2
+                name: Steve
+                addressLine1: 124 Sesame Street
+                addressLine2: South Narnia
+                addressLine3: Antarctica
+                taxType: TAX
+                taxNumber: '40'
+                contactName: Stan
+                contactPhone: '71'
+                contactEmail: anotheremailaddress@gmail.com
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BillingRecipient'
+              example:
+              - id: 1
+                name: Jeff
+                addressLine1: 123 Sesame Street
+                addressLine2: Narnia
+                addressLine3: Antarctica
+                taxType: GST
+                taxNumber: '4'
+                contactName: Bill
+                contactPhone: '17'
+                contactEmail: emailaddress@gmail.com
+              - id: 2
+                name: Steve
+                addressLine1: 124 Sesame Street
+                addressLine2: South Narnia
+                addressLine3: Antarctica
+                taxType: TAX
+                taxNumber: '40'
+                contactName: Stan
+                contactPhone: '71'
+                contactEmail: anotheremailaddress@gmail.com
+components:
+  schemas:
+    OperationArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/Operation'
+    Invoice:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        invoiceNo:
+          type: string
+          nullable: true
+        invoiceDate:
+          type: string
+          format: date-time
+          nullable: true
+        dueDate:
+          type: string
+          format: date-time
+          nullable: true
+        disbursements:
+          type: number
+          format: double
+          nullable: true
+        fees:
+          type: number
+          format: double
+          nullable: true
+        otherFees:
+          type: number
+          format: double
+          nullable: true
+        fileId:
+          type: integer
+          format: int32
+          nullable: true
+        status:
+          type: string
+          nullable: true
+        fileName:
+          type: string
+          nullable: true
+        batchId:
+          type: integer
+          format: int32
+        thirdParty:
+          type: boolean
+        paid:
+          type: boolean
+          nullable: true
+        paidDateUtc:
+          type: string
+          format: date-time
+          nullable: true
+        paymentNote:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        matterId:
+          type: integer
+          format: int32
+          nullable: true
+        approvedDateUtc:
+          type: string
+          format: date-time
+          nullable: true
+        purchaseOrderNo:
+          type: string
+          nullable: true
+        totalTax:
+          type: number
+          format: double
+          nullable: true
+        approvedFees:
+          type: number
+          format: double
+          nullable: true
+        currency:
+          type: string
+          nullable: true
+        postedDateUtc:
+          type: string
+          format: date-time
+          nullable: true
+        internalNotes:
+          type: string
+          nullable: true
+        billingPeriodStart:
+          type: string
+          format: date-time
+          nullable: true
+        billingPeriodEnd:
+          type: string
+          format: date-time
+          nullable: true
+        serviceProviderName:
+          type: string
+          nullable: true
+        serviceProviderId:
+          type: string
+          nullable: true
+      additionalProperties: false
+    BillingRecipient:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          nullable: true
+        name:
+          type: string
+          nullable: true
+        addressLine1:
+          type: string
+          nullable: true
+        addressLine2:
+          type: string
+          nullable: true
+        addressLine3:
+          type: string
+          nullable: true
+        taxType:
+          enum:
+          - GST
+          - TAX
+          - VAT
+          type: string
+          description: <p>Options:</p><ul><li>GST</li><li>TAX</li><li>VAT</li></ul>
+          nullable: true
+        taxNumber:
+          type: string
+          nullable: true
+        contactName:
+          type: string
+          nullable: true
+        contactPhone:
+          type: string
+          nullable: true
+        contactEmail:
+          type: string
+          nullable: true
+      additionalProperties: false
+    InvoiceDataSourceResult:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Invoice'
+          description: Represents a single page of processed data.
+          nullable: true
+        total:
+          type: integer
+          description: The total number of records available.
+          format: int32
+      additionalProperties: false
+    Operation:
+      type: object
+      properties:
+        value:
+          type: object
+          nullable: true
+        path:
+          type: string
+          nullable: true
+        op:
+          type: string
+          nullable: true
+        from:
+          type: string
+          nullable: true
+      additionalProperties: false

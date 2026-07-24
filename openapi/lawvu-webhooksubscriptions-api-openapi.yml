@@ -1,0 +1,329 @@
+openapi: 3.0.1
+info:
+  title: LawVu Account Auth WebhookSubscriptions API
+  description: Apis for account related resources (authentication, profiles, organisation details etc)
+  version: '1.0'
+servers:
+- url: https://api-sandbox.lawvu.com/account-apis
+  description: Sandbox API
+- url: https://api.lawvu.com/account-apis
+  description: Production API
+tags:
+- name: WebhookSubscriptions
+paths:
+  /v1/webhooks/subscriptions:
+    post:
+      tags:
+      - WebhookSubscriptions
+      summary: Create a subscription
+      description: Create a webhook subscription to receive notifications on events occuring in LawVu
+      operationId: post-v1-webhooks-subscriptions
+      requestBody:
+        description: Details of the webhook subscription to create
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/SaveWebhookSubscriptionModel'
+            example:
+              topics:
+              - matter.created
+              - matter.updated
+              - matter.status.updated
+              subscriptionUrl: https://myapplication.com/incomingwebhooks
+              clientState: supersecretstring
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SaveWebhookSubscriptionModel'
+            example:
+              topics:
+              - matter.created
+              - matter.updated
+              - matter.status.updated
+              subscriptionUrl: https://myapplication.com/incomingwebhooks
+              clientState: supersecretstring
+          text/json:
+            schema:
+              $ref: '#/components/schemas/SaveWebhookSubscriptionModel'
+            example:
+              topics:
+              - matter.created
+              - matter.updated
+              - matter.status.updated
+              subscriptionUrl: https://myapplication.com/incomingwebhooks
+              clientState: supersecretstring
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/SaveWebhookSubscriptionModel'
+            example:
+              topics:
+              - matter.created
+              - matter.updated
+              - matter.status.updated
+              subscriptionUrl: https://myapplication.com/incomingwebhooks
+              clientState: supersecretstring
+      responses:
+        '201':
+          description: The ID of the created subscription
+          content:
+            text/plain:
+              schema:
+                type: integer
+                format: int32
+            application/json:
+              schema:
+                type: integer
+                format: int32
+            text/json:
+              schema:
+                type: integer
+                format: int32
+    get:
+      tags:
+      - WebhookSubscriptions
+      summary: Get all subscriptions
+      description: Retrieve all existing webhook subscriptions
+      operationId: GetWebhookSubscriptions
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/WebhookSubscriptionArray'
+              example:
+              - id: 1
+                topics:
+                - matter.created
+                - matter.updated
+                - matter.status.updated
+                subscriptionUrl: https://myapplication.com/incomingwebhooks
+                clientState: supersecretstring
+                status: failed
+                createdDateUtc: '2022-10-11T23:54:04.017'
+                createdBy: 461fffa2-950f-4961-b313-09fef67d419c
+                modifiedDateUtc: '2022-12-19T23:54:04.017'
+                modifiedBy: 461fffa2-950f-4961-b313-09fef67d419c
+              - id: 2
+                topics:
+                - contract.created
+                subscriptionUrl: https://myapplication.com/incomingwebhooks/example
+                clientState: my client state
+                status: active
+                createdDateUtc: '2022-10-15T23:54:04.017'
+                createdBy: 461fffa2-950f-4961-b313-09fef67d419c
+                modifiedDateUtc: '2022-12-21T23:54:04.017'
+                modifiedBy: 461fffa2-950f-4961-b313-09fef67d419c
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookSubscriptionArray'
+              example:
+              - id: 1
+                topics:
+                - matter.created
+                - matter.updated
+                - matter.status.updated
+                subscriptionUrl: https://myapplication.com/incomingwebhooks
+                clientState: supersecretstring
+                status: failed
+                createdDateUtc: '2022-10-11T23:54:04.017'
+                createdBy: 461fffa2-950f-4961-b313-09fef67d419c
+                modifiedDateUtc: '2022-12-19T23:54:04.017'
+                modifiedBy: 461fffa2-950f-4961-b313-09fef67d419c
+              - id: 2
+                topics:
+                - contract.created
+                subscriptionUrl: https://myapplication.com/incomingwebhooks/example
+                clientState: my client state
+                status: active
+                createdDateUtc: '2022-10-15T23:54:04.017'
+                createdBy: 461fffa2-950f-4961-b313-09fef67d419c
+                modifiedDateUtc: '2022-12-21T23:54:04.017'
+                modifiedBy: 461fffa2-950f-4961-b313-09fef67d419c
+            text/json:
+              schema:
+                $ref: '#/components/schemas/WebhookSubscriptionArray'
+              example:
+              - id: 1
+                topics:
+                - matter.created
+                - matter.updated
+                - matter.status.updated
+                subscriptionUrl: https://myapplication.com/incomingwebhooks
+                clientState: supersecretstring
+                status: failed
+                createdDateUtc: '2022-10-11T23:54:04.017'
+                createdBy: 461fffa2-950f-4961-b313-09fef67d419c
+                modifiedDateUtc: '2022-12-19T23:54:04.017'
+                modifiedBy: 461fffa2-950f-4961-b313-09fef67d419c
+              - id: 2
+                topics:
+                - contract.created
+                subscriptionUrl: https://myapplication.com/incomingwebhooks/example
+                clientState: my client state
+                status: active
+                createdDateUtc: '2022-10-15T23:54:04.017'
+                createdBy: 461fffa2-950f-4961-b313-09fef67d419c
+                modifiedDateUtc: '2022-12-21T23:54:04.017'
+                modifiedBy: 461fffa2-950f-4961-b313-09fef67d419c
+  /v1/webhooks/subscriptions/{id}:
+    get:
+      tags:
+      - WebhookSubscriptions
+      summary: Get a subscription
+      description: Retrieve an existing webhook subscription
+      operationId: GetWebhookSubscription
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the subscription
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/WebhookSubscription'
+              example:
+                id: 1
+                topics:
+                - matter.created
+                - matter.updated
+                - matter.status.updated
+                subscriptionUrl: https://myapplication.com/incomingwebhooks
+                clientState: my client state
+                status: active
+                createdDateUtc: '2022-10-11T23:54:04.017'
+                createdBy: 461fffa2-950f-4961-b313-09fef67d419c
+                modifiedDateUtc: '2022-12-19T23:54:04.017'
+                modifiedBy: 461fffa2-950f-4961-b313-09fef67d419c
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookSubscription'
+              example:
+                id: 1
+                topics:
+                - matter.created
+                - matter.updated
+                - matter.status.updated
+                subscriptionUrl: https://myapplication.com/incomingwebhooks
+                clientState: my client state
+                status: active
+                createdDateUtc: '2022-10-11T23:54:04.017'
+                createdBy: 461fffa2-950f-4961-b313-09fef67d419c
+                modifiedDateUtc: '2022-12-19T23:54:04.017'
+                modifiedBy: 461fffa2-950f-4961-b313-09fef67d419c
+            text/json:
+              schema:
+                $ref: '#/components/schemas/WebhookSubscription'
+              example:
+                id: 1
+                topics:
+                - matter.created
+                - matter.updated
+                - matter.status.updated
+                subscriptionUrl: https://myapplication.com/incomingwebhooks
+                clientState: my client state
+                status: active
+                createdDateUtc: '2022-10-11T23:54:04.017'
+                createdBy: 461fffa2-950f-4961-b313-09fef67d419c
+                modifiedDateUtc: '2022-12-19T23:54:04.017'
+                modifiedBy: 461fffa2-950f-4961-b313-09fef67d419c
+    delete:
+      tags:
+      - WebhookSubscriptions
+      summary: Delete a subscription
+      description: Deleting a webhook subscription will stop notifications for that subscription
+      operationId: DeleteWebHookSubscription
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the subscription
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '204':
+          description: No Content
+components:
+  schemas:
+    WebhookSubscriptionArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/WebhookSubscription'
+    WebhookTopicArray:
+      type: array
+      items:
+        enum:
+        - matter.created
+        - matter.updated
+        - contract.created
+        - contract.updated
+        - matter.status.updated
+        - contract.status.updated
+        - matter.file.created
+        - contract.file.created
+        - matter.file.updated
+        - contract.file.updated
+        - contract.document.updated
+        - matter.statusmessage.created
+        - contract.statusmessage.created
+        - matter.tag.created
+        - contract.keydate.created
+        - contract.keydate.updated
+        type: string
+        description: <p>Options:</p><ul><li>MatterCreated</li><li>MatterUpdated</li><li>ContractCreated</li><li>ContractUpdated</li><li>MatterStatusUpdated</li><li>ContractStatusUpdated</li><li>MatterFileCreated</li><li>ContractFileCreated</li><li>MatterFileUpdated</li><li>ContractFileUpdated</li><li>ContractDocumentUpdated</li><li>MatterStatusMessageCreated</li><li>ContractStatusMessageCreated</li><li>MatterTagCreated</li><li>ContractKeyDateCreated</li><li>ContractKeyDateUpdated</li></ul>
+    WebhookSubscription:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        topics:
+          $ref: '#/components/schemas/WebhookTopicArray'
+        subscriptionUrl:
+          type: string
+          nullable: true
+        clientState:
+          type: string
+          nullable: true
+        status:
+          type: string
+          nullable: true
+        createdDateUtc:
+          type: string
+          format: date-time
+        createdBy:
+          type: string
+          nullable: true
+        modifiedDateUtc:
+          type: string
+          format: date-time
+        modifiedBy:
+          type: string
+          nullable: true
+      additionalProperties: false
+    SaveWebhookSubscriptionModel:
+      required:
+      - subscriptionUrl
+      - topics
+      type: object
+      properties:
+        topics:
+          $ref: '#/components/schemas/WebhookTopicArray'
+        subscriptionUrl:
+          maxLength: 2048
+          minLength: 1
+          type: string
+          description: The publicly accessible URL of the endpoint which will be notified
+          format: uri
+        clientState:
+          maxLength: 128
+          type: string
+          description: A custom string which will be included with each notification to help identify the notification came from LawVu
+          nullable: true
+      additionalProperties: false

@@ -1,0 +1,295 @@
+openapi: 3.0.1
+info:
+  title: LawVu Account Auth Organisations API
+  description: Apis for account related resources (authentication, profiles, organisation details etc)
+  version: '1.0'
+servers:
+- url: https://api-sandbox.lawvu.com/account-apis
+  description: Sandbox API
+- url: https://api.lawvu.com/account-apis
+  description: Production API
+tags:
+- name: Organisations
+paths:
+  /v1/organisations:
+    get:
+      tags:
+      - Organisations
+      summary: Get organisations
+      description: Returns an array of organisations the current user is linked to
+      operationId: get-v1-organisations
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OrganisationArray'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganisationArray'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OrganisationArray'
+  /v1/organisations/{organisationId}/departments:
+    get:
+      tags:
+      - Organisations
+      summary: Get departments
+      description: Returns an array of departments for the given organisation
+      operationId: get-v1-organisations-organisationid-departments
+      parameters:
+      - name: organisationId
+        in: path
+        description: The organisation to get departments
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/DepartmentArray'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DepartmentArray'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/DepartmentArray'
+  /v1/organisations/{organisationId}/regions:
+    get:
+      tags:
+      - Organisations
+      summary: Get regions
+      description: Returns an array of regions for the given organisation
+      operationId: get-v1-organisations-organisationid-regions
+      parameters:
+      - name: organisationId
+        in: path
+        description: The organisation to get regions
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/RegionArray'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegionArray'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RegionArray'
+  /v1/organisations/clients:
+    get:
+      tags:
+      - Organisations
+      summary: Get clients
+      description: Returns an array of clients the current user is linked to
+      operationId: get-v1-organisations-clients
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ClientArray'
+              example:
+              - id: 1
+                name: My organisation
+                type: ServiceProvider
+                permissions: []
+              - id: 4
+                name: Client 1 organisation
+                type: Customer
+                permissions: []
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientArray'
+              example:
+              - id: 1
+                name: My organisation
+                type: ServiceProvider
+                permissions: []
+              - id: 4
+                name: Client 1 organisation
+                type: Customer
+                permissions: []
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ClientArray'
+              example:
+              - id: 1
+                name: My organisation
+                type: ServiceProvider
+                permissions: []
+              - id: 4
+                name: Client 1 organisation
+                type: Customer
+                permissions: []
+  /v1/organisations/financialsettings:
+    get:
+      tags:
+      - Organisations
+      summary: Get financial settings
+      description: Returns the organisation financial settings the current user is linked to
+      operationId: get-v1-organisations-financialsettings
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OrganisationFinancialSettings'
+              example:
+                id: 1
+                yearEndDay: 31
+                yearEndMonth: 3
+                accountsPayableContacts: null
+                currency: NZD
+                currencyName: New Zealand Dollar
+                currencySymbol: $
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganisationFinancialSettings'
+              example:
+                id: 1
+                yearEndDay: 31
+                yearEndMonth: 3
+                accountsPayableContacts: null
+                currency: NZD
+                currencyName: New Zealand Dollar
+                currencySymbol: $
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OrganisationFinancialSettings'
+              example:
+                id: 1
+                yearEndDay: 31
+                yearEndMonth: 3
+                accountsPayableContacts: null
+                currency: NZD
+                currencyName: New Zealand Dollar
+                currencySymbol: $
+components:
+  schemas:
+    Region:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+          nullable: true
+      additionalProperties: false
+    OrganisationArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/Organisation'
+    RegionArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/Region'
+    Client:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The organisation id of the client
+          format: int32
+        name:
+          type: string
+          description: The name of the client organisation
+          nullable: true
+        type:
+          enum:
+          - ServiceProvider
+          - Customer
+          type: string
+          description: The type of the organisation<p>Options:</p><ul><li>ServiceProvider</li><li>Customer</li></ul>
+        permissions:
+          type: array
+          items:
+            type: integer
+            format: int32
+          description: The permissions the user has for the organisation
+          nullable: true
+      additionalProperties: false
+    DepartmentArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/Department'
+    OrganisationFinancialSettings:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The organisation ID that the financial settings belong to
+          format: int32
+        yearEndDay:
+          type: integer
+          description: The day of the month corresponding to financial year end
+          format: int32
+        yearEndMonth:
+          type: integer
+          description: The month corresponding to financial year end
+          format: int32
+        accountsPayableContacts:
+          type: string
+          description: Accounts payable contact details
+          nullable: true
+        currency:
+          type: string
+          description: ISO code of the organisation's default currency e.g. USD
+          nullable: true
+        currencyName:
+          type: string
+          description: The Name of the organisation's default currency e.g. US Dollar
+          nullable: true
+          readOnly: true
+        currencySymbol:
+          type: string
+          description: The Symbol of the organisation's default currency e.g. $
+          nullable: true
+          readOnly: true
+      additionalProperties: false
+    Organisation:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+          nullable: true
+      additionalProperties: false
+    ClientArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/Client'
+    Department:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+          nullable: true
+        parentId:
+          type: integer
+          format: int32
+          nullable: true
+        deletedDateUtc:
+          type: string
+          format: date-time
+          nullable: true
+      additionalProperties: false

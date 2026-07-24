@@ -1,0 +1,474 @@
+openapi: 3.0.1
+info:
+  title: LawVu Account Auth Emails API
+  description: Apis for account related resources (authentication, profiles, organisation details etc)
+  version: '1.0'
+servers:
+- url: https://api-sandbox.lawvu.com/account-apis
+  description: Sandbox API
+- url: https://api.lawvu.com/account-apis
+  description: Production API
+tags:
+- name: Emails
+paths:
+  /v1/emails/threads:
+    get:
+      tags:
+      - Emails
+      summary: Get an email thread
+      description: Search for an email thread by the identifier.
+      operationId: get-v1-emails-threads
+      parameters:
+      - name: client
+        in: query
+        description: The email client (Gmail, Outlook)
+        schema:
+          type: string
+      - name: threadIdentifier
+        in: query
+        description: The Id of the thread
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/EmailThreadArray'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmailThreadArray'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/EmailThreadArray'
+    post:
+      tags:
+      - Emails
+      summary: Save email thread
+      description: Creates / Updates an email thread, and child email messages.
+      operationId: post-v1-emails-threads
+      requestBody:
+        description: The email thread to create
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/SaveEmailThread'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SaveEmailThread'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/SaveEmailThread'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/SaveEmailThread'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: integer
+                format: int32
+            application/json:
+              schema:
+                type: integer
+                format: int32
+            text/json:
+              schema:
+                type: integer
+                format: int32
+  /v1/emails/threads/page:
+    get:
+      tags:
+      - Emails
+      summary: Get email threads
+      description: Gets paged email threads ordered by last modified date
+      operationId: get-v1-emails-threads-page
+      parameters:
+      - name: client
+        in: query
+        description: The email client (Gmail, Outlook)
+        schema:
+          type: string
+      - name: pageSize
+        in: query
+        description: 'The number of threads to return<p>Default: 25</p>'
+        schema:
+          type: integer
+          format: int32
+          default: 25
+      - name: cursor
+        in: query
+        description: The Id of the thread to skip to
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/PagedEmailThread'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PagedEmailThread'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/PagedEmailThread'
+  /v1/emails/drafts:
+    post:
+      tags:
+      - Emails
+      summary: Create email draft
+      description: Creates a draft email in LawVu
+      operationId: post-v1-emails-drafts
+      requestBody:
+        description: Draft details
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/CreateMessageDraft'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateMessageDraft'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/CreateMessageDraft'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/CreateMessageDraft'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: integer
+                format: int32
+            application/json:
+              schema:
+                type: integer
+                format: int32
+            text/json:
+              schema:
+                type: integer
+                format: int32
+  /v1/emails/drafts/{draftId}:
+    delete:
+      tags:
+      - Emails
+      summary: Delete email draft
+      description: Deletes a draft email
+      operationId: delete-v1-emails-drafts-draftid
+      parameters:
+      - name: draftId
+        in: path
+        description: The id of the draft email
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Success
+    put:
+      tags:
+      - Emails
+      summary: Update email draft
+      description: Updates a message draft
+      operationId: put-v1-emails-drafts-draftid
+      parameters:
+      - name: draftId
+        in: path
+        description: The id of the draft email
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        description: The message draft update
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/MessageDraft'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MessageDraft'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/MessageDraft'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/MessageDraft'
+      responses:
+        '200':
+          description: Success
+  /v1/emails/threads/byExternalReferenceId:
+    post:
+      tags:
+      - Emails
+      summary: Check for any users tracking an email by External Reference ID
+      operationId: post-v1-emails-threads-byexternalreferenceid
+      requestBody:
+        description: External Reference IDs associated to emails
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/CrossUserEmailTrackingByExternalReferenceIdRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CrossUserEmailTrackingByExternalReferenceIdRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/CrossUserEmailTrackingByExternalReferenceIdRequest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/CrossUserEmailTrackingByExternalReferenceIdRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/CrossUserEmailTrackingResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CrossUserEmailTrackingResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CrossUserEmailTrackingResponse'
+components:
+  schemas:
+    CrossUserEmailTrackingByExternalReferenceIdRequest:
+      type: object
+      properties:
+        externalReferenceIds:
+          $ref: '#/components/schemas/StringArray'
+      additionalProperties: false
+    CrossUserEmailTracking:
+      type: object
+      properties:
+        externalReferenceId:
+          type: string
+          nullable: true
+        tracking:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserEmailTracking'
+          nullable: true
+      additionalProperties: false
+    UserEmailTrackingRecord:
+      type: object
+      properties:
+        recordType:
+          enum:
+          - Matter
+          - Milestone
+          - Task
+          - Organisation
+          - Contract
+          - File
+          - InvoiceBatch
+          - KnowledgeArticle
+          - Folder
+          - FolderTemplate
+          - KnowledgeLibrary
+          - InboundEmail
+          - User
+          - MessageThread
+          - TimelineEntry
+          - MatterStatus
+          - ContractStatus
+          - Message
+          - Comment
+          type: string
+          description: <p>Options:</p><ul><li>Matter</li><li>Milestone</li><li>Task</li><li>Organisation</li><li>Contract</li><li>File</li><li>InvoiceBatch</li><li>KnowledgeArticle</li><li>Folder</li><li>FolderTemplate</li><li>KnowledgeLibrary</li><li>InboundEmail</li><li>User</li><li>MessageThread</li><li>TimelineEntry</li><li>MatterStatus</li><li>ContractStatus</li><li>Message</li><li>Comment</li></ul>
+        recordId:
+          type: integer
+          format: int32
+      additionalProperties: false
+    CreateMessageDraft:
+      type: object
+      properties:
+        sourceId:
+          type: string
+          nullable: true
+        authorEmailAddress:
+          type: string
+          nullable: true
+          deprecated: true
+        expectedFromAddress:
+          type: string
+          nullable: true
+        matterId:
+          type: integer
+          format: int32
+        mode:
+          enum:
+          - Message
+          - File
+          type: string
+          description: <p>Options:</p><ul><li>Message</li><li>File</li></ul>
+        recipients:
+          type: array
+          items:
+            $ref: '#/components/schemas/MessageDraftRecipient'
+          nullable: true
+      additionalProperties: false
+    UserEmailTracking:
+      type: object
+      properties:
+        trackedByUserId:
+          type: string
+          nullable: true
+        trackedOnDateTimeUtc:
+          type: string
+          format: date-time
+          nullable: true
+        trackedToRecord:
+          $ref: '#/components/schemas/UserEmailTrackingRecord'
+      additionalProperties: false
+    PagedEmailThread:
+      type: object
+      properties:
+        threads:
+          type: array
+          items:
+            $ref: '#/components/schemas/EmailThread'
+          nullable: true
+        nextPageCursor:
+          type: integer
+          format: int32
+          nullable: true
+      additionalProperties: false
+    MessageDraftRecipient:
+      required:
+      - userId
+      type: object
+      properties:
+        userId:
+          minLength: 1
+          type: string
+      additionalProperties: false
+    SaveEmailThread:
+      required:
+      - client
+      - threadIdentifier
+      type: object
+      properties:
+        threadIdentifier:
+          minLength: 1
+          type: string
+        track:
+          type: boolean
+        client:
+          enum:
+          - Outlook
+          - Gmail
+          type: string
+          description: <p>Options:</p><ul><li>Outlook</li><li>Gmail</li></ul>
+        matterId:
+          type: integer
+          format: int32
+          nullable: true
+        fileId:
+          type: integer
+          format: int32
+          nullable: true
+        contractId:
+          type: integer
+          format: int32
+          nullable: true
+      additionalProperties: false
+    EmailThreadArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/EmailThread'
+    StringArray:
+      type: array
+      items:
+        type: string
+    EmailThread:
+      type: object
+      properties:
+        threadIdentifier:
+          type: string
+          nullable: true
+        track:
+          type: boolean
+        client:
+          enum:
+          - Outlook
+          - Gmail
+          type: string
+          description: <p>Options:</p><ul><li>Outlook</li><li>Gmail</li></ul>
+        matterId:
+          type: integer
+          format: int32
+          nullable: true
+        matterNumber:
+          type: string
+          nullable: true
+        matterName:
+          type: string
+          nullable: true
+        matterStatus:
+          type: string
+          nullable: true
+        matterIsDeleted:
+          type: boolean
+        fileEntryId:
+          type: integer
+          format: int32
+          nullable: true
+          deprecated: true
+        fileId:
+          type: integer
+          format: int32
+          nullable: true
+        filePath:
+          type: string
+          nullable: true
+        contractId:
+          type: integer
+          format: int32
+          nullable: true
+        contractName:
+          type: string
+          nullable: true
+        contractStatus:
+          type: string
+          nullable: true
+        contractIsDeleted:
+          type: boolean
+      additionalProperties: false
+    CrossUserEmailTrackingResponse:
+      type: object
+      properties:
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/CrossUserEmailTracking'
+          nullable: true
+      additionalProperties: false
+    MessageDraft:
+      type: object
+      properties:
+        matterId:
+          type: integer
+          format: int32
+        mode:
+          enum:
+          - Message
+          - File
+          type: string
+          description: <p>Options:</p><ul><li>Message</li><li>File</li></ul>
+        recipients:
+          type: array
+          items:
+            $ref: '#/components/schemas/MessageDraftRecipient'
+          nullable: true
+      additionalProperties: false

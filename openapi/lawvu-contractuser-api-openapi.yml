@@ -1,0 +1,190 @@
+openapi: 3.0.1
+info:
+  title: LawVu Account Auth ContractUser API
+  description: Apis for account related resources (authentication, profiles, organisation details etc)
+  version: '1.0'
+servers:
+- url: https://api-sandbox.lawvu.com/account-apis
+  description: Sandbox API
+- url: https://api.lawvu.com/account-apis
+  description: Production API
+tags:
+- name: ContractUser
+paths:
+  /v1/contracts/{contractId}/users:
+    post:
+      tags:
+      - ContractUser
+      summary: Add user to a contract
+      description: Adds a user to a contract as a member
+      operationId: post-v1-contracts-contractid-users
+      parameters:
+      - name: contractId
+        in: path
+        description: The ID of the contract
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        description: The ID of the user to add into a contract
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/AssignContractUser'
+            example:
+              UserId: User id test
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssignContractUser'
+            example:
+              UserId: User id test
+          text/json:
+            schema:
+              $ref: '#/components/schemas/AssignContractUser'
+            example:
+              UserId: User id test
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/AssignContractUser'
+            example:
+              UserId: User id test
+        required: true
+      responses:
+        '204':
+          description: No Content
+    get:
+      tags:
+      - ContractUser
+      summary: Get contract users
+      description: Returns the users that are assigned to the contract
+      operationId: get-v1-contracts-contractid-users
+      parameters:
+      - name: contractId
+        in: path
+        description: The contract id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: skip
+        in: query
+        description: The number of results to skip
+        schema:
+          type: integer
+          format: int32
+      - name: filtering.field
+        in: query
+        description: Field to filter by (optional)
+        schema:
+          type: string
+      - name: filtering.operator
+        in: query
+        description: Operator used for filtering (optional)
+        schema:
+          enum:
+          - eq
+          - neq
+          - lt
+          - lte
+          - gt
+          - gte
+          - startswith
+          - endswith
+          - contains
+          - doesnotcon
+          - isnull
+          type: string
+      - name: filtering.value
+        in: query
+        description: Value to filter by (optional)
+        schema:
+          type: string
+      - name: sorting.direction
+        in: query
+        description: Set the sorting direction
+        schema:
+          enum:
+          - asc
+          - desc
+          type: string
+      - name: sorting.field
+        in: query
+        description: Set the sorting fields
+        schema:
+          type: string
+      - name: take
+        in: query
+        description: 'The maximum number of contract users to return<p>Default: 50</p>'
+        schema:
+          type: integer
+          format: int32
+          default: 50
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ContractUserDataSourceResult'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContractUserDataSourceResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ContractUserDataSourceResult'
+components:
+  schemas:
+    ContractUserDataSourceResult:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContractUser'
+          description: Represents a single page of processed data.
+          nullable: true
+        total:
+          type: integer
+          description: The total number of records available.
+          format: int32
+      additionalProperties: false
+    ContractUser:
+      type: object
+      properties:
+        userId:
+          type: string
+          nullable: true
+        userFirstname:
+          type: string
+          nullable: true
+        userLastname:
+          type: string
+          nullable: true
+        userOrganisationId:
+          type: integer
+          format: int32
+          nullable: true
+        userOrganisationName:
+          type: string
+          nullable: true
+        userHasPicture:
+          type: boolean
+        userPictureCacheId:
+          type: integer
+          format: int32
+        userFullName:
+          type: string
+          nullable: true
+        userInitials:
+          type: string
+          nullable: true
+      additionalProperties: false
+    AssignContractUser:
+      required:
+      - userId
+      type: object
+      properties:
+        userId:
+          type: string
+      additionalProperties: false

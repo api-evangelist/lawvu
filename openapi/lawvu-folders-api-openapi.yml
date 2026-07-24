@@ -1,0 +1,190 @@
+openapi: 3.0.1
+info:
+  title: LawVu Account Auth Folders API
+  description: Apis for account related resources (authentication, profiles, organisation details etc)
+  version: '1.0'
+servers:
+- url: https://api-sandbox.lawvu.com/account-apis
+  description: Sandbox API
+- url: https://api.lawvu.com/account-apis
+  description: Production API
+tags:
+- name: Folders
+paths:
+  /v1/folders:
+    get:
+      tags:
+      - Folders
+      summary: Get folders
+      description: Gets a list of folders in LawVu
+      operationId: get-v1-folders
+      parameters:
+      - name: recordId
+        in: query
+        description: The record ID the folders are linked to
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: recordType
+        in: query
+        description: The record type the folders are linked to (Matter, Contract, Organisation etc)<p>Options:</p><ul><li>Matter</li><li>Milestone</li><li>Task</li><li>Organisation</li><li>Contract</li><li>File</li><li>InvoiceBatch</li><li>KnowledgeArticle</li><li>Folder</li><li>FolderTemplate</li><li>KnowledgeLibrary</li><li>InboundEmail</li><li>User</li><li>MessageThread</li><li>TimelineEntry</li><li>MatterStatus</li><li>ContractStatus</li><li>Message</li><li>Comment</li></ul>
+        required: true
+        schema:
+          enum:
+          - Matter
+          - Milestone
+          - Task
+          - Organisation
+          - Contract
+          - File
+          - InvoiceBatch
+          - KnowledgeArticle
+          - Folder
+          - FolderTemplate
+          - KnowledgeLibrary
+          - InboundEmail
+          - User
+          - MessageThread
+          - TimelineEntry
+          - MatterStatus
+          - ContractStatus
+          - Message
+          - Comment
+          type: string
+          description: <p>Options:</p><ul><li>Matter</li><li>Milestone</li><li>Task</li><li>Organisation</li><li>Contract</li><li>File</li><li>InvoiceBatch</li><li>KnowledgeArticle</li><li>Folder</li><li>FolderTemplate</li><li>KnowledgeLibrary</li><li>InboundEmail</li><li>User</li><li>MessageThread</li><li>TimelineEntry</li><li>MatterStatus</li><li>ContractStatus</li><li>Message</li><li>Comment</li></ul>
+      - name: parentFolderId
+        in: query
+        description: Returns folders under the specified parentd folder ID otherwise it returns them from the root folder
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/FolderModelArray'
+              example:
+              - id: 1
+                name: Folder 1 test
+              - id: 2
+                name: Folder 2 test
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FolderModelArray'
+              example:
+              - id: 1
+                name: Folder 1 test
+              - id: 2
+                name: Folder 2 test
+            text/json:
+              schema:
+                $ref: '#/components/schemas/FolderModelArray'
+              example:
+              - id: 1
+                name: Folder 1 test
+              - id: 2
+                name: Folder 2 test
+  /v1/folders/{targetType}/{targetId}:
+    post:
+      tags:
+      - Folders
+      summary: Create folder
+      description: Creates a folder within a entity, optionally as a subfolder
+      operationId: post-v1-folders-targettype-targetid
+      parameters:
+      - name: targetType
+        in: path
+        description: The target type the folder should be created in<p>Options:</p><ul><li>Matter</li><li>Contract</li></ul>
+        required: true
+        schema:
+          enum:
+          - Matter
+          - Contract
+          type: string
+          description: <p>Options:</p><ul><li>Matter</li><li>Contract</li></ul>
+      - name: targetId
+        in: path
+        description: The target entity in LawVu
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        description: Details of the folder to create
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/CreateFolderRequest'
+            example:
+              name: New Folder
+              parentFolderId: 4375767
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateFolderRequest'
+            example:
+              name: New Folder
+              parentFolderId: 4375767
+          text/json:
+            schema:
+              $ref: '#/components/schemas/CreateFolderRequest'
+            example:
+              name: New Folder
+              parentFolderId: 4375767
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/CreateFolderRequest'
+            example:
+              name: New Folder
+              parentFolderId: 4375767
+      responses:
+        '201':
+          description: Created
+          content:
+            text/plain:
+              schema:
+                type: integer
+                format: int32
+            application/json:
+              schema:
+                type: integer
+                format: int32
+            text/json:
+              schema:
+                type: integer
+                format: int32
+components:
+  schemas:
+    CreateFolderRequest:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          minLength: 1
+          type: string
+          description: Name of the folder to create
+        parentFolderId:
+          type: integer
+          description: The parent folder ID the folder will be created within, otherwise the folder is created at the root of the record.
+          format: int32
+          nullable: true
+      additionalProperties: false
+    FolderModel:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Folder ID
+          format: int32
+        name:
+          type: string
+          description: Folder Name
+          nullable: true
+      additionalProperties: false
+    FolderModelArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/FolderModel'

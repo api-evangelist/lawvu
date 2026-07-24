@@ -1,0 +1,379 @@
+openapi: 3.0.1
+info:
+  title: LawVu Account Auth Users API
+  description: Apis for account related resources (authentication, profiles, organisation details etc)
+  version: '1.0'
+servers:
+- url: https://api-sandbox.lawvu.com/account-apis
+  description: Sandbox API
+- url: https://api.lawvu.com/account-apis
+  description: Production API
+tags:
+- name: Users
+paths:
+  /v1/users:
+    get:
+      tags:
+      - Users
+      summary: Search users
+      description: Returns a list of users based on the filter criteria
+      operationId: get-v1-users
+      parameters:
+      - name: filter.search
+        in: query
+        description: 'Search text (applies to: name & email address)'
+        schema:
+          type: string
+      - name: filter.permission
+        in: query
+        description: <p>Options:</p><ul><li>CreateMatters</li><li>ContractCreator</li></ul>
+        schema:
+          enum:
+          - CreateMatters
+          - ContractCreator
+          type: string
+          description: <p>Options:</p><ul><li>CreateMatters</li><li>ContractCreator</li></ul>
+      - name: filter.activeandinvitedusersonly
+        in: query
+        description: Only users that are active or invited
+        schema:
+          type: boolean
+      - name: filter.primaryorganisationid
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: filter.activeusersonly
+        in: query
+        description: Only users that are active
+        schema:
+          type: boolean
+      - name: filter.uselitequery
+        in: query
+        description: "Use a lite query\r\nWhen enabled the response will return only partial information about the user:\r\nUserId, FirstName, LastName, UserFullName and OrganisationName"
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/UserArray'
+              example:
+              - id: 633182f3-130b-4917-99ba-4c3e88080eb4
+                userName: null
+                firstName: Example
+                lastName: User
+                organisationName: null
+                organisationPictureCacheId: null
+                directPhone: null
+                mobilePhone: null
+                email: exampleuser@noemail.com
+                hasPicture: false
+                pictureCacheId: 0
+                invitationSentUtc: null
+                userFullName: Example User
+                userInitials: EU
+                isRemoved: false
+                isDisabled: false
+                hourlyRate: null
+                liveMattersCount: 277
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserArray'
+              example:
+              - id: 633182f3-130b-4917-99ba-4c3e88080eb4
+                userName: null
+                firstName: Example
+                lastName: User
+                organisationName: null
+                organisationPictureCacheId: null
+                directPhone: null
+                mobilePhone: null
+                email: exampleuser@noemail.com
+                hasPicture: false
+                pictureCacheId: 0
+                invitationSentUtc: null
+                userFullName: Example User
+                userInitials: EU
+                isRemoved: false
+                isDisabled: false
+                hourlyRate: null
+                liveMattersCount: 277
+            text/json:
+              schema:
+                $ref: '#/components/schemas/UserArray'
+              example:
+              - id: 633182f3-130b-4917-99ba-4c3e88080eb4
+                userName: null
+                firstName: Example
+                lastName: User
+                organisationName: null
+                organisationPictureCacheId: null
+                directPhone: null
+                mobilePhone: null
+                email: exampleuser@noemail.com
+                hasPicture: false
+                pictureCacheId: 0
+                invitationSentUtc: null
+                userFullName: Example User
+                userInitials: EU
+                isRemoved: false
+                isDisabled: false
+                hourlyRate: null
+                liveMattersCount: 277
+  /v1/users/{id}/profile:
+    get:
+      tags:
+      - Users
+      summary: Get user profile
+      description: Returns the profile of a specific user.
+      operationId: get-v1-users-id-profile
+      parameters:
+      - name: id
+        in: path
+        description: User Id (e.g. e1bf0987-8844-49ab-a6b6-10562b58e230)
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/UserProfile'
+              example:
+                id: 123-456-789
+                firstName: Joey
+                lastName: Tribiani
+                email: emailaddress@gmail.com
+                mobilePhone: '987654321'
+                directPhone: '24680'
+                jobTitle: Worker
+                departmentId: 4
+                specialityIds:
+                - 1
+                - 2
+                - 3
+                biography: Biography
+                hourlyRate: 9.99
+                linkedInUrl: url
+                organisationId: 5
+                organisationName: The Workplace
+                organisationType: Customer
+                role: Administrator
+                departmentName: Department
+                hasPicture: true
+                pictureCacheId: 78
+                invitationSentUtc: '2025-01-21T00:44:36.422387+00:00'
+                status: LockedOut
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfile'
+              example:
+                id: 123-456-789
+                firstName: Joey
+                lastName: Tribiani
+                email: emailaddress@gmail.com
+                mobilePhone: '987654321'
+                directPhone: '24680'
+                jobTitle: Worker
+                departmentId: 4
+                specialityIds:
+                - 1
+                - 2
+                - 3
+                biography: Biography
+                hourlyRate: 9.99
+                linkedInUrl: url
+                organisationId: 5
+                organisationName: The Workplace
+                organisationType: Customer
+                role: Administrator
+                departmentName: Department
+                hasPicture: true
+                pictureCacheId: 78
+                invitationSentUtc: '2025-01-21T00:44:36.422387+00:00'
+                status: LockedOut
+            text/json:
+              schema:
+                $ref: '#/components/schemas/UserProfile'
+              example:
+                id: 123-456-789
+                firstName: Joey
+                lastName: Tribiani
+                email: emailaddress@gmail.com
+                mobilePhone: '987654321'
+                directPhone: '24680'
+                jobTitle: Worker
+                departmentId: 4
+                specialityIds:
+                - 1
+                - 2
+                - 3
+                biography: Biography
+                hourlyRate: 9.99
+                linkedInUrl: url
+                organisationId: 5
+                organisationName: The Workplace
+                organisationType: Customer
+                role: Administrator
+                departmentName: Department
+                hasPicture: true
+                pictureCacheId: 78
+                invitationSentUtc: '2025-01-21T00:44:36.422387+00:00'
+                status: LockedOut
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        userName:
+          type: string
+          nullable: true
+        firstName:
+          type: string
+          nullable: true
+        lastName:
+          type: string
+          nullable: true
+        organisationName:
+          type: string
+          nullable: true
+        organisationPictureCacheId:
+          type: integer
+          format: int32
+          nullable: true
+        directPhone:
+          type: string
+          nullable: true
+        mobilePhone:
+          type: string
+          nullable: true
+        email:
+          type: string
+          nullable: true
+        hasPicture:
+          type: boolean
+        pictureCacheId:
+          type: integer
+          format: int32
+        invitationSentUtc:
+          type: string
+          format: date-time
+          nullable: true
+        userFullName:
+          type: string
+          nullable: true
+        userInitials:
+          type: string
+          nullable: true
+        isRemoved:
+          type: boolean
+        isDisabled:
+          type: boolean
+        hourlyRate:
+          type: number
+          format: double
+          nullable: true
+        liveMattersCount:
+          type: integer
+          format: int32
+      additionalProperties: false
+    UserProfile:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        firstName:
+          type: string
+          nullable: true
+        lastName:
+          type: string
+          nullable: true
+        email:
+          type: string
+          nullable: true
+        mobilePhone:
+          type: string
+          nullable: true
+        directPhone:
+          type: string
+          nullable: true
+        jobTitle:
+          type: string
+          nullable: true
+        departmentId:
+          type: integer
+          format: int32
+          nullable: true
+        specialityIds:
+          type: array
+          items:
+            type: integer
+            format: int32
+          nullable: true
+        biography:
+          type: string
+          nullable: true
+        hourlyRate:
+          type: number
+          format: double
+          nullable: true
+        linkedInUrl:
+          type: string
+          nullable: true
+        organisationId:
+          type: integer
+          format: int32
+        organisationName:
+          type: string
+          nullable: true
+        organisationType:
+          enum:
+          - ServiceProvider
+          - Customer
+          type: string
+          description: <p>Options:</p><ul><li>ServiceProvider</li><li>Customer</li></ul>
+        role:
+          enum:
+          - Administrator
+          - InhouseLegal
+          - Contributor
+          - Standard
+          - External
+          - MatterManager
+          type: string
+          description: <p>Options:</p><ul><li>Administrator</li><li>InhouseLegal</li><li>Contributor</li><li>Standard</li><li>External</li><li>MatterManager</li></ul>
+        departmentName:
+          type: string
+          nullable: true
+        hasPicture:
+          type: boolean
+        pictureCacheId:
+          type: integer
+          format: int32
+        invitationSentUtc:
+          type: string
+          format: date-time
+          nullable: true
+        status:
+          enum:
+          - Pending
+          - Active
+          - Invited
+          - LockedOut
+          - Disabled
+          type: string
+          description: <p>Options:</p><ul><li>Disabled</li><li>Pending</li><li>Active</li><li>Invited</li><li>LockedOut</li></ul>
+      additionalProperties: false
+    UserArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/User'

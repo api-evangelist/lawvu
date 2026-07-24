@@ -1,0 +1,86 @@
+openapi: 3.0.1
+info:
+  title: LawVu Account Auth MatterCategories API
+  description: Apis for account related resources (authentication, profiles, organisation details etc)
+  version: '1.0'
+servers:
+- url: https://api-sandbox.lawvu.com/account-apis
+  description: Sandbox API
+- url: https://api.lawvu.com/account-apis
+  description: Production API
+tags:
+- name: MatterCategories
+paths:
+  /v1/mattercategories:
+    get:
+      tags:
+      - MatterCategories
+      summary: Matter categories
+      description: Gets the configured categories for a matter
+      operationId: get-v1-mattercategories
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/MatterCategoryArray'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MatterCategoryArray'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MatterCategoryArray'
+  /v1/mattercategories/{categoryId}/createSchema:
+    get:
+      tags:
+      - MatterCategories
+      summary: Matter creation schema
+      description: Get the form and fields for rendering a create matter form
+      operationId: get-v1-mattercategories-categoryid-createschema
+      parameters:
+      - name: categoryId
+        in: path
+        description: The category to get the create form for
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Success
+components:
+  schemas:
+    MatterCategory:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        parentId:
+          type: integer
+          format: int32
+          nullable: true
+        name:
+          type: string
+          nullable: true
+        children:
+          type: array
+          items:
+            $ref: '#/components/schemas/MatterCategory'
+          nullable: true
+        teamId:
+          type: integer
+          format: int32
+          nullable: true
+        isDeleted:
+          type: boolean
+        teamRequired:
+          type: boolean
+        hasRules:
+          type: boolean
+      additionalProperties: false
+    MatterCategoryArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/MatterCategory'

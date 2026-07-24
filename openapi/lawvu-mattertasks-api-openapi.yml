@@ -1,0 +1,145 @@
+openapi: 3.0.1
+info:
+  title: LawVu Account Auth MatterTasks API
+  description: Apis for account related resources (authentication, profiles, organisation details etc)
+  version: '1.0'
+servers:
+- url: https://api-sandbox.lawvu.com/account-apis
+  description: Sandbox API
+- url: https://api.lawvu.com/account-apis
+  description: Production API
+tags:
+- name: MatterTasks
+paths:
+  /v1/matters/tasks:
+    get:
+      tags:
+      - MatterTasks
+      summary: Get tasks
+      operationId: get-v1-matters-tasks
+      parameters:
+      - name: skip
+        in: query
+        description: Number of tasks to skip (used for paging)
+        schema:
+          type: integer
+          format: int32
+      - name: filtering.field
+        in: query
+        description: Field to filter by (optional)
+        schema:
+          type: string
+      - name: filtering.operator
+        in: query
+        description: Operator used for filtering (optional)
+        schema:
+          enum:
+          - eq
+          - neq
+          - lt
+          - lte
+          - gt
+          - gte
+          - startswith
+          - endswith
+          - contains
+          - doesnotcon
+          - isnull
+          type: string
+      - name: filtering.value
+        in: query
+        description: Value to filter by (optional)
+        schema:
+          type: string
+      - name: sorting.direction
+        in: query
+        description: Set the sorting direction
+        schema:
+          enum:
+          - asc
+          - desc
+          type: string
+      - name: sorting.field
+        in: query
+        description: Set the sorting fields
+        schema:
+          type: string
+      - name: take
+        in: query
+        description: 'The maximum number of tasks to return<p>Default: 50</p>'
+        schema:
+          type: integer
+          format: int32
+          default: 50
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/TaskSummaryArray'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskSummaryArray'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/TaskSummaryArray'
+components:
+  schemas:
+    TaskSummary:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+          nullable: true
+        parentId:
+          type: integer
+          format: int32
+          nullable: true
+        matterId:
+          type: integer
+          format: int32
+        type:
+          enum:
+          - Standard
+          - Milestone
+          - CourtDate
+          - Meeting
+          type: string
+          description: <p>Options:</p><ul><li>Standard</li><li>Milestone</li><li>CourtDate</li><li>Meeting</li></ul>
+        order:
+          type: integer
+          format: int32
+        userAssignedId:
+          type: string
+          nullable: true
+        createdDateUtc:
+          type: string
+          format: date-time
+        modifiedDateUtc:
+          type: string
+          format: date-time
+        dueDate:
+          type: string
+          format: date-time
+          nullable: true
+        duration:
+          type: number
+          format: double
+        status:
+          enum:
+          - NotStarted
+          - InProgress
+          - Complete
+          - NotRequired
+          - OnHold
+          type: string
+          description: <p>Options:</p><ul><li>NotRequired</li><li>OnHold</li><li>NotStarted</li><li>InProgress</li><li>Complete</li></ul>
+      additionalProperties: false
+    TaskSummaryArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/TaskSummary'

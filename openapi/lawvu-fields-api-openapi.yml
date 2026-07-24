@@ -1,0 +1,991 @@
+openapi: 3.0.1
+info:
+  title: LawVu Account Auth Fields API
+  description: Apis for account related resources (authentication, profiles, organisation details etc)
+  version: '1.0'
+servers:
+- url: https://api-sandbox.lawvu.com/account-apis
+  description: Sandbox API
+- url: https://api.lawvu.com/account-apis
+  description: Production API
+tags:
+- name: Fields
+paths:
+  /v2/fields:
+    get:
+      tags:
+      - Fields
+      summary: Get fields
+      description: Retrieve a list of available fields
+      operationId: get-v2-fields
+      parameters:
+      - name: $skip
+        in: query
+        description: Specifies the number of items to skip
+        schema:
+          type: integer
+          description: Specifies the number of items to skip
+          format: int32
+          default: 0
+      - name: $top
+        in: query
+        description: Specifies the maximum number of items to return
+        schema:
+          type: integer
+          description: Specifies the maximum number of items to return
+          format: int32
+          default: 25
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FieldCollectionResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/HttpValidationProblemDetails'
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /v2/fields/{fieldId}/options:
+    get:
+      tags:
+      - Fields
+      summary: Get field options
+      description: 'Retrieve a list of available options for a field.
+
+
+        Supported field types: MultiOption, Option'
+      operationId: get-v2-fields-fieldid-options
+      parameters:
+      - name: fieldId
+        in: path
+        description: The API name for the field
+        required: true
+        schema:
+          type: string
+          description: The API name for the field
+          example: my_field
+        example: my_field
+      - name: $filter
+        in: query
+        description: Filter the results using OData filter syntax
+        schema:
+          type: string
+      - name: $skip
+        in: query
+        description: Skip the specified number of results
+        schema:
+          type: integer
+      - name: $top
+        in: query
+        description: Limit the number of results returned
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FieldOptionCollectionResponse'
+              examples:
+                Field options:
+                  summary: Example of field options
+                  value:
+                    items:
+                    - label: Option 1
+                      value: option_1
+                      properties: null
+                    - label: Option 2
+                      value: option_2
+                      properties: null
+                Department field options:
+                  summary: Example of field options for a department field
+                  value:
+                    items:
+                    - label: Operations
+                      value: '657'
+                      properties: null
+                    - label: Marketing Department
+                      value: '8643'
+                      properties:
+                        parentId: '657'
+                    - label: Finance Department
+                      value: '9875'
+                      properties:
+                        parentId: '657'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/HttpValidationProblemDetails'
+              example:
+                detail: 'Options not supported for field type: Text'
+                instance: /fields/my_field
+                operationId: 7edb5d62-f5bf-463b-9410-cdd8b3293d89
+                status: 400
+                title: Invalid request
+                type: https://api-docs.lawvu.com/errors/invalid_request
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                detail: Cannot retrieve options as the requested field could not be found
+                instance: /fields/my_field
+                operationId: 7edb5d62-f5bf-463b-9410-cdd8b3293d89
+                status: 404
+                title: Resource not found
+                type: https://api-docs.lawvu.com/errors/resource_not_found
+    post:
+      tags:
+      - Fields
+      summary: Add an option to a field
+      description: 'Add a an option for a field.
+
+
+        Supported field types: MultiOption, Option'
+      operationId: post-v2-fields-fieldid-options
+      parameters:
+      - name: fieldId
+        in: path
+        description: The API name for the field
+        required: true
+        schema:
+          type: string
+          description: The API name for the field
+          example: my_field
+        example: my_field
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+              - label
+              allOf:
+              - $ref: '#/components/schemas/CreateFieldOption'
+            examples:
+              Create field option:
+                summary: Example of creating a field option
+                value:
+                  label: Option 1
+              Create department field option:
+                summary: Example of creating a field option for a department field with a parent
+                value:
+                  label: Marketing Department
+                  properties:
+                    parentId: '657'
+      responses:
+        '201':
+          description: Created
+          headers:
+            Location:
+              description: Location to retrieve the created resource
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreatedFieldOption'
+              examples:
+                Created field option:
+                  summary: Example of a created field option response
+                  value:
+                    value: option_1
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/HttpValidationProblemDetails'
+              example:
+                detail: Field does not support adding options
+                instance: /fields/my_field
+                operationId: 7edb5d62-f5bf-463b-9410-cdd8b3293d89
+                status: 400
+                title: Invalid request
+                type: https://api-docs.lawvu.com/errors/invalid_request
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                detail: Cannot add option as the requested field could not be found
+                instance: /fields/my_field
+                operationId: 7edb5d62-f5bf-463b-9410-cdd8b3293d89
+                status: 404
+                title: Resource not found
+                type: https://api-docs.lawvu.com/errors/resource_not_found
+  /v2/fields/{fieldId}/options/{value}:
+    get:
+      tags:
+      - Fields
+      summary: Get an option for a field
+      description: 'Retrieve an option for a field based by value
+
+
+        Supported field types: MultiOption, Option'
+      operationId: get-v2-fields-fieldid-options-value
+      parameters:
+      - name: fieldId
+        in: path
+        description: The API name for the field
+        required: true
+        schema:
+          type: string
+          description: The API name for the field
+          example: my_field
+        example: my_field
+      - name: value
+        in: path
+        description: The system generated value for the field option
+        required: true
+        schema:
+          type: string
+          description: The system generated value for the field option
+          example: option_1
+        example: option_1
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FieldOption'
+              examples:
+                Field option:
+                  summary: Example of a field option
+                  value:
+                    label: Option 1
+                    value: option_1
+                    properties: null
+                Department field option:
+                  summary: Example of a field option for a department field
+                  value:
+                    label: Marketing Department
+                    value: '8643'
+                    properties:
+                      parentId: '657'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/HttpValidationProblemDetails'
+              example:
+                detail: Field does not support options
+                instance: /fields/my_field/options/option_1
+                operationId: 7edb5d62-f5bf-463b-9410-cdd8b3293d89
+                status: 400
+                title: Invalid request
+                type: https://api-docs.lawvu.com/errors/invalid_request
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                detail: You do not have permission to get this field option
+                instance: /fields/my_field/options/option_1
+                operationId: 7edb5d62-f5bf-463b-9410-cdd8b3293d89
+                status: 403
+                title: Forbidden
+                type: https://api-docs.lawvu.com/errors/forbidden
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                detail: Field option does not exist
+                instance: /fields/my_field/options/option_1
+                operationId: 7edb5d62-f5bf-463b-9410-cdd8b3293d89
+                status: 404
+                title: Resource not found
+                type: https://api-docs.lawvu.com/errors/resource_not_found
+    patch:
+      tags:
+      - Fields
+      summary: Update an option on a field
+      description: 'Update an option on a field by value.
+
+
+        Supported field types: MultiOption, Option'
+      operationId: patch-v2-fields-fieldid-options-value
+      parameters:
+      - name: fieldId
+        in: path
+        description: The API name for the field
+        required: true
+        schema:
+          type: string
+          description: The API name for the field
+          example: my_field
+        example: my_field
+      - name: value
+        in: path
+        description: The value of the option to update
+        required: true
+        schema:
+          type: string
+        example: option_1
+      requestBody:
+        content:
+          application/merge-patch+json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/UpdateFieldOption'
+            examples:
+              Update field option label:
+                summary: Example of updating a field option's label
+                value:
+                  label: Updated Label
+              Update field option properties:
+                summary: Example of updating a field option's properties
+                value:
+                  properties:
+                    parentId: '657'
+              Update field option label and properties:
+                summary: Example of updating a field option's label and properties
+                value:
+                  label: Updated Department Sub
+                  properties:
+                    parentId: '657'
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/HttpValidationProblemDetails'
+              example:
+                detail: Field does not support options
+                instance: /fields/my_field/options/option_1
+                operationId: 7edb5d62-f5bf-463b-9410-cdd8b3293d89
+                status: 400
+                title: Invalid request
+                type: https://api-docs.lawvu.com/errors/invalid_request
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                detail: Field option does not exist
+                instance: /fields/my_field/options/option_1
+                operationId: 7edb5d62-f5bf-463b-9410-cdd8b3293d89
+                status: 404
+                title: Resource not found
+                type: https://api-docs.lawvu.com/errors/resource_not_found
+    delete:
+      tags:
+      - Fields
+      summary: Delete an option from a field
+      description: 'Removes an option from a field by value.
+
+
+        Supported field types: MultiOption, Option'
+      operationId: delete-v2-fields-fieldid-options-value
+      parameters:
+      - name: fieldId
+        in: path
+        description: The API name for the field
+        required: true
+        schema:
+          type: string
+          description: The API name for the field
+          example: my_field
+        example: my_field
+      - name: value
+        in: path
+        description: The system generated value for the field option
+        required: true
+        schema:
+          type: string
+          description: The system generated value for the field option
+          example: option_1
+        example: option_1
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/HttpValidationProblemDetails'
+              example:
+                detail: Field does not support deleting options
+                instance: /fields/my_field/options/option_1
+                operationId: 7edb5d62-f5bf-463b-9410-cdd8b3293d89
+                status: 400
+                title: Invalid request
+                type: https://api-docs.lawvu.com/errors/invalid_request
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                detail: You do not have permission to delete this field option
+                instance: /fields/my_field/options/option_1
+                operationId: 7edb5d62-f5bf-463b-9410-cdd8b3293d89
+                status: 403
+                title: Forbidden
+                type: https://api-docs.lawvu.com/errors/forbidden
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                detail: Field option does not exist
+                instance: /fields/my_field/options/option_1
+                operationId: 7edb5d62-f5bf-463b-9410-cdd8b3293d89
+                status: 404
+                title: Resource not found
+                type: https://api-docs.lawvu.com/errors/resource_not_found
+  /v1/fields:
+    get:
+      tags:
+      - Fields
+      summary: Get fields
+      description: ''
+      operationId: get-v1-fields
+      parameters:
+      - name: filtering.field
+        in: query
+        description: Field to filter by (optional)
+        schema:
+          type: string
+      - name: filtering.operator
+        in: query
+        description: Operator used for filtering (optional)
+        schema:
+          enum:
+          - eq
+          - neq
+          - lt
+          - lte
+          - gt
+          - gte
+          - startswith
+          - endswith
+          - contains
+          - doesnotcon
+          - isnull
+          type: string
+      - name: filtering.value
+        in: query
+        description: Value to filter by (optional)
+        schema:
+          type: string
+      - name: sorting.direction
+        in: query
+        description: Set the sorting direction
+        schema:
+          enum:
+          - asc
+          - desc
+          type: string
+      - name: sorting.field
+        in: query
+        description: Set the sorting fields
+        schema:
+          type: string
+      - name: take
+        in: query
+        description: 'The maximum number of fields to return<p>Default: 50</p>'
+        schema:
+          type: integer
+          format: int32
+          default: 50
+      - name: skip
+        in: query
+        description: '<p>Default: 0</p>'
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: search
+        in: query
+        description: ''
+        schema:
+          type: string
+          default: ''
+      - name: fieldCategory
+        in: query
+        description: <p>Options:</p><ul><li>Custom</li><li>Lawvu</li></ul>
+        schema:
+          enum:
+          - Custom
+          - Lawvu
+          type: string
+          description: <p>Options:</p><ul><li>Custom</li><li>Lawvu</li></ul>
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/FieldListItemDataSourceResult'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FieldListItemDataSourceResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/FieldListItemDataSourceResult'
+  /v1/fields/{fieldId}:
+    get:
+      tags:
+      - Fields
+      summary: Get field schema
+      operationId: get-v1-fields-fieldid
+      parameters:
+      - name: fieldId
+        in: path
+        description: e.g. 1234
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/FieldDetailGetModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FieldDetailGetModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/FieldDetailGetModel'
+components:
+  schemas:
+    AuditableReference:
+      type: object
+      properties:
+        dateUtc:
+          type: string
+          description: The date and time the action was performed. The date and time uses the ISO-8601 format and will be in UTC
+          format: date-time
+          readOnly: true
+          example: '2024-12-25T00:00:00Z'
+        userName:
+          type: string
+          description: The username of who performed the action
+          readOnly: true
+          example: api.developer@lawvu.com
+      additionalProperties: false
+    UpdateFieldOption:
+      type: object
+      properties:
+        label:
+          type: string
+          description: The user defined label of the field option
+          nullable: true
+        properties:
+          type: object
+          additionalProperties: {}
+          description: Specific properties for the field option, varies by field type
+          nullable: true
+      additionalProperties: false
+    FieldListItemDataSourceResult:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldListItem'
+          description: Represents a single page of processed data.
+          nullable: true
+        total:
+          type: integer
+          description: The total number of records available.
+          format: int32
+      additionalProperties: false
+    StringArray:
+      type: array
+      items:
+        type: string
+    FieldListItem:
+      required:
+      - id
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        title:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        category:
+          enum:
+          - Custom
+          - Lawvu
+          type: string
+          description: <p>Options:</p><ul><li>Custom</li><li>Lawvu</li></ul>
+        lawvuType:
+          type: integer
+          format: int32
+        webMergeFieldName:
+          type: string
+          nullable: true
+        contractCount:
+          type: integer
+          format: int32
+        matterCount:
+          type: integer
+          format: int32
+        _links:
+          type: array
+          items:
+            $ref: '#/components/schemas/HyperMediaLink'
+          nullable: true
+      additionalProperties: false
+    LookupSingleOptionModel:
+      type: object
+      properties:
+        Value:
+          type: string
+          nullable: true
+        id:
+          type: integer
+          format: int32
+        label:
+          type: string
+          nullable: true
+      additionalProperties: false
+    FieldDetailParameters:
+      type: object
+      properties:
+        options:
+          type: array
+          items:
+            $ref: '#/components/schemas/LookupSingleOptionModel'
+          nullable: true
+        default:
+          type: object
+          nullable: true
+        rangeStart:
+          type: number
+          format: double
+          nullable: true
+        rangeEnd:
+          type: number
+          format: double
+          nullable: true
+        stepSize:
+          type: number
+          format: double
+          nullable: true
+        allowExternalUsers:
+          type: boolean
+          nullable: true
+        canAddOptions:
+          type: boolean
+          nullable: true
+      additionalProperties: false
+    FieldType:
+      enum:
+      - Text
+      - Decimal
+      - Boolean
+      - Date
+      - Option
+      - MultiOption
+      - User
+      type: string
+    OptionFieldProperties:
+      type: object
+      properties:
+        userCanAddOption:
+          type: boolean
+          description: Indicates if an option can be added without the user having access to further manage the field options
+          nullable: true
+          example: true
+      additionalProperties: false
+    FieldOption:
+      required:
+      - label
+      type: object
+      properties:
+        label:
+          type: string
+          description: The user defined label of the field option
+          nullable: true
+          example: Option A
+        value:
+          type: string
+          description: The system generated value for the field option
+          nullable: true
+          readOnly: true
+          example: option_1
+        properties:
+          type: object
+          additionalProperties:
+            x-additionalPropertiesName: propertyName
+          description: Additional properties based on the type of field option. See examples for more details.
+          nullable: true
+      additionalProperties: false
+    Field:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The API name for the field
+          nullable: true
+          readOnly: true
+          example: my_field
+        name:
+          type: string
+          description: The user defined name of the field
+          nullable: true
+          example: My dropdown field
+        type:
+          allOf:
+          - $ref: '#/components/schemas/FieldType'
+          description: The type of the field
+          nullable: true
+          example: text
+        properties:
+          oneOf:
+          - $ref: '#/components/schemas/MultiOptionFieldProperties'
+          - $ref: '#/components/schemas/OptionFieldProperties'
+          description: Specific properties for the field, varies by type
+          nullable: true
+          readOnly: true
+        created:
+          allOf:
+          - $ref: '#/components/schemas/AuditableReference'
+          description: The username who created the field and when
+          nullable: true
+          readOnly: true
+        modified:
+          allOf:
+          - $ref: '#/components/schemas/AuditableReference'
+          description: The username who modified the field and when
+          nullable: true
+          readOnly: true
+      additionalProperties: false
+    FieldOptionCollectionResponse:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldOption'
+          description: The collection of items
+      additionalProperties: false
+      description: Response wrapper of a collection of items
+    ProblemDetails:
+      type: object
+      properties:
+        detail:
+          type: string
+          description: More information about the problem.
+        instance:
+          type: string
+          description: The URI of the resource which the error relates to.
+        operationId:
+          type: string
+          description: A unique trace identifier for the request. This should be provided when requesting support.
+        status:
+          type: integer
+          description: The HTTP status code for the problem.
+          format: int32
+        title:
+          type: string
+          description: A short description of the error.
+        type:
+          type: string
+          description: A URI which can be followed to find out more about the problem.
+      additionalProperties: {}
+    CreateFieldOption:
+      required:
+      - label
+      type: object
+      properties:
+        label:
+          type: string
+          description: The user defined label of the field option
+          example: Option A
+        properties:
+          type: object
+          additionalProperties:
+            x-additionalPropertiesName: propertyName
+          description: Additional properties based on the type of field option. See examples for more details.
+          nullable: true
+      additionalProperties: false
+    MultiOptionFieldProperties:
+      type: object
+      properties:
+        userCanAddOption:
+          type: boolean
+          description: Indicates if an option can be added without the user having access to further manage the field options
+          nullable: true
+          example: true
+      additionalProperties: false
+    FieldDetailGetModel:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        organisationId:
+          type: integer
+          format: int32
+          nullable: true
+        isAlwaysRequired:
+          type: boolean
+        entityColumnName:
+          type: string
+          nullable: true
+        name:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        category:
+          type: string
+          nullable: true
+        lawvuType:
+          enum:
+          - ShortText
+          - LongText
+          - Slider
+          - Currency
+          - Decimal
+          - Checkbox
+          - Date
+          - Dropdown
+          - Department
+          - Region
+          - BillingMethod
+          - BillingIntention
+          - Priority
+          - ContractEntity
+          - ConflictCheck
+          - CheckboxList
+          - RadioGroup
+          - SectionHeader
+          - ContractOwner
+          - Restricted
+          - List
+          - InvoiceRecipient
+          - User
+          - Lookup
+          type: string
+          description: <p>Options:</p><ul><li>ShortText</li><li>LongText</li><li>Slider</li><li>Currency</li><li>Decimal</li><li>Checkbox</li><li>Date</li><li>Dropdown</li><li>Department</li><li>Region</li><li>BillingMethod</li><li>BillingIntention</li><li>Priority</li><li>ContractEntity</li><li>ConflictCheck</li><li>CheckboxList</li><li>RadioGroup</li><li>SectionHeader</li><li>ContractOwner</li><li>Restricted</li><li>List</li><li>Lookup</li><li>InvoiceRecipient</li><li>User</li></ul>
+        webMergeFieldName:
+          type: string
+          nullable: true
+        contractCount:
+          type: integer
+          format: int32
+        matterCount:
+          type: integer
+          format: int32
+        parameters:
+          $ref: '#/components/schemas/FieldDetailParameters'
+      additionalProperties: false
+      description: This model represents the payload returned from the Private API for getting details related to a single lookup field
+    FieldCollectionResponse:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Field'
+          description: The collection of items
+      additionalProperties: false
+      description: Response wrapper of a collection of items
+    HttpValidationProblemDetails:
+      type: object
+      properties:
+        detail:
+          type: string
+          description: More information about the problem.
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+          description: A dictionary of validation errors, where each key is a field api name and the value is a list of error messages.
+        instance:
+          type: string
+          description: The URI of the resource which the error relates to.
+        operationId:
+          type: string
+          description: A unique trace identifier for the request. This should be provided when requesting support.
+        status:
+          type: integer
+          description: The HTTP status code for the problem.
+          format: int32
+        title:
+          type: string
+          description: A short description of the error.
+        type:
+          type: string
+          description: A URI which can be followed to find out more about the problem.
+      additionalProperties: {}
+    HyperMediaLink:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+        uri:
+          type: string
+          nullable: true
+        methods:
+          $ref: '#/components/schemas/StringArray'
+      additionalProperties: false
+    CreatedFieldOption:
+      type: object
+      properties:
+        value:
+          type: string
+          description: The system generated value for the field option
+          example: option_1
+      additionalProperties: false
+      description: Represents a field option that has been created

@@ -1,0 +1,86 @@
+openapi: 3.0.1
+info:
+  title: LawVu Account Auth ContractFiles API
+  description: Apis for account related resources (authentication, profiles, organisation details etc)
+  version: '1.0'
+servers:
+- url: https://api-sandbox.lawvu.com/account-apis
+  description: Sandbox API
+- url: https://api.lawvu.com/account-apis
+  description: Production API
+tags:
+- name: ContractFiles
+paths:
+  /v1/contracts/{contractId}/files:
+    post:
+      tags:
+      - ContractFiles
+      summary: Upload file
+      description: "Add or update a file in a contract. \\\r\n \\\r\nThe body of the request must be content-type 'multipart/form-data' and contain the file data. \\\r\n \\\r\nTo update the contract document: Only specify the 'parentFileId' parameter. The 'folderId' and 'conflictResolution' parameters should not be used for these updates"
+      operationId: post-v1-contracts-contractid-files
+      parameters:
+      - name: contractId
+        in: path
+        description: The id of the contract
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: comments
+        in: query
+        description: Comments to be added to the file
+        schema:
+          type: string
+      - name: parentFileId
+        in: query
+        description: Creates a new version for the specified parent file id
+        schema:
+          type: integer
+          format: int32
+      - name: folderId
+        in: query
+        description: The id of the folder to upload the file within
+        schema:
+          type: integer
+          format: int32
+      - name: conflictResolution
+        in: query
+        description: Defines behaviour for when a file conflict is found<p>Options:</p><ul><li>Replace</li><li>KeepBoth</li><li>SaveVersion</li><li>Skip</li></ul>
+        schema:
+          enum:
+          - Replace
+          - KeepBoth
+          - SaveVersion
+          - Skip
+          type: string
+          description: <p>Options:</p><ul><li>Replace</li><li>KeepBoth</li><li>SaveVersion</li><li>Skip</li></ul>
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+            encoding:
+              file:
+                style: form
+      responses:
+        '201':
+          description: The id of the created file
+          content:
+            text/plain:
+              schema:
+                type: integer
+                format: int32
+            application/json:
+              schema:
+                type: integer
+                format: int32
+            text/json:
+              schema:
+                type: integer
+                format: int32
+        '204':
+          description: When the file was skipped due to conflict resolution setting
