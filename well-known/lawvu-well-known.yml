@@ -1,0 +1,70 @@
+generated: '2026-07-19'
+method: searched
+source: probed /.well-known/ on every LawVu host in apis.yml and the OpenAPI servers[]
+hosts:
+- host: https://lawvu.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    file: lawvu-security.txt
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+- host: https://api.lawvu.com
+  note: production API gateway rejects unauthenticated requests with 401 for every path,
+    including /.well-known/, so no discovery document could be confirmed
+  documents:
+  - path: /.well-known/security.txt
+    status: 401
+  - path: /.well-known/openid-configuration
+    status: 401
+  - path: /.well-known/oauth-authorization-server
+    status: 401
+  - path: /.well-known/api-catalog
+    status: 401
+  - path: /.well-known/ai-plugin.json
+    status: 401
+- host: https://developer.lawvu.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+- host: https://api-docs.lawvu.com
+  note: reference documentation host (Redocly). The oauth-authorization-server document
+    here belongs to the Redocly-hosted documentation MCP server at /_mcp, not to the
+    LawVu product API. All other /.well-known/ paths return the docs SPA shell (HTML),
+    not a discovery document.
+  documents:
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    file: lawvu-docs-oauth-authorization-server.json
+    content_type: application/json
+  - path: /.well-known/openid-configuration
+    status: 200
+    content_type: text/html
+    note: SPA fallback, not a discovery document
+  - path: /.well-known/api-catalog
+    status: 200
+    content_type: text/html
+    note: SPA fallback, not a discovery document
+  - path: /.well-known/security.txt
+    status: 200
+    content_type: text/html
+    note: SPA fallback, not an RFC 9116 document
+security_txt:
+  file: lawvu-security.txt
+  url: https://lawvu.com/.well-known/security.txt
+  contact: mailto:security@lawvu.com
+  expires: '2027-01-01T00:00:00.000Z'

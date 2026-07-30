@@ -1,0 +1,110 @@
+generated: '2026-07-19'
+method: searched
+source: https://api-docs.lawvu.com/docs/guides/odata
+docs:
+- https://api-docs.lawvu.com/docs/guides/odata
+- https://api-docs.lawvu.com/docs/errors
+- https://api-docs.lawvu.com/docs/guides/authentication
+- https://api-docs.lawvu.com/docs/guides/webhooks
+authentication:
+  style: OAuth 2.0 bearer token
+  header: 'Authorization: Bearer {access_token}'
+  delegated: true
+  reference: authentication/lawvu-authentication.yml
+idempotency:
+  supported: false
+  documented: false
+  note: >-
+    LawVu documents no idempotency key header or parameter, and none of the seven published
+    OpenAPI documents declares an Idempotency-Key parameter. Writes are plain POST/PATCH/DELETE.
+    Recorded as absent rather than asserted.
+pagination:
+  style: offset (OData $top / $skip)
+  params:
+  - name: $top
+    description: number of results returned
+    default: 30
+    min: 1
+    max: 200
+  - name: $skip
+    description: number of results to skip
+    default: 0
+    min: 0
+  applies_to: list/collection endpoints on the v2 API
+  history:
+  - date: '2025-10-28'
+    note: $top and $skip added to all list-based endpoints
+  - date: '2022-06-08'
+    note: legacy v1 endpoints use a `take` parameter, default 50
+filtering:
+  style: OData subset
+  param: $filter
+  comparison_operators: [eq, 'eq null', ne, 'ne null', gt, ge, lt, le, contains]
+  logical_operators: [and, or]
+  collection_operators:
+  - name: any
+    syntax: collectionProperty/any(property:property <operator> <value>)
+    note: only `or` logic is supported inside the lambda expression
+  grouping: parentheses supported
+  nested_properties: forward slash path syntax, e.g. Owner/Id, Created/User/Id
+  note: not every field supports every operator; the OData guide lists supported properties
+    per resource (Contracts, Matters, Field Options, and matter/contract field values by field type)
+sorting:
+  param: $orderby
+  syntax: $orderby=field [asc|desc][,field2 [asc|desc]]
+  default_direction: asc
+field_expansion:
+  supported: partial
+  note: >-
+    the legacy v1 Get matters / Get contracts endpoints allow specifying which fields are
+    included in the response (added 2023-11-23). No general `expand` / sparse-fieldset
+    convention is documented for v2.
+metadata:
+  custom_fields: true
+  note: matters and contracts carry customer-defined Fields; the Fields API manages field
+    definitions and their options
+  reference: https://api-docs.lawvu.com/docs/guides/fields
+external_ids:
+  supported: true
+  field: ExternalId
+  note: matters and contracts expose an ExternalId for correlating LawVu records with an
+    external system of record; it is filterable (eq, ne, contains, null checks)
+request_tracing:
+  field: operationId
+  location: error response body
+  description: >-
+    every RFC 9457 error carries an `operationId` unique trace identifier; LawVu asks that it
+    be quoted when requesting support (notably on 500 responses)
+  note: no request-id request/response header is documented
+versioning:
+  scheme: uri-path
+  current: v2
+  legacy: v1
+  hosts:
+    production: https://api.lawvu.com
+    sandbox: https://api-sandbox.lawvu.com
+  path_prefixes:
+    v2: /v2/...
+    v1: /account-apis/v1, /matter-apis/v1, /contract-apis/v1, /field-apis/v1, /file-apis/v1,
+      /invoice-apis/v1
+  reference: lifecycle/lawvu-lifecycle.yml
+error_envelope:
+  format: rfc9457
+  media_type: application/problem+json
+  fields: [type, title, status, detail, instance, operationId]
+  extensions:
+  - name: errors
+    when: validation failures on 400 responses
+    description: field-specific error messages
+  reference: errors/lawvu-problem-types.yml
+rate_limiting:
+  documented: false
+  note: LawVu publishes no rate-limit policy or rate-limit response headers in its developer
+    documentation; recorded as absent, not assumed
+webhooks:
+  supported: true
+  reference: asyncapi/lawvu-webhooks.yml
+content_types:
+  request: application/json (application/x-www-form-urlencoded on the token endpoint)
+  response: application/json; application/problem+json on errors
+  unsupported_media_type: 415

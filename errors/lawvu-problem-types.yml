@@ -1,0 +1,99 @@
+generated: '2026-07-19'
+method: searched
+source: https://api-docs.lawvu.com/docs/errors
+docs: https://api-docs.lawvu.com/docs/errors
+derived_from: openapi/lawvu-api-openapi-original.yml
+format: rfc9457
+media_type: application/problem+json
+envelope:
+  fields:
+  - name: type
+    description: A URI which can be followed to find out more about the problem.
+  - name: title
+    description: A short description of the error.
+  - name: status
+    description: The HTTP status code for the problem.
+  - name: detail
+    description: More information about the problem.
+  - name: instance
+    description: The URI of the resource which the error relates to.
+  - name: operationId
+    description: A unique trace identifier for the request. Provide it when requesting support.
+  extensions:
+  - name: errors
+    when: 400 validation failures
+    description: field-specific error messages identifying which inputs to correct.
+problems:
+- status: 400
+  title: Bad Request
+  causes:
+  - Validation failures — required fields missing, invalid values, or a body that does not
+    match the expected schema.
+  - Malformed requests — the payload is not properly formatted (e.g. invalid JSON).
+  - Business rule violations — the request violates business logic or constraints.
+  remediation: Correct the request using the `errors` property when present.
+  occurrences_in_spec: 17
+- status: 401
+  title: Unauthorized
+  causes:
+  - Missing Authorization header.
+  - Token invalid, expired, or revoked.
+  remediation: Include a valid bearer access token; refresh or re-authorize if expired.
+  docs: https://api-docs.lawvu.com/docs/guides/authentication
+- status: 403
+  title: Forbidden
+  causes:
+  - Authenticated but the consenting user lacks the roles or access rights for the resource
+    or action.
+  remediation: Review the user's roles and permissions in LawVu.
+  docs: https://help.lawvu.com/en/articles/3202052-managing-roles-and-permissions-for-your-team-members
+  occurrences_in_spec: 8
+- status: 404
+  title: Not Found
+  causes:
+  - The referenced identifier or path does not correspond to an existing resource.
+  occurrences_in_spec: 17
+- status: 409
+  title: Conflict
+  causes:
+  - Creating a resource that already exists.
+  - An update that would violate a uniqueness constraint or conflicts with current resource
+    state.
+  occurrences_in_spec: 7
+- status: 415
+  title: Unsupported Media Type
+  causes:
+  - The request Content-Type is not supported by the endpoint (the API expects application/json).
+  occurrences_in_spec: 1
+- status: 500
+  title: Internal Server Error
+  causes:
+  - Unexpected application error.
+  remediation: Retry later; if it persists contact LawVu support and quote the `operationId`
+    from the error response.
+odata_problems:
+- status: 400
+  type: https://api-docs.lawvu.com/errors/invalid_request
+  title: Invalid request
+  detail_examples:
+  - "OData filtering is not supported for 'unsupportedField'"
+  - "Operation 'gt' is not supported for 'Name'"
+  - 'OData $top value must be less than 50'
+  - The OData query is invalid. Please check the syntax and try again
+  source: https://api-docs.lawvu.com/docs/guides/odata
+oauth_errors:
+  source: https://api-docs.lawvu.com/docs/guides/authentication
+  authorize_endpoint:
+  - 'Required parameter missing from request url: redirect_uri'
+  - 'Required parameter missing from request url: client_id'
+  - 'Supplied parameter does not match a whitelisted value: redirect_uri'
+  token_endpoint:
+  - 'Required parameter missing from request body: grant_type'
+  - 'Required parameter missing from request body: client_id'
+  - 'Required parameter missing from request body: code'
+  - Supplied authorization_code is not valid or has expired
+  - Supplied redirect URI doesn't match the one used for authorize endpoint ({redirect_uri})
+  - 'Client is not valid: "{your_client_id}"'
+  - 'Supplied parameter is not correct: client_secret'
+  - Refresh token is not valid
+  - Supplied refresh_token expired at '{utc_time}'

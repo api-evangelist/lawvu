@@ -1,0 +1,54 @@
+generated: '2026-07-19'
+method: searched
+probe: true
+source: https://lawvu.com/trust-center/
+url: https://lawvu.com/trust-center/
+sections:
+- name: Security
+  url: https://lawvu.com/trust-center/security/
+- name: Privacy
+  url: https://lawvu.com/trust-center/privacy/privacy-policy/
+certifications:
+- ISO 27001
+- SOC 1
+- SOC 2
+compliance:
+- GDPR
+- CCPA
+- HIPAA
+compliance_note: >-
+  LawVu states it is GDPR, CCPA and HIPAA compliant with independent attestation, and certified
+  against ISO 27001, SOC 1 and SOC 2 through regular independent third-party audits. Its
+  company-wide risk management program is based on the ISO 27001 controls framework.
+security_practices:
+- Encryption in transit and at rest using current industry standards
+- SAML SSO and SCIM integration for organisation-wide access control including MFA
+- Annual third-party penetration tests by CREST-certified security firms
+- Daily vulnerability scanning
+reliability:
+- Built on Microsoft Azure
+- 99.95% service uptime SLA
+- RTO and RPO metrics regularly reviewed and tested
+- Business continuity plans shared with clients
+privacy:
+- Privacy Policy and Data Processing Addendum published
+- Privacy Officer and Data Protection Officer appointed
+ai_governance:
+  published: true
+  points:
+  - An AI Principles program governs LawVu's use and development of AI
+  - In-app AI offerings sit within the existing security and privacy compliance program
+  - AI services are provided from within the existing Azure ecosystem
+  - Customer data is segregated and not used to train public models
+security_pack:
+  available_on_request: true
+  description: security pack covering what an organisation needs to run a security assessment
+    of LawVu
+evidence:
+- source: https://lawvu.com/trust-center/
+  keywords: [trust center, iso27001, soc 1, soc 2, gdpr, ccpa, hipaa, penetration test,
+    vulnerability scanning, compliance program]
+probe_note: >-
+  0-working/probe-security-programs.py reported trust=none because LawVu hosts its trust center
+  at lawvu.com/trust-center/ rather than the trust.<domain> / <domain>/trust patterns the probe
+  checks. Captured here by search instead.

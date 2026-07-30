@@ -1,0 +1,33 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for LawVu Files
+  version: 1.0.0
+extends: openapi/lawvu-files-openapi-original.json
+actions:
+- target: $.info
+  update:
+    x-apievangelist-slug: lawvu
+    x-apievangelist-generated: '2026-07-19'
+    x-apievangelist-source: https://api-docs.lawvu.com/
+- target: $
+  update:
+    x-authentication: authentication/lawvu-authentication.yml
+    x-conventions: conventions/lawvu-conventions.yml
+    x-errors: errors/lawvu-problem-types.yml
+    x-lifecycle: lifecycle/lawvu-lifecycle.yml
+    x-webhooks: asyncapi/lawvu-webhooks.yml
+    x-data-model: data-model/lawvu-data-model.yml
+    x-sandbox: sandbox/lawvu-sandbox.yml
+    x-agentic-access: agentic-access/lawvu-agentic-access.yml
+- target: $.components.securitySchemes
+  update:
+    lawvuOAuth2:
+      type: oauth2
+      description: LawVu OAuth 2.0 authorization code grant. Documented at https://api-docs.lawvu.com/docs/guides/authentication
+        but absent from the published specification.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://go.lawvu.com/#/authorize
+          tokenUrl: https://api.lawvu.com/account-apis/v1/auth/token
+          refreshUrl: https://api.lawvu.com/account-apis/v1/auth/token
+          scopes: {}

@@ -1,0 +1,2589 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "LawVu Account",
+    "description": "Apis for account related resources (authentication, profiles, organisation details etc)",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "https://api-sandbox.lawvu.com/account-apis",
+      "description": "Sandbox API"
+    },
+    {
+      "url": "https://api.lawvu.com/account-apis",
+      "description": "Production API"
+    }
+  ],
+  "paths": {
+    "/v1/auth/token": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Get token",
+        "description": "Get a token to access the rest of the LawVu APIs",
+        "operationId": "post-v1-auth-token",
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "grant_type": {
+                    "type": "string"
+                  },
+                  "client_id": {
+                    "type": "string"
+                  },
+                  "client_secret": {
+                    "type": "string"
+                  },
+                  "username": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  },
+                  "refresh_token": {
+                    "type": "string"
+                  },
+                  "code": {
+                    "type": "string"
+                  },
+                  "redirect_uri": {
+                    "type": "string"
+                  },
+                  "SSOId": {
+                    "type": "string"
+                  },
+                  "SAMLResponse": {
+                    "type": "string"
+                  },
+                  "region_hint": {
+                    "type": "string"
+                  }
+                }
+              },
+              "encoding": {
+                "grant_type": {
+                  "style": "form"
+                },
+                "client_id": {
+                  "style": "form"
+                },
+                "client_secret": {
+                  "style": "form"
+                },
+                "username": {
+                  "style": "form"
+                },
+                "password": {
+                  "style": "form"
+                },
+                "refresh_token": {
+                  "style": "form"
+                },
+                "code": {
+                  "style": "form"
+                },
+                "redirect_uri": {
+                  "style": "form"
+                },
+                "SSOId": {
+                  "style": "form"
+                },
+                "SAMLResponse": {
+                  "style": "form"
+                },
+                "region_hint": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/emails/threads": {
+      "get": {
+        "tags": [
+          "Emails"
+        ],
+        "summary": "Get an email thread",
+        "description": "Search for an email thread by the identifier.",
+        "operationId": "get-v1-emails-threads",
+        "parameters": [
+          {
+            "name": "client",
+            "in": "query",
+            "description": "The email client (Gmail, Outlook)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "threadIdentifier",
+            "in": "query",
+            "description": "The Id of the thread",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmailThreadArray"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmailThreadArray"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmailThreadArray"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Emails"
+        ],
+        "summary": "Save email thread",
+        "description": "Creates / Updates an email thread, and child email messages.",
+        "operationId": "post-v1-emails-threads",
+        "requestBody": {
+          "description": "The email thread to create",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SaveEmailThread"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SaveEmailThread"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SaveEmailThread"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SaveEmailThread"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/emails/threads/page": {
+      "get": {
+        "tags": [
+          "Emails"
+        ],
+        "summary": "Get email threads",
+        "description": "Gets paged email threads ordered by last modified date",
+        "operationId": "get-v1-emails-threads-page",
+        "parameters": [
+          {
+            "name": "client",
+            "in": "query",
+            "description": "The email client (Gmail, Outlook)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "The number of threads to return<p>Default: 25</p>",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 25
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "description": "The Id of the thread to skip to",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedEmailThread"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedEmailThread"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedEmailThread"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/emails/drafts": {
+      "post": {
+        "tags": [
+          "Emails"
+        ],
+        "summary": "Create email draft",
+        "description": "Creates a draft email in LawVu",
+        "operationId": "post-v1-emails-drafts",
+        "requestBody": {
+          "description": "Draft details",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateMessageDraft"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateMessageDraft"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateMessageDraft"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateMessageDraft"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/emails/drafts/{draftId}": {
+      "delete": {
+        "tags": [
+          "Emails"
+        ],
+        "summary": "Delete email draft",
+        "description": "Deletes a draft email",
+        "operationId": "delete-v1-emails-drafts-draftid",
+        "parameters": [
+          {
+            "name": "draftId",
+            "in": "path",
+            "description": "The id of the draft email",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Emails"
+        ],
+        "summary": "Update email draft",
+        "description": "Updates a message draft",
+        "operationId": "put-v1-emails-drafts-draftid",
+        "parameters": [
+          {
+            "name": "draftId",
+            "in": "path",
+            "description": "The id of the draft email",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The message draft update",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/MessageDraft"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MessageDraft"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MessageDraft"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/MessageDraft"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/v1/emails/threads/byExternalReferenceId": {
+      "post": {
+        "tags": [
+          "Emails"
+        ],
+        "summary": "Check for any users tracking an email by External Reference ID",
+        "operationId": "post-v1-emails-threads-byexternalreferenceid",
+        "requestBody": {
+          "description": "External Reference IDs associated to emails",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CrossUserEmailTrackingByExternalReferenceIdRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CrossUserEmailTrackingByExternalReferenceIdRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CrossUserEmailTrackingByExternalReferenceIdRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CrossUserEmailTrackingByExternalReferenceIdRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CrossUserEmailTrackingResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CrossUserEmailTrackingResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CrossUserEmailTrackingResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/features/{featureCode}": {
+      "get": {
+        "tags": [
+          "Features"
+        ],
+        "summary": "Get feature",
+        "description": "Retrieves a feature by feature code based on the current authorised users organisation context",
+        "operationId": "get-v1-features-featurecode",
+        "parameters": [
+          {
+            "name": "featureCode",
+            "in": "path",
+            "description": "The code of the feature",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/FeatureModel"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FeatureModel"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FeatureModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/organisations": {
+      "get": {
+        "tags": [
+          "Organisations"
+        ],
+        "summary": "Get organisations",
+        "description": "Returns an array of organisations the current user is linked to",
+        "operationId": "get-v1-organisations",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrganisationArray"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrganisationArray"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrganisationArray"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/organisations/{organisationId}/departments": {
+      "get": {
+        "tags": [
+          "Organisations"
+        ],
+        "summary": "Get departments",
+        "description": "Returns an array of departments for the given organisation",
+        "operationId": "get-v1-organisations-organisationid-departments",
+        "parameters": [
+          {
+            "name": "organisationId",
+            "in": "path",
+            "description": "The organisation to get departments",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/DepartmentArray"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DepartmentArray"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DepartmentArray"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/organisations/{organisationId}/regions": {
+      "get": {
+        "tags": [
+          "Organisations"
+        ],
+        "summary": "Get regions",
+        "description": "Returns an array of regions for the given organisation",
+        "operationId": "get-v1-organisations-organisationid-regions",
+        "parameters": [
+          {
+            "name": "organisationId",
+            "in": "path",
+            "description": "The organisation to get regions",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/RegionArray"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RegionArray"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RegionArray"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/organisations/clients": {
+      "get": {
+        "tags": [
+          "Organisations"
+        ],
+        "summary": "Get clients",
+        "description": "Returns an array of clients the current user is linked to",
+        "operationId": "get-v1-organisations-clients",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClientArray"
+                },
+                "example": [
+                  {
+                    "id": 1,
+                    "name": "My organisation",
+                    "type": "ServiceProvider",
+                    "permissions": []
+                  },
+                  {
+                    "id": 4,
+                    "name": "Client 1 organisation",
+                    "type": "Customer",
+                    "permissions": []
+                  }
+                ]
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClientArray"
+                },
+                "example": [
+                  {
+                    "id": 1,
+                    "name": "My organisation",
+                    "type": "ServiceProvider",
+                    "permissions": []
+                  },
+                  {
+                    "id": 4,
+                    "name": "Client 1 organisation",
+                    "type": "Customer",
+                    "permissions": []
+                  }
+                ]
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClientArray"
+                },
+                "example": [
+                  {
+                    "id": 1,
+                    "name": "My organisation",
+                    "type": "ServiceProvider",
+                    "permissions": []
+                  },
+                  {
+                    "id": 4,
+                    "name": "Client 1 organisation",
+                    "type": "Customer",
+                    "permissions": []
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/organisations/financialsettings": {
+      "get": {
+        "tags": [
+          "Organisations"
+        ],
+        "summary": "Get financial settings",
+        "description": "Returns the organisation financial settings the current user is linked to",
+        "operationId": "get-v1-organisations-financialsettings",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrganisationFinancialSettings"
+                },
+                "example": {
+                  "id": 1,
+                  "yearEndDay": 31,
+                  "yearEndMonth": 3,
+                  "accountsPayableContacts": null,
+                  "currency": "NZD",
+                  "currencyName": "New Zealand Dollar",
+                  "currencySymbol": "$"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrganisationFinancialSettings"
+                },
+                "example": {
+                  "id": 1,
+                  "yearEndDay": 31,
+                  "yearEndMonth": 3,
+                  "accountsPayableContacts": null,
+                  "currency": "NZD",
+                  "currencyName": "New Zealand Dollar",
+                  "currencySymbol": "$"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrganisationFinancialSettings"
+                },
+                "example": {
+                  "id": 1,
+                  "yearEndDay": 31,
+                  "yearEndMonth": 3,
+                  "accountsPayableContacts": null,
+                  "currency": "NZD",
+                  "currencyName": "New Zealand Dollar",
+                  "currencySymbol": "$"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/my/recents": {
+      "get": {
+        "tags": [
+          "Recents"
+        ],
+        "summary": "Get recent items",
+        "description": "",
+        "operationId": "get-v1-my-recents",
+        "parameters": [
+          {
+            "name": "take",
+            "in": "query",
+            "description": "The maximum number of recent items to return<p>Default: 5</p>",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 5
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/RecentItemModelArray"
+                },
+                "example": [
+                  {
+                    "type": "file",
+                    "id": 414236,
+                    "title": "NDA contract for John Doe - V2.pdf",
+                    "description": "LV1762-00001 - Advice on Matter",
+                    "lastActivityDate": "2023-11-07T01:51:41.903",
+                    "matterId": 164476,
+                    "contractId": null,
+                    "contentType": "application/pdf",
+                    "documentId": "LV1762-0000004.1",
+                    "ownerId": "",
+                    "managerId": "",
+                    "contractStatus": null,
+                    "matterCategoryName": null
+                  },
+                  {
+                    "type": "matter",
+                    "id": 164476,
+                    "title": "Advice on Matter",
+                    "description": "LV1762-00001",
+                    "lastActivityDate": "2023-11-07T01:51:39.68",
+                    "matterId": null,
+                    "contractId": null,
+                    "contentType": "",
+                    "documentId": null,
+                    "ownerId": "GUID",
+                    "managerId": null,
+                    "contractStatus": null,
+                    "matterCategoryName": "Advice"
+                  },
+                  {
+                    "type": "contract",
+                    "id": 78173,
+                    "title": "NDA for Contract",
+                    "description": "Contract ID: 78173",
+                    "lastActivityDate": "2023-11-06T21:16:25.45",
+                    "matterId": null,
+                    "contractId": null,
+                    "contentType": "",
+                    "documentId": null,
+                    "ownerId": "GUID",
+                    "managerId": "",
+                    "contractStatus": "Negotiating",
+                    "matterCategoryName": null
+                  }
+                ]
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RecentItemModelArray"
+                },
+                "example": [
+                  {
+                    "type": "file",
+                    "id": 414236,
+                    "title": "NDA contract for John Doe - V2.pdf",
+                    "description": "LV1762-00001 - Advice on Matter",
+                    "lastActivityDate": "2023-11-07T01:51:41.903",
+                    "matterId": 164476,
+                    "contractId": null,
+                    "contentType": "application/pdf",
+                    "documentId": "LV1762-0000004.1",
+                    "ownerId": "",
+                    "managerId": "",
+                    "contractStatus": null,
+                    "matterCategoryName": null
+                  },
+                  {
+                    "type": "matter",
+                    "id": 164476,
+                    "title": "Advice on Matter",
+                    "description": "LV1762-00001",
+                    "lastActivityDate": "2023-11-07T01:51:39.68",
+                    "matterId": null,
+                    "contractId": null,
+                    "contentType": "",
+                    "documentId": null,
+                    "ownerId": "GUID",
+                    "managerId": null,
+                    "contractStatus": null,
+                    "matterCategoryName": "Advice"
+                  },
+                  {
+                    "type": "contract",
+                    "id": 78173,
+                    "title": "NDA for Contract",
+                    "description": "Contract ID: 78173",
+                    "lastActivityDate": "2023-11-06T21:16:25.45",
+                    "matterId": null,
+                    "contractId": null,
+                    "contentType": "",
+                    "documentId": null,
+                    "ownerId": "GUID",
+                    "managerId": "",
+                    "contractStatus": "Negotiating",
+                    "matterCategoryName": null
+                  }
+                ]
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RecentItemModelArray"
+                },
+                "example": [
+                  {
+                    "type": "file",
+                    "id": 414236,
+                    "title": "NDA contract for John Doe - V2.pdf",
+                    "description": "LV1762-00001 - Advice on Matter",
+                    "lastActivityDate": "2023-11-07T01:51:41.903",
+                    "matterId": 164476,
+                    "contractId": null,
+                    "contentType": "application/pdf",
+                    "documentId": "LV1762-0000004.1",
+                    "ownerId": "",
+                    "managerId": "",
+                    "contractStatus": null,
+                    "matterCategoryName": null
+                  },
+                  {
+                    "type": "matter",
+                    "id": 164476,
+                    "title": "Advice on Matter",
+                    "description": "LV1762-00001",
+                    "lastActivityDate": "2023-11-07T01:51:39.68",
+                    "matterId": null,
+                    "contractId": null,
+                    "contentType": "",
+                    "documentId": null,
+                    "ownerId": "GUID",
+                    "managerId": null,
+                    "contractStatus": null,
+                    "matterCategoryName": "Advice"
+                  },
+                  {
+                    "type": "contract",
+                    "id": 78173,
+                    "title": "NDA for Contract",
+                    "description": "Contract ID: 78173",
+                    "lastActivityDate": "2023-11-06T21:16:25.45",
+                    "matterId": null,
+                    "contractId": null,
+                    "contentType": "",
+                    "documentId": null,
+                    "ownerId": "GUID",
+                    "managerId": "",
+                    "contractStatus": "Negotiating",
+                    "matterCategoryName": null
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/teams": {
+      "get": {
+        "tags": [
+          "Teams"
+        ],
+        "summary": "Get teams",
+        "description": "Get teams",
+        "operationId": "get-v1-teams",
+        "parameters": [
+          {
+            "name": "allowAssigment",
+            "in": "query",
+            "description": "Only return teams that allow work assignment<p>Default: False</p>",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/TeamArray"
+                },
+                "example": [
+                  {
+                    "id": 1,
+                    "name": "Team 1"
+                  },
+                  {
+                    "id": 2,
+                    "name": "Team 2"
+                  }
+                ]
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TeamArray"
+                },
+                "example": [
+                  {
+                    "id": 1,
+                    "name": "Team 1"
+                  },
+                  {
+                    "id": 2,
+                    "name": "Team 2"
+                  }
+                ]
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TeamArray"
+                },
+                "example": [
+                  {
+                    "id": 1,
+                    "name": "Team 1"
+                  },
+                  {
+                    "id": 2,
+                    "name": "Team 2"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/users": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Search users",
+        "description": "Returns a list of users based on the filter criteria",
+        "operationId": "get-v1-users",
+        "parameters": [
+          {
+            "name": "filter.search",
+            "in": "query",
+            "description": "Search text (applies to: name & email address)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filter.permission",
+            "in": "query",
+            "description": "<p>Options:</p><ul><li>CreateMatters</li><li>ContractCreator</li></ul>",
+            "schema": {
+              "enum": [
+                "CreateMatters",
+                "ContractCreator"
+              ],
+              "type": "string",
+              "description": "<p>Options:</p><ul><li>CreateMatters</li><li>ContractCreator</li></ul>"
+            }
+          },
+          {
+            "name": "filter.activeandinvitedusersonly",
+            "in": "query",
+            "description": "Only users that are active or invited",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "filter.primaryorganisationid",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "filter.activeusersonly",
+            "in": "query",
+            "description": "Only users that are active",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "filter.uselitequery",
+            "in": "query",
+            "description": "Use a lite query\r\nWhen enabled the response will return only partial information about the user:\r\nUserId, FirstName, LastName, UserFullName and OrganisationName",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserArray"
+                },
+                "example": [
+                  {
+                    "id": "633182f3-130b-4917-99ba-4c3e88080eb4",
+                    "userName": null,
+                    "firstName": "Example",
+                    "lastName": "User",
+                    "organisationName": null,
+                    "organisationPictureCacheId": null,
+                    "directPhone": null,
+                    "mobilePhone": null,
+                    "email": "exampleuser@noemail.com",
+                    "hasPicture": false,
+                    "pictureCacheId": 0,
+                    "invitationSentUtc": null,
+                    "userFullName": "Example User",
+                    "userInitials": "EU",
+                    "isRemoved": false,
+                    "isDisabled": false,
+                    "hourlyRate": null,
+                    "liveMattersCount": 277
+                  }
+                ]
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserArray"
+                },
+                "example": [
+                  {
+                    "id": "633182f3-130b-4917-99ba-4c3e88080eb4",
+                    "userName": null,
+                    "firstName": "Example",
+                    "lastName": "User",
+                    "organisationName": null,
+                    "organisationPictureCacheId": null,
+                    "directPhone": null,
+                    "mobilePhone": null,
+                    "email": "exampleuser@noemail.com",
+                    "hasPicture": false,
+                    "pictureCacheId": 0,
+                    "invitationSentUtc": null,
+                    "userFullName": "Example User",
+                    "userInitials": "EU",
+                    "isRemoved": false,
+                    "isDisabled": false,
+                    "hourlyRate": null,
+                    "liveMattersCount": 277
+                  }
+                ]
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserArray"
+                },
+                "example": [
+                  {
+                    "id": "633182f3-130b-4917-99ba-4c3e88080eb4",
+                    "userName": null,
+                    "firstName": "Example",
+                    "lastName": "User",
+                    "organisationName": null,
+                    "organisationPictureCacheId": null,
+                    "directPhone": null,
+                    "mobilePhone": null,
+                    "email": "exampleuser@noemail.com",
+                    "hasPicture": false,
+                    "pictureCacheId": 0,
+                    "invitationSentUtc": null,
+                    "userFullName": "Example User",
+                    "userInitials": "EU",
+                    "isRemoved": false,
+                    "isDisabled": false,
+                    "hourlyRate": null,
+                    "liveMattersCount": 277
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/users/{id}/profile": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Get user profile",
+        "description": "Returns the profile of a specific user.",
+        "operationId": "get-v1-users-id-profile",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "User Id (e.g. e1bf0987-8844-49ab-a6b6-10562b58e230)",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserProfile"
+                },
+                "example": {
+                  "id": "123-456-789",
+                  "firstName": "Joey",
+                  "lastName": "Tribiani",
+                  "email": "emailaddress@gmail.com",
+                  "mobilePhone": "987654321",
+                  "directPhone": "24680",
+                  "jobTitle": "Worker",
+                  "departmentId": 4,
+                  "specialityIds": [
+                    1,
+                    2,
+                    3
+                  ],
+                  "biography": "Biography",
+                  "hourlyRate": 9.99,
+                  "linkedInUrl": "url",
+                  "organisationId": 5,
+                  "organisationName": "The Workplace",
+                  "organisationType": "Customer",
+                  "role": "Administrator",
+                  "departmentName": "Department",
+                  "hasPicture": true,
+                  "pictureCacheId": 78,
+                  "invitationSentUtc": "2025-01-21T00:44:36.422387+00:00",
+                  "status": "LockedOut"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserProfile"
+                },
+                "example": {
+                  "id": "123-456-789",
+                  "firstName": "Joey",
+                  "lastName": "Tribiani",
+                  "email": "emailaddress@gmail.com",
+                  "mobilePhone": "987654321",
+                  "directPhone": "24680",
+                  "jobTitle": "Worker",
+                  "departmentId": 4,
+                  "specialityIds": [
+                    1,
+                    2,
+                    3
+                  ],
+                  "biography": "Biography",
+                  "hourlyRate": 9.99,
+                  "linkedInUrl": "url",
+                  "organisationId": 5,
+                  "organisationName": "The Workplace",
+                  "organisationType": "Customer",
+                  "role": "Administrator",
+                  "departmentName": "Department",
+                  "hasPicture": true,
+                  "pictureCacheId": 78,
+                  "invitationSentUtc": "2025-01-21T00:44:36.422387+00:00",
+                  "status": "LockedOut"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserProfile"
+                },
+                "example": {
+                  "id": "123-456-789",
+                  "firstName": "Joey",
+                  "lastName": "Tribiani",
+                  "email": "emailaddress@gmail.com",
+                  "mobilePhone": "987654321",
+                  "directPhone": "24680",
+                  "jobTitle": "Worker",
+                  "departmentId": 4,
+                  "specialityIds": [
+                    1,
+                    2,
+                    3
+                  ],
+                  "biography": "Biography",
+                  "hourlyRate": 9.99,
+                  "linkedInUrl": "url",
+                  "organisationId": 5,
+                  "organisationName": "The Workplace",
+                  "organisationType": "Customer",
+                  "role": "Administrator",
+                  "departmentName": "Department",
+                  "hasPicture": true,
+                  "pictureCacheId": 78,
+                  "invitationSentUtc": "2025-01-21T00:44:36.422387+00:00",
+                  "status": "LockedOut"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/webhooks/subscriptions": {
+      "post": {
+        "tags": [
+          "WebhookSubscriptions"
+        ],
+        "summary": "Create a subscription",
+        "description": "Create a webhook subscription to receive notifications on events occuring in LawVu",
+        "operationId": "post-v1-webhooks-subscriptions",
+        "requestBody": {
+          "description": "Details of the webhook subscription to create",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SaveWebhookSubscriptionModel"
+              },
+              "example": {
+                "topics": [
+                  "matter.created",
+                  "matter.updated",
+                  "matter.status.updated"
+                ],
+                "subscriptionUrl": "https://myapplication.com/incomingwebhooks",
+                "clientState": "supersecretstring"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SaveWebhookSubscriptionModel"
+              },
+              "example": {
+                "topics": [
+                  "matter.created",
+                  "matter.updated",
+                  "matter.status.updated"
+                ],
+                "subscriptionUrl": "https://myapplication.com/incomingwebhooks",
+                "clientState": "supersecretstring"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SaveWebhookSubscriptionModel"
+              },
+              "example": {
+                "topics": [
+                  "matter.created",
+                  "matter.updated",
+                  "matter.status.updated"
+                ],
+                "subscriptionUrl": "https://myapplication.com/incomingwebhooks",
+                "clientState": "supersecretstring"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SaveWebhookSubscriptionModel"
+              },
+              "example": {
+                "topics": [
+                  "matter.created",
+                  "matter.updated",
+                  "matter.status.updated"
+                ],
+                "subscriptionUrl": "https://myapplication.com/incomingwebhooks",
+                "clientState": "supersecretstring"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The ID of the created subscription",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "WebhookSubscriptions"
+        ],
+        "summary": "Get all subscriptions",
+        "description": "Retrieve all existing webhook subscriptions",
+        "operationId": "GetWebhookSubscriptions",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebhookSubscriptionArray"
+                },
+                "example": [
+                  {
+                    "id": 1,
+                    "topics": [
+                      "matter.created",
+                      "matter.updated",
+                      "matter.status.updated"
+                    ],
+                    "subscriptionUrl": "https://myapplication.com/incomingwebhooks",
+                    "clientState": "supersecretstring",
+                    "status": "failed",
+                    "createdDateUtc": "2022-10-11T23:54:04.017",
+                    "createdBy": "461fffa2-950f-4961-b313-09fef67d419c",
+                    "modifiedDateUtc": "2022-12-19T23:54:04.017",
+                    "modifiedBy": "461fffa2-950f-4961-b313-09fef67d419c"
+                  },
+                  {
+                    "id": 2,
+                    "topics": [
+                      "contract.created"
+                    ],
+                    "subscriptionUrl": "https://myapplication.com/incomingwebhooks/example",
+                    "clientState": "my client state",
+                    "status": "active",
+                    "createdDateUtc": "2022-10-15T23:54:04.017",
+                    "createdBy": "461fffa2-950f-4961-b313-09fef67d419c",
+                    "modifiedDateUtc": "2022-12-21T23:54:04.017",
+                    "modifiedBy": "461fffa2-950f-4961-b313-09fef67d419c"
+                  }
+                ]
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebhookSubscriptionArray"
+                },
+                "example": [
+                  {
+                    "id": 1,
+                    "topics": [
+                      "matter.created",
+                      "matter.updated",
+                      "matter.status.updated"
+                    ],
+                    "subscriptionUrl": "https://myapplication.com/incomingwebhooks",
+                    "clientState": "supersecretstring",
+                    "status": "failed",
+                    "createdDateUtc": "2022-10-11T23:54:04.017",
+                    "createdBy": "461fffa2-950f-4961-b313-09fef67d419c",
+                    "modifiedDateUtc": "2022-12-19T23:54:04.017",
+                    "modifiedBy": "461fffa2-950f-4961-b313-09fef67d419c"
+                  },
+                  {
+                    "id": 2,
+                    "topics": [
+                      "contract.created"
+                    ],
+                    "subscriptionUrl": "https://myapplication.com/incomingwebhooks/example",
+                    "clientState": "my client state",
+                    "status": "active",
+                    "createdDateUtc": "2022-10-15T23:54:04.017",
+                    "createdBy": "461fffa2-950f-4961-b313-09fef67d419c",
+                    "modifiedDateUtc": "2022-12-21T23:54:04.017",
+                    "modifiedBy": "461fffa2-950f-4961-b313-09fef67d419c"
+                  }
+                ]
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebhookSubscriptionArray"
+                },
+                "example": [
+                  {
+                    "id": 1,
+                    "topics": [
+                      "matter.created",
+                      "matter.updated",
+                      "matter.status.updated"
+                    ],
+                    "subscriptionUrl": "https://myapplication.com/incomingwebhooks",
+                    "clientState": "supersecretstring",
+                    "status": "failed",
+                    "createdDateUtc": "2022-10-11T23:54:04.017",
+                    "createdBy": "461fffa2-950f-4961-b313-09fef67d419c",
+                    "modifiedDateUtc": "2022-12-19T23:54:04.017",
+                    "modifiedBy": "461fffa2-950f-4961-b313-09fef67d419c"
+                  },
+                  {
+                    "id": 2,
+                    "topics": [
+                      "contract.created"
+                    ],
+                    "subscriptionUrl": "https://myapplication.com/incomingwebhooks/example",
+                    "clientState": "my client state",
+                    "status": "active",
+                    "createdDateUtc": "2022-10-15T23:54:04.017",
+                    "createdBy": "461fffa2-950f-4961-b313-09fef67d419c",
+                    "modifiedDateUtc": "2022-12-21T23:54:04.017",
+                    "modifiedBy": "461fffa2-950f-4961-b313-09fef67d419c"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/webhooks/subscriptions/{id}": {
+      "get": {
+        "tags": [
+          "WebhookSubscriptions"
+        ],
+        "summary": "Get a subscription",
+        "description": "Retrieve an existing webhook subscription",
+        "operationId": "GetWebhookSubscription",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the subscription",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebhookSubscription"
+                },
+                "example": {
+                  "id": 1,
+                  "topics": [
+                    "matter.created",
+                    "matter.updated",
+                    "matter.status.updated"
+                  ],
+                  "subscriptionUrl": "https://myapplication.com/incomingwebhooks",
+                  "clientState": "my client state",
+                  "status": "active",
+                  "createdDateUtc": "2022-10-11T23:54:04.017",
+                  "createdBy": "461fffa2-950f-4961-b313-09fef67d419c",
+                  "modifiedDateUtc": "2022-12-19T23:54:04.017",
+                  "modifiedBy": "461fffa2-950f-4961-b313-09fef67d419c"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebhookSubscription"
+                },
+                "example": {
+                  "id": 1,
+                  "topics": [
+                    "matter.created",
+                    "matter.updated",
+                    "matter.status.updated"
+                  ],
+                  "subscriptionUrl": "https://myapplication.com/incomingwebhooks",
+                  "clientState": "my client state",
+                  "status": "active",
+                  "createdDateUtc": "2022-10-11T23:54:04.017",
+                  "createdBy": "461fffa2-950f-4961-b313-09fef67d419c",
+                  "modifiedDateUtc": "2022-12-19T23:54:04.017",
+                  "modifiedBy": "461fffa2-950f-4961-b313-09fef67d419c"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebhookSubscription"
+                },
+                "example": {
+                  "id": 1,
+                  "topics": [
+                    "matter.created",
+                    "matter.updated",
+                    "matter.status.updated"
+                  ],
+                  "subscriptionUrl": "https://myapplication.com/incomingwebhooks",
+                  "clientState": "my client state",
+                  "status": "active",
+                  "createdDateUtc": "2022-10-11T23:54:04.017",
+                  "createdBy": "461fffa2-950f-4961-b313-09fef67d419c",
+                  "modifiedDateUtc": "2022-12-19T23:54:04.017",
+                  "modifiedBy": "461fffa2-950f-4961-b313-09fef67d419c"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "WebhookSubscriptions"
+        ],
+        "summary": "Delete a subscription",
+        "description": "Deleting a webhook subscription will stop notifications for that subscription",
+        "operationId": "DeleteWebHookSubscription",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the subscription",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Client": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "The organisation id of the client",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the client organisation",
+            "nullable": true
+          },
+          "type": {
+            "enum": [
+              "ServiceProvider",
+              "Customer"
+            ],
+            "type": "string",
+            "description": "The type of the organisation<p>Options:</p><ul><li>ServiceProvider</li><li>Customer</li></ul>"
+          },
+          "permissions": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "description": "The permissions the user has for the organisation",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ClientArray": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Client"
+        }
+      },
+      "CreateMessageDraft": {
+        "type": "object",
+        "properties": {
+          "sourceId": {
+            "type": "string",
+            "nullable": true
+          },
+          "authorEmailAddress": {
+            "type": "string",
+            "nullable": true,
+            "deprecated": true
+          },
+          "expectedFromAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "matterId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "mode": {
+            "enum": [
+              "Message",
+              "File"
+            ],
+            "type": "string",
+            "description": "<p>Options:</p><ul><li>Message</li><li>File</li></ul>"
+          },
+          "recipients": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MessageDraftRecipient"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CrossUserEmailTracking": {
+        "type": "object",
+        "properties": {
+          "externalReferenceId": {
+            "type": "string",
+            "nullable": true
+          },
+          "tracking": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserEmailTracking"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CrossUserEmailTrackingByExternalReferenceIdRequest": {
+        "type": "object",
+        "properties": {
+          "externalReferenceIds": {
+            "$ref": "#/components/schemas/StringArray"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CrossUserEmailTrackingResponse": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CrossUserEmailTracking"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Department": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "parentId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "deletedDateUtc": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DepartmentArray": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Department"
+        }
+      },
+      "EmailThread": {
+        "type": "object",
+        "properties": {
+          "threadIdentifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "track": {
+            "type": "boolean"
+          },
+          "client": {
+            "enum": [
+              "Outlook",
+              "Gmail"
+            ],
+            "type": "string",
+            "description": "<p>Options:</p><ul><li>Outlook</li><li>Gmail</li></ul>"
+          },
+          "matterId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "matterNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "matterName": {
+            "type": "string",
+            "nullable": true
+          },
+          "matterStatus": {
+            "type": "string",
+            "nullable": true
+          },
+          "matterIsDeleted": {
+            "type": "boolean"
+          },
+          "fileEntryId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true,
+            "deprecated": true
+          },
+          "fileId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "filePath": {
+            "type": "string",
+            "nullable": true
+          },
+          "contractId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "contractName": {
+            "type": "string",
+            "nullable": true
+          },
+          "contractStatus": {
+            "type": "string",
+            "nullable": true
+          },
+          "contractIsDeleted": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "EmailThreadArray": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/EmailThread"
+        }
+      },
+      "FeatureModel": {
+        "type": "object",
+        "properties": {
+          "isEnabled": {
+            "type": "boolean"
+          },
+          "featureCode": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "MessageDraft": {
+        "type": "object",
+        "properties": {
+          "matterId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "mode": {
+            "enum": [
+              "Message",
+              "File"
+            ],
+            "type": "string",
+            "description": "<p>Options:</p><ul><li>Message</li><li>File</li></ul>"
+          },
+          "recipients": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MessageDraftRecipient"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "MessageDraftRecipient": {
+        "required": [
+          "userId"
+        ],
+        "type": "object",
+        "properties": {
+          "userId": {
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Organisation": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "OrganisationArray": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Organisation"
+        }
+      },
+      "OrganisationFinancialSettings": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "The organisation ID that the financial settings belong to",
+            "format": "int32"
+          },
+          "yearEndDay": {
+            "type": "integer",
+            "description": "The day of the month corresponding to financial year end",
+            "format": "int32"
+          },
+          "yearEndMonth": {
+            "type": "integer",
+            "description": "The month corresponding to financial year end",
+            "format": "int32"
+          },
+          "accountsPayableContacts": {
+            "type": "string",
+            "description": "Accounts payable contact details",
+            "nullable": true
+          },
+          "currency": {
+            "type": "string",
+            "description": "ISO code of the organisation's default currency e.g. USD",
+            "nullable": true
+          },
+          "currencyName": {
+            "type": "string",
+            "description": "The Name of the organisation's default currency e.g. US Dollar",
+            "nullable": true,
+            "readOnly": true
+          },
+          "currencySymbol": {
+            "type": "string",
+            "description": "The Symbol of the organisation's default currency e.g. $",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PagedEmailThread": {
+        "type": "object",
+        "properties": {
+          "threads": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EmailThread"
+            },
+            "nullable": true
+          },
+          "nextPageCursor": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RecentItemModel": {
+        "type": "object",
+        "properties": {
+          "recordType": {
+            "enum": [
+              "Matter",
+              "Milestone",
+              "Task",
+              "Organisation",
+              "Contract",
+              "File",
+              "InvoiceBatch",
+              "KnowledgeArticle",
+              "Folder",
+              "FolderTemplate",
+              "KnowledgeLibrary",
+              "InboundEmail",
+              "User",
+              "MessageThread",
+              "TimelineEntry",
+              "MatterStatus",
+              "ContractStatus",
+              "Message",
+              "Comment"
+            ],
+            "type": "string",
+            "description": "<p>Options:</p><ul><li>Matter</li><li>Milestone</li><li>Task</li><li>Organisation</li><li>Contract</li><li>File</li><li>InvoiceBatch</li><li>KnowledgeArticle</li><li>Folder</li><li>FolderTemplate</li><li>KnowledgeLibrary</li><li>InboundEmail</li><li>User</li><li>MessageThread</li><li>TimelineEntry</li><li>MatterStatus</li><li>ContractStatus</li><li>Message</li><li>Comment</li></ul>"
+          },
+          "recordId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastActivityDateUtc": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "matterId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "contractId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "fileContentType": {
+            "type": "string",
+            "nullable": true
+          },
+          "fileId": {
+            "type": "string",
+            "nullable": true
+          },
+          "ownerId": {
+            "type": "string",
+            "nullable": true
+          },
+          "managerId": {
+            "type": "string",
+            "nullable": true
+          },
+          "contractStatus": {
+            "enum": [
+              "Draft",
+              "Negotiating",
+              "Approval",
+              "Signing",
+              "Executed",
+              "Expired",
+              "Void"
+            ],
+            "type": "string",
+            "description": "<p>Options:</p><ul><li>Draft</li><li>Negotiating</li><li>Approval</li><li>Signing</li><li>Executed</li><li>Expired</li><li>Void</li></ul>",
+            "nullable": true
+          },
+          "matterCategoryName": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RecentItemModelArray": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/RecentItemModel"
+        }
+      },
+      "Region": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RegionArray": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Region"
+        }
+      },
+      "SaveEmailThread": {
+        "required": [
+          "client",
+          "threadIdentifier"
+        ],
+        "type": "object",
+        "properties": {
+          "threadIdentifier": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "track": {
+            "type": "boolean"
+          },
+          "client": {
+            "enum": [
+              "Outlook",
+              "Gmail"
+            ],
+            "type": "string",
+            "description": "<p>Options:</p><ul><li>Outlook</li><li>Gmail</li></ul>"
+          },
+          "matterId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "fileId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "contractId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SaveWebhookSubscriptionModel": {
+        "required": [
+          "subscriptionUrl",
+          "topics"
+        ],
+        "type": "object",
+        "properties": {
+          "topics": {
+            "$ref": "#/components/schemas/WebhookTopicArray"
+          },
+          "subscriptionUrl": {
+            "maxLength": 2048,
+            "minLength": 1,
+            "type": "string",
+            "description": "The publicly accessible URL of the endpoint which will be notified",
+            "format": "uri"
+          },
+          "clientState": {
+            "maxLength": 128,
+            "type": "string",
+            "description": "A custom string which will be included with each notification to help identify the notification came from LawVu",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "StringArray": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "Team": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TeamArray": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Team"
+        }
+      },
+      "TokenResponse": {
+        "type": "object",
+        "properties": {
+          "access_token": {
+            "type": "string",
+            "nullable": true
+          },
+          "token_type": {
+            "type": "string",
+            "nullable": true
+          },
+          "expires_in": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "refresh_token": {
+            "type": "string",
+            "nullable": true
+          },
+          "userName": {
+            "type": "string",
+            "nullable": true
+          },
+          "userId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "expires": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "gateway": {
+            "type": "string",
+            "nullable": true
+          },
+          "emailDomain": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "userName": {
+            "type": "string",
+            "nullable": true
+          },
+          "firstName": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastName": {
+            "type": "string",
+            "nullable": true
+          },
+          "organisationName": {
+            "type": "string",
+            "nullable": true
+          },
+          "organisationPictureCacheId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "directPhone": {
+            "type": "string",
+            "nullable": true
+          },
+          "mobilePhone": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "hasPicture": {
+            "type": "boolean"
+          },
+          "pictureCacheId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "invitationSentUtc": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "userFullName": {
+            "type": "string",
+            "nullable": true
+          },
+          "userInitials": {
+            "type": "string",
+            "nullable": true
+          },
+          "isRemoved": {
+            "type": "boolean"
+          },
+          "isDisabled": {
+            "type": "boolean"
+          },
+          "hourlyRate": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "liveMattersCount": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UserArray": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/User"
+        }
+      },
+      "UserEmailTracking": {
+        "type": "object",
+        "properties": {
+          "trackedByUserId": {
+            "type": "string",
+            "nullable": true
+          },
+          "trackedOnDateTimeUtc": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "trackedToRecord": {
+            "$ref": "#/components/schemas/UserEmailTrackingRecord"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UserEmailTrackingRecord": {
+        "type": "object",
+        "properties": {
+          "recordType": {
+            "enum": [
+              "Matter",
+              "Milestone",
+              "Task",
+              "Organisation",
+              "Contract",
+              "File",
+              "InvoiceBatch",
+              "KnowledgeArticle",
+              "Folder",
+              "FolderTemplate",
+              "KnowledgeLibrary",
+              "InboundEmail",
+              "User",
+              "MessageThread",
+              "TimelineEntry",
+              "MatterStatus",
+              "ContractStatus",
+              "Message",
+              "Comment"
+            ],
+            "type": "string",
+            "description": "<p>Options:</p><ul><li>Matter</li><li>Milestone</li><li>Task</li><li>Organisation</li><li>Contract</li><li>File</li><li>InvoiceBatch</li><li>KnowledgeArticle</li><li>Folder</li><li>FolderTemplate</li><li>KnowledgeLibrary</li><li>InboundEmail</li><li>User</li><li>MessageThread</li><li>TimelineEntry</li><li>MatterStatus</li><li>ContractStatus</li><li>Message</li><li>Comment</li></ul>"
+          },
+          "recordId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UserProfile": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "firstName": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastName": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "mobilePhone": {
+            "type": "string",
+            "nullable": true
+          },
+          "directPhone": {
+            "type": "string",
+            "nullable": true
+          },
+          "jobTitle": {
+            "type": "string",
+            "nullable": true
+          },
+          "departmentId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "specialityIds": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          },
+          "biography": {
+            "type": "string",
+            "nullable": true
+          },
+          "hourlyRate": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "linkedInUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "organisationId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "organisationName": {
+            "type": "string",
+            "nullable": true
+          },
+          "organisationType": {
+            "enum": [
+              "ServiceProvider",
+              "Customer"
+            ],
+            "type": "string",
+            "description": "<p>Options:</p><ul><li>ServiceProvider</li><li>Customer</li></ul>"
+          },
+          "role": {
+            "enum": [
+              "Administrator",
+              "InhouseLegal",
+              "Contributor",
+              "Standard",
+              "External",
+              "MatterManager"
+            ],
+            "type": "string",
+            "description": "<p>Options:</p><ul><li>Administrator</li><li>InhouseLegal</li><li>Contributor</li><li>Standard</li><li>External</li><li>MatterManager</li></ul>"
+          },
+          "departmentName": {
+            "type": "string",
+            "nullable": true
+          },
+          "hasPicture": {
+            "type": "boolean"
+          },
+          "pictureCacheId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "invitationSentUtc": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "status": {
+            "enum": [
+              "Pending",
+              "Active",
+              "Invited",
+              "LockedOut",
+              "Disabled"
+            ],
+            "type": "string",
+            "description": "<p>Options:</p><ul><li>Disabled</li><li>Pending</li><li>Active</li><li>Invited</li><li>LockedOut</li></ul>"
+          }
+        },
+        "additionalProperties": false
+      },
+      "WebhookSubscription": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "topics": {
+            "$ref": "#/components/schemas/WebhookTopicArray"
+          },
+          "subscriptionUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "clientState": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdDateUtc": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "modifiedDateUtc": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "modifiedBy": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "WebhookSubscriptionArray": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/WebhookSubscription"
+        }
+      },
+      "WebhookTopicArray": {
+        "type": "array",
+        "items": {
+          "enum": [
+            "matter.created",
+            "matter.updated",
+            "contract.created",
+            "contract.updated",
+            "matter.status.updated",
+            "contract.status.updated",
+            "matter.file.created",
+            "contract.file.created",
+            "matter.file.updated",
+            "contract.file.updated",
+            "contract.document.updated",
+            "matter.statusmessage.created",
+            "contract.statusmessage.created",
+            "matter.tag.created",
+            "contract.keydate.created",
+            "contract.keydate.updated"
+          ],
+          "type": "string",
+          "description": "<p>Options:</p><ul><li>MatterCreated</li><li>MatterUpdated</li><li>ContractCreated</li><li>ContractUpdated</li><li>MatterStatusUpdated</li><li>ContractStatusUpdated</li><li>MatterFileCreated</li><li>ContractFileCreated</li><li>MatterFileUpdated</li><li>ContractFileUpdated</li><li>ContractDocumentUpdated</li><li>MatterStatusMessageCreated</li><li>ContractStatusMessageCreated</li><li>MatterTagCreated</li><li>ContractKeyDateCreated</li><li>ContractKeyDateUpdated</li></ul>"
+        }
+      }
+    }
+  }
+}

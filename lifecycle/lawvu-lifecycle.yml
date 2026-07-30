@@ -1,0 +1,54 @@
+generated: '2026-07-19'
+method: searched
+source: https://api-docs.lawvu.com/docs/v2-endpoints-faq
+versioning:
+  scheme: uri-path
+  current: v2
+  legacy: v1
+  docs: https://api-docs.lawvu.com/docs/v2-endpoints-faq
+  changelog: https://api-docs.lawvu.com/docs/changelog
+  ga_date: '2025-08-04'
+  beta_date: '2025-06-03'
+  note: >-
+    v2 endpoints reached general availability on 2025-08-04 after a beta that began 2025-06-03.
+    The v1 product-scoped APIs (account-apis, matter-apis, contract-apis, field-apis, file-apis,
+    invoice-apis) remain published as the "Legacy API reference".
+deprecation:
+  policy_url: https://api-docs.lawvu.com/docs/v2-endpoints-faq
+  sunset_header: not documented
+  deprecation_header: not documented
+  note: >-
+    LawVu signals deprecation editorially through the V2 endpoints FAQ and the changelog rather
+    than through RFC 8594 Sunset/Deprecation headers. LawVu states it uses the contact details
+    recorded on an OAuth integration client to communicate planned outages and breaking API
+    changes to integrators.
+  contact_channel_source: https://api-docs.lawvu.com/docs/guides/integration-clients
+deprecated_operations: []
+retired_mechanisms:
+- name: Ocp-Apim-Subscription-Key header
+  date: '2024-02-26'
+  note: subscription keys no longer required; header ignored if supplied
+- name: region-specific API endpoints (*.public-api.lawvu.com)
+  date: '2024-12-20'
+  note: superseded by api.lawvu.com / api-sandbox.lawvu.com; the region-specific endpoints
+    continue to be supported. Sandboxes created before 2024-02-21 continue to use
+    integrations.public-api.lawvu.com.
+sla:
+  uptime_target: 99.95%
+  url: https://lawvu.com/trust-center/
+  note: >-
+    "99.95% service uptime SLA" published on the LawVu Trust Center, alongside stated RTO/RPO
+    review and testing and shared business continuity plans.
+status_page: https://lawvu.com/lawvu-system-status/
+status_page_note: first-party status page on lawvu.com (not a third-party status host)
+environments:
+- name: production
+  api_host: https://api.lawvu.com
+  web_host: https://go.lawvu.com
+- name: sandbox
+  api_host: https://api-sandbox.lawvu.com
+  web_host: https://demo.lawvu.com
+support:
+  developer_contact: developer@lawvu.com
+  help_center: https://help.lawvu.com/en/
+  security_contact: security@lawvu.com

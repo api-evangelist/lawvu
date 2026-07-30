@@ -1,0 +1,62 @@
+generated: '2026-07-19'
+method: searched
+source: npm, PyPI, NuGet, RubyGems, Packagist, and the LawVu GitHub organisation
+registries_probed:
+- registry: npm
+  query: lawvu
+  first_party_api_client: false
+- registry: pypi
+  query: lawvu
+  result: 404
+- registry: nuget
+  query: lawvu
+  result: 0 hits
+- registry: rubygems
+  query: lawvu
+  result: 0 hits
+- registry: packagist
+  query: lawvu
+  result: no LawVu-owned packages
+- registry: pkg.go.dev
+  query: lawvu
+  result: no first-party module
+official_sdks: false
+official_sdks_note: >-
+  LawVu ships no first-party API client SDK in any public package registry. Integrators call the
+  REST API directly, or use the low-code connectors below. Recorded honestly — no SDKs pointer is
+  emitted in apis.yml because no client library exists.
+packages:
+- language: csharp
+  registry: github
+  name: LawVu/PowerPlatformConnectors
+  url: https://github.com/LawVu/PowerPlatformConnectors
+  official: true
+  kind: connector
+  description: LawVu's fork of the Microsoft Power Platform connectors repository, carrying the
+    LawVu connector for Power Automate, Power Apps and Azure Logic Apps
+  docs: https://developer.lawvu.com/connector-for-power-platform/
+  note: a Power Platform connector definition, not an installable API client library
+- language: javascript
+  registry: npm
+  name: gdrive-lib
+  url: https://www.npmjs.com/package/gdrive-lib
+  install: npm install gdrive-lib
+  official: true
+  kind: internal-ui-library
+  description: "LawVu's GDrive Angular library"
+  note: >-
+    published by LawVu but an internal Angular UI library for Google Drive, not a client for the
+    LawVu API. Catalogued for completeness only.
+low_code_connectors:
+- name: LawVu connector for Microsoft Power Platform
+  url: https://developer.lawvu.com/connector-for-power-platform/
+  faq: https://developer.lawvu.com/pp-faq/
+  repo: https://github.com/LawVu/PowerPlatformConnectors
+  official: true
+- name: LawVu on Workato
+  url: https://developer.lawvu.com/workato-and-lawvu/
+  official: true
+- name: Insights Connect
+  url: https://developer.lawvu.com/insights-connect/
+  official: true
+  description: LawVu's data/reporting connectivity offering

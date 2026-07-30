@@ -1,0 +1,55 @@
+generated: '2026-07-19'
+method: searched
+source: https://api-docs.lawvu.com/docs
+docs:
+- https://api-docs.lawvu.com/docs
+- https://api-docs.lawvu.com/docs/guides/authentication
+- https://api-docs.lawvu.com/docs/guides/integration-clients
+available: true
+access: >-
+  Provisioned on request. Registering for LawVu Developer access provisions an "Integrations"
+  sandbox environment in which an integration can be freely developed and tested before
+  production credentials are issued.
+registration:
+  url: https://developer.lawvu.com/the-lawvu-api/
+  contact: developer@lawvu.com
+  self_service: false
+environments:
+- name: sandbox
+  api_host: https://api-sandbox.lawvu.com
+  web_host: https://demo.lawvu.com
+  legacy_api_host: https://integrations.public-api.lawvu.com
+  legacy_note: sandboxes created before 2024-02-21 continue to use the legacy host
+- name: production
+  api_host: https://api.lawvu.com
+  web_host: https://go.lawvu.com
+separation:
+  key_prefixes: none documented
+  mode_switch: separate hosts and separate OAuth clients, not a mode flag on one credential
+  differences:
+  - area: redirect URI whitelisting
+    sandbox: any redirect URI is accepted, no pre-registration required
+    production: redirect URIs must be whitelisted by LawVu when the client is registered
+  - area: OAuth clients
+    sandbox: sandbox clients cannot be migrated to production
+    production: all OAuth clients (client ID, secret, redirect URLs, configuration) must be
+      recreated manually in the production Integrations area
+promotion_steps:
+- Register for LawVu Developer access to receive the Integrations sandbox.
+- Provision an OAuth client using the Integration Clients guide.
+- Build the integration against the sandbox using the authentication and webhooks guides.
+- Recreate the OAuth client in the production organisation and update the application with the
+  new client ID, secret, authorize URL and token URL.
+test_values:
+  published: false
+  note: >-
+    LawVu publishes no magic test identifiers, test cards, fixture generators, or time-simulation
+    tooling. The sandbox is a real, isolated LawVu tenant seeded with the customer's own test
+    data rather than a fixture surface. No test values have been invented.
+interactive_console:
+  available: true
+  url: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
+  description: >-
+    The API reference supports sending requests directly from the documentation — cited by a
+    LawVu customer as the feature they value most about the developer portal.
+  source: https://developer.lawvu.com/the-lawvu-api/

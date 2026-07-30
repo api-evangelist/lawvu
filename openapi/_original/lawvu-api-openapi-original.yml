@@ -1,0 +1,3299 @@
+openapi: 3.0.1
+info:
+  title: LawVu API
+  description: The next generation of the LawVu API.
+  termsOfService: https://developer.lawvu.com/developer-terms
+  contact:
+    name: LawVu Developer Support Team
+    url: https://developer.lawvu.com
+    email: developer@lawvu.com
+  version: ''
+servers:
+  - url: https://api-sandbox.lawvu.com
+    description: Sandbox API
+  - url: https://api.lawvu.com
+    description: Production API
+paths:
+  /v2/contracts:
+    get:
+      tags:
+        - Contracts
+      summary: Get contracts
+      description: Retrieve a list of contracts
+      operationId: get-v2-contracts
+      parameters:
+        - name: $filter
+          in: query
+          description: Filter the results using OData filter syntax
+          schema:
+            type: string
+        - name: $orderby
+          in: query
+          description: Order the results using OData orderby syntax
+          schema:
+            type: string
+        - name: $skip
+          in: query
+          description: Skip the specified number of results
+          schema:
+            type: integer
+        - name: $top
+          in: query
+          description: Limit the number of results returned
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContractCollectionResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/HttpValidationProblemDetails'
+              example:
+                detail: The request was invalid and could not be processed
+                errors:
+                  Name: Operation 'gt' is not supported for 'Name'
+                instance: /contracts
+                operationId: 7edb5d62-f5bf-463b-9410-cdd8b3293d89
+                status: 400
+                title: Invalid request
+                type: https://api-docs.lawvu.com/errors/invalid_request
+    post:
+      tags:
+        - Contracts
+      summary: Create contract
+      description: Creates a contract based on the provided contract type.
+      operationId: post-v2-contracts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - type
+              allOf:
+                - $ref: '#/components/schemas/CreateContract'
+      responses:
+        '201':
+          description: Created
+          headers:
+            Location:
+              description: Location to retrieve the created contract
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreatedContract'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/HttpValidationProblemDetails'
+              example:
+                detail: The request was invalid and could not be processed
+                errors:
+                  Name: Required
+                instance: /contracts/
+                operationId: 7edb5d62-f5bf-463b-9410-cdd8b3293d89
+                status: 400
+                title: Invalid request
+                type: https://api-docs.lawvu.com/errors/invalid_request
+        '409':
+          description: Conflict
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                detail: The request could not be processed due to a conflict
+                errors:
+                  ExternalId: Is already in use
+                instance: /contracts/
+                operationId: 7edb5d62-f5bf-463b-9410-cdd8b3293d89
+                status: 409
+                title: Conflict
+                type: https://api-docs.lawvu.com/errors/conflict
+  /v2/contracts/{contractId}:
+    get:
+      tags:
+        - Contracts
+      summary: Get contract
+      description: Retrieve a contract by its identifier
+      operationId: get-v2-contracts-contractid
+      parameters:
+        - name: contractId
+          in: path
+          description: The system identifier for the contract
+          required: true
+          schema:
+            type: integer
+            description: The system identifier for the contract
+            format: int32
+            example: 5348
+          example: 5348
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contract'
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                detail: The requested resource could not be found
+                instance: /contracts/5348
+                operationId: 7edb5d62-f5bf-463b-9410-cdd8b3293d89
+                status: 404
+                title: Resource not found
+                type: https://api-docs.lawvu.com/errors/resource_not_found
+    patch:
+      tags:
+        - Contracts
+      summary: Update contract
+      description: Updates a contracts details
+      operationId: patch-v2-contracts-contractid
+      parameters:
+        - name: contractId
+          in: path
+          description: The system identifier for the contract
+          required: true
+          schema:
+            type: integer
+            description: The system identifier for the contract
+            format: int32
+            example: 5348
+          example: 5348
+      requestBody:
+        content:
+          application/merge-patch+json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/UpdateContract'
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/HttpValidationProblemDetails'
+              example:
+                detail: The request was invalid and could not be processed
+                errors:
+                  Name: Required
+                instance: /contracts/5348
+                operationId: 7edb5d62-f5bf-463b-9410-cdd8b3293d89
+                status: 400
+                title: Invalid request
+                type: https://api-docs.lawvu.com/errors/invalid_request
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                detail: You do not have permission to update this contract
+                instance: /contracts/5348
+                operationId: 7edb5d62-f5bf-463b-9410-cdd8b3293d89
+                status: 403
+                title: Forbidden
+                type: https://api-docs.lawvu.com/errors/forbidden
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                detail: The requested resource could not be found
+                instance: /contracts/5348
+                operationId: 7edb5d62-f5bf-463b-9410-cdd8b3293d89
+                status: 404
+                title: Resource not found
+                type: https://api-docs.lawvu.com/errors/resource_not_found
+        '409':
+          description: Conflict
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                detail: The request could not be processed due to a conflict
+                errors:
+                  ExternalId: Is already in use
+                instance: /contracts/5348
+                operationId: 7edb5d62-f5bf-463b-9410-cdd8b3293d89
+                status: 409
+                title: Conflict
+                type: https://api-docs.lawvu.com/errors/conflict
+  /v2/contracts/{contractId}/files/{fileId}:
+    get:
+      tags:
+        - Contracts
+      summary: Get contract file
+      description: Retrieve information about a file on a contract
+      operationId: get-v2-contracts-contractid-files-fileid
+      parameters:
+        - name: contractId
+          in: path
+          description: The system identifier for the contract
+          required: true
+          schema:
+            type: integer
+            description: The system identifier for the contract
+            format: int32
+            example: 5348
+          example: 5348
+        - name: fileId
+          in: path
+          description: The system identifier for the file
+          required: true
+          schema:
+            type: integer
+            description: The system identifier for the file
+            format: int32
+            example: 9456
+          example: 9456
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/File'
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                detail: The requested resource could not be found
+                instance: /contracts/5348/files/9456
+                operationId: 7edb5d62-f5bf-463b-9410-cdd8b3293d89
+                status: 404
+                title: Resource not found
+                type: https://api-docs.lawvu.com/errors/resource_not_found
+  /v2/contractTypes:
+    get:
+      tags:
+        - Contracts
+      summary: Get contract types
+      description: Retrieve a list of contract types
+      operationId: get-v2-contracttypes
+      parameters:
+        - name: $skip
+          in: query
+          description: Specifies the number of items to skip
+          schema:
+            type: integer
+            description: Specifies the number of items to skip
+            format: int32
+            default: 0
+        - name: $top
+          in: query
+          description: Specifies the maximum number of items to return
+          schema:
+            type: integer
+            description: Specifies the maximum number of items to return
+            format: int32
+            default: 25
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContractTypeCollectionResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/HttpValidationProblemDetails'
+              example:
+                detail: The request was invalid and could not be processed
+                instance: /contractsTypes/
+                operationId: 7edb5d62-f5bf-463b-9410-cdd8b3293d89
+                status: 400
+                title: Invalid request
+                type: https://api-docs.lawvu.com/errors/invalid_request
+  /v2/fields:
+    get:
+      tags:
+        - Fields
+      summary: Get fields
+      description: Retrieve a list of available fields
+      operationId: get-v2-fields
+      parameters:
+        - name: $skip
+          in: query
+          description: Specifies the number of items to skip
+          schema:
+            type: integer
+            description: Specifies the number of items to skip
+            format: int32
+            default: 0
+        - name: $top
+          in: query
+          description: Specifies the maximum number of items to return
+          schema:
+            type: integer
+            description: Specifies the maximum number of items to return
+            format: int32
+            default: 25
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FieldCollectionResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/HttpValidationProblemDetails'
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /v2/fields/{fieldId}/options:
+    get:
+      tags:
+        - Fields
+      summary: Get field options
+      description: |-
+        Retrieve a list of available options for a field.
+
+        Supported field types: MultiOption, Option
+      operationId: get-v2-fields-fieldid-options
+      parameters:
+        - name: fieldId
+          in: path
+          description: The API name for the field
+          required: true
+          schema:
+            type: string
+            description: The API name for the field
+            example: my_field
+          example: my_field
+        - name: $filter
+          in: query
+          description: Filter the results using OData filter syntax
+          schema:
+            type: string
+        - name: $skip
+          in: query
+          description: Skip the specified number of results
+          schema:
+            type: integer
+        - name: $top
+          in: query
+          description: Limit the number of results returned
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FieldOptionCollectionResponse'
+              examples:
+                Field options:
+                  summary: Example of field options
+                  value:
+                    items:
+                      - label: Option 1
+                        value: option_1
+                        properties: null
+                      - label: Option 2
+                        value: option_2
+                        properties: null
+                Department field options:
+                  summary: Example of field options for a department field
+                  value:
+                    items:
+                      - label: Operations
+                        value: '657'
+                        properties: null
+                      - label: Marketing Department
+                        value: '8643'
+                        properties:
+                          parentId: '657'
+                      - label: Finance Department
+                        value: '9875'
+                        properties:
+                          parentId: '657'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/HttpValidationProblemDetails'
+              example:
+                detail: 'Options not supported for field type: Text'
+                instance: /fields/my_field
+                operationId: 7edb5d62-f5bf-463b-9410-cdd8b3293d89
+                status: 400
+                title: Invalid request
+                type: https://api-docs.lawvu.com/errors/invalid_request
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                detail: >-
+                  Cannot retrieve options as the requested field could not be
+                  found
+                instance: /fields/my_field
+                operationId: 7edb5d62-f5bf-463b-9410-cdd8b3293d89
+                status: 404
+                title: Resource not found
+                type: https://api-docs.lawvu.com/errors/resource_not_found
+    post:
+      tags:
+        - Fields
+      summary: Add an option to a field
+      description: |-
+        Add a an option for a field.
+
+        Supported field types: MultiOption, Option
+      operationId: post-v2-fields-fieldid-options
+      parameters:
+        - name: fieldId
+          in: path
+          description: The API name for the field
+          required: true
+          schema:
+            type: string
+            description: The API name for the field
+            example: my_field
+          example: my_field
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - label
+              allOf:
+                - $ref: '#/components/schemas/CreateFieldOption'
+            examples:
+              Create field option:
+                summary: Example of creating a field option
+                value:
+                  label: Option 1
+              Create department field option:
+                summary: >-
+                  Example of creating a field option for a department field with
+                  a parent
+                value:
+                  label: Marketing Department
+                  properties:
+                    parentId: '657'
+      responses:
+        '201':
+          description: Created
+          headers:
+            Location:
+              description: Location to retrieve the created resource
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreatedFieldOption'
+              examples:
+                Created field option:
+                  summary: Example of a created field option response
+                  value:
+                    value: option_1
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/HttpValidationProblemDetails'
+              example:
+                detail: Field does not support adding options
+                instance: /fields/my_field
+                operationId: 7edb5d62-f5bf-463b-9410-cdd8b3293d89
+                status: 400
+                title: Invalid request
+                type: https://api-docs.lawvu.com/errors/invalid_request
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                detail: Cannot add option as the requested field could not be found
+                instance: /fields/my_field
+                operationId: 7edb5d62-f5bf-463b-9410-cdd8b3293d89
+                status: 404
+                title: Resource not found
+                type: https://api-docs.lawvu.com/errors/resource_not_found
+  /v2/fields/{fieldId}/options/{value}:
+    get:
+      tags:
+        - Fields
+      summary: Get an option for a field
+      description: |-
+        Retrieve an option for a field based by value
+
+        Supported field types: MultiOption, Option
+      operationId: get-v2-fields-fieldid-options-value
+      parameters:
+        - name: fieldId
+          in: path
+          description: The API name for the field
+          required: true
+          schema:
+            type: string
+            description: The API name for the field
+            example: my_field
+          example: my_field
+        - name: value
+          in: path
+          description: The system generated value for the field option
+          required: true
+          schema:
+            type: string
+            description: The system generated value for the field option
+            example: option_1
+          example: option_1
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FieldOption'
+              examples:
+                Field option:
+                  summary: Example of a field option
+                  value:
+                    label: Option 1
+                    value: option_1
+                    properties: null
+                Department field option:
+                  summary: Example of a field option for a department field
+                  value:
+                    label: Marketing Department
+                    value: '8643'
+                    properties:
+                      parentId: '657'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/HttpValidationProblemDetails'
+              example:
+                detail: Field does not support options
+                instance: /fields/my_field/options/option_1
+                operationId: 7edb5d62-f5bf-463b-9410-cdd8b3293d89
+                status: 400
+                title: Invalid request
+                type: https://api-docs.lawvu.com/errors/invalid_request
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                detail: You do not have permission to get this field option
+                instance: /fields/my_field/options/option_1
+                operationId: 7edb5d62-f5bf-463b-9410-cdd8b3293d89
+                status: 403
+                title: Forbidden
+                type: https://api-docs.lawvu.com/errors/forbidden
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                detail: Field option does not exist
+                instance: /fields/my_field/options/option_1
+                operationId: 7edb5d62-f5bf-463b-9410-cdd8b3293d89
+                status: 404
+                title: Resource not found
+                type: https://api-docs.lawvu.com/errors/resource_not_found
+    patch:
+      tags:
+        - Fields
+      summary: Update an option on a field
+      description: |-
+        Update an option on a field by value.
+
+        Supported field types: MultiOption, Option
+      operationId: patch-v2-fields-fieldid-options-value
+      parameters:
+        - name: fieldId
+          in: path
+          description: The API name for the field
+          required: true
+          schema:
+            type: string
+            description: The API name for the field
+            example: my_field
+          example: my_field
+        - name: value
+          in: path
+          description: The value of the option to update
+          required: true
+          schema:
+            type: string
+          example: option_1
+      requestBody:
+        content:
+          application/merge-patch+json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/UpdateFieldOption'
+            examples:
+              Update field option label:
+                summary: Example of updating a field option's label
+                value:
+                  label: Updated Label
+              Update field option properties:
+                summary: Example of updating a field option's properties
+                value:
+                  properties:
+                    parentId: '657'
+              Update field option label and properties:
+                summary: Example of updating a field option's label and properties
+                value:
+                  label: Updated Department Sub
+                  properties:
+                    parentId: '657'
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/HttpValidationProblemDetails'
+              example:
+                detail: Field does not support options
+                instance: /fields/my_field/options/option_1
+                operationId: 7edb5d62-f5bf-463b-9410-cdd8b3293d89
+                status: 400
+                title: Invalid request
+                type: https://api-docs.lawvu.com/errors/invalid_request
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                detail: Field option does not exist
+                instance: /fields/my_field/options/option_1
+                operationId: 7edb5d62-f5bf-463b-9410-cdd8b3293d89
+                status: 404
+                title: Resource not found
+                type: https://api-docs.lawvu.com/errors/resource_not_found
+    delete:
+      tags:
+        - Fields
+      summary: Delete an option from a field
+      description: |-
+        Removes an option from a field by value.
+
+        Supported field types: MultiOption, Option
+      operationId: delete-v2-fields-fieldid-options-value
+      parameters:
+        - name: fieldId
+          in: path
+          description: The API name for the field
+          required: true
+          schema:
+            type: string
+            description: The API name for the field
+            example: my_field
+          example: my_field
+        - name: value
+          in: path
+          description: The system generated value for the field option
+          required: true
+          schema:
+            type: string
+            description: The system generated value for the field option
+            example: option_1
+          example: option_1
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/HttpValidationProblemDetails'
+              example:
+                detail: Field does not support deleting options
+                instance: /fields/my_field/options/option_1
+                operationId: 7edb5d62-f5bf-463b-9410-cdd8b3293d89
+                status: 400
+                title: Invalid request
+                type: https://api-docs.lawvu.com/errors/invalid_request
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                detail: You do not have permission to delete this field option
+                instance: /fields/my_field/options/option_1
+                operationId: 7edb5d62-f5bf-463b-9410-cdd8b3293d89
+                status: 403
+                title: Forbidden
+                type: https://api-docs.lawvu.com/errors/forbidden
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                detail: Field option does not exist
+                instance: /fields/my_field/options/option_1
+                operationId: 7edb5d62-f5bf-463b-9410-cdd8b3293d89
+                status: 404
+                title: Resource not found
+                type: https://api-docs.lawvu.com/errors/resource_not_found
+  /v2/files/{fileId}:
+    get:
+      tags:
+        - Files
+      summary: Get file
+      description: >-
+        Retrieve details for a file resource by identifier (File, Folder,
+        ContractDocument)
+      operationId: get-v2-files-fileid
+      parameters:
+        - name: fileId
+          in: path
+          description: The system identifier for the file
+          required: true
+          schema:
+            type: integer
+            description: The system identifier for the file
+            format: int32
+            example: 9456
+          example: 9456
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/File'
+              examples:
+                File at root:
+                  summary: File located at the root of the resource
+                  value:
+                    id: 9456
+                    name: document.txt
+                    displayId: LV0001-0000123.1
+                    type: File
+                    folder: null
+                    contentType: text/plain
+                    resource:
+                      id: 1056
+                      type: Matter
+                    restricted: false
+                    size: 18139
+                    version: 3
+                    created:
+                      dateUtc: '2024-12-25T00:00:00Z'
+                      userName: api.developer@lawvu.com
+                    modified:
+                      dateUtc: '2024-12-26T10:30:00Z'
+                      userName: api.developer@lawvu.com
+                File in nested folder:
+                  summary: File located in a folder within a contract
+                  value:
+                    id: 9456
+                    name: contract.pdf
+                    displayId: LV0001-0000456.1
+                    type: File
+                    folder:
+                      id: 123
+                      name: Drafts
+                      folder:
+                        id: 786
+                        name: Legal Documents
+                        folder: null
+                    contentType: application/pdf
+                    resource:
+                      id: 5348
+                      type: Contract
+                    restricted: true
+                    size: 245890
+                    version: 1
+                    created:
+                      dateUtc: '2024-11-15T09:00:00Z'
+                      userName: legal.team@lawvu.com
+                    modified:
+                      dateUtc: '2024-11-20T14:45:00Z'
+                      userName: legal.team@lawvu.com
+                Folder at root:
+                  summary: Folder located at the root of the resource
+                  value:
+                    id: 786
+                    name: Legal Documents
+                    displayId: null
+                    type: Folder
+                    folder: null
+                    contentType: null
+                    resource:
+                      id: 1056
+                      type: Matter
+                    restricted: false
+                    size: 0
+                    version: 1
+                    created:
+                      dateUtc: '2024-12-25T00:00:00Z'
+                      userName: api.developer@lawvu.com
+                    modified:
+                      dateUtc: '2024-12-26T10:30:00Z'
+                      userName: api.developer@lawvu.com
+                Folder in nested folder:
+                  summary: Folder located in a folder within a contract
+                  value:
+                    id: 123
+                    name: Drafts
+                    displayId: null
+                    type: Folder
+                    folder:
+                      id: 786
+                      name: Legal Documents
+                      folder: null
+                    contentType: null
+                    resource:
+                      id: 1056
+                      type: Matter
+                    restricted: false
+                    size: 0
+                    version: 1
+                    created:
+                      dateUtc: '2024-12-25T00:00:00Z'
+                      userName: api.developer@lawvu.com
+                    modified:
+                      dateUtc: '2024-12-26T10:30:00Z'
+                      userName: api.developer@lawvu.com
+                Contract document:
+                  summary: Contract document
+                  value:
+                    id: 6429
+                    name: contract-document.txt
+                    displayId: LV0001-0000123.1
+                    type: ContractDocument
+                    folder: null
+                    contentType: text/plain
+                    resource:
+                      id: 5348
+                      type: Contract
+                    restricted: false
+                    size: 18139
+                    version: 3
+                    created:
+                      dateUtc: '2024-12-25T00:00:00Z'
+                      userName: api.developer@lawvu.com
+                    modified:
+                      dateUtc: '2024-12-26T10:30:00Z'
+                      userName: api.developer@lawvu.com
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                detail: The requested resource could not be found
+                instance: /files/9456
+                operationId: 7edb5d62-f5bf-463b-9410-cdd8b3293d89
+                status: 404
+                title: Resource not found
+                type: https://api-docs.lawvu.com/errors/resource_not_found
+    delete:
+      tags:
+        - Files
+      summary: Delete file
+      description: Delete a file resource (File, Folder, ContractDocument)
+      operationId: delete-v2-files-fileid
+      parameters:
+        - name: fileId
+          in: path
+          description: The system identifier for the file
+          required: true
+          schema:
+            type: integer
+            description: The system identifier for the file
+            format: int32
+            example: 9456
+          example: 9456
+      responses:
+        '204':
+          description: No Content
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                detail: You do not have permission to delete this file or folder
+                instance: /files/9456
+                operationId: 7edb5d62-f5bf-463b-9410-cdd8b3293d89
+                status: 403
+                title: Forbidden
+                type: https://api-docs.lawvu.com/errors/forbidden
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                detail: The requested resource could not be found
+                instance: /files/9456
+                operationId: 7edb5d62-f5bf-463b-9410-cdd8b3293d89
+                status: 404
+                title: Resource not found
+                type: https://api-docs.lawvu.com/errors/resource_not_found
+    patch:
+      tags:
+        - Files
+      summary: Update file
+      description: Update a file resource (File, Folder, ContractDocument)
+      operationId: patch-v2-files-fileid
+      parameters:
+        - name: fileId
+          in: path
+          description: The system identifier for the file
+          required: true
+          schema:
+            type: integer
+            description: The system identifier for the file
+            format: int32
+            example: 9456
+          example: 9456
+      requestBody:
+        content:
+          application/merge-patch+json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/UpdateFile'
+            examples:
+              Rename file or folder:
+                summary: Rename a file or folder
+                value:
+                  name: Q4 Legal Review
+              Move to folder:
+                summary: Move a file or folder to another folder
+                value:
+                  folder:
+                    id: 786
+              Move to root:
+                summary: Move a file or folder to the root of the resource
+                value:
+                  folder: null
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/HttpValidationProblemDetails'
+              example:
+                detail: The request was invalid and could not be processed
+                errors:
+                  Folder: Target location is invalid
+                instance: /files/9456
+                operationId: 7edb5d62-f5bf-463b-9410-cdd8b3293d89
+                status: 400
+                title: Invalid request
+                type: https://api-docs.lawvu.com/errors/invalid_request
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                detail: You do not have permission to update this file or folder
+                instance: /files/9456
+                operationId: 7edb5d62-f5bf-463b-9410-cdd8b3293d89
+                status: 403
+                title: Forbidden
+                type: https://api-docs.lawvu.com/errors/forbidden
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                detail: The requested resource could not be found
+                instance: /files/9456
+                operationId: 7edb5d62-f5bf-463b-9410-cdd8b3293d89
+                status: 404
+                title: Resource not found
+                type: https://api-docs.lawvu.com/errors/resource_not_found
+        '409':
+          description: Conflict
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                detail: The request could not be processed due to a conflict
+                errors:
+                  Name: >-
+                    A file with the same name already exists in the target
+                    location
+                instance: /files/9456
+                operationId: 7edb5d62-f5bf-463b-9410-cdd8b3293d89
+                status: 409
+                title: Conflict
+                type: https://api-docs.lawvu.com/errors/conflict
+    post:
+      tags:
+        - Files
+      summary: Upload file version
+      description: Upload a new version of a file resource (File, ContractDocument)
+      operationId: post-v2-files-fileid
+      parameters:
+        - name: fileId
+          in: path
+          description: The system identifier for the file
+          required: true
+          schema:
+            type: integer
+            description: The system identifier for the file
+            format: int32
+            example: 9456
+          example: 9456
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              required:
+                - file
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+            examples:
+              multipart/form-data:
+                summary: Example of a upload a new version of an existing file
+                value: >
+                  boundary=abc1234
+
+                  abc1234
+
+                  Content-Disposition: form-data; name="file";
+                  filename="new-file-version.pdf"
+
+                  Content-Type: application/pdf
+
+                  <Binary file contents>
+
+                  abc1234
+            encoding:
+              file:
+                style: form
+      responses:
+        '201':
+          description: Created
+          headers:
+            Location:
+              description: Relative location to retrieve the new version of the file
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadedFile'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/HttpValidationProblemDetails'
+              example:
+                detail: The request was invalid and could not be processed
+                errors:
+                  File: File size exceeds the 50 MB limit
+                instance: /files
+                operationId: 7edb5d62-f5bf-463b-9410-cdd8b3293d89
+                status: 400
+                title: Invalid request
+                type: https://api-docs.lawvu.com/errors/invalid_request
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                detail: The requested resource could not be found
+                instance: /files/9456
+                operationId: 7edb5d62-f5bf-463b-9410-cdd8b3293d89
+                status: 404
+                title: Resource not found
+                type: https://api-docs.lawvu.com/errors/resource_not_found
+        '409':
+          description: Conflict
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                detail: The request could not be processed due to a conflict
+                errors:
+                  Name: A file with the same name already exists in this location
+                instance: /files
+                operationId: 7edb5d62-f5bf-463b-9410-cdd8b3293d89
+                status: 409
+                title: Conflict
+                type: https://api-docs.lawvu.com/errors/conflict
+  /v2/files/{fileId}/content:
+    get:
+      tags:
+        - Files
+      summary: Get file content
+      description: Retrieve the binary content of a file
+      operationId: get-v2-files-fileid-content
+      parameters:
+        - name: fileId
+          in: path
+          description: The system identifier for the file
+          required: true
+          schema:
+            type: integer
+            description: The system identifier for the file
+            format: int32
+            example: 9456
+          example: 9456
+      responses:
+        '200':
+          description: The binary content of the file.
+          headers:
+            Content-Type:
+              description: The content type of the file content
+              schema:
+                type: string
+            Content-Length:
+              description: The length in bytes of the file content
+              schema:
+                type: integer
+            Content-MD5:
+              description: The MD5 hash of the file content
+              schema:
+                type: string
+            Content-Disposition:
+              description: The content disposition of the file content
+              schema:
+                type: string
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                detail: The requested resource could not be found
+                instance: /files/9456/content
+                operationId: 7edb5d62-f5bf-463b-9410-cdd8b3293d89
+                status: 404
+                title: Resource not found
+                type: https://api-docs.lawvu.com/errors/resource_not_found
+  /v2/files:
+    post:
+      tags:
+        - Files
+      summary: Create file
+      description: >-
+        Creates a file resource (File, Folder, ContractDocument).
+
+        - File or ContractDocument upload: Use `Content-Type:
+        multipart/form-data`
+
+        - Folder creation: Use `Content-Type: application/json`
+      operationId: post-v2-files
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UploadFileForm'
+            examples:
+              Contract:
+                summary: Example of a file uploaded to create a contract
+                value: >
+                  boundary=abc1234
+
+                  abc1234
+
+                  Content-Disposition: form-data; name="file";
+                  filename="contract.pdf"
+
+                  Content-Type: application/pdf
+
+                  <Binary file contents>
+
+                  abc1234
+
+                  Content-Disposition: form-data; name="targetResourceType"
+
+                  ContractCreation
+
+                  abc1234
+              Contract file:
+                summary: Example of a file uploaded to a contract
+                value: >
+                  boundary=abc1234
+
+                  abc1234
+
+                  Content-Disposition: form-data; name="file";
+                  filename="contract-file.pdf"
+
+                  Content-Type: application/pdf
+
+                  <Binary file contents>
+
+                  abc1234
+
+                  Content-Disposition: form-data; name="targetResourceType"
+
+                  Contract
+
+                  abc1234
+
+                  Content-Disposition: form-data; name="targetResourceId"
+
+                  5348
+
+                  abc1234
+              Matter file:
+                summary: Example of a file uploaded to a matter
+                value: >
+                  boundary=abc1234
+
+                  abc1234
+
+                  Content-Disposition: form-data; name="file";
+                  filename="matter-file.pdf"
+
+                  Content-Type: application/pdf
+
+                  <Binary file contents>
+
+                  abc1234
+
+                  Content-Disposition: form-data; name="targetResourceType"
+
+                  Matter
+
+                  abc1234
+
+                  Content-Disposition: form-data; name="targetResourceId"
+
+                  1056
+
+                  abc1234
+              Contract file folder:
+                summary: Example of a file uploaded into a folder within a contract
+                value: >
+                  boundary=abc1234
+
+                  abc1234
+
+                  Content-Disposition: form-data; name="file";
+                  filename="contract-file.pdf"
+
+                  Content-Type: application/pdf
+
+                  <Binary file contents>
+
+                  abc1234
+
+                  Content-Disposition: form-data; name="targetResourceType"
+
+                  Contract
+
+                  abc1234
+
+                  Content-Disposition: form-data; name="targetResourceId"
+
+                  5348
+
+                  abc1234
+
+                  Content-Disposition: form-data; name="folderId"
+
+                  786
+
+                  abc1234
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateFolder'
+            examples:
+              Matter folder:
+                summary: Example of creating a folder within a matter
+                value:
+                  name: My Documents
+                  resource:
+                    type: Matter
+                    id: 1056
+              Contract folder:
+                summary: Example of creating a folder within a contract
+                value:
+                  name: Legal Documents
+                  resource:
+                    type: Contract
+                    id: 5348
+              Nested folder:
+                summary: Example of creating a nested folder within an existing folder
+                value:
+                  name: Drafts
+                  folder:
+                    id: 786
+                  resource:
+                    type: Contract
+                    id: 5348
+        required: true
+      responses:
+        '201':
+          description: Created
+          headers:
+            Location:
+              description: Relative location to retrieve the created file or folder
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadedFile'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/HttpValidationProblemDetails'
+              example:
+                detail: The request was invalid and could not be processed
+                errors:
+                  TargetResourceId: Is required when adding a file to a matter
+                instance: /files
+                operationId: 7edb5d62-f5bf-463b-9410-cdd8b3293d89
+                status: 400
+                title: Invalid request
+                type: https://api-docs.lawvu.com/errors/invalid_request
+        '409':
+          description: Conflict
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                detail: The request could not be processed due to a conflict
+                errors:
+                  Name: >-
+                    A file or folder with the same name already exists in this
+                    location
+                instance: /files
+                operationId: 7edb5d62-f5bf-463b-9410-cdd8b3293d89
+                status: 409
+                title: Conflict
+                type: https://api-docs.lawvu.com/errors/conflict
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                detail: >-
+                  The Content-Type must be either 'multipart/form-data' for file
+                  uploads or 'application/json' for folder creation
+                instance: /files
+                operationId: 7edb5d62-f5bf-463b-9410-cdd8b3293d89
+                status: 415
+                title: Unsupported media type
+                type: https://api-docs.lawvu.com/errors/unsupported_media_type
+  /v2/matters:
+    get:
+      tags:
+        - Matters
+      summary: Get matters
+      description: Retrieve a list of matters
+      operationId: get-v2-matters
+      parameters:
+        - name: $filter
+          in: query
+          description: Filter the results using OData filter syntax
+          schema:
+            type: string
+        - name: $orderby
+          in: query
+          description: Order the results using OData orderby syntax
+          schema:
+            type: string
+        - name: $skip
+          in: query
+          description: Skip the specified number of results
+          schema:
+            type: integer
+        - name: $top
+          in: query
+          description: Limit the number of results returned
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MatterCollectionResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/HttpValidationProblemDetails'
+              example:
+                detail: The request was invalid and could not be processed
+                errors:
+                  Name: Operation 'gt' is not supported for 'Name'
+                instance: /matters
+                operationId: 7edb5d62-f5bf-463b-9410-cdd8b3293d89
+                status: 400
+                title: Invalid request
+                type: https://api-docs.lawvu.com/errors/invalid_request
+    post:
+      tags:
+        - Matters
+      summary: Create matter
+      description: Creates a matter based on the provided matter type.
+      operationId: post-v2-matters
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - type
+              allOf:
+                - $ref: '#/components/schemas/CreateMatter'
+      responses:
+        '201':
+          description: Created
+          headers:
+            Location:
+              description: Location to retrieve the created matter
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreatedMatter'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/HttpValidationProblemDetails'
+              example:
+                detail: The request was invalid and could not be processed
+                errors:
+                  Name: Required
+                instance: /matters
+                operationId: 7edb5d62-f5bf-463b-9410-cdd8b3293d89
+                status: 400
+                title: Invalid request
+                type: https://api-docs.lawvu.com/errors/invalid_request
+        '409':
+          description: Conflict
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                detail: The request could not be processed due to a conflict
+                errors:
+                  ExternalId: Is already in use
+                instance: /matters
+                operationId: 7edb5d62-f5bf-463b-9410-cdd8b3293d89
+                status: 409
+                title: Conflict
+                type: https://api-docs.lawvu.com/errors/conflict
+  /v2/matters/{matterId}:
+    get:
+      tags:
+        - Matters
+      summary: Get matter
+      description: Retrieve a matter by its identifier
+      operationId: get-v2-matters-matterid
+      parameters:
+        - name: matterId
+          in: path
+          description: The system identifier for the matter
+          required: true
+          schema:
+            type: integer
+            description: The system identifier for the matter
+            format: int32
+            example: 1056
+          example: 1056
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Matter'
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                detail: The requested resource could not be found
+                instance: /matters/1056
+                operationId: 7edb5d62-f5bf-463b-9410-cdd8b3293d89
+                status: 404
+                title: Resource not found
+                type: https://api-docs.lawvu.com/errors/resource_not_found
+    patch:
+      tags:
+        - Matters
+      summary: Update matter
+      description: Updates a matters details
+      operationId: patch-v2-matters-matterid
+      parameters:
+        - name: matterId
+          in: path
+          description: The system identifier for the matter
+          required: true
+          schema:
+            type: integer
+            description: The system identifier for the matter
+            format: int32
+            example: 1056
+          example: 1056
+      requestBody:
+        content:
+          application/merge-patch+json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/UpdateMatter'
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/HttpValidationProblemDetails'
+              example:
+                detail: The request was invalid and could not be processed
+                errors:
+                  Name: Required
+                instance: /matters/1056
+                operationId: 7edb5d62-f5bf-463b-9410-cdd8b3293d89
+                status: 400
+                title: Invalid request
+                type: https://api-docs.lawvu.com/errors/invalid_request
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                detail: You do not have permission to update this matter
+                instance: /matters/1056
+                operationId: 7edb5d62-f5bf-463b-9410-cdd8b3293d89
+                status: 403
+                title: Forbidden
+                type: https://api-docs.lawvu.com/errors/forbidden
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                detail: The requested resource could not be found
+                instance: /matters/1056
+                operationId: 7edb5d62-f5bf-463b-9410-cdd8b3293d89
+                status: 404
+                title: Resource not found
+                type: https://api-docs.lawvu.com/errors/resource_not_found
+        '409':
+          description: Conflict
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                detail: The request could not be processed due to a conflict
+                errors:
+                  ExternalId: Is already in use
+                instance: /matters/1056
+                operationId: 7edb5d62-f5bf-463b-9410-cdd8b3293d89
+                status: 409
+                title: Conflict
+                type: https://api-docs.lawvu.com/errors/conflict
+  /v2/matters/{matterId}/files/{fileId}:
+    get:
+      tags:
+        - Matters
+      summary: Get matter file
+      description: Retrieve information about a file on a matter
+      operationId: get-v2-matters-matterid-files-fileid
+      parameters:
+        - name: matterId
+          in: path
+          description: The system identifier for the matter
+          required: true
+          schema:
+            type: integer
+            description: The system identifier for the matter
+            format: int32
+            example: 1056
+          example: 1056
+        - name: fileId
+          in: path
+          description: The system identifier for the file
+          required: true
+          schema:
+            type: integer
+            description: The system identifier for the file
+            format: int32
+            example: 9456
+          example: 9456
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/File'
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                detail: The requested resource could not be found
+                instance: /matters/1056/files/9456
+                operationId: 7edb5d62-f5bf-463b-9410-cdd8b3293d89
+                status: 404
+                title: Resource not found
+                type: https://api-docs.lawvu.com/errors/resource_not_found
+  /v2/matterTypes:
+    get:
+      tags:
+        - Matters
+      summary: Get matter types
+      description: Retrieve a list of matter types
+      operationId: get-v2-mattertypes
+      parameters:
+        - name: $skip
+          in: query
+          description: Specifies the number of items to skip
+          schema:
+            type: integer
+            description: Specifies the number of items to skip
+            format: int32
+            default: 0
+        - name: $top
+          in: query
+          description: Specifies the maximum number of items to return
+          schema:
+            type: integer
+            description: Specifies the maximum number of items to return
+            format: int32
+            default: 25
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MatterTypeCollectionResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/HttpValidationProblemDetails'
+              example:
+                detail: The request was invalid and could not be processed
+                instance: /matterTypes/
+                operationId: 7edb5d62-f5bf-463b-9410-cdd8b3293d89
+                status: 400
+                title: Invalid request
+                type: https://api-docs.lawvu.com/errors/invalid_request
+components:
+  schemas:
+    AuditableReference:
+      type: object
+      properties:
+        dateUtc:
+          type: string
+          description: >-
+            The date and time the action was performed. The date and time uses
+            the ISO-8601 format and will be in UTC
+          format: date-time
+          readOnly: true
+          example: '2024-12-25T00:00:00Z'
+        userName:
+          type: string
+          description: The username of who performed the action
+          readOnly: true
+          example: api.developer@lawvu.com
+      additionalProperties: false
+    AuditableUserReference:
+      type: object
+      properties:
+        dateUtc:
+          type: string
+          description: >-
+            The date and time the action was performed. The date and time uses
+            the ISO-8601 format and will be in UTC
+          format: date-time
+          readOnly: true
+          example: '2024-12-25T00:00:00Z'
+        user:
+          allOf:
+            - $ref: '#/components/schemas/UserReference'
+          description: The user who performed the action
+          nullable: true
+          readOnly: true
+        userName:
+          type: string
+          description: The username of who performed the action
+          readOnly: true
+          example: api.developer@lawvu.com
+      additionalProperties: false
+    Contract:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The system identifier for the contract
+          format: int32
+          nullable: true
+          readOnly: true
+          example: 5348
+        name:
+          type: string
+          description: The user defined name of the contract
+          nullable: true
+          example: My contract
+        document:
+          allOf:
+            - $ref: '#/components/schemas/FileReference'
+          description: The contract document
+          nullable: true
+          readOnly: true
+        type:
+          allOf:
+            - $ref: '#/components/schemas/ContractTypeReference'
+          description: The type of the contract
+          nullable: true
+          readOnly: true
+        owner:
+          allOf:
+            - $ref: '#/components/schemas/UserReference'
+          description: The user assigned as the owner of the contract
+          nullable: true
+        expiry:
+          type: string
+          description: >-
+            The expiry date of the contract. The date and time uses the ISO-8601
+            format and will be in the Local timezone of the organization
+          format: date-time
+          nullable: true
+          example: '2024-12-25T00:00:00'
+        externalId:
+          type: string
+          description: >-
+            A unique user defined identifier that can be used to reference
+            another system
+          nullable: true
+          example: external-01
+        fields:
+          type: object
+          additionalProperties:
+            oneOf:
+              - title: 'null'
+              - title: Text
+                type: string
+                example: my text value
+              - title: Decimal
+                type: number
+                example: 78659.84
+              - title: Boolean
+                type: boolean
+                example: true
+              - title: Date
+                type: string
+                example: '2025-05-06'
+              - $ref: '#/components/schemas/OptionFieldValue'
+              - title: MultiOption
+                type: array
+                items:
+                  $ref: '#/components/schemas/OptionFieldValue'
+              - $ref: '#/components/schemas/UserFieldValue'
+            x-additionalPropertiesName: fieldApiName
+          description: The collection of fields associated with the contract
+          nullable: true
+          example:
+            my_text_field: my text value
+            my_decimal_field: 78659.84
+            my_boolean_field: true
+            my_date_field: '2025-05-06'
+            my_option_field:
+              label: Option 1
+              value: option_1
+            my_multioption_field:
+              - label: Option A
+                value: option_a
+              - label: Option D
+                value: option_d
+            my_user_field:
+              email: api.developer@lawvu.com
+              firstName: Api
+              id: f0f1e06e-3005-4093-af7f-1934d55617e1
+              lastName: Developer
+              organizationId: 8134
+        restricted:
+          type: boolean
+          description: |-
+            Is the contract only available to members.
+
+            An indicator where the contract requires membership to access
+          default: false
+          nullable: true
+          example: false
+        status:
+          allOf:
+            - $ref: '#/components/schemas/ContractStatus'
+          description: The current status of the contract
+          nullable: true
+          example: Active
+        teamAssigned:
+          allOf:
+            - $ref: '#/components/schemas/TeamReference'
+          description: The team which this contract is assigned to
+          nullable: true
+        created:
+          allOf:
+            - $ref: '#/components/schemas/AuditableUserReference'
+          description: The user who created the contract and when
+          nullable: true
+          readOnly: true
+      additionalProperties: false
+    ContractCollectionResponse:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Contract'
+          description: The collection of items
+      additionalProperties: false
+      description: Response wrapper of a collection of items
+    ContractGroupReference:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The system identifier for the contract group
+          format: int32
+          example: 5002
+        name:
+          type: string
+          description: The name of the contract type
+          readOnly: true
+          example: Employment
+      additionalProperties: false
+    ContractStatus:
+      enum:
+        - Draft
+        - Negotiating
+        - Approval
+        - Signing
+        - Executed
+        - Expired
+        - Void
+      type: string
+    ContractType:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The system identifier for the contract type
+          format: int32
+          nullable: true
+          readOnly: true
+          example: 1234
+        name:
+          type: string
+          description: The user defined name of the contract type
+          nullable: true
+          example: Contractor Agreement
+        parent:
+          allOf:
+            - $ref: '#/components/schemas/ContractGroupReference'
+          description: The parent contract type
+          nullable: true
+        hasWizard:
+          type: boolean
+          description: The contract type has a wizard in place.
+          nullable: true
+          example: false
+        teamAssignmentRequired:
+          type: boolean
+          description: The contract type has a team assignment required.
+          nullable: true
+          example: false
+      additionalProperties: false
+    ContractTypeCollectionResponse:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContractType'
+          description: The collection of items
+      additionalProperties: false
+      description: Response wrapper of a collection of items
+    ContractTypeReference:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The system identifier for the contract type
+          format: int32
+          example: 1234
+        name:
+          type: string
+          description: The name of the contract type
+          readOnly: true
+          example: NDA
+      additionalProperties: false
+    CreateContract:
+      required:
+        - type
+      type: object
+      properties:
+        type:
+          allOf:
+            - $ref: '#/components/schemas/ContractTypeReference'
+          description: The type of the contract
+        id:
+          type: integer
+          description: The system identifier for the contract
+          format: int32
+          nullable: true
+          readOnly: true
+          example: 5348
+        name:
+          type: string
+          description: The user defined name of the contract
+          nullable: true
+          example: My contract
+        owner:
+          allOf:
+            - $ref: '#/components/schemas/UserReference'
+          description: The user assigned as the owner of the contract
+          nullable: true
+        document:
+          allOf:
+            - $ref: '#/components/schemas/FileReference'
+          description: |-
+            The contract document.
+
+            This is only optional if the contract type has a wizard
+          nullable: true
+        expiry:
+          type: string
+          description: >-
+            The expiry date of the contract. The date and time uses the ISO-8601
+            format and will be in the Local timezone of the organization
+          format: date-time
+          nullable: true
+          example: '2024-12-25T00:00:00'
+        externalId:
+          type: string
+          description: >-
+            A unique user defined identifier that can be used to reference
+            another system
+          nullable: true
+          example: external-01
+        fields:
+          type: object
+          additionalProperties:
+            oneOf:
+              - title: 'null'
+              - title: Text
+                type: string
+                example: my text value
+              - title: Decimal
+                type: number
+                example: 78659.84
+              - title: Boolean
+                type: boolean
+                example: true
+              - title: Date
+                type: string
+                example: '2025-05-06'
+              - $ref: '#/components/schemas/OptionFieldValue'
+              - title: MultiOption
+                type: array
+                items:
+                  $ref: '#/components/schemas/OptionFieldValue'
+              - $ref: '#/components/schemas/UserFieldValue'
+            x-additionalPropertiesName: fieldApiName
+          description: The collection of fields associated with the contract
+          nullable: true
+          example:
+            my_text_field: my text value
+            my_decimal_field: 78659.84
+            my_boolean_field: true
+            my_date_field: '2025-05-06'
+            my_option_field:
+              value: option_1
+            my_multioption_field:
+              - value: option_a
+              - value: option_d
+            my_user_field:
+              id: f0f1e06e-3005-4093-af7f-1934d55617e1
+        restricted:
+          type: boolean
+          description: |-
+            Is the contract only available to members.
+
+            An indicator where the contract requires membership to access
+          default: false
+          nullable: true
+          example: false
+        teamAssigned:
+          allOf:
+            - $ref: '#/components/schemas/TeamReference'
+          description: The team which this contract is assigned to
+          nullable: true
+        created:
+          allOf:
+            - $ref: '#/components/schemas/AuditableUserReference'
+          description: The user who created the contract and when
+          nullable: true
+          readOnly: true
+      additionalProperties: false
+    CreateFieldOption:
+      required:
+        - label
+      type: object
+      properties:
+        label:
+          type: string
+          description: The user defined label of the field option
+          example: Option A
+        properties:
+          type: object
+          additionalProperties:
+            x-additionalPropertiesName: propertyName
+          description: >-
+            Additional properties based on the type of field option. See
+            examples for more details.
+          nullable: true
+      additionalProperties: false
+    CreateFolder:
+      required:
+        - name
+        - resource
+      type: object
+      properties:
+        name:
+          type: string
+          description: >-
+            The user defined name of the file resource
+
+            For file resources with a type of file this includes the file
+            extension
+          example: document.txt
+        resource:
+          allOf:
+            - $ref: '#/components/schemas/ResourceReference'
+          description: The resource where the file resource is located within
+        id:
+          type: integer
+          description: The system identifier for the file
+          format: int32
+          nullable: true
+          readOnly: true
+          example: 9456
+        displayId:
+          type: string
+          description: |-
+            A system generated identifier of the file resource.
+            Also known as "Document ID"
+          nullable: true
+          readOnly: true
+          example: LV0001-0000123.1
+        type:
+          allOf:
+            - $ref: '#/components/schemas/FileType'
+          description: The type of file resource
+          nullable: true
+          readOnly: true
+          example: File
+        folder:
+          allOf:
+            - $ref: '#/components/schemas/FolderReference'
+          description: >-
+            The folder where the file resource is located 
+
+
+            Folder is null when the file resource is located at the root of the
+            resource
+          nullable: true
+        contentType:
+          type: string
+          description: The content type of the file binary
+          nullable: true
+          readOnly: true
+          example: text/plain
+        restricted:
+          type: boolean
+          description: Is the file resource access restricted
+          default: false
+          nullable: true
+          readOnly: true
+          example: false
+        size:
+          type: integer
+          description: The size of the file binary in bytes
+          format: int64
+          nullable: true
+          readOnly: true
+          example: 18139
+        version:
+          type: integer
+          description: The version number of the file resource
+          format: int32
+          nullable: true
+          readOnly: true
+          example: 3
+        created:
+          allOf:
+            - $ref: '#/components/schemas/AuditableUserReference'
+          description: The user who created the file resource and when
+          nullable: true
+          readOnly: true
+        modified:
+          allOf:
+            - $ref: '#/components/schemas/AuditableReference'
+          description: The username who modified the file resource and when
+          nullable: true
+          readOnly: true
+      additionalProperties: false
+      description: Request model for creating a folder
+    CreateMatter:
+      required:
+        - type
+      type: object
+      properties:
+        type:
+          allOf:
+            - $ref: '#/components/schemas/MatterTypeReference'
+          description: The type of the matter
+        id:
+          type: integer
+          description: The system identifier for the matter
+          format: int32
+          nullable: true
+          readOnly: true
+          example: 1056
+        name:
+          type: string
+          description: >-
+            The user defined name of the matter 
+
+
+            When simple ticketing is enabled for the organization then the Name
+            is going to be optional and will default to simple ticketing rules,
+            otherwise is required.
+          nullable: true
+          example: My matter
+        displayId:
+          type: string
+          description: |-
+            A system generated identifier of the matter.
+            Also known as "LawVu ID" or "Matter Number"
+          nullable: true
+          readOnly: true
+          example: LV0001-0001
+        owner:
+          allOf:
+            - $ref: '#/components/schemas/UserReference'
+          description: The user assigned as the owner of the matter
+          nullable: true
+        manager:
+          allOf:
+            - $ref: '#/components/schemas/MatterManager'
+          description: >-
+            The user managing the matter or the intake queue for an
+            organization.
+
+
+            Only one of User and IntakeQueue can be assigned to a matter at a
+            time.
+
+
+            During creation a default manager may be assigned when none is
+            provided depending on the matter type configuration. More
+            information can be found <a
+            href="https://help.lawvu.com/en/articles/6102905-setting-a-default-matter-manager-intake-assignment">here</a>.
+          nullable: true
+        externalId:
+          type: string
+          description: >-
+            A unique user defined identifier that can be used to reference
+            another system
+          nullable: true
+          example: external-01
+        fields:
+          type: object
+          additionalProperties:
+            oneOf:
+              - title: 'null'
+              - title: Text
+                type: string
+                example: my text value
+              - title: Decimal
+                type: number
+                example: 78659.84
+              - title: Boolean
+                type: boolean
+                example: true
+              - title: Date
+                type: string
+                example: '2025-05-06'
+              - $ref: '#/components/schemas/OptionFieldValue'
+              - title: MultiOption
+                type: array
+                items:
+                  $ref: '#/components/schemas/OptionFieldValue'
+              - $ref: '#/components/schemas/UserFieldValue'
+            x-additionalPropertiesName: fieldApiName
+          description: The collection of fields associated with the matter
+          nullable: true
+          example:
+            my_text_field: my text value
+            my_decimal_field: 78659.84
+            my_boolean_field: true
+            my_date_field: '2025-05-06'
+            my_option_field:
+              value: option_1
+            my_multioption_field:
+              - value: option_a
+              - value: option_d
+            my_user_field:
+              id: f0f1e06e-3005-4093-af7f-1934d55617e1
+        restricted:
+          type: boolean
+          description: |-
+            Is the matter only available to members
+
+            An indicator where the matter requires membership to access
+          default: false
+          nullable: true
+          example: false
+        teamAssigned:
+          allOf:
+            - $ref: '#/components/schemas/TeamReference'
+          description: The team which this matter is assigned to
+          nullable: true
+        created:
+          allOf:
+            - $ref: '#/components/schemas/AuditableUserReference'
+          description: The user who created the matter and when
+          nullable: true
+          readOnly: true
+      additionalProperties: false
+    CreatedContract:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The system identifier for the contract
+          format: int32
+          readOnly: true
+          example: 5348
+      additionalProperties: false
+      description: Represents a contract that has been created
+    CreatedFieldOption:
+      type: object
+      properties:
+        value:
+          type: string
+          description: The system generated value for the field option
+          example: option_1
+      additionalProperties: false
+      description: Represents a field option that has been created
+    CreatedMatter:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The system identifier for the matter
+          format: int32
+          example: 1056
+      additionalProperties: false
+      description: Represents a matter that has been created
+    Field:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The API name for the field
+          nullable: true
+          readOnly: true
+          example: my_field
+        name:
+          type: string
+          description: The user defined name of the field
+          nullable: true
+          example: My dropdown field
+        type:
+          allOf:
+            - $ref: '#/components/schemas/FieldType'
+          description: The type of the field
+          nullable: true
+          example: text
+        properties:
+          oneOf:
+            - $ref: '#/components/schemas/MultiOptionFieldProperties'
+            - $ref: '#/components/schemas/OptionFieldProperties'
+          description: Specific properties for the field, varies by type
+          nullable: true
+          readOnly: true
+        created:
+          allOf:
+            - $ref: '#/components/schemas/AuditableReference'
+          description: The username who created the field and when
+          nullable: true
+          readOnly: true
+        modified:
+          allOf:
+            - $ref: '#/components/schemas/AuditableReference'
+          description: The username who modified the field and when
+          nullable: true
+          readOnly: true
+      additionalProperties: false
+    FieldCollectionResponse:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Field'
+          description: The collection of items
+      additionalProperties: false
+      description: Response wrapper of a collection of items
+    FieldOption:
+      required:
+        - label
+      type: object
+      properties:
+        label:
+          type: string
+          description: The user defined label of the field option
+          nullable: true
+          example: Option A
+        value:
+          type: string
+          description: The system generated value for the field option
+          nullable: true
+          readOnly: true
+          example: option_1
+        properties:
+          type: object
+          additionalProperties:
+            x-additionalPropertiesName: propertyName
+          description: >-
+            Additional properties based on the type of field option. See
+            examples for more details.
+          nullable: true
+      additionalProperties: false
+    FieldOptionCollectionResponse:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldOption'
+          description: The collection of items
+      additionalProperties: false
+      description: Response wrapper of a collection of items
+    FieldType:
+      enum:
+        - Text
+        - Decimal
+        - Boolean
+        - Date
+        - Option
+        - MultiOption
+        - User
+      type: string
+    File:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The system identifier for the file
+          format: int32
+          nullable: true
+          readOnly: true
+          example: 9456
+        name:
+          type: string
+          description: >-
+            The user defined name of the file resource
+
+            For file resources with a type of file this includes the file
+            extension
+          nullable: true
+          example: document.txt
+        displayId:
+          type: string
+          description: |-
+            A system generated identifier of the file resource.
+            Also known as "Document ID"
+          nullable: true
+          readOnly: true
+          example: LV0001-0000123.1
+        type:
+          allOf:
+            - $ref: '#/components/schemas/FileType'
+          description: The type of file resource
+          nullable: true
+          readOnly: true
+          example: File
+        folder:
+          allOf:
+            - $ref: '#/components/schemas/FolderReference'
+          description: >-
+            The folder where the file resource is located 
+
+
+            Folder is null when the file resource is located at the root of the
+            resource
+          nullable: true
+        contentType:
+          type: string
+          description: The content type of the file binary
+          nullable: true
+          readOnly: true
+          example: text/plain
+        resource:
+          allOf:
+            - $ref: '#/components/schemas/ResourceReference'
+          description: The resource where the file resource is located within
+          nullable: true
+          readOnly: true
+        restricted:
+          type: boolean
+          description: Is the file resource access restricted
+          default: false
+          nullable: true
+          readOnly: true
+          example: false
+        size:
+          type: integer
+          description: The size of the file binary in bytes
+          format: int64
+          nullable: true
+          readOnly: true
+          example: 18139
+        version:
+          type: integer
+          description: The version number of the file resource
+          format: int32
+          nullable: true
+          readOnly: true
+          example: 3
+        created:
+          allOf:
+            - $ref: '#/components/schemas/AuditableUserReference'
+          description: The user who created the file resource and when
+          nullable: true
+          readOnly: true
+        modified:
+          allOf:
+            - $ref: '#/components/schemas/AuditableReference'
+          description: The username who modified the file resource and when
+          nullable: true
+          readOnly: true
+      additionalProperties: false
+    FileReference:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The system identifier for the file
+          format: int32
+          example: 9456
+        name:
+          type: string
+          description: The name of the file
+          readOnly: true
+          example: Standard NDA.docx
+        version:
+          type: integer
+          description: The version of the file
+          format: int32
+          readOnly: true
+          example: 3
+      additionalProperties: false
+    FileType:
+      enum:
+        - File
+        - Folder
+        - ContractDocument
+      type: string
+      description: The type of file entry
+    FileUploadResourceType:
+      enum:
+        - Matter
+        - Contract
+        - ContractCreation
+      type: string
+    FolderReference:
+      type: object
+      properties:
+        folder:
+          allOf:
+            - $ref: '#/components/schemas/FolderReference'
+          description: >-
+            The parent folder. 
+
+
+            The folder will be null when the folder is at the root of the
+            resource
+          nullable: true
+          readOnly: true
+        id:
+          type: integer
+          description: The system identifier for the folder
+          format: int32
+          example: 786
+        name:
+          type: string
+          description: The name of the folder
+          readOnly: true
+          example: Drafts
+      additionalProperties: false
+    HttpValidationProblemDetails:
+      type: object
+      properties:
+        detail:
+          type: string
+          description: More information about the problem.
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+          description: >-
+            A dictionary of validation errors, where each key is a field api
+            name and the value is a list of error messages.
+        instance:
+          type: string
+          description: The URI of the resource which the error relates to.
+        operationId:
+          type: string
+          description: >-
+            A unique trace identifier for the request. This should be provided
+            when requesting support.
+        status:
+          type: integer
+          description: The HTTP status code for the problem.
+          format: int32
+        title:
+          type: string
+          description: A short description of the error.
+        type:
+          type: string
+          description: A URI which can be followed to find out more about the problem.
+      additionalProperties: {}
+    IntakeQueueReference:
+      type: object
+      properties:
+        organizationId:
+          type: integer
+          description: The system identifier for the organization
+          format: int32
+          example: 8134
+        organizationName:
+          type: string
+          description: The name of the organization
+          readOnly: true
+          example: Api Development Organization
+      additionalProperties: false
+    Matter:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The system identifier for the matter
+          format: int32
+          nullable: true
+          readOnly: true
+          example: 1056
+        name:
+          type: string
+          description: >-
+            The user defined name of the matter 
+
+
+            When simple ticketing is enabled for the organization then the Name
+            is going to be optional and will default to simple ticketing rules,
+            otherwise is required.
+          nullable: true
+          example: My matter
+        displayId:
+          type: string
+          description: |-
+            A system generated identifier of the matter.
+            Also known as "LawVu ID" or "Matter Number"
+          nullable: true
+          readOnly: true
+          example: LV0001-0001
+        type:
+          allOf:
+            - $ref: '#/components/schemas/MatterTypeReference'
+          description: The type of the matter
+          nullable: true
+          readOnly: true
+        owner:
+          allOf:
+            - $ref: '#/components/schemas/UserReference'
+          description: The user assigned as the owner of the matter
+          nullable: true
+        manager:
+          allOf:
+            - $ref: '#/components/schemas/MatterManager'
+          description: >
+            The user managing the matter or the intake queue for an
+            organization.
+
+
+            Only one of User and IntakeQueue can be assigned to a matter at a
+            time.
+          nullable: true
+        externalId:
+          type: string
+          description: >-
+            A unique user defined identifier that can be used to reference
+            another system
+          nullable: true
+          example: external-01
+        fields:
+          type: object
+          additionalProperties:
+            oneOf:
+              - title: 'null'
+              - title: Text
+                type: string
+                example: my text value
+              - title: Decimal
+                type: number
+                example: 78659.84
+              - title: Boolean
+                type: boolean
+                example: true
+              - title: Date
+                type: string
+                example: '2025-05-06'
+              - $ref: '#/components/schemas/OptionFieldValue'
+              - title: MultiOption
+                type: array
+                items:
+                  $ref: '#/components/schemas/OptionFieldValue'
+              - $ref: '#/components/schemas/UserFieldValue'
+            x-additionalPropertiesName: fieldApiName
+          description: The collection of fields associated with the matter
+          nullable: true
+          example:
+            my_text_field: my text value
+            my_decimal_field: 78659.84
+            my_boolean_field: true
+            my_date_field: '2025-05-06'
+            my_option_field:
+              label: Option 1
+              value: option_1
+            my_multioption_field:
+              - label: Option A
+                value: option_a
+              - label: Option D
+                value: option_d
+            my_user_field:
+              email: api.developer@lawvu.com
+              firstName: Api
+              id: f0f1e06e-3005-4093-af7f-1934d55617e1
+              lastName: Developer
+              organizationId: 8134
+        restricted:
+          type: boolean
+          description: |-
+            Is the matter only available to members
+
+            An indicator where the matter requires membership to access
+          default: false
+          nullable: true
+          example: false
+        status:
+          allOf:
+            - $ref: '#/components/schemas/MatterStatus'
+          description: The current status of the matter
+          nullable: true
+          example: Active
+        teamAssigned:
+          allOf:
+            - $ref: '#/components/schemas/TeamReference'
+          description: The team which this matter is assigned to
+          nullable: true
+        created:
+          allOf:
+            - $ref: '#/components/schemas/AuditableUserReference'
+          description: The user who created the matter and when
+          nullable: true
+          readOnly: true
+      additionalProperties: false
+    MatterCollectionResponse:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Matter'
+          description: The collection of items
+      additionalProperties: false
+      description: Response wrapper of a collection of items
+    MatterManager:
+      type: object
+      properties:
+        intakeQueue:
+          allOf:
+            - $ref: '#/components/schemas/IntakeQueueReference'
+          description: >-
+            The intake queue for the organization that is assigned to manage the
+            matter
+          nullable: true
+        user:
+          allOf:
+            - $ref: '#/components/schemas/UserReference'
+          description: The user who is assigned to manage the matter
+          nullable: true
+      additionalProperties: false
+    MatterStatus:
+      enum:
+        - Draft
+        - Scoping
+        - Review
+        - Active
+        - TasksLate
+        - MilestonesLate
+        - TasksAndMilestonesLate
+        - AwaitingManagerAcceptance
+        - AwaitingOwnerAcceptance
+        - Complete
+        - Archived
+        - OnHold
+      type: string
+    MatterType:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The system identifier for the matter type
+          format: int32
+          nullable: true
+          readOnly: true
+          example: 7492
+        name:
+          type: string
+          description: The user defined name of the matter type
+          nullable: true
+          example: My matter type
+        parent:
+          allOf:
+            - $ref: '#/components/schemas/MatterTypeReference'
+          description: The parent matter type
+          nullable: true
+      additionalProperties: false
+    MatterTypeCollectionResponse:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/MatterType'
+          description: The collection of items
+      additionalProperties: false
+      description: Response wrapper of a collection of items
+    MatterTypeReference:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The system identifier for the matter type
+          format: int32
+          example: 7492
+        name:
+          type: string
+          description: The name of the matter type
+          readOnly: true
+          example: NDA
+      additionalProperties: false
+    MultiOptionFieldProperties:
+      type: object
+      properties:
+        userCanAddOption:
+          type: boolean
+          description: >-
+            Indicates if an option can be added without the user having access
+            to further manage the field options
+          nullable: true
+          example: true
+      additionalProperties: false
+    OptionFieldProperties:
+      type: object
+      properties:
+        userCanAddOption:
+          type: boolean
+          description: >-
+            Indicates if an option can be added without the user having access
+            to further manage the field options
+          nullable: true
+          example: true
+      additionalProperties: false
+    OptionFieldValue:
+      title: Option
+      type: object
+      properties:
+        label:
+          type: string
+          readOnly: true
+          example: Option 1
+        value:
+          type: string
+          example: option_1
+    ProblemDetails:
+      type: object
+      properties:
+        detail:
+          type: string
+          description: More information about the problem.
+        instance:
+          type: string
+          description: The URI of the resource which the error relates to.
+        operationId:
+          type: string
+          description: >-
+            A unique trace identifier for the request. This should be provided
+            when requesting support.
+        status:
+          type: integer
+          description: The HTTP status code for the problem.
+          format: int32
+        title:
+          type: string
+          description: A short description of the error.
+        type:
+          type: string
+          description: A URI which can be followed to find out more about the problem.
+      additionalProperties: {}
+    ResourceReference:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The system identifier for the resource
+          format: int32
+          example: 78914
+        type:
+          allOf:
+            - $ref: '#/components/schemas/ResourceType'
+          description: The type of the resource
+          readOnly: true
+          example: Contract
+      additionalProperties: false
+    ResourceType:
+      enum:
+        - Contract
+        - Matter
+      type: string
+    TeamReference:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The identifier of the team
+          format: int32
+          example: 469
+        name:
+          type: string
+          description: The full name of the team
+          readOnly: true
+          example: Legal - Commercial
+      additionalProperties: false
+    UpdateContract:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The user defined name of the contract
+          nullable: true
+        owner:
+          allOf:
+            - $ref: '#/components/schemas/UserReference'
+          description: The user assigned as the owner of the contract
+          nullable: true
+        expiry:
+          type: string
+          description: >-
+            The expiry date of the contract. The date and time uses the ISO-8601
+            format and will be in the Local timezone of the organization
+          format: date-time
+          nullable: true
+        externalId:
+          type: string
+          description: >-
+            A unique user defined identifier that can be used to reference
+            another system
+          nullable: true
+        fields:
+          type: object
+          additionalProperties:
+            oneOf:
+              - title: 'null'
+              - title: Text
+                type: string
+                example: my text value
+              - title: Decimal
+                type: number
+                example: 78659.84
+              - title: Boolean
+                type: boolean
+                example: true
+              - title: Date
+                type: string
+                example: '2025-05-06'
+              - $ref: '#/components/schemas/OptionFieldValue'
+              - title: MultiOption
+                type: array
+                items:
+                  $ref: '#/components/schemas/OptionFieldValue'
+              - $ref: '#/components/schemas/UserFieldValue'
+            x-additionalPropertiesName: fieldApiName
+          description: The collection of fields associated with the contract
+          nullable: true
+          example:
+            my_text_field: my text value
+            my_decimal_field: 78659.84
+            my_boolean_field: true
+            my_date_field: '2025-05-06'
+            my_option_field:
+              value: option_1
+            my_multioption_field:
+              - value: option_a
+              - value: option_d
+            my_user_field:
+              id: f0f1e06e-3005-4093-af7f-1934d55617e1
+        restricted:
+          type: boolean
+          description: |-
+            Is the contract only available to members.
+
+            An indicator where the contract requires membership to access
+          nullable: true
+          example: false
+        status:
+          allOf:
+            - $ref: '#/components/schemas/ContractStatus'
+          description: The current status of the contract
+          nullable: true
+        teamAssigned:
+          allOf:
+            - $ref: '#/components/schemas/TeamReference'
+          description: The team which this contract is assigned to
+          nullable: true
+      additionalProperties: false
+    UpdateFieldOption:
+      type: object
+      properties:
+        label:
+          type: string
+          description: The user defined label of the field option
+          nullable: true
+        properties:
+          type: object
+          additionalProperties: {}
+          description: Specific properties for the field option, varies by field type
+          nullable: true
+      additionalProperties: false
+    UpdateFile:
+      type: object
+      properties:
+        name:
+          type: string
+          description: >-
+            The user defined name of the file resource
+
+            For file resources with a type of file this includes the file
+            extension
+          nullable: true
+        folder:
+          allOf:
+            - $ref: '#/components/schemas/FolderReference'
+          description: >-
+            The folder where the file resource is located 
+
+
+            Folder is null when the file resource is located at the root of the
+            resource
+          nullable: true
+      additionalProperties: false
+    UpdateMatter:
+      type: object
+      properties:
+        name:
+          type: string
+          description: >-
+            The user defined name of the matter 
+
+
+            When simple ticketing is enabled for the organization then the Name
+            is going to be optional and will default to simple ticketing rules,
+            otherwise is required.
+          nullable: true
+        owner:
+          allOf:
+            - $ref: '#/components/schemas/UserReference'
+          description: The user assigned as the owner of the matter
+          nullable: true
+        manager:
+          allOf:
+            - $ref: '#/components/schemas/MatterManager'
+          description: >
+            The user managing the matter or the intake queue for an
+            organization.
+
+
+            Only one of User and IntakeQueue can be assigned to a matter at a
+            time.
+          nullable: true
+        externalId:
+          type: string
+          description: >-
+            A unique user defined identifier that can be used to reference
+            another system
+          nullable: true
+        fields:
+          type: object
+          additionalProperties:
+            oneOf:
+              - title: 'null'
+              - title: Text
+                type: string
+                example: my text value
+              - title: Decimal
+                type: number
+                example: 78659.84
+              - title: Boolean
+                type: boolean
+                example: true
+              - title: Date
+                type: string
+                example: '2025-05-06'
+              - $ref: '#/components/schemas/OptionFieldValue'
+              - title: MultiOption
+                type: array
+                items:
+                  $ref: '#/components/schemas/OptionFieldValue'
+              - $ref: '#/components/schemas/UserFieldValue'
+            x-additionalPropertiesName: fieldApiName
+          description: The collection of fields associated with the matter
+          nullable: true
+          example:
+            my_text_field: my text value
+            my_decimal_field: 78659.84
+            my_boolean_field: true
+            my_date_field: '2025-05-06'
+            my_option_field:
+              value: option_1
+            my_multioption_field:
+              - value: option_a
+              - value: option_d
+            my_user_field:
+              id: f0f1e06e-3005-4093-af7f-1934d55617e1
+        restricted:
+          type: boolean
+          description: |-
+            Is the matter only available to members
+
+            An indicator where the matter requires membership to access
+          nullable: true
+          example: false
+        status:
+          allOf:
+            - $ref: '#/components/schemas/MatterStatus'
+          description: The current status of the matter
+          nullable: true
+        teamAssigned:
+          allOf:
+            - $ref: '#/components/schemas/TeamReference'
+          description: The team which this matter is assigned to
+          nullable: true
+      additionalProperties: false
+    UploadFileForm:
+      required:
+        - file
+        - targetResourceType
+      type: object
+      properties:
+        file:
+          type: string
+          description: The file to be uploaded
+          format: binary
+          nullable: true
+        targetResourceType:
+          allOf:
+            - $ref: '#/components/schemas/FileUploadResourceType'
+          description: The type of the resource the file will be uploaded to
+          example: Matter
+        targetResourceId:
+          type: integer
+          description: >-
+            The id of the resource the file will be uploaded to. Required unless
+            TargetResourceType is ContractCreation
+          format: int32
+          nullable: true
+          example: 65436
+        folderId:
+          type: integer
+          description: >-
+            The parent folder id of the file. Leave null if the file is not in a
+            folder
+          format: int32
+          nullable: true
+          example: 32535
+      additionalProperties: false
+    UploadedFile:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The system identifier for the file
+          format: int32
+          readOnly: true
+          example: 9456
+      additionalProperties: false
+      description: Represents a file that has been uploaded
+    UserFieldValue:
+      title: User
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/UserReference'
+    UserReference:
+      type: object
+      properties:
+        email:
+          type: string
+          description: The email of the user
+          readOnly: true
+          example: api.developer@lawvu.com
+        firstName:
+          type: string
+          description: The first name of the user
+          readOnly: true
+          example: Api
+        id:
+          type: string
+          description: The identifier of the user
+          example: f0f1e06e-3005-4093-af7f-1934d55617e1
+        lastName:
+          type: string
+          description: The last name of the user
+          readOnly: true
+          example: Developer
+        organizationId:
+          type: integer
+          description: The system identifier for the organization
+          format: int32
+          readOnly: true
+          example: 8134
+      additionalProperties: false

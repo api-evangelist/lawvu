@@ -1,0 +1,166 @@
+generated: '2026-07-19'
+method: derived
+source: openapi/lawvu-api-openapi-original.yml
+enriched_from:
+- https://api-docs.lawvu.com/docs/guides/odata
+- https://api-docs.lawvu.com/docs/guides/files
+- https://api-docs.lawvu.com/docs/guides/fields
+domain: in-house legal operations (matters, contracts, files, fields, spend)
+id_style: >-
+  integer surrogate ids on matters, contracts and files; string values on field options; GUIDs on
+  users and teams. No typed id prefixes.
+entities:
+- name: Matter
+  schema: Matter
+  description: A unit of legal work. The central record in LawVu.
+  key_fields: [id, name, displayId, type, owner, manager, externalId, fields, restricted,
+    status, teamAssigned, created]
+  operations:
+  - get-v2-matters
+  - post-v2-matters
+  - get-v2-matters-matterid
+  - patch-v2-matters-matterid
+  relationships:
+  - type: belongs_to
+    target: MatterType
+    via: type
+  - type: has_one
+    target: UserReference
+    via: owner
+  - type: has_one
+    target: MatterManager
+    via: manager
+  - type: has_one
+    target: TeamReference
+    via: teamAssigned
+  - type: has_many
+    target: Field
+    via: fields
+  - type: has_many
+    target: File
+    via: matter files (get-v2-matters-matterid-files-fileid)
+  - type: has_one
+    target: AuditableUserReference
+    via: created
+- name: Contract
+  schema: Contract
+  description: A contract record, with its own document and lifecycle stage.
+  key_fields: [id, name, document, type, owner, expiry, externalId, fields, restricted,
+    status, teamAssigned, created]
+  operations:
+  - get-v2-contracts
+  - post-v2-contracts
+  - get-v2-contracts-contractid
+  - patch-v2-contracts-contractid
+  relationships:
+  - type: belongs_to
+    target: ContractType
+    via: type
+  - type: has_one
+    target: FileReference
+    via: document
+  - type: has_one
+    target: UserReference
+    via: owner
+  - type: has_one
+    target: TeamReference
+    via: teamAssigned
+  - type: has_many
+    target: Field
+    via: fields
+  - type: has_many
+    target: File
+    via: contract files (get-v2-contracts-contractid-files-fileid)
+- name: MatterType
+  schema: MatterType
+  description: Customer-defined classification for matters; hierarchical via parent.
+  operations: [get-v2-mattertypes]
+  relationships:
+  - type: has_one
+    target: MatterTypeReference
+    via: parent
+- name: ContractType
+  schema: ContractType
+  description: Customer-defined classification for contracts; hierarchical via parent, may
+    drive a wizard and require team assignment.
+  operations: [get-v2-contracttypes]
+  relationships:
+  - type: has_one
+    target: ContractTypeReference
+    via: parent
+- name: Field
+  schema: Field
+  description: A customer-defined custom field definition applied to matters and contracts.
+  key_fields: [id, name, type, properties, created, modified]
+  operations: [get-v2-fields]
+  relationships:
+  - type: has_many
+    target: FieldOption
+    via: options (get-v2-fields-fieldid-options)
+- name: FieldOption
+  schema: FieldOption
+  description: A selectable option on an option-based field, keyed by value.
+  key_fields: [label, value, properties]
+  operations:
+  - get-v2-fields-fieldid-options
+  - post-v2-fields-fieldid-options
+  - get-v2-fields-fieldid-options-value
+  - patch-v2-fields-fieldid-options-value
+  - delete-v2-fields-fieldid-options-value
+  relationships:
+  - type: belongs_to
+    target: Field
+    via: fieldId path parameter
+- name: File
+  schema: File
+  description: A document or folder attached to a matter or contract, with versioning.
+  key_fields: [id, name, displayId, type, folder, contentType, resource, restricted, size,
+    version, created, modified]
+  operations:
+  - post-v2-files
+  - get-v2-files-fileid
+  - patch-v2-files-fileid
+  - post-v2-files-fileid
+  - delete-v2-files-fileid
+  - get-v2-files-fileid-content
+  relationships:
+  - type: belongs_to
+    target: ResourceReference
+    via: resource (matter or contract, by type + id)
+  - type: has_one
+    target: FolderReference
+    via: folder
+- name: UserReference
+  schema: UserReference
+  description: A LawVu user, scoped to an organisation.
+  key_fields: [id, email, firstName, lastName, organizationId]
+- name: TeamReference
+  schema: TeamReference
+  description: A team a matter or contract can be assigned to.
+- name: MatterManager
+  schema: MatterManager
+  description: Either an assigned user or an intake queue that owns triage for a matter.
+  relationships:
+  - type: has_one
+    target: UserReference
+    via: user
+  - type: has_one
+    target: IntakeQueueReference
+    via: intakeQueue
+error_schemas:
+- name: ProblemDetails
+  fields: [type, title, status, detail, instance, operationId]
+- name: HttpValidationProblemDetails
+  fields: [type, title, status, detail, instance, operationId, errors]
+legacy_domains:
+  note: >-
+    The v1 "Legacy API reference" adds domains not yet present in v2 — email threads and drafts,
+    organisations, departments, regions, clients, financial settings, teams, users, webhook
+    subscriptions (Account API) and invoices and invoice recipients (Invoices API).
+  specs:
+  - openapi/lawvu-account-openapi-original.json
+  - openapi/lawvu-invoices-openapi-original.json
+  - openapi/lawvu-matters-openapi-original.json
+  - openapi/lawvu-contracts-openapi-original.json
+  - openapi/lawvu-fields-openapi-original.json
+  - openapi/lawvu-files-openapi-original.json

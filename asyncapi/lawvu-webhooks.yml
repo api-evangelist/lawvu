@@ -1,0 +1,145 @@
+generated: '2026-07-19'
+method: searched
+source: https://api-docs.lawvu.com/docs/guides/webhooks
+type: Webhooks
+spec_type: none
+asyncapi_published: false
+asyncapi_note: >-
+  LawVu documents a full webhook surface but publishes no AsyncAPI document. No AsyncAPI was
+  found on the docs host, the developer portal, or the LawVu GitHub organisation. The webhook
+  catalog below is captured verbatim from the webhooks guide; no AsyncAPI has been fabricated.
+docs: https://api-docs.lawvu.com/docs/guides/webhooks
+transport: HTTP POST to a subscriber-supplied HTTPS endpoint
+subscription_management:
+  api: openapi/lawvu-account-openapi-original.json
+  base_path: /account-apis/v1/webhooks/subscriptions
+  operations:
+  - operationId: post-v1-webhooks-subscriptions
+    summary: Create a subscription
+  - operationId: GetWebhookSubscriptions
+    summary: Get all subscriptions
+  - operationId: GetWebhookSubscription
+    summary: Get a subscription
+  - operationId: DeleteWebHookSubscription
+    summary: Delete a subscription
+  updatable: false
+  update_note: subscriptions cannot be updated; delete and recreate to change them
+  expiry: subscriptions do not expire, but can be disabled after repeated delivery failures
+  scope: created under the security context of an individual user, not an organisation
+subscription_fields:
+- name: topics
+  description: array of event topics to subscribe to
+- name: subscriptionUrl
+  description: HTTPS URL, max 2048 characters; may carry query string data
+- name: clientState
+  description: optional secret echoed back on every notification, used by the subscriber to
+    validate that a notification came from LawVu
+notification_payload:
+  fields:
+  - name: Timestamp
+    description: UTC date and time the event occurred
+  - name: ResourceId
+    description: id of the resource the notification relates to; query the LawVu API with it
+      for detail
+  - name: EventType
+    description: the topic the notification was generated for
+  - name: ClientState
+    description: the value supplied when the subscription was created
+  - name: ParentResource
+    description: present for sub-resource topics; object of ResourceType and ResourceId
+  thin_payload: true
+  thin_payload_note: no event detail beyond identifiers is sent; fetch the resource by id
+delivery:
+  latency: generally within 10 seconds of the event, except where a delay window applies
+  ack_requirement: 2xx response within 5 seconds
+  retries:
+  - attempt: 1
+    delay: 1 minute
+  - attempt: 2
+    delay: 2 minutes
+  - attempt: 3
+    delay: 5 minutes
+  - attempt: 4
+    action: abandon notification
+  disable_rule: >-
+    a subscription is disabled after 10 abandoned notifications within a 24-hour period; it
+    must be recreated to be re-enabled
+security:
+  endpoint_auth_supported: false
+  endpoint_auth_note: LawVu does not support subscription URLs that require authentication or
+    are not publicly accessible
+  signature: none
+  shared_secret: clientState (subscriber-defined, echoed on each notification)
+  ip_allowlist: not provided
+  data_access: notifications respect the access level of the user who created the subscription
+topics:
+- topic: matter.created
+  description: When a matter is created
+  parent_resource: false
+  deduplication: false
+- topic: matter.updated
+  description: When a matter is updated — name, team assigned, matter type, custom fields,
+    state, owner, manager (including intake), restricted, urgent, external ID, parent matter,
+    tags, or status message
+  parent_resource: false
+  deduplication: true
+  delay_window: 2 minutes
+- topic: matter.status.updated
+  description: When the state of a matter is updated
+  parent_resource: false
+  deduplication: false
+- topic: matter.file.created
+  description: When a file is added to a matter
+  parent_resource: true
+  deduplication: false
+- topic: matter.file.updated
+  description: When a file is updated in a matter
+  parent_resource: true
+  deduplication: false
+- topic: matter.statusmessage.created
+  description: When a new status message is posted to a matter
+  parent_resource: true
+  deduplication: false
+- topic: matter.tag.created
+  description: When a tag is added to a matter
+  parent_resource: true
+  deduplication: false
+- topic: contract.created
+  description: When a contract is created
+  parent_resource: false
+  deduplication: false
+- topic: contract.updated
+  description: When a contract is updated — name, team assigned, contract type, custom fields,
+    stage, owner, restricted, contract value, expiry date, executed date, external ID, parent
+    matter, or status message
+  parent_resource: false
+  deduplication: true
+  delay_window: 2 minutes
+- topic: contract.status.updated
+  description: When the stage of a contract is updated (e.g. approval to signing)
+  parent_resource: true
+  deduplication: false
+- topic: contract.file.created
+  description: When a file is added to a contract (files that appear in the Files tab)
+  parent_resource: true
+  deduplication: false
+- topic: contract.file.updated
+  description: When a file is updated in a contract (files that appear in the Files tab)
+  parent_resource: true
+  deduplication: false
+- topic: contract.document.updated
+  description: When the contract document is updated
+  parent_resource: true
+  deduplication: false
+- topic: contract.statusmessage.created
+  description: When a new status message is posted to a contract
+  parent_resource: true
+  deduplication: false
+- topic: contract.keydate.created
+  description: When a new key date is created on a contract
+  parent_resource: true
+  deduplication: false
+- topic: contract.keydate.updated
+  description: When a key date is updated on a contract
+  parent_resource: true
+  deduplication: false

@@ -1,0 +1,86 @@
+generated: '2026-07-19'
+method: searched
+source: https://api-docs.lawvu.com/docs
+sources:
+- https://api-docs.lawvu.com/docs/errors
+- https://api-docs.lawvu.com/docs/guides/authentication
+- https://api-docs.lawvu.com/docs/guides/odata
+- https://lawvu.com/trust-center/
+- openapi/lawvu-api-openapi-original.yml
+standards:
+- id: rfc9457-problem-details
+  conforms: true
+  evidence: 'Errors guide states "Errors produced by the API adhere to the RFC 9457 Problem
+    Details for HTTP APIs"; all 50 4xx responses in the v2 OpenAPI use application/problem+json'
+- id: oauth2
+  conforms: true
+  evidence: OAuth 2.0 authorization code grant with refresh tokens, documented against RFC 6749
+- id: rfc6749-authorization-code
+  conforms: true
+  evidence: authorization code is the only supported grant type
+- id: rfc7519-jwt
+  conforms: true
+  evidence: access tokens are base64-encoded JWTs carrying sub / name / organisationId / exp /
+    iat claims
+- id: odata
+  conforms: partial
+  evidence: '"a subset of the OData query language" — $filter, $orderby, $top, $skip only'
+- id: openapi-3.0
+  conforms: true
+  evidence: seven published OpenAPI 3.0.1 documents
+- id: rfc9116-security-txt
+  conforms: true
+  evidence: https://lawvu.com/.well-known/security.txt returns Contact and Expires
+- id: saml-sso
+  conforms: true
+  evidence: Trust Center — "We integrate with SAML SSO and SCIM"
+- id: scim
+  conforms: true
+  evidence: Trust Center — SCIM integration for organisation-wide access protocols
+- id: iso-27001
+  conforms: true
+  evidence: Trust Center — certified against ISO 27001; risk management program based on the
+    ISO 27001 controls framework
+- id: soc-1
+  conforms: true
+  evidence: Trust Center — certified against SOC 1
+- id: soc-2
+  conforms: true
+  evidence: Trust Center — certified against SOC 2
+- id: gdpr
+  conforms: true
+  evidence: Trust Center — independent attestation of GDPR compliance
+- id: ccpa
+  conforms: true
+  evidence: Trust Center — independent attestation of CCPA compliance
+- id: hipaa
+  conforms: true
+  evidence: Trust Center — independent attestation of HIPAA compliance
+- id: mcp
+  conforms: true
+  evidence: first-party LawVu MCP server for connecting AI tools to the LegalOS
+- id: rfc8414-oauth-authorization-server-metadata
+  conforms: partial
+  evidence: published for the documentation MCP server at api-docs.lawvu.com, not for the
+    product API
+- id: rfc8594-sunset-header
+  conforms: false
+  evidence: no Sunset or Deprecation header documented
+- id: openid-connect
+  conforms: false
+  evidence: no OIDC discovery document on any product host; the API uses plain OAuth 2.0
+- id: asyncapi
+  conforms: false
+  evidence: webhooks documented, but no AsyncAPI document published
+- id: json-api
+  conforms: false
+  evidence: plain JSON resource representations, not the JSON:API media type
+- id: idempotency-key
+  conforms: false
+  evidence: no idempotency key header or parameter documented or present in any spec
+- id: fhir-r4
+  conforms: false
+- id: fapi
+  conforms: false
+- id: psd2
+  conforms: false

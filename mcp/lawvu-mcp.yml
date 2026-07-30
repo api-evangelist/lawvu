@@ -1,0 +1,60 @@
+generated: '2026-07-19'
+method: searched
+source: https://lawvu.com/demo/legalos-lawvu-mcp-server/
+status: published
+servers:
+- name: lawvu-legalos-mcp
+  kind: product
+  status: published
+  url: null
+  url_note: >-
+    LawVu markets and demonstrates a first-party MCP server ("Integrations & MCP server" in the
+    platform navigation, with a recorded product demo), but publishes no public endpoint URL,
+    installation manifest, or tool list on its public surface. The connection URL appears to be
+    issued per customer tenant. No endpoint has been invented here.
+  description: >-
+    The LawVu MCP server securely connects AI tools such as Claude, ChatGPT and Microsoft
+    Copilot to the LawVu LegalOS, so an agent can access legal information and workflows within
+    the customer's governance framework.
+  demonstrated_capabilities:
+  - Read across matters, contracts and tasks
+  - Return deep links back to the underlying LawVu records
+  - Compose with other MCP-connected systems (the published demo pairs LawVu with Salesforce)
+  sources:
+  - https://lawvu.com/demo/legalos-lawvu-mcp-server/
+  - https://lawvu.com/workspace/integrations/
+- name: lawvu-api-docs-mcp
+  kind: documentation
+  status: published
+  transport: http
+  url: https://api-docs.lawvu.com/_mcp
+  description: >-
+    Documentation MCP server hosted with the LawVu API reference (Redocly). The reference site
+    offers one-click "Install MCP server" actions for Cursor and VS Code, and exposes an
+    RFC 8414 authorization-server document.
+  oauth:
+    metadata_url: https://api-docs.lawvu.com/.well-known/oauth-authorization-server
+    metadata_file: well-known/lawvu-docs-oauth-authorization-server.json
+    issuer: https://auth.cloud.redocly.com
+    authorization_endpoint: https://api-docs.lawvu.com/_mcp/oauth2/auth
+    token_endpoint: https://api-docs.lawvu.com/_mcp/oauth2/token-portal
+    registration_endpoint: https://api-docs.lawvu.com/_mcp/register
+    grant_types: [authorization_code, refresh_token, client_credentials]
+    scopes: [openid, profile, email, offline_access]
+    pkce: S256
+  scope_note: serves the LawVu documentation to agents; it is not the LawVu product API
+  sources:
+  - https://api-docs.lawvu.com/docs
+agent_surface:
+  llms_txt: https://api-docs.lawvu.com/llms.txt
+  markdown_docs: every documentation page is served as Markdown at <page>.md
+  one_click_agents:
+  - ChatGPT
+  - Claude
+  - Cursor
+  - VS Code
+tools: []
+tools_note: >-
+  No tool list is published for either server, and none has been derived here. The underlying
+  operation surface an agent would reach through the product MCP server is catalogued in
+  openapi/ and skills/.

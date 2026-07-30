@@ -1,0 +1,88 @@
+generated: '2026-07-19'
+method: searched
+source: https://api-docs.lawvu.com/docs/changelog
+url: https://api-docs.lawvu.com/docs/changelog
+scheme: dated entries grouped by year, no semantic version numbers
+current_version: v2
+format: editorial entries with links to the affected reference operations
+window: recent entries captured; the live changelog remains the source of truth
+entries:
+- date: '2026-03-30'
+  title: Field option management and matter listing with OData support
+  breaking: false
+  additions:
+  - GET /fields/{fieldId}/options — list options with OData filtering and pagination
+  - GET /fields/{fieldId}/options/{value} — retrieve a single option
+  - POST /fields/{fieldId}/options — create a new option
+  - PATCH /fields/{fieldId}/options/{value} — update an existing option
+  - DELETE /fields/{fieldId}/options/{value} — delete an option
+  - GET /matters — OData filtering and sorting, including by field values
+- date: '2025-10-28'
+  title: API V2 endpoint changes
+  breaking: false
+  additions:
+  - $top and $skip support added to all list-based endpoints (contracttypes, mattertypes,
+    fields, field options)
+- date: '2025-08-04'
+  title: API V2 endpoints — now generally available
+  breaking: false
+  highlights:
+  - Simplified, more intuitive payloads
+  - Improved field identifiers
+  - Enhanced reference documentation
+  - Improved API responses
+- date: '2025-06-03'
+  title: API V2 endpoint beta
+  breaking: false
+  highlights:
+  - New V2 endpoint set released to a beta group ahead of general availability
+- date: '2024-12-20'
+  title: API endpoint changes
+  breaking: false
+  highlights:
+  - Region-specific production endpoints no longer required; use api.lawvu.com and
+    api-sandbox.lawvu.com
+  - Existing '*.public-api.lawvu.com' endpoints continue to be supported
+- date: '2024-06-27'
+  title: Files API — Create folder endpoint
+  breaking: false
+  additions:
+  - Create a folder or subfolder in a matter or contract
+- date: '2024-03-11'
+  title: File-related enhancements
+  breaking: false
+  highlights:
+  - Fixed moving a file from a folder into the root folder of a matter or contract
+  - Added ParentRecordType and ParentRecordId to the Get File response
+- date: '2024-02-26'
+  title: Removed Subscription Key requirement
+  breaking: false
+  highlights:
+  - Ocp-Apim-Subscription-Key header no longer required; ignored if supplied
+- date: '2024-02-15'
+  title: Added new "take" parameter when using find endpoints
+  breaking: false
+  additions:
+  - take parameter on Find matters and Find contracts
+- date: '2023-11-23'
+  title: Matter and contract filtering enhancements
+  breaking: false
+  additions:
+  - Filtering on a single field or multiple fields for Get contracts / Get matters
+  - Ability to specify which fields are included in the response
+- date: '2023-08-21'
+  title: Account API — financial settings endpoint
+  breaking: false
+  additions:
+  - Retrieve financial settings for the active user's organisation
+- date: '2023-07-17'
+  title: Contract key dates
+  breaking: false
+  additions:
+  - Retrieve a list of key dates for a given contract ID
+  - contract.keydate.created and contract.keydate.updated webhook topics
+- date: '2023-01-27'
+  title: Added Webhooks functionality
+  breaking: false
+  additions:
+  - Webhook subscriptions and event notifications to a publicly accessible URL

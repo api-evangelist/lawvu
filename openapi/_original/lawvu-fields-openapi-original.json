@@ -1,0 +1,939 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "LawVu Fields",
+    "description": "Apis for field resources",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "https://api-sandbox.lawvu.com/field-apis",
+      "description": "Sandbox API"
+    },
+    {
+      "url": "https://api.lawvu.com/field-apis",
+      "description": "Production API"
+    }
+  ],
+  "paths": {
+    "/v1/fields": {
+      "get": {
+        "tags": [
+          "Fields"
+        ],
+        "summary": "Get fields",
+        "description": "",
+        "operationId": "get-v1-fields",
+        "parameters": [
+          {
+            "name": "filtering.field",
+            "in": "query",
+            "description": "Field to filter by (optional)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filtering.operator",
+            "in": "query",
+            "description": "Operator used for filtering (optional)",
+            "schema": {
+              "enum": [
+                "eq",
+                "neq",
+                "lt",
+                "lte",
+                "gt",
+                "gte",
+                "startswith",
+                "endswith",
+                "contains",
+                "doesnotcon",
+                "isnull"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "filtering.value",
+            "in": "query",
+            "description": "Value to filter by (optional)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sorting.direction",
+            "in": "query",
+            "description": "Set the sorting direction",
+            "schema": {
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "sorting.field",
+            "in": "query",
+            "description": "Set the sorting fields",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "take",
+            "in": "query",
+            "description": "The maximum number of fields to return<p>Default: 50</p>",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 50
+            }
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "<p>Default: 0</p>",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "description": "",
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          },
+          {
+            "name": "fieldCategory",
+            "in": "query",
+            "description": "<p>Options:</p><ul><li>Custom</li><li>Lawvu</li></ul>",
+            "schema": {
+              "enum": [
+                "Custom",
+                "Lawvu"
+              ],
+              "type": "string",
+              "description": "<p>Options:</p><ul><li>Custom</li><li>Lawvu</li></ul>"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/FieldListItemDataSourceResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FieldListItemDataSourceResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FieldListItemDataSourceResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/fields/{fieldId}": {
+      "get": {
+        "tags": [
+          "Fields"
+        ],
+        "summary": "Get field schema",
+        "operationId": "get-v1-fields-fieldid",
+        "parameters": [
+          {
+            "name": "fieldId",
+            "in": "path",
+            "description": "e.g. 1234",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/FieldDetailGetModel"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FieldDetailGetModel"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FieldDetailGetModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/lookupFields/{id}/choices": {
+      "get": {
+        "tags": [
+          "LookupFields"
+        ],
+        "summary": "Get available choices for a multi lookup field",
+        "operationId": "get-v1-lookupfields-id-choices",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the field",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "Number of results to skip<p>Default: 0</p>",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          },
+          {
+            "name": "take",
+            "in": "query",
+            "description": "The maximum number of choices to return<p>Default: 25</p>",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 25
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "description": "Text filter",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LookupOptionPaganationResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LookupOptionPaganationResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LookupOptionPaganationResult"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "LookupFields"
+        ],
+        "summary": "Add a choice to the multi lookup field",
+        "operationId": "post-v1-lookupfields-id-choices",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the lookup field",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "A model describing the choice to be added",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LookupOptionCreate"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LookupOptionCreate"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LookupOptionCreate"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LookupOptionCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LookupOption"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LookupOption"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LookupOption"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/lookupFields/{id}/choices/{choiceId}": {
+      "delete": {
+        "tags": [
+          "LookupFields"
+        ],
+        "summary": "Deletes a choice from the the lookup field",
+        "operationId": "delete-v1-lookupfields-id-choices-choiceid",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the lookup field",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "choiceId",
+            "in": "path",
+            "description": "The ID of the choice to remove",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "LookupFields"
+        ],
+        "summary": "Patch a choice, currently only move is supported to merge two choices together",
+        "operationId": "patch-v1-lookupfields-id-choices-choiceid",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the lookup field",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "choiceId",
+            "in": "path",
+            "description": "The choice to patch",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "A Json-Patch to apply",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/OperationArray"
+              },
+              "example": [
+                {
+                  "value": 1000,
+                  "path": "Id",
+                  "op": "replace"
+                }
+              ]
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OperationArray"
+              },
+              "example": [
+                {
+                  "value": 1000,
+                  "path": "Id",
+                  "op": "replace"
+                }
+              ]
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OperationArray"
+              },
+              "example": [
+                {
+                  "value": 1000,
+                  "path": "Id",
+                  "op": "replace"
+                }
+              ]
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/OperationArray"
+              },
+              "example": [
+                {
+                  "value": 1000,
+                  "path": "Id",
+                  "op": "replace"
+                }
+              ]
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/v1/lookupFields/{id}/choice/single": {
+      "post": {
+        "tags": [
+          "LookupFields"
+        ],
+        "summary": "Add a choice to the single lookup field",
+        "operationId": "post-v1-lookupfields-id-choice-single",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the lookup field",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "A model describing the choice to be added",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LookupOptionCreate"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LookupOptionCreate"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LookupOptionCreate"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LookupOptionCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/SingleLookupOption"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SingleLookupOption"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SingleLookupOption"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/lookupFields/{id}/choices/single": {
+      "get": {
+        "tags": [
+          "LookupFields"
+        ],
+        "summary": "Get available choices for a single lookup field",
+        "operationId": "get-v1-lookupfields-id-choices-single",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the field",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "Number of results to skip<p>Default: 0</p>",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          },
+          {
+            "name": "take",
+            "in": "query",
+            "description": "The maximum number of choices to return<p>Default: 25</p>",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 25
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "description": "Text filter",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/SingleLookupOptionPaganationResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SingleLookupOptionPaganationResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SingleLookupOptionPaganationResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "FieldDetailGetModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "organisationId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "isAlwaysRequired": {
+            "type": "boolean"
+          },
+          "entityColumnName": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "category": {
+            "type": "string",
+            "nullable": true
+          },
+          "lawvuType": {
+            "enum": [
+              "ShortText",
+              "LongText",
+              "Slider",
+              "Currency",
+              "Decimal",
+              "Checkbox",
+              "Date",
+              "Dropdown",
+              "Department",
+              "Region",
+              "BillingMethod",
+              "BillingIntention",
+              "Priority",
+              "ContractEntity",
+              "ConflictCheck",
+              "CheckboxList",
+              "RadioGroup",
+              "SectionHeader",
+              "ContractOwner",
+              "Restricted",
+              "List",
+              "InvoiceRecipient",
+              "User",
+              "Lookup"
+            ],
+            "type": "string",
+            "description": "<p>Options:</p><ul><li>ShortText</li><li>LongText</li><li>Slider</li><li>Currency</li><li>Decimal</li><li>Checkbox</li><li>Date</li><li>Dropdown</li><li>Department</li><li>Region</li><li>BillingMethod</li><li>BillingIntention</li><li>Priority</li><li>ContractEntity</li><li>ConflictCheck</li><li>CheckboxList</li><li>RadioGroup</li><li>SectionHeader</li><li>ContractOwner</li><li>Restricted</li><li>List</li><li>Lookup</li><li>InvoiceRecipient</li><li>User</li></ul>"
+          },
+          "webMergeFieldName": {
+            "type": "string",
+            "nullable": true
+          },
+          "contractCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "matterCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "parameters": {
+            "$ref": "#/components/schemas/FieldDetailParameters"
+          }
+        },
+        "additionalProperties": false,
+        "description": "This model represents the payload returned from the Private API for getting details related to a single lookup field"
+      },
+      "FieldDetailParameters": {
+        "type": "object",
+        "properties": {
+          "options": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LookupSingleOptionModel"
+            },
+            "nullable": true
+          },
+          "default": {
+            "type": "object",
+            "nullable": true
+          },
+          "rangeStart": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "rangeEnd": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "stepSize": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "allowExternalUsers": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "canAddOptions": {
+            "type": "boolean",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "FieldListItem": {
+        "required": [
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "category": {
+            "enum": [
+              "Custom",
+              "Lawvu"
+            ],
+            "type": "string",
+            "description": "<p>Options:</p><ul><li>Custom</li><li>Lawvu</li></ul>"
+          },
+          "lawvuType": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "webMergeFieldName": {
+            "type": "string",
+            "nullable": true
+          },
+          "contractCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "matterCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "_links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HyperMediaLink"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "FieldListItemDataSourceResult": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FieldListItem"
+            },
+            "description": "Represents a single page of processed data.",
+            "nullable": true
+          },
+          "total": {
+            "type": "integer",
+            "description": "The total number of records available.",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "HyperMediaLink": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "uri": {
+            "type": "string",
+            "nullable": true
+          },
+          "methods": {
+            "$ref": "#/components/schemas/StringArray"
+          }
+        },
+        "additionalProperties": false
+      },
+      "LookupOption": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "label": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LookupOptionCreate": {
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LookupOptionPaganationResult": {
+        "type": "object",
+        "properties": {
+          "skip": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "take": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LookupOption"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LookupSingleOptionModel": {
+        "type": "object",
+        "properties": {
+          "Value": {
+            "type": "string",
+            "nullable": true
+          },
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "label": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Operation": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "object",
+            "nullable": true
+          },
+          "path": {
+            "type": "string",
+            "nullable": true
+          },
+          "op": {
+            "type": "string",
+            "nullable": true
+          },
+          "from": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "OperationArray": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Operation"
+        }
+      },
+      "SingleLookupOption": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "label": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SingleLookupOptionPaganationResult": {
+        "type": "object",
+        "properties": {
+          "skip": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "take": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SingleLookupOption"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "StringArray": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
