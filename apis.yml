@@ -1,20 +1,361 @@
 aid: lawvu
 name: LawVu
-description: LawVu is a company surfaced as a portfolio company of insight-partners and added to the API
-  Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+description: >-
+  LawVu is a New Zealand-founded legal technology company whose LegalOS is a connected workspace
+  for corporate in-house legal teams, bringing matter management, contract lifecycle management,
+  legal request intake, spend management and e-billing, document management, reporting and
+  embedded AI into a single platform. LawVu publishes a public REST developer platform — a v2
+  API covering matters, contracts, fields and files, and a set of legacy v1 product APIs covering
+  accounts, users, organisations, email threads, invoices and webhook subscriptions — secured
+  with OAuth 2.0 authorization code, documented with OpenAPI 3.0.1, returning RFC 9457 problem
+  details, and filtered and paged with a subset of OData. It also ships a first-party MCP server
+  for connecting AI assistants to the LegalOS, a Microsoft Power Platform connector, and a
+  Workato connector. LawVu is backed by Insight Partners.
 url: https://raw.githubusercontent.com/api-evangelist/lawvu/refs/heads/main/apis.yml
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://lawvu.com/wp-content/uploads/2023/09/cropped-fav-icon-192x192.png
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - insight-partners
-x-tier: stub
-x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-19'
 tags:
 - Company
-apis: []
+- Legal
+- Legal Technology
+- Legal Operations
+- Contract Lifecycle Management
+- Matter Management
+- Document Management
+- Spend Management
+- SaaS
+- Workflow
+apis:
+- aid: lawvu:lawvu-auth-api
+  name: LawVu Auth API
+  description: The Auth API from LawVu — 1 operation(s) for auth.
+  humanURL: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
+  baseURL: https://api.lawvu.com
+  tags:
+  - Auth
+  properties:
+  - type: OpenAPI
+    url: openapi/lawvu-auth-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
+- aid: lawvu:lawvu-contractfiles-api
+  name: LawVu ContractFiles API
+  description: The ContractFiles API from LawVu — 1 operation(s) for contractfiles.
+  humanURL: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
+  baseURL: https://api.lawvu.com
+  tags:
+  - ContractFiles
+  properties:
+  - type: OpenAPI
+    url: openapi/lawvu-contractfiles-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
+- aid: lawvu:lawvu-contractkeydate-api
+  name: LawVu ContractKeyDate API
+  description: The ContractKeyDate API from LawVu — 1 operation(s) for contractkeydate.
+  humanURL: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
+  baseURL: https://api.lawvu.com
+  tags:
+  - ContractKeyDate
+  properties:
+  - type: OpenAPI
+    url: openapi/lawvu-contractkeydate-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
+- aid: lawvu:lawvu-contracts-api
+  name: LawVu Contracts API
+  description: The Contracts API from LawVu — 12 operation(s) for contracts.
+  humanURL: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
+  baseURL: https://api.lawvu.com
+  tags:
+  - Contracts
+  properties:
+  - type: OpenAPI
+    url: openapi/lawvu-contracts-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
+- aid: lawvu:lawvu-contractstatusmessage-api
+  name: LawVu ContractStatusMessage API
+  description: The ContractStatusMessage API from LawVu — 1 operation(s) for contractstatusmessage.
+  humanURL: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
+  baseURL: https://api.lawvu.com
+  tags:
+  - ContractStatusMessage
+  properties:
+  - type: OpenAPI
+    url: openapi/lawvu-contractstatusmessage-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
+- aid: lawvu:lawvu-contracttemplates-api
+  name: LawVu ContractTemplates API
+  description: The ContractTemplates API from LawVu — 2 operation(s) for contracttemplates.
+  humanURL: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
+  baseURL: https://api.lawvu.com
+  tags:
+  - ContractTemplates
+  properties:
+  - type: OpenAPI
+    url: openapi/lawvu-contracttemplates-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
+- aid: lawvu:lawvu-contractuser-api
+  name: LawVu ContractUser API
+  description: The ContractUser API from LawVu — 1 operation(s) for contractuser.
+  humanURL: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
+  baseURL: https://api.lawvu.com
+  tags:
+  - ContractUser
+  properties:
+  - type: OpenAPI
+    url: openapi/lawvu-contractuser-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
+- aid: lawvu:lawvu-emails-api
+  name: LawVu Emails API
+  description: The Emails API from LawVu — 5 operation(s) for emails.
+  humanURL: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
+  baseURL: https://api.lawvu.com
+  tags:
+  - Emails
+  properties:
+  - type: OpenAPI
+    url: openapi/lawvu-emails-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
+- aid: lawvu:lawvu-features-api
+  name: LawVu Features API
+  description: The Features API from LawVu — 1 operation(s) for features.
+  humanURL: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
+  baseURL: https://api.lawvu.com
+  tags:
+  - Features
+  properties:
+  - type: OpenAPI
+    url: openapi/lawvu-features-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
+- aid: lawvu:lawvu-fields-api
+  name: LawVu Fields API
+  description: The Fields API from LawVu — 5 operation(s) for fields.
+  humanURL: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
+  baseURL: https://api.lawvu.com
+  tags:
+  - Fields
+  properties:
+  - type: OpenAPI
+    url: openapi/lawvu-fields-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
+- aid: lawvu:lawvu-files-api
+  name: LawVu Files API
+  description: The Files API from LawVu — 9 operation(s) for files.
+  humanURL: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
+  baseURL: https://api.lawvu.com
+  tags:
+  - Files
+  properties:
+  - type: OpenAPI
+    url: openapi/lawvu-files-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
+- aid: lawvu:lawvu-folders-api
+  name: LawVu Folders API
+  description: The Folders API from LawVu — 2 operation(s) for folders.
+  humanURL: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
+  baseURL: https://api.lawvu.com
+  tags:
+  - Folders
+  properties:
+  - type: OpenAPI
+    url: openapi/lawvu-folders-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
+- aid: lawvu:lawvu-invoices-api
+  name: LawVu Invoices API
+  description: The Invoices API from LawVu — 3 operation(s) for invoices.
+  humanURL: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
+  baseURL: https://api.lawvu.com
+  tags:
+  - Invoices
+  properties:
+  - type: OpenAPI
+    url: openapi/lawvu-invoices-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
+- aid: lawvu:lawvu-lookupfields-api
+  name: LawVu LookupFields API
+  description: The LookupFields API from LawVu — 4 operation(s) for lookupfields.
+  humanURL: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
+  baseURL: https://api.lawvu.com
+  tags:
+  - LookupFields
+  properties:
+  - type: OpenAPI
+    url: openapi/lawvu-lookupfields-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
+- aid: lawvu:lawvu-mattercategories-api
+  name: LawVu MatterCategories API
+  description: The MatterCategories API from LawVu — 2 operation(s) for mattercategories.
+  humanURL: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
+  baseURL: https://api.lawvu.com
+  tags:
+  - MatterCategories
+  properties:
+  - type: OpenAPI
+    url: openapi/lawvu-mattercategories-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
+- aid: lawvu:lawvu-matterfiles-api
+  name: LawVu MatterFiles API
+  description: The MatterFiles API from LawVu — 1 operation(s) for matterfiles.
+  humanURL: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
+  baseURL: https://api.lawvu.com
+  tags:
+  - MatterFiles
+  properties:
+  - type: OpenAPI
+    url: openapi/lawvu-matterfiles-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
+- aid: lawvu:lawvu-matters-api
+  name: LawVu Matters API
+  description: The Matters API from LawVu — 11 operation(s) for matters.
+  humanURL: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
+  baseURL: https://api.lawvu.com
+  tags:
+  - Matters
+  properties:
+  - type: OpenAPI
+    url: openapi/lawvu-matters-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
+- aid: lawvu:lawvu-mattersinvoices-api
+  name: LawVu MattersInvoices API
+  description: The MattersInvoices API from LawVu — 1 operation(s) for mattersinvoices.
+  humanURL: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
+  baseURL: https://api.lawvu.com
+  tags:
+  - MattersInvoices
+  properties:
+  - type: OpenAPI
+    url: openapi/lawvu-mattersinvoices-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
+- aid: lawvu:lawvu-matterstatusmessage-api
+  name: LawVu MatterStatusMessage API
+  description: The MatterStatusMessage API from LawVu — 1 operation(s) for matterstatusmessage.
+  humanURL: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
+  baseURL: https://api.lawvu.com
+  tags:
+  - MatterStatusMessage
+  properties:
+  - type: OpenAPI
+    url: openapi/lawvu-matterstatusmessage-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
+- aid: lawvu:lawvu-mattertasks-api
+  name: LawVu MatterTasks API
+  description: The MatterTasks API from LawVu — 1 operation(s) for mattertasks.
+  humanURL: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
+  baseURL: https://api.lawvu.com
+  tags:
+  - MatterTasks
+  properties:
+  - type: OpenAPI
+    url: openapi/lawvu-mattertasks-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
+- aid: lawvu:lawvu-mattertasktemplates-api
+  name: LawVu MatterTaskTemplates API
+  description: The MatterTaskTemplates API from LawVu — 2 operation(s) for mattertasktemplates.
+  humanURL: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
+  baseURL: https://api.lawvu.com
+  tags:
+  - MatterTaskTemplates
+  properties:
+  - type: OpenAPI
+    url: openapi/lawvu-mattertasktemplates-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
+- aid: lawvu:lawvu-organisations-api
+  name: LawVu Organisations API
+  description: The Organisations API from LawVu — 5 operation(s) for organisations.
+  humanURL: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
+  baseURL: https://api.lawvu.com
+  tags:
+  - Organisations
+  properties:
+  - type: OpenAPI
+    url: openapi/lawvu-organisations-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
+- aid: lawvu:lawvu-recents-api
+  name: LawVu Recents API
+  description: The Recents API from LawVu — 1 operation(s) for recents.
+  humanURL: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
+  baseURL: https://api.lawvu.com
+  tags:
+  - Recents
+  properties:
+  - type: OpenAPI
+    url: openapi/lawvu-recents-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
+- aid: lawvu:lawvu-teams-api
+  name: LawVu Teams API
+  description: The Teams API from LawVu — 1 operation(s) for teams.
+  humanURL: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
+  baseURL: https://api.lawvu.com
+  tags:
+  - Teams
+  properties:
+  - type: OpenAPI
+    url: openapi/lawvu-teams-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
+- aid: lawvu:lawvu-users-api
+  name: LawVu Users API
+  description: The Users API from LawVu — 2 operation(s) for users.
+  humanURL: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
+  baseURL: https://api.lawvu.com
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/lawvu-users-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
+- aid: lawvu:lawvu-webhooksubscriptions-api
+  name: LawVu WebhookSubscriptions API
+  description: The WebhookSubscriptions API from LawVu — 2 operation(s) for webhooksubscriptions.
+  humanURL: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
+  baseURL: https://api.lawvu.com
+  tags:
+  - WebhookSubscriptions
+  properties:
+  - type: OpenAPI
+    url: openapi/lawvu-webhooksubscriptions-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -23,3 +364,78 @@ maintainers:
 common:
 - type: Website
   url: https://lawvu.com/
+- type: DeveloperPortal
+  url: https://developer.lawvu.com/
+- type: Documentation
+  url: https://api-docs.lawvu.com/docs
+- type: APIReference
+  url: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
+- type: GettingStarted
+  url: https://api-docs.lawvu.com/docs
+- type: SignUp
+  url: https://developer.lawvu.com/the-lawvu-api/
+- type: Login
+  url: https://go.lawvu.com/
+- type: Support
+  url: https://help.lawvu.com/en/
+- type: Blog
+  url: https://lawvu.com/articles/
+- type: Pricing
+  url: https://lawvu.com/plans/
+- type: TermsOfService
+  url: https://lawvu.com/website-terms/
+- type: PrivacyPolicy
+  url: https://lawvu.com/trust-center/privacy/privacy-policy/
+- type: GitHubOrganization
+  url: https://github.com/LawVu
+- type: Authentication
+  url: authentication/lawvu-authentication.yml
+- type: Conventions
+  url: conventions/lawvu-conventions.yml
+- type: ErrorCatalog
+  url: errors/lawvu-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/lawvu-lifecycle.yml
+- type: StatusPage
+  url: https://lawvu.com/lawvu-system-status/
+- type: Deprecation
+  url: https://api-docs.lawvu.com/docs/v2-endpoints-faq
+- type: ChangeLog
+  url: changelog/lawvu-changelog.yml
+- type: Webhooks
+  url: asyncapi/lawvu-webhooks.yml
+- type: MCPServer
+  url: mcp/lawvu-mcp.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: Sandbox
+  url: sandbox/lawvu-sandbox.yml
+- type: Packages
+  url: packages/lawvu-packages.yml
+- type: DataModel
+  url: data-model/lawvu-data-model.yml
+- type: Conformance
+  url: conformance/lawvu-conformance.yml
+- type: Compliance
+  url: https://lawvu.com/trust-center/
+- type: TrustCenter
+  url: security/lawvu-trust-center.yml
+- type: Security
+  url: https://lawvu.com/.well-known/security.txt
+- type: VulnerabilityDisclosure
+  url: security/lawvu-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/lawvu-domain-security.yml
+- type: WellKnown
+  url: well-known/lawvu-well-known.yml
+- type: SecurityTxt
+  url: well-known/lawvu-security.txt
+- type: LLMsTxt
+  url: llms/lawvu-llms.txt
+- type: AgenticAccess
+  url: agentic-access/lawvu-agentic-access.yml
+x-enrichment:
+  date: '2026-07-19'
+  status: backfilled
+  pass: local-v1
+  note: backfilled from .gitignore signal + verified work evidence
