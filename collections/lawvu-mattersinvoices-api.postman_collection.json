@@ -1,0 +1,193 @@
+{
+  "item": [
+    {
+      "id": "536487fa-fb14-4fe5-bd80-1cac50317c65",
+      "name": "MattersInvoices",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "bd465bbb-5160-4760-ab80-131550fb6fe5",
+          "name": "Get matter invoices",
+          "request": {
+            "name": "Get matter invoices",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "matters",
+                ":matterId",
+                "invoices"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "skip",
+                  "value": "<integer>",
+                  "description": "The number of matter invoices to skip (used for paging)"
+                },
+                {
+                  "disabled": false,
+                  "key": "filtering.field",
+                  "value": "<string>",
+                  "description": "Field to filter by (optional)"
+                },
+                {
+                  "disabled": false,
+                  "key": "filtering.operator",
+                  "value": "<string>",
+                  "description": "Operator used for filtering (optional)"
+                },
+                {
+                  "disabled": false,
+                  "key": "filtering.value",
+                  "value": "<string>",
+                  "description": "Value to filter by (optional)"
+                },
+                {
+                  "disabled": false,
+                  "key": "sorting.direction",
+                  "value": "<string>",
+                  "description": "Set the sorting direction"
+                },
+                {
+                  "disabled": false,
+                  "key": "sorting.field",
+                  "value": "<string>",
+                  "description": "Set the sorting fields"
+                },
+                {
+                  "disabled": false,
+                  "key": "take",
+                  "value": "50",
+                  "description": "The maximum number of matter invoices to return<p>Default: 50</p>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "matterId",
+                  "description": "(Required) The Id of the matter"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6915dacc-6573-4287-a3c4-b0c6e125b4df",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "matters",
+                    ":matterId",
+                    "invoices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "filtering.field",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filtering.operator",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filtering.value",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sorting.direction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sorting.field",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "take",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "matterId",
+                      "description": "(Required) The Id of the matter"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": 1371,\n      \"invoiceNo\": \"string\",\n      \"invoiceDate\": \"1998-11-14T03:10:29.215Z\",\n      \"dueDate\": \"1950-05-30T04:46:55.022Z\",\n      \"disbursements\": 1226.176191077789,\n      \"fees\": 3572.376786866177,\n      \"otherFees\": 4524.531660322016,\n      \"fileId\": 2126,\n      \"status\": \"string\",\n      \"fileName\": \"string\",\n      \"batchId\": 1147,\n      \"thirdParty\": false,\n      \"paid\": true,\n      \"paidDateUtc\": \"1997-06-26T20:33:03.704Z\",\n      \"description\": \"string\"\n    },\n    {\n      \"id\": 9298,\n      \"invoiceNo\": \"string\",\n      \"invoiceDate\": \"1947-04-29T15:39:57.962Z\",\n      \"dueDate\": \"1991-09-08T00:27:50.782Z\",\n      \"disbursements\": 8082.012870373332,\n      \"fees\": 3684.310669177865,\n      \"otherFees\": 8155.945972030496,\n      \"fileId\": 3844,\n      \"status\": \"string\",\n      \"fileName\": \"string\",\n      \"batchId\": 9281,\n      \"thirdParty\": true,\n      \"paid\": true,\n      \"paidDateUtc\": \"1971-01-25T09:45:09.295Z\",\n      \"description\": \"string\"\n    }\n  ],\n  \"total\": 2517\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-sandbox.lawvu.com/account-apis",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "e44c4104-60cb-4fb6-8d7c-26d574fa56ea",
+    "name": "LawVu Account Auth MattersInvoices API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Apis for account related resources (authentication, profiles, organisation details etc)",
+      "type": "text/plain"
+    }
+  }
+}

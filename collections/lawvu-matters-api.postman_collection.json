@@ -1,0 +1,2364 @@
+{
+  "item": [
+    {
+      "id": "6cd7e4bd-4377-4443-be58-b2d6536bd8d6",
+      "name": "Matters",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "26409a8a-89af-4673-aa3c-adccca8aca22",
+          "name": "Get matters",
+          "request": {
+            "name": "Get matters",
+            "description": {
+              "content": "Retrieve a list of matters",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "matters"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "$filter",
+                  "value": "<string>",
+                  "description": "Filter the results using OData filter syntax"
+                },
+                {
+                  "disabled": false,
+                  "key": "$orderby",
+                  "value": "<string>",
+                  "description": "Order the results using OData orderby syntax"
+                },
+                {
+                  "disabled": false,
+                  "key": "$skip",
+                  "value": "<integer>",
+                  "description": "Skip the specified number of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "$top",
+                  "value": "<integer>",
+                  "description": "Limit the number of results returned"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "21c45fc9-6ae1-4919-bd14-5843c71e881f",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "matters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$orderby",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"id\": 1056,\n      \"name\": \"My matter\",\n      \"displayId\": \"LV0001-0001\",\n      \"type\": {\n        \"id\": 7492,\n        \"name\": \"NDA\"\n      },\n      \"owner\": {\n        \"email\": \"api.developer@lawvu.com\",\n        \"firstName\": \"Api\",\n        \"id\": \"f0f1e06e-3005-4093-af7f-1934d55617e1\",\n        \"lastName\": \"Developer\",\n        \"organizationId\": 8134\n      },\n      \"manager\": {\n        \"intakeQueue\": {\n          \"organizationId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"organizationName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"user\": {\n          \"email\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"firstName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"lastName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"organizationId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"externalId\": \"external-01\",\n      \"fields\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      },\n      \"restricted\": false,\n      \"status\": \"Active\",\n      \"teamAssigned\": {\n        \"id\": 469,\n        \"name\": \"Legal - Commercial\"\n      },\n      \"created\": {\n        \"dateUtc\": \"2024-12-25T00:00:00Z\",\n        \"user\": {\n          \"email\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"firstName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"lastName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"organizationId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"userName\": \"api.developer@lawvu.com\"\n      }\n    },\n    {\n      \"id\": 1056,\n      \"name\": \"My matter\",\n      \"displayId\": \"LV0001-0001\",\n      \"type\": {\n        \"id\": 7492,\n        \"name\": \"NDA\"\n      },\n      \"owner\": {\n        \"email\": \"api.developer@lawvu.com\",\n        \"firstName\": \"Api\",\n        \"id\": \"f0f1e06e-3005-4093-af7f-1934d55617e1\",\n        \"lastName\": \"Developer\",\n        \"organizationId\": 8134\n      },\n      \"manager\": {\n        \"intakeQueue\": {\n          \"organizationId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"organizationName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"user\": {\n          \"email\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"firstName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"lastName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"organizationId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"externalId\": \"external-01\",\n      \"fields\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      },\n      \"restricted\": false,\n      \"status\": \"Active\",\n      \"teamAssigned\": {\n        \"id\": 469,\n        \"name\": \"Legal - Commercial\"\n      },\n      \"created\": {\n        \"dateUtc\": \"2024-12-25T00:00:00Z\",\n        \"user\": {\n          \"email\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"firstName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"lastName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"organizationId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"userName\": \"api.developer@lawvu.com\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "56889bd2-9e12-4351-b1e6-e10b0247cd52",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "matters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$orderby",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"The request was invalid and could not be processed\",\n  \"errors\": {\n    \"Name\": \"Operation 'gt' is not supported for 'Name'\"\n  },\n  \"instance\": \"/matters\",\n  \"operationId\": \"7edb5d62-f5bf-463b-9410-cdd8b3293d89\",\n  \"status\": 400,\n  \"title\": \"Invalid request\",\n  \"type\": \"https://api-docs.lawvu.com/errors/invalid_request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cc9059ca-485f-48e6-a518-abc941e880fe",
+          "name": "Create matter",
+          "request": {
+            "name": "Create matter",
+            "description": {
+              "content": "Creates a matter based on the provided matter type.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "matters"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": {\n    \"id\": \"<integer>\"\n  },\n  \"name\": \"<string>\",\n  \"owner\": {\n    \"id\": \"<string>\"\n  },\n  \"manager\": {\n    \"intakeQueue\": {\n      \"organizationId\": \"<integer>\"\n    },\n    \"user\": {\n      \"id\": \"<string>\"\n    }\n  },\n  \"externalId\": \"<string>\",\n  \"fields\": {\n    \"key_0\": {}\n  },\n  \"restricted\": false,\n  \"teamAssigned\": {\n    \"id\": \"<integer>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9b7792e4-25ee-481a-9149-95380ca17e0a",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "matters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": {\n    \"id\": 7492\n  },\n  \"name\": \"My matter\",\n  \"owner\": {\n    \"id\": \"f0f1e06e-3005-4093-af7f-1934d55617e1\"\n  },\n  \"manager\": {\n    \"intakeQueue\": {\n      \"organizationId\": 8134\n    },\n    \"user\": {\n      \"id\": \"f0f1e06e-3005-4093-af7f-1934d55617e1\"\n    }\n  },\n  \"externalId\": \"external-01\",\n  \"fields\": {\n    \"key_0\": {}\n  },\n  \"restricted\": false,\n  \"teamAssigned\": {\n    \"id\": 469\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Location to retrieve the created matter",
+                  "key": "Location",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 1056\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "64b025c8-c009-4007-9fd8-7c103ffb57ae",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "matters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": {\n    \"id\": 7492\n  },\n  \"name\": \"My matter\",\n  \"owner\": {\n    \"id\": \"f0f1e06e-3005-4093-af7f-1934d55617e1\"\n  },\n  \"manager\": {\n    \"intakeQueue\": {\n      \"organizationId\": 8134\n    },\n    \"user\": {\n      \"id\": \"f0f1e06e-3005-4093-af7f-1934d55617e1\"\n    }\n  },\n  \"externalId\": \"external-01\",\n  \"fields\": {\n    \"key_0\": {}\n  },\n  \"restricted\": false,\n  \"teamAssigned\": {\n    \"id\": 469\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"The request was invalid and could not be processed\",\n  \"errors\": {\n    \"Name\": \"Required\"\n  },\n  \"instance\": \"/matters\",\n  \"operationId\": \"7edb5d62-f5bf-463b-9410-cdd8b3293d89\",\n  \"status\": 400,\n  \"title\": \"Invalid request\",\n  \"type\": \"https://api-docs.lawvu.com/errors/invalid_request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3912bafb-28ca-49f4-9e5f-9bf1348730e3",
+              "name": "Conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "matters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": {\n    \"id\": 7492\n  },\n  \"name\": \"My matter\",\n  \"owner\": {\n    \"id\": \"f0f1e06e-3005-4093-af7f-1934d55617e1\"\n  },\n  \"manager\": {\n    \"intakeQueue\": {\n      \"organizationId\": 8134\n    },\n    \"user\": {\n      \"id\": \"f0f1e06e-3005-4093-af7f-1934d55617e1\"\n    }\n  },\n  \"externalId\": \"external-01\",\n  \"fields\": {\n    \"key_0\": {}\n  },\n  \"restricted\": false,\n  \"teamAssigned\": {\n    \"id\": 469\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"The request could not be processed due to a conflict\",\n  \"errors\": {\n    \"ExternalId\": \"Is already in use\"\n  },\n  \"instance\": \"/matters\",\n  \"operationId\": \"7edb5d62-f5bf-463b-9410-cdd8b3293d89\",\n  \"status\": 409,\n  \"title\": \"Conflict\",\n  \"type\": \"https://api-docs.lawvu.com/errors/conflict\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9fce5b66-ec53-4e9f-9393-ea927ecf83cd",
+          "name": "Get matter",
+          "request": {
+            "name": "Get matter",
+            "description": {
+              "content": "Retrieve a matter by its identifier",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "matters",
+                ":matterId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "matterId",
+                  "description": "(Required) The system identifier for the matter"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "88e12806-44c4-4c1a-a773-0238a5483f01",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "matters",
+                    ":matterId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "matterId",
+                      "description": "(Required) The system identifier for the matter"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 1056,\n  \"name\": \"My matter\",\n  \"displayId\": \"LV0001-0001\",\n  \"type\": {\n    \"id\": 7492,\n    \"name\": \"NDA\"\n  },\n  \"owner\": {\n    \"email\": \"api.developer@lawvu.com\",\n    \"firstName\": \"Api\",\n    \"id\": \"f0f1e06e-3005-4093-af7f-1934d55617e1\",\n    \"lastName\": \"Developer\",\n    \"organizationId\": 8134\n  },\n  \"manager\": {\n    \"intakeQueue\": {\n      \"organizationId\": 8134,\n      \"organizationName\": \"Api Development Organization\"\n    },\n    \"user\": {\n      \"email\": \"api.developer@lawvu.com\",\n      \"firstName\": \"Api\",\n      \"id\": \"f0f1e06e-3005-4093-af7f-1934d55617e1\",\n      \"lastName\": \"Developer\",\n      \"organizationId\": 8134\n    }\n  },\n  \"externalId\": \"external-01\",\n  \"fields\": {\n    \"key_0\": {},\n    \"key_1\": {},\n    \"key_2\": {}\n  },\n  \"restricted\": false,\n  \"status\": \"Active\",\n  \"teamAssigned\": {\n    \"id\": 469,\n    \"name\": \"Legal - Commercial\"\n  },\n  \"created\": {\n    \"dateUtc\": \"2024-12-25T00:00:00Z\",\n    \"user\": {\n      \"email\": \"api.developer@lawvu.com\",\n      \"firstName\": \"Api\",\n      \"id\": \"f0f1e06e-3005-4093-af7f-1934d55617e1\",\n      \"lastName\": \"Developer\",\n      \"organizationId\": 8134\n    },\n    \"userName\": \"api.developer@lawvu.com\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "265c8609-6e45-458d-ab1f-292ca9414bd7",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "matters",
+                    ":matterId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "matterId",
+                      "description": "(Required) The system identifier for the matter"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"The requested resource could not be found\",\n  \"instance\": \"/matters/1056\",\n  \"operationId\": \"7edb5d62-f5bf-463b-9410-cdd8b3293d89\",\n  \"status\": 404,\n  \"title\": \"Resource not found\",\n  \"type\": \"https://api-docs.lawvu.com/errors/resource_not_found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5d8badde-1f74-4356-8778-6eacbd2f8eff",
+          "name": "Update matter",
+          "request": {
+            "name": "Update matter",
+            "description": {
+              "content": "Updates a matters details",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "matters",
+                ":matterId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "matterId",
+                  "description": "(Required) The system identifier for the matter"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/merge-patch+json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/problem+json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"owner\": {\n    \"id\": \"<string>\"\n  },\n  \"manager\": {\n    \"intakeQueue\": {\n      \"organizationId\": \"<integer>\"\n    },\n    \"user\": {\n      \"id\": \"<string>\"\n    }\n  },\n  \"externalId\": \"<string>\",\n  \"fields\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  },\n  \"restricted\": \"<boolean>\",\n  \"status\": \"<string>\",\n  \"teamAssigned\": {\n    \"id\": \"<integer>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9d58bffa-2321-4510-9266-f8e925755338",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "matters",
+                    ":matterId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "matterId",
+                      "description": "(Required) The system identifier for the matter"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"owner\": {\n    \"id\": \"f0f1e06e-3005-4093-af7f-1934d55617e1\"\n  },\n  \"manager\": {\n    \"intakeQueue\": {\n      \"organizationId\": 8134\n    },\n    \"user\": {\n      \"id\": \"f0f1e06e-3005-4093-af7f-1934d55617e1\"\n    }\n  },\n  \"externalId\": \"<string>\",\n  \"fields\": {\n    \"key_0\": {}\n  },\n  \"restricted\": false,\n  \"status\": \"<string>\",\n  \"teamAssigned\": {\n    \"id\": 469\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e9617ac3-f1bf-4c74-aea8-17a03c991043",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "matters",
+                    ":matterId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "matterId",
+                      "description": "(Required) The system identifier for the matter"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"owner\": {\n    \"id\": \"f0f1e06e-3005-4093-af7f-1934d55617e1\"\n  },\n  \"manager\": {\n    \"intakeQueue\": {\n      \"organizationId\": 8134\n    },\n    \"user\": {\n      \"id\": \"f0f1e06e-3005-4093-af7f-1934d55617e1\"\n    }\n  },\n  \"externalId\": \"<string>\",\n  \"fields\": {\n    \"key_0\": {}\n  },\n  \"restricted\": false,\n  \"status\": \"<string>\",\n  \"teamAssigned\": {\n    \"id\": 469\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"The request was invalid and could not be processed\",\n  \"errors\": {\n    \"Name\": \"Required\"\n  },\n  \"instance\": \"/matters/1056\",\n  \"operationId\": \"7edb5d62-f5bf-463b-9410-cdd8b3293d89\",\n  \"status\": 400,\n  \"title\": \"Invalid request\",\n  \"type\": \"https://api-docs.lawvu.com/errors/invalid_request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "20fb230f-74a0-4d1d-85ea-a1d9586cf893",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "matters",
+                    ":matterId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "matterId",
+                      "description": "(Required) The system identifier for the matter"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"owner\": {\n    \"id\": \"f0f1e06e-3005-4093-af7f-1934d55617e1\"\n  },\n  \"manager\": {\n    \"intakeQueue\": {\n      \"organizationId\": 8134\n    },\n    \"user\": {\n      \"id\": \"f0f1e06e-3005-4093-af7f-1934d55617e1\"\n    }\n  },\n  \"externalId\": \"<string>\",\n  \"fields\": {\n    \"key_0\": {}\n  },\n  \"restricted\": false,\n  \"status\": \"<string>\",\n  \"teamAssigned\": {\n    \"id\": 469\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"You do not have permission to update this matter\",\n  \"instance\": \"/matters/1056\",\n  \"operationId\": \"7edb5d62-f5bf-463b-9410-cdd8b3293d89\",\n  \"status\": 403,\n  \"title\": \"Forbidden\",\n  \"type\": \"https://api-docs.lawvu.com/errors/forbidden\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d3d97ae7-9e6d-4247-b214-397f6dd93a03",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "matters",
+                    ":matterId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "matterId",
+                      "description": "(Required) The system identifier for the matter"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"owner\": {\n    \"id\": \"f0f1e06e-3005-4093-af7f-1934d55617e1\"\n  },\n  \"manager\": {\n    \"intakeQueue\": {\n      \"organizationId\": 8134\n    },\n    \"user\": {\n      \"id\": \"f0f1e06e-3005-4093-af7f-1934d55617e1\"\n    }\n  },\n  \"externalId\": \"<string>\",\n  \"fields\": {\n    \"key_0\": {}\n  },\n  \"restricted\": false,\n  \"status\": \"<string>\",\n  \"teamAssigned\": {\n    \"id\": 469\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"The requested resource could not be found\",\n  \"instance\": \"/matters/1056\",\n  \"operationId\": \"7edb5d62-f5bf-463b-9410-cdd8b3293d89\",\n  \"status\": 404,\n  \"title\": \"Resource not found\",\n  \"type\": \"https://api-docs.lawvu.com/errors/resource_not_found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f4b0aceb-cb4d-413e-ae8d-3c2bf88f758d",
+              "name": "Conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "matters",
+                    ":matterId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "matterId",
+                      "description": "(Required) The system identifier for the matter"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"owner\": {\n    \"id\": \"f0f1e06e-3005-4093-af7f-1934d55617e1\"\n  },\n  \"manager\": {\n    \"intakeQueue\": {\n      \"organizationId\": 8134\n    },\n    \"user\": {\n      \"id\": \"f0f1e06e-3005-4093-af7f-1934d55617e1\"\n    }\n  },\n  \"externalId\": \"<string>\",\n  \"fields\": {\n    \"key_0\": {}\n  },\n  \"restricted\": false,\n  \"status\": \"<string>\",\n  \"teamAssigned\": {\n    \"id\": 469\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"The request could not be processed due to a conflict\",\n  \"errors\": {\n    \"ExternalId\": \"Is already in use\"\n  },\n  \"instance\": \"/matters/1056\",\n  \"operationId\": \"7edb5d62-f5bf-463b-9410-cdd8b3293d89\",\n  \"status\": 409,\n  \"title\": \"Conflict\",\n  \"type\": \"https://api-docs.lawvu.com/errors/conflict\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1b97c829-12c4-4023-b909-2a871723c66f",
+          "name": "Get matter file",
+          "request": {
+            "name": "Get matter file",
+            "description": {
+              "content": "Retrieve information about a file on a matter",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "matters",
+                ":matterId",
+                "files",
+                ":fileId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "matterId",
+                  "description": "(Required) The system identifier for the matter"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "fileId",
+                  "description": "(Required) The system identifier for the file"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "aad546db-20e2-47c9-9134-c60c035be16f",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "matters",
+                    ":matterId",
+                    "files",
+                    ":fileId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "matterId",
+                      "description": "(Required) The system identifier for the matter"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "fileId",
+                      "description": "(Required) The system identifier for the file"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 9456,\n  \"name\": \"document.txt\",\n  \"displayId\": \"LV0001-0000123.1\",\n  \"type\": \"File\",\n  \"folder\": {\n    \"folder\": {\n      \"description\": \"The parent folder. \\n\\nThe folder will be null when the folder is at the root of the resource\",\n      \"nullable\": true,\n      \"readOnly\": true,\n      \"value\": \"<Circular reference to #/components/schemas/FolderReference detected>\"\n    },\n    \"id\": 786,\n    \"name\": \"Drafts\"\n  },\n  \"contentType\": \"text/plain\",\n  \"resource\": {\n    \"id\": 78914,\n    \"type\": \"Contract\"\n  },\n  \"restricted\": false,\n  \"size\": 18139,\n  \"version\": 3,\n  \"created\": {\n    \"dateUtc\": \"2024-12-25T00:00:00Z\",\n    \"user\": {\n      \"email\": \"api.developer@lawvu.com\",\n      \"firstName\": \"Api\",\n      \"id\": \"f0f1e06e-3005-4093-af7f-1934d55617e1\",\n      \"lastName\": \"Developer\",\n      \"organizationId\": 8134\n    },\n    \"userName\": \"api.developer@lawvu.com\"\n  },\n  \"modified\": {\n    \"dateUtc\": \"2024-12-25T00:00:00Z\",\n    \"userName\": \"api.developer@lawvu.com\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aba1fb62-e17d-40a8-b566-de25225cffe5",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "matters",
+                    ":matterId",
+                    "files",
+                    ":fileId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "matterId",
+                      "description": "(Required) The system identifier for the matter"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "fileId",
+                      "description": "(Required) The system identifier for the file"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"The requested resource could not be found\",\n  \"instance\": \"/matters/1056/files/9456\",\n  \"operationId\": \"7edb5d62-f5bf-463b-9410-cdd8b3293d89\",\n  \"status\": 404,\n  \"title\": \"Resource not found\",\n  \"type\": \"https://api-docs.lawvu.com/errors/resource_not_found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ae8f61f4-26cb-4db7-bb0e-0d7f7e3bcc1d",
+          "name": "Get matter types",
+          "request": {
+            "name": "Get matter types",
+            "description": {
+              "content": "Retrieve a list of matter types",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "matterTypes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "$skip",
+                  "value": "0",
+                  "description": "Specifies the number of items to skip"
+                },
+                {
+                  "disabled": false,
+                  "key": "$top",
+                  "value": "25",
+                  "description": "Specifies the maximum number of items to return"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0e3a64fe-d4e4-4142-849b-c09073c45225",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "matterTypes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$skip",
+                      "value": "0"
+                    },
+                    {
+                      "key": "$top",
+                      "value": "25"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"id\": 7492,\n      \"name\": \"My matter type\",\n      \"parent\": {\n        \"id\": 7492,\n        \"name\": \"NDA\"\n      }\n    },\n    {\n      \"id\": 7492,\n      \"name\": \"My matter type\",\n      \"parent\": {\n        \"id\": 7492,\n        \"name\": \"NDA\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "617b88de-2e30-4feb-8d69-7c5fe617480a",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "matterTypes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$skip",
+                      "value": "0"
+                    },
+                    {
+                      "key": "$top",
+                      "value": "25"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"The request was invalid and could not be processed\",\n  \"instance\": \"/matterTypes/\",\n  \"operationId\": \"7edb5d62-f5bf-463b-9410-cdd8b3293d89\",\n  \"status\": 400,\n  \"title\": \"Invalid request\",\n  \"type\": \"https://api-docs.lawvu.com/errors/invalid_request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e26d930c-0afb-4cda-99cf-da5a1f82c13c",
+          "name": "Find matters",
+          "request": {
+            "name": "Find matters",
+            "description": {
+              "content": "Quickly find and filter matters",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "matters",
+                "quickfind"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "term",
+                  "value": "<string>",
+                  "description": "A term to search matters by"
+                },
+                {
+                  "disabled": false,
+                  "key": "includeRestricted",
+                  "value": "false",
+                  "description": "Include restricted matters in the search<p>Default: False</p>"
+                },
+                {
+                  "disabled": false,
+                  "key": "take",
+                  "value": "<integer>",
+                  "description": "The number of matters to return (maximum: 100, default: 20)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c4ddcdb1-f912-456e-b99c-bb2cb79bf473",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "matters",
+                    "quickfind"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "term",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "includeRestricted",
+                      "value": "false"
+                    },
+                    {
+                      "key": "take",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 1943,\n    \"matterNumber\": \"string\",\n    \"name\": \"string\",\n    \"organisationName\": \"string\",\n    \"reference\": \"string\",\n    \"managerReference\": \"string\",\n    \"purchaseOrderNumber\": \"string\",\n    \"parentId\": 2711,\n    \"organisationId\": 4718\n  },\n  {\n    \"id\": 5882,\n    \"matterNumber\": \"string\",\n    \"name\": \"string\",\n    \"organisationName\": \"string\",\n    \"reference\": \"string\",\n    \"managerReference\": \"string\",\n    \"purchaseOrderNumber\": \"string\",\n    \"parentId\": 4254,\n    \"organisationId\": 586\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2d1c15a9-4840-4126-9ca5-f5ba4b6cb925",
+          "name": "Recent  matters",
+          "request": {
+            "name": "Recent  matters",
+            "description": {
+              "content": "Returns recently viewed (ref:take) matters for the user",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "matters",
+                "recent"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "take",
+                  "value": "5",
+                  "description": "The maximum number of recently viewed matters to return<p>Default: 5</p>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "33bef694-1ce6-41c6-a70f-10778da9a22b",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "matters",
+                    "recent"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "take",
+                      "value": "5"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 95,\n    \"name\": \"My Matter\",\n    \"matterNumber\": \"LV1234-0012\",\n    \"lastActivityDateUtc\": \"2023-12-15T20:30:00Z\",\n    \"organisationId\": 1234,\n    \"managerId\": \"C7541186-26CE-4C6C-ABFF-37FE3EF57F88\",\n    \"ownerId\": \"08FD1ED1-627E-4CB9-8388-731227584D21\"\n  },\n  {\n    \"id\": 789,\n    \"name\": \"Another Matter\",\n    \"matterNumber\": \"LV1234-0099\",\n    \"lastActivityDateUtc\": \"2024-01-12T10:00:00Z\",\n    \"organisationId\": 1234,\n    \"managerId\": null,\n    \"ownerId\": \"BE17D7D6-721A-4F6D-B081-CAABB6D8F5B9\"\n  },\n  {\n    \"id\": 684,\n    \"name\": \"Different Matter\",\n    \"matterNumber\": \"LV1234-0054\",\n    \"lastActivityDateUtc\": \"2023-12-10T15:30:00Z\",\n    \"organisationId\": 1234,\n    \"managerId\": \"C7541186-26CE-4C6C-ABFF-37FE3EF57F88\",\n    \"ownerId\": \"BE17D7D6-721A-4F6D-B081-CAABB6D8F5B9\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "69324267-f3fd-4ecb-9801-4ea079479c78",
+          "name": "Create matter",
+          "request": {
+            "name": "Create matter",
+            "description": {
+              "content": "Creates a new matter with the supplied values",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "matters"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"categoryId\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"organisationId\": \"<integer>\",\n  \"fields\": \"<object>\",\n  \"restricted\": \"<boolean>\",\n  \"urgent\": \"<boolean>\",\n  \"parentId\": \"<integer>\",\n  \"managerId\": \"<string>\",\n  \"ownerId\": \"<string>\",\n  \"externalId\": \"<string>\",\n  \"teamId\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "48b5c7e8-dce6-400c-b7e4-e1aaa8d7f920",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "matters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"categoryId\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"organisationId\": \"<integer>\",\n  \"fields\": \"<object>\",\n  \"restricted\": \"<boolean>\",\n  \"urgent\": \"<boolean>\",\n  \"parentId\": \"<integer>\",\n  \"managerId\": \"<string>\",\n  \"ownerId\": \"<string>\",\n  \"externalId\": \"<string>\",\n  \"teamId\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "3133",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b5c8c0d1-ca20-4333-85c6-975923019e0a",
+          "name": "Get matters",
+          "request": {
+            "name": "Get matters",
+            "description": {
+              "content": "Gets matters filtered by single or multiple fields.\r\n<br /> \r\n_To filter by one field_: \"filtering.field\", \"filtering.operator\" and \"filtering.value\" parameters must be filled.\r\n<br /> \r\n_To filter by multiple fields_: \"filtering.logic\" and \"filtering.filters\" parameters must be filled.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "matters"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "skip",
+                  "value": "<integer>",
+                  "description": "The number of matters to skip (used for paging)"
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "Fields to include in the response"
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "Fields to include in the response"
+                },
+                {
+                  "disabled": false,
+                  "key": "filtering.logic",
+                  "value": "<string>",
+                  "description": "Gets or sets the filtering logic for filters. Value by default is 'and'"
+                },
+                {
+                  "disabled": false,
+                  "key": "filtering.filters",
+                  "value": "{\"field\":\"<string>\",\"operator\":\"<string>\",\"value\":\"<string>\"}",
+                  "description": "Array of filters object (optional)\r\n<br /> \r\n_Object Properties_:\r\n<br /> \r\n* _Field_: field to filter by\r\n<br /> \r\n* _Operator_: operator used to filter by\r\n<br /> \r\n* _Value_: value to filter by"
+                },
+                {
+                  "disabled": false,
+                  "key": "filtering.filters",
+                  "value": "{\"field\":\"<string>\",\"operator\":\"<string>\",\"value\":\"<string>\"}",
+                  "description": "Array of filters object (optional)\r\n<br /> \r\n_Object Properties_:\r\n<br /> \r\n* _Field_: field to filter by\r\n<br /> \r\n* _Operator_: operator used to filter by\r\n<br /> \r\n* _Value_: value to filter by"
+                },
+                {
+                  "disabled": false,
+                  "key": "filtering.field",
+                  "value": "<string>",
+                  "description": "Field to filter by (optional)"
+                },
+                {
+                  "disabled": false,
+                  "key": "filtering.operator",
+                  "value": "<string>",
+                  "description": "Operator used for filtering (optional)"
+                },
+                {
+                  "disabled": false,
+                  "key": "filtering.value",
+                  "value": "<string>",
+                  "description": "Value to filter by (optional)"
+                },
+                {
+                  "disabled": false,
+                  "key": "sorting.direction",
+                  "value": "<string>",
+                  "description": "Set the sorting direction"
+                },
+                {
+                  "disabled": false,
+                  "key": "sorting.field",
+                  "value": "<string>",
+                  "description": "Set the sorting fields"
+                },
+                {
+                  "disabled": false,
+                  "key": "take",
+                  "value": "50",
+                  "description": "The maximum number of matters to return<p>Default: 50</p>"
+                },
+                {
+                  "disabled": false,
+                  "key": "context",
+                  "value": "Personal",
+                  "description": "Controls the scope of matters returned by this operation<p>Default: Personal</p><p>Options:</p><ul><li>All - Returns all matters regardless of whether the authenticated user is a member. Requires the authenticated user to be a member of the Matter Administrators security group</li><li>Personal - Returns matters which the authenticated user is a member of. Equivalent to the \"My matters\" view in LawVu</li><li>Intake - Returns all matters in the Intake queue. Requires the authenticated user to have the 'Manage intake' permission</li><li>Teams - Returns all matters that are accessible by teams that the authenticated user is a member of</li><li>Restricted - Returns restricted matters. Requires the authenticated user to be an Organization Administrator</li></ul>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a9c17e87-43aa-45a7-a009-cdec02726221",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "matters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filtering.logic",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filtering.filters",
+                      "value": "[object Object]"
+                    },
+                    {
+                      "key": "filtering.filters",
+                      "value": "[object Object]"
+                    },
+                    {
+                      "key": "filtering.field",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filtering.operator",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filtering.value",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sorting.direction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sorting.field",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "take",
+                      "value": "50"
+                    },
+                    {
+                      "key": "context",
+                      "value": "Personal"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 3721\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "589d53f1-7f34-49b6-a693-26e74b7f4a71",
+          "name": "Get matter",
+          "request": {
+            "name": "Get matter",
+            "description": {
+              "content": "Gets the details of the selected matter (ref: matterId)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "matters",
+                ":matterId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "matterId",
+                  "description": "(Required) The Id of the matter (e.g. 1234)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0c0891ee-44c3-4c8e-8dee-f1c695a361e6",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "matters",
+                    ":matterId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "matterId",
+                      "description": "(Required) The Id of the matter (e.g. 1234)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 5496,\n  \"matterNumber\": \"string\",\n  \"matterUrl\": \"string\",\n  \"createdDateUtc\": \"2000-05-22T23:15:19.995Z\",\n  \"managerOrganisationId\": 6319,\n  \"owner\": {\n    \"userId\": \"string\",\n    \"userFirstname\": \"string\",\n    \"userLastname\": \"string\",\n    \"userOrganisationId\": 3347,\n    \"userOrganisationName\": \"string\",\n    \"userHasPicture\": true,\n    \"userPictureCacheId\": 3973,\n    \"userFullName\": \"string\",\n    \"userInitials\": \"string\",\n    \"permissions\": [\n      376,\n      9145\n    ],\n    \"isDelegateOwner\": true,\n    \"isDelegateManager\": false\n  },\n  \"manager\": {\n    \"userId\": \"string\",\n    \"userFirstname\": \"string\",\n    \"userLastname\": \"string\",\n    \"userOrganisationId\": 5130,\n    \"userOrganisationName\": \"string\",\n    \"userHasPicture\": true,\n    \"userPictureCacheId\": 3116,\n    \"userFullName\": \"string\",\n    \"userInitials\": \"string\",\n    \"permissions\": [\n      2189,\n      4247\n    ],\n    \"isDelegateOwner\": false,\n    \"isDelegateManager\": false\n  },\n  \"organisationId\": 7174,\n  \"organisationName\": \"string\",\n  \"lastStatusMessage\": {\n    \"message\": \"string\",\n    \"createdDateUtc\": \"2012-06-23T22:59:05.577Z\",\n    \"id\": 3341,\n    \"userId\": \"string\",\n    \"userFirstname\": \"string\",\n    \"userLastname\": \"string\",\n    \"userOrganisationId\": 1729,\n    \"userOrganisationName\": \"string\",\n    \"userHasPicture\": false,\n    \"userPictureCacheId\": 6228,\n    \"role\": \"Standard\",\n    \"userFullName\": \"string\",\n    \"userInitials\": \"string\"\n  },\n  \"terms\": {\n    \"fileId\": 6689,\n    \"code\": \"string\",\n    \"fileName\": \"string\"\n  },\n  \"matterSpecificEmail\": \"string\",\n  \"tags\": [\n    {\n      \"id\": 716,\n      \"description\": \"string\"\n    },\n    {\n      \"id\": 4235,\n      \"description\": \"string\"\n    }\n  ],\n  \"categoryId\": 9325,\n  \"externalId\": \"string\",\n  \"name\": \"string\",\n  \"parentId\": 1402,\n  \"restricted\": true,\n  \"status\": \"string\",\n  \"teamId\": 5649,\n  \"urgent\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f374fda0-5e19-4d8f-be90-a79946352b24",
+          "name": "Update matter",
+          "request": {
+            "name": "Update matter",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "matters",
+                ":matterId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "matterId",
+                  "description": "(Required) The Id of the matter"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"value\": \"<object>\",\n    \"path\": \"<string>\",\n    \"op\": \"<string>\",\n    \"from\": \"<string>\"\n  },\n  {\n    \"value\": \"<object>\",\n    \"path\": \"<string>\",\n    \"op\": \"<string>\",\n    \"from\": \"<string>\"\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c5edf963-55f2-4cc2-9759-70539ae97d4f",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "matters",
+                    ":matterId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "matterId",
+                      "description": "(Required) The Id of the matter"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"value\": \"<object>\",\n    \"path\": \"<string>\",\n    \"op\": \"<string>\",\n    \"from\": \"<string>\"\n  },\n  {\n    \"value\": \"<object>\",\n    \"path\": \"<string>\",\n    \"op\": \"<string>\",\n    \"from\": \"<string>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3d0fbfff-e11f-4276-9922-24e9df63a696",
+          "name": "Add user to a matter",
+          "request": {
+            "name": "Add user to a matter",
+            "description": {
+              "content": "Adds a user to the matter (as owner, manager or regular matter member)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "matters",
+                ":matterId",
+                "users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "matterId",
+                  "description": "(Required) The Id of the matter"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"target\": \"<string>\",\n  \"userId\": \"<string>\",\n  \"note\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7a4cd580-59a7-40f6-95da-b1ff661b6ab8",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "matters",
+                    ":matterId",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "matterId",
+                      "description": "(Required) The Id of the matter"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"target\": \"<string>\",\n  \"userId\": \"<string>\",\n  \"note\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c8705b37-8cac-458a-9913-0864b295310b",
+          "name": "Get matter users",
+          "request": {
+            "name": "Get matter users",
+            "description": {
+              "content": "Returns the users that are assigned to the matter",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "matters",
+                ":matterId",
+                "users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "skip",
+                  "value": "<integer>",
+                  "description": "The number of results to skip"
+                },
+                {
+                  "disabled": false,
+                  "key": "filtering.field",
+                  "value": "<string>",
+                  "description": "Field to filter by (optional)"
+                },
+                {
+                  "disabled": false,
+                  "key": "filtering.operator",
+                  "value": "<string>",
+                  "description": "Operator used for filtering (optional)"
+                },
+                {
+                  "disabled": false,
+                  "key": "filtering.value",
+                  "value": "<string>",
+                  "description": "Value to filter by (optional)"
+                },
+                {
+                  "disabled": false,
+                  "key": "sorting.direction",
+                  "value": "<string>",
+                  "description": "Set the sorting direction"
+                },
+                {
+                  "disabled": false,
+                  "key": "sorting.field",
+                  "value": "<string>",
+                  "description": "Set the sorting fields"
+                },
+                {
+                  "disabled": false,
+                  "key": "take",
+                  "value": "50",
+                  "description": "The maximum number of matter users to return<p>Default: 50</p>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "matterId",
+                  "description": "(Required) The matter id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d4dc107d-59f9-40fe-96c7-10e285b05ef9",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "matters",
+                    ":matterId",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "filtering.field",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filtering.operator",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filtering.value",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sorting.direction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sorting.field",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "take",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "matterId",
+                      "description": "(Required) The matter id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"userId\": \"string\",\n      \"userFirstname\": \"string\",\n      \"userLastname\": \"string\",\n      \"userOrganisationId\": 9993,\n      \"userOrganisationName\": \"string\",\n      \"userHasPicture\": true,\n      \"userPictureCacheId\": 9737,\n      \"userFullName\": \"string\",\n      \"userInitials\": \"string\",\n      \"permissions\": [\n        2375,\n        4910\n      ],\n      \"isDelegateOwner\": false,\n      \"isDelegateManager\": false\n    },\n    {\n      \"userId\": \"string\",\n      \"userFirstname\": \"string\",\n      \"userLastname\": \"string\",\n      \"userOrganisationId\": 1703,\n      \"userOrganisationName\": \"string\",\n      \"userHasPicture\": false,\n      \"userPictureCacheId\": 6608,\n      \"userFullName\": \"string\",\n      \"userInitials\": \"string\",\n      \"permissions\": [\n        2492,\n        4804\n      ],\n      \"isDelegateOwner\": true,\n      \"isDelegateManager\": false\n    }\n  ],\n  \"total\": 3989\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "eeaf7dba-848a-4357-815b-5ea7498f333b",
+          "name": "ExternalId lookup",
+          "request": {
+            "name": "ExternalId lookup",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "matters",
+                "externalid",
+                ":externalId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "externalId",
+                  "description": "(Required) The externalId to lookup"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0b8148d2-9fa2-4366-9129-77a968da8ac4",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "matters",
+                    "externalid",
+                    ":externalId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalId",
+                      "description": "(Required) The externalId to lookup"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 5936\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "50cc5bb3-a5e1-4cd2-a9a5-9b95affb54b5",
+          "name": "Get matter fields",
+          "request": {
+            "name": "Get matter fields",
+            "description": {
+              "content": "Get matter fields by matter id",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "matters",
+                ":matterId",
+                "fields"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "matterId",
+                  "description": "(Required) The Id of the matter"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f1dc73c2-5512-4a81-9161-9d2506b70e06",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "matters",
+                    ":matterId",
+                    "fields"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "matterId",
+                      "description": "(Required) The Id of the matter"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailFields\": {\n    \"schema\": {\n      \"properties\": {\n        \"field_1\": {\n          \"fieldId\": 1,\n          \"title\": \"An example field name\",\n          \"description\": \"Example field description\",\n          \"lawvuType\": 7,\n          \"isReadOnly\": false,\n          \"type\": \"boolean\",\n          \"label\": \"\"\n        }\n      },\n      \"order\": [\n        \"field_1\"\n      ],\n      \"required\": [\n        \"field_1\"\n      ]\n    },\n    \"model\": {\n      \"field_1\": true\n    }\n  },\n  \"coreFields\": {\n    \"schema\": null,\n    \"model\": null\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ad52e076-d33f-4cd8-94ef-26a9651234f9",
+          "name": "Update fields",
+          "request": {
+            "name": "Update fields",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "matters",
+                ":matterId",
+                "fields"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "matterId",
+                  "description": "(Required) The Id of the matter"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"value\": \"<object>\",\n    \"path\": \"<string>\",\n    \"op\": \"<string>\",\n    \"from\": \"<string>\"\n  },\n  {\n    \"value\": \"<object>\",\n    \"path\": \"<string>\",\n    \"op\": \"<string>\",\n    \"from\": \"<string>\"\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8f741f3b-e1d3-4a17-b35d-42a9ec76643e",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "matters",
+                    ":matterId",
+                    "fields"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "matterId",
+                      "description": "(Required) The Id of the matter"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"value\": \"new value\",\n  \"path\": \"/field_string\",\n  \"op\": \"replace\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-sandbox.lawvu.com/account-apis",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "e014f09f-17f1-41b5-8072-340666f04121",
+    "name": "LawVu Account Auth Matters API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Apis for account related resources (authentication, profiles, organisation details etc)",
+      "type": "text/plain"
+    }
+  }
+}

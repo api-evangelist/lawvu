@@ -1,0 +1,107 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "LawVu Account Auth Invoices API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Invoices",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get invoices",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v1/invoices",
+            "params": [
+              {
+                "name": "skip",
+                "value": "",
+                "type": "query",
+                "description": "The number of invoices to skip (used for paging)"
+              },
+              {
+                "name": "filtering.field",
+                "value": "",
+                "type": "query",
+                "description": "Field to filter by (optional)"
+              },
+              {
+                "name": "filtering.operator",
+                "value": "",
+                "type": "query",
+                "description": "Operator used for filtering (optional)"
+              },
+              {
+                "name": "filtering.value",
+                "value": "",
+                "type": "query",
+                "description": "Value to filter by (optional)"
+              },
+              {
+                "name": "sorting.direction",
+                "value": "",
+                "type": "query",
+                "description": "Set the sorting direction"
+              },
+              {
+                "name": "sorting.field",
+                "value": "",
+                "type": "query",
+                "description": "Set the sorting fields"
+              },
+              {
+                "name": "take",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of invoices to return<p>Default: 50</p>"
+              }
+            ]
+          },
+          "docs": "Get invoices"
+        },
+        {
+          "info": {
+            "name": "Update invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v1/invoices/:invoiceId",
+            "params": [
+              {
+                "name": "invoiceId",
+                "value": "",
+                "type": "path",
+                "description": "The invoice Id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update invoice"
+        },
+        {
+          "info": {
+            "name": "Retrieve Invoice Recipients",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v1/invoices/recipients"
+          },
+          "docs": "Retrieve Invoice Recipients"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

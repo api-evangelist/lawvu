@@ -1,0 +1,71 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "LawVu Account Auth ContractFiles API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ContractFiles",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Upload file",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v1/contracts/:contractId/files",
+            "params": [
+              {
+                "name": "contractId",
+                "value": "",
+                "type": "path",
+                "description": "The id of the contract"
+              },
+              {
+                "name": "comments",
+                "value": "",
+                "type": "query",
+                "description": "Comments to be added to the file"
+              },
+              {
+                "name": "parentFileId",
+                "value": "",
+                "type": "query",
+                "description": "Creates a new version for the specified parent file id"
+              },
+              {
+                "name": "folderId",
+                "value": "",
+                "type": "query",
+                "description": "The id of the folder to upload the file within"
+              },
+              {
+                "name": "conflictResolution",
+                "value": "",
+                "type": "query",
+                "description": "Defines behaviour for when a file conflict is found<p>Options:</p><ul><li>Replace</li><li>KeepBoth</li><li>SaveVersion</li><li>Skip</li></ul>"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "file",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Add or update a file in a contract. \\\r\n \\\r\nThe body of the request must be content-type 'multipart/form-data' and contain the file data. \\\r\n \\\r\nTo update the contract document: Only specify the 'parentFileId' parameter. The 'folderId' and 'conflictResolution' parameters should not be used for these updates"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

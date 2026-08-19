@@ -1,0 +1,41 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "LawVu Account Auth MatterStatusMessage API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "MatterStatusMessage",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Add a status message to a matter",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v1/matters/:matterId/statusMessages",
+            "params": [
+              {
+                "name": "matterId",
+                "value": "",
+                "type": "path",
+                "description": "The Id of the matter"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a status message to a matter"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

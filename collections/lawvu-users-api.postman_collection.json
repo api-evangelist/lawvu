@@ -1,0 +1,257 @@
+{
+  "item": [
+    {
+      "id": "9c09818b-b2b3-4b34-8c89-baf90b094e9e",
+      "name": "Users",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5f4de7ae-546f-4975-8d08-d0e828170b18",
+          "name": "Search users",
+          "request": {
+            "name": "Search users",
+            "description": {
+              "content": "Returns a list of users based on the filter criteria",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "filter.search",
+                  "value": "<string>",
+                  "description": "Search text (applies to: name & email address)"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter.permission",
+                  "value": "<string>",
+                  "description": "<p>Options:</p><ul><li>CreateMatters</li><li>ContractCreator</li></ul>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter.activeandinvitedusersonly",
+                  "value": "<boolean>",
+                  "description": "Only users that are active or invited"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter.primaryorganisationid",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter.activeusersonly",
+                  "value": "<boolean>",
+                  "description": "Only users that are active"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter.uselitequery",
+                  "value": "<boolean>",
+                  "description": "Use a lite query\r\nWhen enabled the response will return only partial information about the user:\r\nUserId, FirstName, LastName, UserFullName and OrganisationName"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d7086e32-e10d-47be-8883-a34bad4c0dbf",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter.search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter.permission",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter.activeandinvitedusersonly",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "filter.primaryorganisationid",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "filter.activeusersonly",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "filter.uselitequery",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"633182f3-130b-4917-99ba-4c3e88080eb4\",\n    \"userName\": null,\n    \"firstName\": \"Example\",\n    \"lastName\": \"User\",\n    \"organisationName\": null,\n    \"organisationPictureCacheId\": null,\n    \"directPhone\": null,\n    \"mobilePhone\": null,\n    \"email\": \"exampleuser@noemail.com\",\n    \"hasPicture\": false,\n    \"pictureCacheId\": 0,\n    \"invitationSentUtc\": null,\n    \"userFullName\": \"Example User\",\n    \"userInitials\": \"EU\",\n    \"isRemoved\": false,\n    \"isDisabled\": false,\n    \"hourlyRate\": null,\n    \"liveMattersCount\": 277\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "962f08fc-df6b-4267-b02d-1108b34474f9",
+          "name": "Get user profile",
+          "request": {
+            "name": "Get user profile",
+            "description": {
+              "content": "Returns the profile of a specific user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "users",
+                ":id",
+                "profile"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) User Id (e.g. e1bf0987-8844-49ab-a6b6-10562b58e230)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "eed33a33-b0d7-4e11-a691-0fa3a91b8e92",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "users",
+                    ":id",
+                    "profile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) User Id (e.g. e1bf0987-8844-49ab-a6b6-10562b58e230)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"123-456-789\",\n  \"firstName\": \"Joey\",\n  \"lastName\": \"Tribiani\",\n  \"email\": \"emailaddress@gmail.com\",\n  \"mobilePhone\": \"987654321\",\n  \"directPhone\": \"24680\",\n  \"jobTitle\": \"Worker\",\n  \"departmentId\": 4,\n  \"specialityIds\": [\n    1,\n    2,\n    3\n  ],\n  \"biography\": \"Biography\",\n  \"hourlyRate\": 9.99,\n  \"linkedInUrl\": \"url\",\n  \"organisationId\": 5,\n  \"organisationName\": \"The Workplace\",\n  \"organisationType\": \"Customer\",\n  \"role\": \"Administrator\",\n  \"departmentName\": \"Department\",\n  \"hasPicture\": true,\n  \"pictureCacheId\": 78,\n  \"invitationSentUtc\": \"2025-01-21T00:44:36.422387+00:00\",\n  \"status\": \"LockedOut\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-sandbox.lawvu.com/account-apis",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "16635b80-dc9f-4e29-a92f-e02db5f07973",
+    "name": "LawVu Account Auth Users API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Apis for account related resources (authentication, profiles, organisation details etc)",
+      "type": "text/plain"
+    }
+  }
+}

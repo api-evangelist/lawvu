@@ -1,0 +1,373 @@
+{
+  "item": [
+    {
+      "id": "663a1c22-7b38-4a9a-8647-3440a57a4978",
+      "name": "WebhookSubscriptions",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a5406310-6b06-4db3-9d4d-7b95c3f75c12",
+          "name": "Create a subscription",
+          "request": {
+            "name": "Create a subscription",
+            "description": {
+              "content": "Create a webhook subscription to receive notifications on events occuring in LawVu",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "webhooks",
+                "subscriptions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"subscriptionUrl\": \"<uri>\",\n  \"topics\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"clientState\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e768eb40-6cb9-4a93-8c9a-1adcd73e0265",
+              "name": "The ID of the created subscription",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "webhooks",
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"topics\": [\n    \"matter.created\",\n    \"matter.updated\",\n    \"matter.status.updated\"\n  ],\n  \"subscriptionUrl\": \"https://myapplication.com/incomingwebhooks\",\n  \"clientState\": \"supersecretstring\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "3857",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3b3d62d0-24a7-478a-9c8a-d92040cc8941",
+          "name": "Get all subscriptions",
+          "request": {
+            "name": "Get all subscriptions",
+            "description": {
+              "content": "Retrieve all existing webhook subscriptions",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "webhooks",
+                "subscriptions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "786b00ce-8e41-49cc-b9c1-a5d1a89532b9",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "webhooks",
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 1,\n    \"topics\": [\n      \"matter.created\",\n      \"matter.updated\",\n      \"matter.status.updated\"\n    ],\n    \"subscriptionUrl\": \"https://myapplication.com/incomingwebhooks\",\n    \"clientState\": \"supersecretstring\",\n    \"status\": \"failed\",\n    \"createdDateUtc\": \"2022-10-11T23:54:04.017\",\n    \"createdBy\": \"461fffa2-950f-4961-b313-09fef67d419c\",\n    \"modifiedDateUtc\": \"2022-12-19T23:54:04.017\",\n    \"modifiedBy\": \"461fffa2-950f-4961-b313-09fef67d419c\"\n  },\n  {\n    \"id\": 2,\n    \"topics\": [\n      \"contract.created\"\n    ],\n    \"subscriptionUrl\": \"https://myapplication.com/incomingwebhooks/example\",\n    \"clientState\": \"my client state\",\n    \"status\": \"active\",\n    \"createdDateUtc\": \"2022-10-15T23:54:04.017\",\n    \"createdBy\": \"461fffa2-950f-4961-b313-09fef67d419c\",\n    \"modifiedDateUtc\": \"2022-12-21T23:54:04.017\",\n    \"modifiedBy\": \"461fffa2-950f-4961-b313-09fef67d419c\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "44b67b99-c243-49da-85bb-4629cbffa66d",
+          "name": "Get a subscription",
+          "request": {
+            "name": "Get a subscription",
+            "description": {
+              "content": "Retrieve an existing webhook subscription",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "webhooks",
+                "subscriptions",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) The ID of the subscription"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ad1b6e64-639c-4e3a-8eaa-381651b8e812",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "webhooks",
+                    "subscriptions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The ID of the subscription"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 1,\n  \"topics\": [\n    \"matter.created\",\n    \"matter.updated\",\n    \"matter.status.updated\"\n  ],\n  \"subscriptionUrl\": \"https://myapplication.com/incomingwebhooks\",\n  \"clientState\": \"my client state\",\n  \"status\": \"active\",\n  \"createdDateUtc\": \"2022-10-11T23:54:04.017\",\n  \"createdBy\": \"461fffa2-950f-4961-b313-09fef67d419c\",\n  \"modifiedDateUtc\": \"2022-12-19T23:54:04.017\",\n  \"modifiedBy\": \"461fffa2-950f-4961-b313-09fef67d419c\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ac49ef1e-a832-47f0-ad45-b51373198a8e",
+          "name": "Delete a subscription",
+          "request": {
+            "name": "Delete a subscription",
+            "description": {
+              "content": "Deleting a webhook subscription will stop notifications for that subscription",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "webhooks",
+                "subscriptions",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) The ID of the subscription"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "841c627a-35ec-4158-8422-ebed9f24c07a",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "webhooks",
+                    "subscriptions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The ID of the subscription"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-sandbox.lawvu.com/account-apis",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "69175d0e-b9fa-437a-b91a-53ff6f7d135e",
+    "name": "LawVu Account Auth WebhookSubscriptions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Apis for account related resources (authentication, profiles, organisation details etc)",
+      "type": "text/plain"
+    }
+  }
+}

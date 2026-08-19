@@ -1,0 +1,78 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "LawVu Account Auth Folders API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Folders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get folders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v1/folders",
+            "params": [
+              {
+                "name": "recordId",
+                "value": "",
+                "type": "query",
+                "description": "The record ID the folders are linked to"
+              },
+              {
+                "name": "recordType",
+                "value": "",
+                "type": "query",
+                "description": "The record type the folders are linked to (Matter, Contract, Organisation etc)<p>Options:</p><ul><li>Matter</li><li>Milestone</li><li>Task</li><li>Organisation</li><li>Contract</li><li>File</li><li>InvoiceBatch</li><li>KnowledgeArticle</li><li>Folder</li><li>FolderTemplate</li><li>KnowledgeLibrary</li><li>InboundEmail</li><li>User</li><li>MessageThread</li><li>TimelineEntry</li><li>MatterStatus</li><li>ContractStatus</li><li>Message</li><li>Comment</li></ul>"
+              },
+              {
+                "name": "parentFolderId",
+                "value": "",
+                "type": "query",
+                "description": "Returns folders under the specified parentd folder ID otherwise it returns them from the root folder"
+              }
+            ]
+          },
+          "docs": "Gets a list of folders in LawVu"
+        },
+        {
+          "info": {
+            "name": "Create folder",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v1/folders/:targetType/:targetId",
+            "params": [
+              {
+                "name": "targetType",
+                "value": "",
+                "type": "path",
+                "description": "The target type the folder should be created in<p>Options:</p><ul><li>Matter</li><li>Contract</li></ul>"
+              },
+              {
+                "name": "targetId",
+                "value": "",
+                "type": "path",
+                "description": "The target entity in LawVu"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a folder within a entity, optionally as a subfolder"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

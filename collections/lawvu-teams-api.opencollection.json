@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "LawVu Account Auth Teams API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Teams",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get teams",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v1/teams",
+            "params": [
+              {
+                "name": "allowAssigment",
+                "value": "",
+                "type": "query",
+                "description": "Only return teams that allow work assignment<p>Default: False</p>"
+              }
+            ]
+          },
+          "docs": "Get teams"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

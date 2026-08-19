@@ -1,0 +1,52 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "LawVu Account Auth MatterTaskTemplates API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "MatterTaskTemplates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get task templates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v1/matters/tasktemplates"
+          },
+          "docs": "Gets task templates"
+        },
+        {
+          "info": {
+            "name": "Add a task template to matter",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v1/matters/:matterId/taskTemplates",
+            "params": [
+              {
+                "name": "matterId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the matter"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a task template to a matter"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

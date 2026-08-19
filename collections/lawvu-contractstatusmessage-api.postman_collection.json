@@ -1,0 +1,135 @@
+{
+  "item": [
+    {
+      "id": "d2d220cf-8dbf-4904-a81a-8d61177cf82f",
+      "name": "ContractStatusMessage",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "eae7471a-d9da-4859-9435-af282656a68b",
+          "name": "Add a status message to a contract",
+          "request": {
+            "name": "Add a status message to a contract",
+            "description": {
+              "content": "Add status message to a contract",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "contracts",
+                ":contractId",
+                "statusMessages"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "contractId",
+                  "description": "(Required) The Id of the contract"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"statusMessage\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e3bbf600-915e-4378-a232-8b749a6a34ae",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "contracts",
+                    ":contractId",
+                    "statusMessages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "contractId",
+                      "description": "(Required) The Id of the contract"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"StatusMessage\": \"Test status message\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-sandbox.lawvu.com/account-apis",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "9faf5c86-6b94-4f54-af7c-8b45b7109630",
+    "name": "LawVu Account Auth ContractStatusMessage API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Apis for account related resources (authentication, profiles, organisation details etc)",
+      "type": "text/plain"
+    }
+  }
+}

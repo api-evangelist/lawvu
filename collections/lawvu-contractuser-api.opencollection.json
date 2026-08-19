@@ -1,0 +1,102 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "LawVu Account Auth ContractUser API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ContractUser",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get contract users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v1/contracts/:contractId/users",
+            "params": [
+              {
+                "name": "contractId",
+                "value": "",
+                "type": "path",
+                "description": "The contract id"
+              },
+              {
+                "name": "skip",
+                "value": "",
+                "type": "query",
+                "description": "The number of results to skip"
+              },
+              {
+                "name": "filtering.field",
+                "value": "",
+                "type": "query",
+                "description": "Field to filter by (optional)"
+              },
+              {
+                "name": "filtering.operator",
+                "value": "",
+                "type": "query",
+                "description": "Operator used for filtering (optional)"
+              },
+              {
+                "name": "filtering.value",
+                "value": "",
+                "type": "query",
+                "description": "Value to filter by (optional)"
+              },
+              {
+                "name": "sorting.direction",
+                "value": "",
+                "type": "query",
+                "description": "Set the sorting direction"
+              },
+              {
+                "name": "sorting.field",
+                "value": "",
+                "type": "query",
+                "description": "Set the sorting fields"
+              },
+              {
+                "name": "take",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of contract users to return<p>Default: 50</p>"
+              }
+            ]
+          },
+          "docs": "Returns the users that are assigned to the contract"
+        },
+        {
+          "info": {
+            "name": "Add user to a contract",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v1/contracts/:contractId/users",
+            "params": [
+              {
+                "name": "contractId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the contract"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a user to a contract as a member"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

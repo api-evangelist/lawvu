@@ -1,0 +1,703 @@
+{
+  "item": [
+    {
+      "id": "6fc8e809-002c-4ebc-9ed8-133dd5eb0b9a",
+      "name": "Emails",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "29057156-5391-4583-8b9d-d19364e05e7f",
+          "name": "Get an email thread",
+          "request": {
+            "name": "Get an email thread",
+            "description": {
+              "content": "Search for an email thread by the identifier.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "emails",
+                "threads"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "client",
+                  "value": "<string>",
+                  "description": "The email client (Gmail, Outlook)"
+                },
+                {
+                  "disabled": false,
+                  "key": "threadIdentifier",
+                  "value": "<string>",
+                  "description": "The Id of the thread"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "658b7ceb-3562-4eb4-8c9e-6e5ff72e8444",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "emails",
+                    "threads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "client",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "threadIdentifier",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"threadIdentifier\": \"string\",\n    \"track\": false,\n    \"client\": \"Outlook\",\n    \"matterId\": 6029,\n    \"matterNumber\": \"string\",\n    \"matterName\": \"string\",\n    \"matterStatus\": \"string\",\n    \"matterIsDeleted\": true,\n    \"fileEntryId\": 7652,\n    \"fileId\": 5494,\n    \"filePath\": \"string\",\n    \"contractId\": 9778,\n    \"contractName\": \"string\",\n    \"contractStatus\": \"string\",\n    \"contractIsDeleted\": true\n  },\n  {\n    \"threadIdentifier\": \"string\",\n    \"track\": true,\n    \"client\": \"Gmail\",\n    \"matterId\": 9700,\n    \"matterNumber\": \"string\",\n    \"matterName\": \"string\",\n    \"matterStatus\": \"string\",\n    \"matterIsDeleted\": true,\n    \"fileEntryId\": 1183,\n    \"fileId\": 4631,\n    \"filePath\": \"string\",\n    \"contractId\": 8451,\n    \"contractName\": \"string\",\n    \"contractStatus\": \"string\",\n    \"contractIsDeleted\": false\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7d1734c4-a4fa-4c79-bcf6-6fdbef2ec138",
+          "name": "Save email thread",
+          "request": {
+            "name": "Save email thread",
+            "description": {
+              "content": "Creates / Updates an email thread, and child email messages.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "emails",
+                "threads"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"client\": \"<string>\",\n  \"threadIdentifier\": \"<string>\",\n  \"track\": \"<boolean>\",\n  \"matterId\": \"<integer>\",\n  \"fileId\": \"<integer>\",\n  \"contractId\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3f19f0fd-5db3-46a3-bd80-99030bf0ab8a",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "emails",
+                    "threads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"client\": \"<string>\",\n  \"threadIdentifier\": \"<string>\",\n  \"track\": \"<boolean>\",\n  \"matterId\": \"<integer>\",\n  \"fileId\": \"<integer>\",\n  \"contractId\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "2193",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ae37c741-0ad0-4e07-a570-a50d9d88eca1",
+          "name": "Get email threads",
+          "request": {
+            "name": "Get email threads",
+            "description": {
+              "content": "Gets paged email threads ordered by last modified date",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "emails",
+                "threads",
+                "page"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "client",
+                  "value": "<string>",
+                  "description": "The email client (Gmail, Outlook)"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "25",
+                  "description": "The number of threads to return<p>Default: 25</p>"
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<integer>",
+                  "description": "The Id of the thread to skip to"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0c07b819-0576-481b-95f7-1d427bafa9ff",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "emails",
+                    "threads",
+                    "page"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "client",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "25"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"threads\": [\n    {\n      \"threadIdentifier\": \"string\",\n      \"track\": true,\n      \"client\": \"Outlook\",\n      \"matterId\": 8008,\n      \"matterNumber\": \"string\",\n      \"matterName\": \"string\",\n      \"matterStatus\": \"string\",\n      \"matterIsDeleted\": false,\n      \"fileEntryId\": 1450,\n      \"fileId\": 622,\n      \"filePath\": \"string\",\n      \"contractId\": 2497,\n      \"contractName\": \"string\",\n      \"contractStatus\": \"string\",\n      \"contractIsDeleted\": false\n    },\n    {\n      \"threadIdentifier\": \"string\",\n      \"track\": false,\n      \"client\": \"Gmail\",\n      \"matterId\": 8669,\n      \"matterNumber\": \"string\",\n      \"matterName\": \"string\",\n      \"matterStatus\": \"string\",\n      \"matterIsDeleted\": true,\n      \"fileEntryId\": 6658,\n      \"fileId\": 6854,\n      \"filePath\": \"string\",\n      \"contractId\": 6713,\n      \"contractName\": \"string\",\n      \"contractStatus\": \"string\",\n      \"contractIsDeleted\": true\n    }\n  ],\n  \"nextPageCursor\": 5869\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b0841310-bebd-4e7b-a0c2-910c2454d60b",
+          "name": "Create email draft",
+          "request": {
+            "name": "Create email draft",
+            "description": {
+              "content": "Creates a draft email in LawVu",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "emails",
+                "drafts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"sourceId\": \"<string>\",\n  \"authorEmailAddress\": \"<string>\",\n  \"expectedFromAddress\": \"<string>\",\n  \"matterId\": \"<integer>\",\n  \"mode\": \"<string>\",\n  \"recipients\": [\n    {\n      \"userId\": \"<string>\"\n    },\n    {\n      \"userId\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "be706e34-6825-4284-9ae0-ce23946e56d2",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "emails",
+                    "drafts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sourceId\": \"<string>\",\n  \"authorEmailAddress\": \"<string>\",\n  \"expectedFromAddress\": \"<string>\",\n  \"matterId\": \"<integer>\",\n  \"mode\": \"<string>\",\n  \"recipients\": [\n    {\n      \"userId\": \"<string>\"\n    },\n    {\n      \"userId\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "2193",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "53a012ca-bd63-4bf2-9ff8-a91c9169e2a6",
+          "name": "Delete email draft",
+          "request": {
+            "name": "Delete email draft",
+            "description": {
+              "content": "Deletes a draft email",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "emails",
+                "drafts",
+                ":draftId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "draftId",
+                  "description": "(Required) The id of the draft email"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4505b963-2a86-4531-82a4-7577f670e4d9",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "emails",
+                    "drafts",
+                    ":draftId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "draftId",
+                      "description": "(Required) The id of the draft email"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ee0711c3-31bc-4ebd-8bf1-a4402cc31251",
+          "name": "Update email draft",
+          "request": {
+            "name": "Update email draft",
+            "description": {
+              "content": "Updates a message draft",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "emails",
+                "drafts",
+                ":draftId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "draftId",
+                  "description": "(Required) The id of the draft email"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"matterId\": \"<integer>\",\n  \"mode\": \"<string>\",\n  \"recipients\": [\n    {\n      \"userId\": \"<string>\"\n    },\n    {\n      \"userId\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e722a1bf-8a67-4d3e-9ed8-dd8a71c2e701",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "emails",
+                    "drafts",
+                    ":draftId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "draftId",
+                      "description": "(Required) The id of the draft email"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"matterId\": \"<integer>\",\n  \"mode\": \"<string>\",\n  \"recipients\": [\n    {\n      \"userId\": \"<string>\"\n    },\n    {\n      \"userId\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "248a8709-faab-49f2-acff-305ddc1b78fa",
+          "name": "Check for any users tracking an email by External Reference ID",
+          "request": {
+            "name": "Check for any users tracking an email by External Reference ID",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "emails",
+                "threads",
+                "byExternalReferenceId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"externalReferenceIds\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c1783c49-9d47-4492-91a7-0b3ae8d44acb",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "emails",
+                    "threads",
+                    "byExternalReferenceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalReferenceIds\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"value\": [\n    {\n      \"externalReferenceId\": \"string\",\n      \"tracking\": [\n        {\n          \"trackedByUserId\": \"string\",\n          \"trackedOnDateTimeUtc\": \"2023-01-03T09:42:23.713Z\",\n          \"trackedToRecord\": {\n            \"recordType\": \"Message\",\n            \"recordId\": 2380\n          }\n        },\n        {\n          \"trackedByUserId\": \"string\",\n          \"trackedOnDateTimeUtc\": \"1997-06-23T04:02:45.531Z\",\n          \"trackedToRecord\": {\n            \"recordType\": \"InboundEmail\",\n            \"recordId\": 8658\n          }\n        }\n      ]\n    },\n    {\n      \"externalReferenceId\": \"string\",\n      \"tracking\": [\n        {\n          \"trackedByUserId\": \"string\",\n          \"trackedOnDateTimeUtc\": \"1958-02-15T16:27:40.868Z\",\n          \"trackedToRecord\": {\n            \"recordType\": \"Contract\",\n            \"recordId\": 776\n          }\n        },\n        {\n          \"trackedByUserId\": \"string\",\n          \"trackedOnDateTimeUtc\": \"1969-12-16T00:59:47.440Z\",\n          \"trackedToRecord\": {\n            \"recordType\": \"Contract\",\n            \"recordId\": 7559\n          }\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-sandbox.lawvu.com/account-apis",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "7cb3f393-620e-48c7-8d4c-f50a7344ef43",
+    "name": "LawVu Account Auth Emails API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Apis for account related resources (authentication, profiles, organisation details etc)",
+      "type": "text/plain"
+    }
+  }
+}

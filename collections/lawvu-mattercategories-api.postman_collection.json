@@ -1,0 +1,184 @@
+{
+  "item": [
+    {
+      "id": "c06044f1-0d9c-4810-9220-79cba8ada229",
+      "name": "MatterCategories",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "672a52f4-273a-4b63-bd60-109ca53620cf",
+          "name": "Matter categories",
+          "request": {
+            "name": "Matter categories",
+            "description": {
+              "content": "Gets the configured categories for a matter",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "mattercategories"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "66968952-e35d-4878-9b17-281aad125e3c",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "mattercategories"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 2435,\n    \"parentId\": 6462,\n    \"name\": \"string\",\n    \"children\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/MatterCategory detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/MatterCategory detected>\"\n      }\n    ],\n    \"teamId\": 9593,\n    \"isDeleted\": false,\n    \"teamRequired\": true,\n    \"hasRules\": true\n  },\n  {\n    \"id\": 3145,\n    \"parentId\": 3534,\n    \"name\": \"string\",\n    \"children\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/MatterCategory detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/MatterCategory detected>\"\n      }\n    ],\n    \"teamId\": 763,\n    \"isDeleted\": false,\n    \"teamRequired\": true,\n    \"hasRules\": false\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1d604dfb-1d4e-4de2-a782-069f3bd70800",
+          "name": "Matter creation schema",
+          "request": {
+            "name": "Matter creation schema",
+            "description": {
+              "content": "Get the form and fields for rendering a create matter form",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "mattercategories",
+                ":categoryId",
+                "createSchema"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "categoryId",
+                  "description": "(Required) The category to get the create form for"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1dc18c0c-5ce4-4698-b7ca-d6bd6bb76e25",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "mattercategories",
+                    ":categoryId",
+                    "createSchema"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "categoryId",
+                      "description": "(Required) The category to get the create form for"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-sandbox.lawvu.com/account-apis",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "f3db6a44-c713-4f79-9368-ceb7113cf2b6",
+    "name": "LawVu Account Auth MatterCategories API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Apis for account related resources (authentication, profiles, organisation details etc)",
+      "type": "text/plain"
+    }
+  }
+}

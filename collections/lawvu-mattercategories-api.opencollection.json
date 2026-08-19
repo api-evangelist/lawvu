@@ -1,0 +1,48 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "LawVu Account Auth MatterCategories API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "MatterCategories",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Matter categories",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v1/mattercategories"
+          },
+          "docs": "Gets the configured categories for a matter"
+        },
+        {
+          "info": {
+            "name": "Matter creation schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v1/mattercategories/:categoryId/createSchema",
+            "params": [
+              {
+                "name": "categoryId",
+                "value": "",
+                "type": "path",
+                "description": "The category to get the create form for"
+              }
+            ]
+          },
+          "docs": "Get the form and fields for rendering a create matter form"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

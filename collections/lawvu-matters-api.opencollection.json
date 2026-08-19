@@ -1,0 +1,493 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "LawVu Account Auth Matters API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Matters",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get matters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v2/matters",
+            "params": [
+              {
+                "name": "$filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter the results using OData filter syntax"
+              },
+              {
+                "name": "$orderby",
+                "value": "",
+                "type": "query",
+                "description": "Order the results using OData orderby syntax"
+              },
+              {
+                "name": "$skip",
+                "value": "",
+                "type": "query",
+                "description": "Skip the specified number of results"
+              },
+              {
+                "name": "$top",
+                "value": "",
+                "type": "query",
+                "description": "Limit the number of results returned"
+              }
+            ]
+          },
+          "docs": "Retrieve a list of matters"
+        },
+        {
+          "info": {
+            "name": "Create matter",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v2/matters",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a matter based on the provided matter type."
+        },
+        {
+          "info": {
+            "name": "Get matter",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v2/matters/:matterId",
+            "params": [
+              {
+                "name": "matterId",
+                "value": "1056",
+                "type": "path",
+                "description": "The system identifier for the matter"
+              }
+            ]
+          },
+          "docs": "Retrieve a matter by its identifier"
+        },
+        {
+          "info": {
+            "name": "Update matter",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v2/matters/:matterId",
+            "params": [
+              {
+                "name": "matterId",
+                "value": "1056",
+                "type": "path",
+                "description": "The system identifier for the matter"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a matters details"
+        },
+        {
+          "info": {
+            "name": "Get matter file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v2/matters/:matterId/files/:fileId",
+            "params": [
+              {
+                "name": "matterId",
+                "value": "1056",
+                "type": "path",
+                "description": "The system identifier for the matter"
+              },
+              {
+                "name": "fileId",
+                "value": "9456",
+                "type": "path",
+                "description": "The system identifier for the file"
+              }
+            ]
+          },
+          "docs": "Retrieve information about a file on a matter"
+        },
+        {
+          "info": {
+            "name": "Get matter types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v2/matterTypes",
+            "params": [
+              {
+                "name": "$skip",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the number of items to skip"
+              },
+              {
+                "name": "$top",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the maximum number of items to return"
+              }
+            ]
+          },
+          "docs": "Retrieve a list of matter types"
+        },
+        {
+          "info": {
+            "name": "Find matters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v1/matters/quickfind",
+            "params": [
+              {
+                "name": "term",
+                "value": "",
+                "type": "query",
+                "description": "A term to search matters by"
+              },
+              {
+                "name": "includeRestricted",
+                "value": "",
+                "type": "query",
+                "description": "Include restricted matters in the search<p>Default: False</p>"
+              },
+              {
+                "name": "take",
+                "value": "",
+                "type": "query",
+                "description": "The number of matters to return (maximum: 100, default: 20)"
+              }
+            ]
+          },
+          "docs": "Quickly find and filter matters"
+        },
+        {
+          "info": {
+            "name": "Recent  matters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v1/matters/recent",
+            "params": [
+              {
+                "name": "take",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of recently viewed matters to return<p>Default: 5</p>"
+              }
+            ]
+          },
+          "docs": "Returns recently viewed (ref:take) matters for the user"
+        },
+        {
+          "info": {
+            "name": "Get matters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v1/matters",
+            "params": [
+              {
+                "name": "skip",
+                "value": "",
+                "type": "query",
+                "description": "The number of matters to skip (used for paging)"
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Fields to include in the response"
+              },
+              {
+                "name": "filtering.logic",
+                "value": "",
+                "type": "query",
+                "description": "Gets or sets the filtering logic for filters. Value by default is 'and'"
+              },
+              {
+                "name": "filtering.filters",
+                "value": "",
+                "type": "query",
+                "description": "Array of filters object (optional)\r\n<br /> \r\n_Object Properties_:\r\n<br /> \r\n* _Field_: field to filter by\r\n<br /> \r\n* _Operator_: operator used to filter by\r\n<br /> \r\n* _Value_: value to filter by"
+              },
+              {
+                "name": "filtering.field",
+                "value": "",
+                "type": "query",
+                "description": "Field to filter by (optional)"
+              },
+              {
+                "name": "filtering.operator",
+                "value": "",
+                "type": "query",
+                "description": "Operator used for filtering (optional)"
+              },
+              {
+                "name": "filtering.value",
+                "value": "",
+                "type": "query",
+                "description": "Value to filter by (optional)"
+              },
+              {
+                "name": "sorting.direction",
+                "value": "",
+                "type": "query",
+                "description": "Set the sorting direction"
+              },
+              {
+                "name": "sorting.field",
+                "value": "",
+                "type": "query",
+                "description": "Set the sorting fields"
+              },
+              {
+                "name": "take",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of matters to return<p>Default: 50</p>"
+              },
+              {
+                "name": "context",
+                "value": "",
+                "type": "query",
+                "description": "Controls the scope of matters returned by this operation<p>Default: Personal</p><p>Options:</p><ul><li>All - Returns all matters regardless of whether the authenticated user is a member. Requires the authenticated user to be a member of the Matter Administrators security group</li><li>Personal - Returns matters which the authenticated user is a member of. Equivalent to the \"My matters\" view in LawVu</li><li>Intake - Returns all matters in the Intake queue. Requires the authenticated user to have the 'Manage intake' permission</li><li>Teams - Returns all matters that are accessible by teams that the authenticated user is a member of</li><li>Restricted - Returns restricted matters. Requires the authenticated user to be an Organization Administrator</li></ul>"
+              }
+            ]
+          },
+          "docs": "Gets matters filtered by single or multiple fields.\r\n<br /> \r\n_To filter by one field_: \"filtering.field\", \"filtering.operator\" and \"filtering.value\" parameters must be filled.\r\n<br /> \r\n_To filter by multiple fields_: \"filtering.logic\" and \"filtering.filters\" parameters must be filled."
+        },
+        {
+          "info": {
+            "name": "Create matter",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v1/matters",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new matter with the supplied values"
+        },
+        {
+          "info": {
+            "name": "Get matter",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v1/matters/:matterId",
+            "params": [
+              {
+                "name": "matterId",
+                "value": "",
+                "type": "path",
+                "description": "The Id of the matter (e.g. 1234)"
+              }
+            ]
+          },
+          "docs": "Gets the details of the selected matter (ref: matterId)"
+        },
+        {
+          "info": {
+            "name": "Update matter",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v1/matters/:matterId",
+            "params": [
+              {
+                "name": "matterId",
+                "value": "",
+                "type": "path",
+                "description": "The Id of the matter"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update matter"
+        },
+        {
+          "info": {
+            "name": "Get matter users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v1/matters/:matterId/users",
+            "params": [
+              {
+                "name": "matterId",
+                "value": "",
+                "type": "path",
+                "description": "The matter id"
+              },
+              {
+                "name": "skip",
+                "value": "",
+                "type": "query",
+                "description": "The number of results to skip"
+              },
+              {
+                "name": "filtering.field",
+                "value": "",
+                "type": "query",
+                "description": "Field to filter by (optional)"
+              },
+              {
+                "name": "filtering.operator",
+                "value": "",
+                "type": "query",
+                "description": "Operator used for filtering (optional)"
+              },
+              {
+                "name": "filtering.value",
+                "value": "",
+                "type": "query",
+                "description": "Value to filter by (optional)"
+              },
+              {
+                "name": "sorting.direction",
+                "value": "",
+                "type": "query",
+                "description": "Set the sorting direction"
+              },
+              {
+                "name": "sorting.field",
+                "value": "",
+                "type": "query",
+                "description": "Set the sorting fields"
+              },
+              {
+                "name": "take",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of matter users to return<p>Default: 50</p>"
+              }
+            ]
+          },
+          "docs": "Returns the users that are assigned to the matter"
+        },
+        {
+          "info": {
+            "name": "Add user to a matter",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v1/matters/:matterId/users",
+            "params": [
+              {
+                "name": "matterId",
+                "value": "",
+                "type": "path",
+                "description": "The Id of the matter"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a user to the matter (as owner, manager or regular matter member)"
+        },
+        {
+          "info": {
+            "name": "ExternalId lookup",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v1/matters/externalid/:externalId",
+            "params": [
+              {
+                "name": "externalId",
+                "value": "",
+                "type": "path",
+                "description": "The externalId to lookup"
+              }
+            ]
+          },
+          "docs": "ExternalId lookup"
+        },
+        {
+          "info": {
+            "name": "Get matter fields",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v1/matters/:matterId/fields",
+            "params": [
+              {
+                "name": "matterId",
+                "value": "",
+                "type": "path",
+                "description": "The Id of the matter"
+              }
+            ]
+          },
+          "docs": "Get matter fields by matter id"
+        },
+        {
+          "info": {
+            "name": "Update fields",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v1/matters/:matterId/fields",
+            "params": [
+              {
+                "name": "matterId",
+                "value": "",
+                "type": "path",
+                "description": "The Id of the matter"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update fields"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

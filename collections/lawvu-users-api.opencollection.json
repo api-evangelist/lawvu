@@ -1,0 +1,85 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "LawVu Account Auth Users API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v1/users",
+            "params": [
+              {
+                "name": "filter.search",
+                "value": "",
+                "type": "query",
+                "description": "Search text (applies to: name & email address)"
+              },
+              {
+                "name": "filter.permission",
+                "value": "",
+                "type": "query",
+                "description": "<p>Options:</p><ul><li>CreateMatters</li><li>ContractCreator</li></ul>"
+              },
+              {
+                "name": "filter.activeandinvitedusersonly",
+                "value": "",
+                "type": "query",
+                "description": "Only users that are active or invited"
+              },
+              {
+                "name": "filter.primaryorganisationid",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter.activeusersonly",
+                "value": "",
+                "type": "query",
+                "description": "Only users that are active"
+              },
+              {
+                "name": "filter.uselitequery",
+                "value": "",
+                "type": "query",
+                "description": "Use a lite query\r\nWhen enabled the response will return only partial information about the user:\r\nUserId, FirstName, LastName, UserFullName and OrganisationName"
+              }
+            ]
+          },
+          "docs": "Returns a list of users based on the filter criteria"
+        },
+        {
+          "info": {
+            "name": "Get user profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v1/users/:id/profile",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "User Id (e.g. e1bf0987-8844-49ab-a6b6-10562b58e230)"
+              }
+            ]
+          },
+          "docs": "Returns the profile of a specific user."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,161 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "LawVu Account Auth Emails API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Emails",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get an email thread",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v1/emails/threads",
+            "params": [
+              {
+                "name": "client",
+                "value": "",
+                "type": "query",
+                "description": "The email client (Gmail, Outlook)"
+              },
+              {
+                "name": "threadIdentifier",
+                "value": "",
+                "type": "query",
+                "description": "The Id of the thread"
+              }
+            ]
+          },
+          "docs": "Search for an email thread by the identifier."
+        },
+        {
+          "info": {
+            "name": "Save email thread",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v1/emails/threads",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates / Updates an email thread, and child email messages."
+        },
+        {
+          "info": {
+            "name": "Get email threads",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v1/emails/threads/page",
+            "params": [
+              {
+                "name": "client",
+                "value": "",
+                "type": "query",
+                "description": "The email client (Gmail, Outlook)"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "The number of threads to return<p>Default: 25</p>"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "The Id of the thread to skip to"
+              }
+            ]
+          },
+          "docs": "Gets paged email threads ordered by last modified date"
+        },
+        {
+          "info": {
+            "name": "Create email draft",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v1/emails/drafts",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a draft email in LawVu"
+        },
+        {
+          "info": {
+            "name": "Update email draft",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v1/emails/drafts/:draftId",
+            "params": [
+              {
+                "name": "draftId",
+                "value": "",
+                "type": "path",
+                "description": "The id of the draft email"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a message draft"
+        },
+        {
+          "info": {
+            "name": "Delete email draft",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v1/emails/drafts/:draftId",
+            "params": [
+              {
+                "name": "draftId",
+                "value": "",
+                "type": "path",
+                "description": "The id of the draft email"
+              }
+            ]
+          },
+          "docs": "Deletes a draft email"
+        },
+        {
+          "info": {
+            "name": "Check for any users tracking an email by External Reference ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v1/emails/threads/byExternalReferenceId",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Check for any users tracking an email by External Reference ID"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

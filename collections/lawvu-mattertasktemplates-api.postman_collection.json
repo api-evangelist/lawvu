@@ -1,0 +1,209 @@
+{
+  "item": [
+    {
+      "id": "fb3e266f-db72-48cf-9545-fc53c01326d0",
+      "name": "MatterTaskTemplates",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "07aaa565-9f29-48b3-a319-3cf817285a9f",
+          "name": "Get task templates",
+          "request": {
+            "name": "Get task templates",
+            "description": {
+              "content": "Gets task templates",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "matters",
+                "tasktemplates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2e2df0cc-0a2d-4861-8a0d-cfec11f144a3",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "matters",
+                    "tasktemplates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 1,\n    \"name\": \"name task template 1\",\n    \"description\": \"description task template 1\",\n    \"createdDateUtc\": \"2025-01-21T00:44:46.8310951+00:00\"\n  },\n  {\n    \"id\": 2,\n    \"name\": \"name task template 2\",\n    \"description\": \"description task template 2\",\n    \"createdDateUtc\": \"2025-01-21T00:44:46.8311252+00:00\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2ac51634-eec9-41e3-9a65-323f0c81bb57",
+          "name": "Add a task template to matter",
+          "request": {
+            "name": "Add a task template to matter",
+            "description": {
+              "content": "Adds a task template to a matter",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "matters",
+                ":matterId",
+                "taskTemplates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "matterId",
+                  "description": "(Required) The ID of the matter"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"templateId\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1798ddd3-9339-4db3-aeb6-5ec4cbf04ea5",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "matters",
+                    ":matterId",
+                    "taskTemplates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "matterId",
+                      "description": "(Required) The ID of the matter"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"templateId\": 1\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-sandbox.lawvu.com/account-apis",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "4ac87bb4-c645-4ba0-af65-10d7ce1f6b54",
+    "name": "LawVu Account Auth MatterTaskTemplates API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Apis for account related resources (authentication, profiles, organisation details etc)",
+      "type": "text/plain"
+    }
+  }
+}

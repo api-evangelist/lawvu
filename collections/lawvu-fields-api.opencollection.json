@@ -1,0 +1,267 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "LawVu Account Auth Fields API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Fields",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get fields",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v2/fields",
+            "params": [
+              {
+                "name": "$skip",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the number of items to skip"
+              },
+              {
+                "name": "$top",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the maximum number of items to return"
+              }
+            ]
+          },
+          "docs": "Retrieve a list of available fields"
+        },
+        {
+          "info": {
+            "name": "Get field options",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v2/fields/:fieldId/options",
+            "params": [
+              {
+                "name": "fieldId",
+                "value": "my_field",
+                "type": "path",
+                "description": "The API name for the field"
+              },
+              {
+                "name": "$filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter the results using OData filter syntax"
+              },
+              {
+                "name": "$skip",
+                "value": "",
+                "type": "query",
+                "description": "Skip the specified number of results"
+              },
+              {
+                "name": "$top",
+                "value": "",
+                "type": "query",
+                "description": "Limit the number of results returned"
+              }
+            ]
+          },
+          "docs": "Retrieve a list of available options for a field.\n\nSupported field types: MultiOption, Option"
+        },
+        {
+          "info": {
+            "name": "Add an option to a field",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v2/fields/:fieldId/options",
+            "params": [
+              {
+                "name": "fieldId",
+                "value": "my_field",
+                "type": "path",
+                "description": "The API name for the field"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a an option for a field.\n\nSupported field types: MultiOption, Option"
+        },
+        {
+          "info": {
+            "name": "Get an option for a field",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v2/fields/:fieldId/options/:value",
+            "params": [
+              {
+                "name": "fieldId",
+                "value": "my_field",
+                "type": "path",
+                "description": "The API name for the field"
+              },
+              {
+                "name": "value",
+                "value": "option_1",
+                "type": "path",
+                "description": "The system generated value for the field option"
+              }
+            ]
+          },
+          "docs": "Retrieve an option for a field based by value\n\nSupported field types: MultiOption, Option"
+        },
+        {
+          "info": {
+            "name": "Update an option on a field",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v2/fields/:fieldId/options/:value",
+            "params": [
+              {
+                "name": "fieldId",
+                "value": "my_field",
+                "type": "path",
+                "description": "The API name for the field"
+              },
+              {
+                "name": "value",
+                "value": "option_1",
+                "type": "path",
+                "description": "The value of the option to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an option on a field by value.\n\nSupported field types: MultiOption, Option"
+        },
+        {
+          "info": {
+            "name": "Delete an option from a field",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v2/fields/:fieldId/options/:value",
+            "params": [
+              {
+                "name": "fieldId",
+                "value": "my_field",
+                "type": "path",
+                "description": "The API name for the field"
+              },
+              {
+                "name": "value",
+                "value": "option_1",
+                "type": "path",
+                "description": "The system generated value for the field option"
+              }
+            ]
+          },
+          "docs": "Removes an option from a field by value.\n\nSupported field types: MultiOption, Option"
+        },
+        {
+          "info": {
+            "name": "Get fields",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v1/fields",
+            "params": [
+              {
+                "name": "filtering.field",
+                "value": "",
+                "type": "query",
+                "description": "Field to filter by (optional)"
+              },
+              {
+                "name": "filtering.operator",
+                "value": "",
+                "type": "query",
+                "description": "Operator used for filtering (optional)"
+              },
+              {
+                "name": "filtering.value",
+                "value": "",
+                "type": "query",
+                "description": "Value to filter by (optional)"
+              },
+              {
+                "name": "sorting.direction",
+                "value": "",
+                "type": "query",
+                "description": "Set the sorting direction"
+              },
+              {
+                "name": "sorting.field",
+                "value": "",
+                "type": "query",
+                "description": "Set the sorting fields"
+              },
+              {
+                "name": "take",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of fields to return<p>Default: 50</p>"
+              },
+              {
+                "name": "skip",
+                "value": "",
+                "type": "query",
+                "description": "<p>Default: 0</p>"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "fieldCategory",
+                "value": "",
+                "type": "query",
+                "description": "<p>Options:</p><ul><li>Custom</li><li>Lawvu</li></ul>"
+              }
+            ]
+          },
+          "docs": "Get fields"
+        },
+        {
+          "info": {
+            "name": "Get field schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v1/fields/:fieldId",
+            "params": [
+              {
+                "name": "fieldId",
+                "value": "",
+                "type": "path",
+                "description": "e.g. 1234"
+              }
+            ]
+          },
+          "docs": "Get field schema"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

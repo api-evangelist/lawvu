@@ -1,0 +1,396 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "LawVu Account Auth Files API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Files",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v2/files/:fileId",
+            "params": [
+              {
+                "name": "fileId",
+                "value": "9456",
+                "type": "path",
+                "description": "The system identifier for the file"
+              }
+            ]
+          },
+          "docs": "Retrieve details for a file resource by identifier (File, Folder, ContractDocument)"
+        },
+        {
+          "info": {
+            "name": "Upload file version",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v2/files/:fileId",
+            "params": [
+              {
+                "name": "fileId",
+                "value": "9456",
+                "type": "path",
+                "description": "The system identifier for the file"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "file",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Upload a new version of a file resource (File, ContractDocument)"
+        },
+        {
+          "info": {
+            "name": "Update file",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v2/files/:fileId",
+            "params": [
+              {
+                "name": "fileId",
+                "value": "9456",
+                "type": "path",
+                "description": "The system identifier for the file"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a file resource (File, Folder, ContractDocument)"
+        },
+        {
+          "info": {
+            "name": "Delete file",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v2/files/:fileId",
+            "params": [
+              {
+                "name": "fileId",
+                "value": "9456",
+                "type": "path",
+                "description": "The system identifier for the file"
+              }
+            ]
+          },
+          "docs": "Delete a file resource (File, Folder, ContractDocument)"
+        },
+        {
+          "info": {
+            "name": "Get file content",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v2/files/:fileId/content",
+            "params": [
+              {
+                "name": "fileId",
+                "value": "9456",
+                "type": "path",
+                "description": "The system identifier for the file"
+              }
+            ]
+          },
+          "docs": "Retrieve the binary content of a file"
+        },
+        {
+          "info": {
+            "name": "Create file",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v2/files",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a file resource (File, Folder, ContractDocument).\n- File or ContractDocument upload: Use `Content-Type: multipart/form-data`\n- Folder creation: Use `Content-Type: application/json`"
+        },
+        {
+          "info": {
+            "name": "Get files",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v1/files",
+            "params": [
+              {
+                "name": "recordType",
+                "value": "",
+                "type": "query",
+                "description": "The record type the file in linked to (Matter, Contract, Organisation etc)<p>Options:</p><ul><li>Matter</li><li>Milestone</li><li>Task</li><li>Organisation</li><li>Contract</li><li>File</li><li>InvoiceBatch</li><li>KnowledgeArticle</li><li>Folder</li><li>FolderTemplate</li><li>KnowledgeLibrary</li><li>InboundEmail</li><li>User</li><li>MessageThread</li><li>TimelineEntry</li><li>MatterStatus</li><li>ContractStatus</li><li>Message</li><li>Comment</li></ul>"
+              },
+              {
+                "name": "recordId",
+                "value": "",
+                "type": "query",
+                "description": "The record id the file is linked to"
+              },
+              {
+                "name": "skip",
+                "value": "",
+                "type": "query",
+                "description": "The number of files to skip (used for paging)"
+              },
+              {
+                "name": "folderId",
+                "value": "",
+                "type": "query",
+                "description": "The folder id to get files from"
+              },
+              {
+                "name": "filtering.field",
+                "value": "",
+                "type": "query",
+                "description": "Field to filter by (optional)"
+              },
+              {
+                "name": "filtering.operator",
+                "value": "",
+                "type": "query",
+                "description": "Operator used for filtering (optional)"
+              },
+              {
+                "name": "filtering.value",
+                "value": "",
+                "type": "query",
+                "description": "Value to filter by (optional)"
+              },
+              {
+                "name": "sorting.direction",
+                "value": "",
+                "type": "query",
+                "description": "Set the sorting direction"
+              },
+              {
+                "name": "sorting.field",
+                "value": "",
+                "type": "query",
+                "description": "Set the sorting fields"
+              },
+              {
+                "name": "take",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of files to return<p>Default: 50</p>"
+              },
+              {
+                "name": "recursive",
+                "value": "",
+                "type": "query",
+                "description": "Set to true in order to include subdirectories and nested files<p>Default: False</p>"
+              }
+            ]
+          },
+          "docs": "Gets a list of files in LawVu (with filters)"
+        },
+        {
+          "info": {
+            "name": "Get file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v1/files/:fileId",
+            "params": [
+              {
+                "name": "fileId",
+                "value": "",
+                "type": "path",
+                "description": "The Id of the file"
+              }
+            ]
+          },
+          "docs": "Get file meta from LawVu"
+        },
+        {
+          "info": {
+            "name": "Patch file",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v1/files/:fileId",
+            "params": [
+              {
+                "name": "fileId",
+                "value": "",
+                "type": "path",
+                "description": "The Id of the file"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a file"
+        },
+        {
+          "info": {
+            "name": "Delete file",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v1/files/:fileId",
+            "params": [
+              {
+                "name": "fileId",
+                "value": "",
+                "type": "path",
+                "description": "The Id of the file"
+              }
+            ]
+          },
+          "docs": "Deletes a file in LawVu"
+        },
+        {
+          "info": {
+            "name": "Download file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v1/files/:fileId/download",
+            "params": [
+              {
+                "name": "fileId",
+                "value": "",
+                "type": "path",
+                "description": "The Id of the file"
+              }
+            ]
+          },
+          "docs": "Download file"
+        },
+        {
+          "info": {
+            "name": "Move file",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v1/files/:fileId/move/:destinationId",
+            "params": [
+              {
+                "name": "fileId",
+                "value": "",
+                "type": "path",
+                "description": "The Id of the file"
+              },
+              {
+                "name": "conflictResolution",
+                "value": "",
+                "type": "query",
+                "description": "Conflict handling<p>Options:</p><ul><li>Replace</li><li>KeepBoth</li><li>SaveVersion</li><li>Skip</li></ul>"
+              },
+              {
+                "name": "destinationId",
+                "value": "",
+                "type": "path",
+                "description": "The destination location for the file.<br />If moving the file to the root folder of the matter or contract, omit this value from the path i.e. 'POST /{fileId}/move/'"
+              }
+            ]
+          },
+          "docs": "Moves a file. If there is a conflict in the destination, set the ConflictResolution<br /><br />See notes for destinationId when moving a file to the root folder of a matter or contract"
+        },
+        {
+          "info": {
+            "name": "Upload file",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v1/files/:targetType/:targetId",
+            "params": [
+              {
+                "name": "targetType",
+                "value": "",
+                "type": "path",
+                "description": "The target entity type in LawVu<p>Options:</p><ul><li>Matter</li><li>Milestone</li><li>Task</li><li>Organisation</li><li>Contract</li><li>File</li><li>InvoiceBatch</li><li>KnowledgeArticle</li><li>Folder</li><li>FolderTemplate</li><li>KnowledgeLibrary</li><li>InboundEmail</li><li>User</li><li>MessageThread</li><li>TimelineEntry</li><li>MatterStatus</li><li>ContractStatus</li><li>Message</li><li>Comment</li></ul>"
+              },
+              {
+                "name": "targetId",
+                "value": "",
+                "type": "path",
+                "description": "The target entity in LawVu"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Upload a file to LawVu. The body of the post should be the contents of the file."
+        },
+        {
+          "info": {
+            "name": "Finalise upload",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v1/files/:targetType/:targetId/uploads/:uploadId",
+            "params": [
+              {
+                "name": "targetType",
+                "value": "",
+                "type": "path",
+                "description": "The target of the upload<p>Options:</p><ul><li>Matter</li><li>Milestone</li><li>Task</li><li>Organisation</li><li>Contract</li><li>File</li><li>InvoiceBatch</li><li>KnowledgeArticle</li><li>Folder</li><li>FolderTemplate</li><li>KnowledgeLibrary</li><li>InboundEmail</li><li>User</li><li>MessageThread</li><li>TimelineEntry</li><li>MatterStatus</li><li>ContractStatus</li><li>Message</li><li>Comment</li></ul>"
+              },
+              {
+                "name": "targetId",
+                "value": "",
+                "type": "path",
+                "description": "The id of the target type"
+              },
+              {
+                "name": "uploadId",
+                "value": "",
+                "type": "path",
+                "description": "The id of the upload"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "(communicate the outcome) of an individual file upload (which may be one of a set of files being uploaded)"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

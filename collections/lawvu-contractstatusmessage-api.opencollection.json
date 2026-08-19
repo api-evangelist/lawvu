@@ -1,0 +1,41 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "LawVu Account Auth ContractStatusMessage API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ContractStatusMessage",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Add a status message to a contract",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v1/contracts/:contractId/statusMessages",
+            "params": [
+              {
+                "name": "contractId",
+                "value": "",
+                "type": "path",
+                "description": "The Id of the contract"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add status message to a contract"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

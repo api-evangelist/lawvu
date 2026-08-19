@@ -1,0 +1,192 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "LawVu Account Auth LookupFields API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "LookupFields",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get available choices for a multi lookup field",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v1/lookupFields/:id/choices",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the field"
+              },
+              {
+                "name": "skip",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip<p>Default: 0</p>"
+              },
+              {
+                "name": "take",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of choices to return<p>Default: 25</p>"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Text filter"
+              }
+            ]
+          },
+          "docs": "Get available choices for a multi lookup field"
+        },
+        {
+          "info": {
+            "name": "Add a choice to the multi lookup field",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v1/lookupFields/:id/choices",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the lookup field"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a choice to the multi lookup field"
+        },
+        {
+          "info": {
+            "name": "Patch a choice, currently only move is supported to merge two choices together",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v1/lookupFields/:id/choices/:choiceId",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the lookup field"
+              },
+              {
+                "name": "choiceId",
+                "value": "",
+                "type": "path",
+                "description": "The choice to patch"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Patch a choice, currently only move is supported to merge two choices together"
+        },
+        {
+          "info": {
+            "name": "Deletes a choice from the the lookup field",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v1/lookupFields/:id/choices/:choiceId",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the lookup field"
+              },
+              {
+                "name": "choiceId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the choice to remove"
+              }
+            ]
+          },
+          "docs": "Deletes a choice from the the lookup field"
+        },
+        {
+          "info": {
+            "name": "Add a choice to the single lookup field",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v1/lookupFields/:id/choice/single",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the lookup field"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a choice to the single lookup field"
+        },
+        {
+          "info": {
+            "name": "Get available choices for a single lookup field",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v1/lookupFields/:id/choices/single",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the field"
+              },
+              {
+                "name": "skip",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip<p>Default: 0</p>"
+              },
+              {
+                "name": "take",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of choices to return<p>Default: 25</p>"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Text filter"
+              }
+            ]
+          },
+          "docs": "Get available choices for a single lookup field"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

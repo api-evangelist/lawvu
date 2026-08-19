@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "LawVu Account Auth Recents API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Recents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get recent items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v1/my/recents",
+            "params": [
+              {
+                "name": "take",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of recent items to return<p>Default: 5</p>"
+              }
+            ]
+          },
+          "docs": "Get recent items"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

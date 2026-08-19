@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "LawVu Account Auth Features API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Features",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get feature",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v1/features/:featureCode",
+            "params": [
+              {
+                "name": "featureCode",
+                "value": "",
+                "type": "path",
+                "description": "The code of the feature"
+              }
+            ]
+          },
+          "docs": "Retrieves a feature by feature code based on the current authorised users organisation context"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

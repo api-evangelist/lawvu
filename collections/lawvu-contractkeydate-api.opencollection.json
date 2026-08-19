@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "LawVu Account Auth ContractKeyDate API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ContractKeyDate",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get contract key dates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v1/contracts/:contractId/keyDates",
+            "params": [
+              {
+                "name": "contractId",
+                "value": "",
+                "type": "path",
+                "description": "The contract id"
+              }
+            ]
+          },
+          "docs": "Returns a list of contract key dates"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

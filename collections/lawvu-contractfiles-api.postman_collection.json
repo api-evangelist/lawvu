@@ -1,0 +1,263 @@
+{
+  "item": [
+    {
+      "id": "01f959b6-5a7e-466a-a271-d5a8dc30db8d",
+      "name": "ContractFiles",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4dd9159d-84f2-41fd-b389-c3672f16c8d9",
+          "name": "Upload file",
+          "request": {
+            "name": "Upload file",
+            "description": {
+              "content": "Add or update a file in a contract. \\\r\n \\\r\nThe body of the request must be content-type 'multipart/form-data' and contain the file data. \\\r\n \\\r\nTo update the contract document: Only specify the 'parentFileId' parameter. The 'folderId' and 'conflictResolution' parameters should not be used for these updates",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "contracts",
+                ":contractId",
+                "files"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "comments",
+                  "value": "<string>",
+                  "description": "Comments to be added to the file"
+                },
+                {
+                  "disabled": false,
+                  "key": "parentFileId",
+                  "value": "<integer>",
+                  "description": "Creates a new version for the specified parent file id"
+                },
+                {
+                  "disabled": false,
+                  "key": "folderId",
+                  "value": "<integer>",
+                  "description": "The id of the folder to upload the file within"
+                },
+                {
+                  "disabled": false,
+                  "key": "conflictResolution",
+                  "value": "<string>",
+                  "description": "Defines behaviour for when a file conflict is found<p>Options:</p><ul><li>Replace</li><li>KeepBoth</li><li>SaveVersion</li><li>Skip</li></ul>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "contractId",
+                  "description": "(Required) The id of the contract"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "description": ""
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "5f45199c-e353-426a-9c34-3e5624bde8a2",
+              "name": "The id of the created file",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "contracts",
+                    ":contractId",
+                    "files"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "comments",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "parentFileId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "folderId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "conflictResolution",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "contractId",
+                      "description": "(Required) The id of the contract"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "6313",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b9b61367-a7a0-48c1-afd7-76176f2b2156",
+              "name": "When the file was skipped due to conflict resolution setting",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "contracts",
+                    ":contractId",
+                    "files"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "comments",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "parentFileId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "folderId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "conflictResolution",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "contractId",
+                      "description": "(Required) The id of the contract"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-sandbox.lawvu.com/account-apis",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "f64af003-9430-436c-b8c8-0ccdcded59c7",
+    "name": "LawVu Account Auth ContractFiles API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Apis for account related resources (authentication, profiles, organisation details etc)",
+      "type": "text/plain"
+    }
+  }
+}

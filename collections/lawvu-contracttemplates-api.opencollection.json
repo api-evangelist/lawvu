@@ -1,0 +1,48 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "LawVu Account Auth ContractTemplates API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ContractTemplates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get contract templates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v1/contractsTemplates"
+          },
+          "docs": "Gets a list of contract templates"
+        },
+        {
+          "info": {
+            "name": "Get upload schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v1/contractsTemplates/:templateId/uploadSchema",
+            "params": [
+              {
+                "name": "templateId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the contract template"
+              }
+            ]
+          },
+          "docs": "Gets the schema for creating a new contract from file upload"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

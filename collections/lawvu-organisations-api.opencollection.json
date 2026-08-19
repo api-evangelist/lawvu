@@ -1,0 +1,89 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "LawVu Account Auth Organisations API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Organisations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get organisations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v1/organisations"
+          },
+          "docs": "Returns an array of organisations the current user is linked to"
+        },
+        {
+          "info": {
+            "name": "Get departments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v1/organisations/:organisationId/departments",
+            "params": [
+              {
+                "name": "organisationId",
+                "value": "",
+                "type": "path",
+                "description": "The organisation to get departments"
+              }
+            ]
+          },
+          "docs": "Returns an array of departments for the given organisation"
+        },
+        {
+          "info": {
+            "name": "Get regions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v1/organisations/:organisationId/regions",
+            "params": [
+              {
+                "name": "organisationId",
+                "value": "",
+                "type": "path",
+                "description": "The organisation to get regions"
+              }
+            ]
+          },
+          "docs": "Returns an array of regions for the given organisation"
+        },
+        {
+          "info": {
+            "name": "Get clients",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v1/organisations/clients"
+          },
+          "docs": "Returns an array of clients the current user is linked to"
+        },
+        {
+          "info": {
+            "name": "Get financial settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v1/organisations/financialsettings"
+          },
+          "docs": "Returns the organisation financial settings the current user is linked to"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

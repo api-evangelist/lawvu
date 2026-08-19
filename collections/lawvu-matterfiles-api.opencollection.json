@@ -1,0 +1,71 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "LawVu Account Auth MatterFiles API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "MatterFiles",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Upload file",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-sandbox.lawvu.com/account-apis/v1/matters/:matterId/files",
+            "params": [
+              {
+                "name": "matterId",
+                "value": "",
+                "type": "path",
+                "description": "The id of the matter"
+              },
+              {
+                "name": "comments",
+                "value": "",
+                "type": "query",
+                "description": "Comments to be added to the file"
+              },
+              {
+                "name": "parentFileId",
+                "value": "",
+                "type": "query",
+                "description": "Creates a new version for the specified parent file id"
+              },
+              {
+                "name": "folderId",
+                "value": "",
+                "type": "query",
+                "description": "The id of the folder to upload the file within"
+              },
+              {
+                "name": "conflictResolution",
+                "value": "",
+                "type": "query",
+                "description": "Defines behaviour for when a file conflict is found<p>Options:</p><ul><li>Replace</li><li>KeepBoth</li><li>SaveVersion</li><li>Skip</li></ul>"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "file",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Add or update a file in a matter. \\\r\n \\\r\nThe body of the request must be content-type 'multipart/form-data' and contain the file data."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

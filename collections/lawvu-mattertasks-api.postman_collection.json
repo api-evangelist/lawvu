@@ -1,0 +1,175 @@
+{
+  "item": [
+    {
+      "id": "09283f0a-6263-47ba-9e0e-c2e5a9a4cdf1",
+      "name": "MatterTasks",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "472c2935-450e-496e-bba7-74745a39d725",
+          "name": "Get tasks",
+          "request": {
+            "name": "Get tasks",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "matters",
+                "tasks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "skip",
+                  "value": "<integer>",
+                  "description": "Number of tasks to skip (used for paging)"
+                },
+                {
+                  "disabled": false,
+                  "key": "filtering.field",
+                  "value": "<string>",
+                  "description": "Field to filter by (optional)"
+                },
+                {
+                  "disabled": false,
+                  "key": "filtering.operator",
+                  "value": "<string>",
+                  "description": "Operator used for filtering (optional)"
+                },
+                {
+                  "disabled": false,
+                  "key": "filtering.value",
+                  "value": "<string>",
+                  "description": "Value to filter by (optional)"
+                },
+                {
+                  "disabled": false,
+                  "key": "sorting.direction",
+                  "value": "<string>",
+                  "description": "Set the sorting direction"
+                },
+                {
+                  "disabled": false,
+                  "key": "sorting.field",
+                  "value": "<string>",
+                  "description": "Set the sorting fields"
+                },
+                {
+                  "disabled": false,
+                  "key": "take",
+                  "value": "50",
+                  "description": "The maximum number of tasks to return<p>Default: 50</p>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fd8ab21e-34c0-4d97-a072-2f2414beeb37",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "matters",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "filtering.field",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filtering.operator",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filtering.value",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sorting.direction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sorting.field",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "take",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 9063,\n    \"name\": \"string\",\n    \"parentId\": 1168,\n    \"matterId\": 4674,\n    \"type\": \"Meeting\",\n    \"order\": 5011,\n    \"userAssignedId\": \"string\",\n    \"createdDateUtc\": \"1963-03-14T14:53:18.818Z\",\n    \"modifiedDateUtc\": \"1981-04-11T18:56:14.665Z\",\n    \"dueDate\": \"1972-01-09T12:25:23.178Z\",\n    \"duration\": 6748.144977689555,\n    \"status\": \"NotRequired\"\n  },\n  {\n    \"id\": 476,\n    \"name\": \"string\",\n    \"parentId\": 1816,\n    \"matterId\": 1171,\n    \"type\": \"Milestone\",\n    \"order\": 7408,\n    \"userAssignedId\": \"string\",\n    \"createdDateUtc\": \"1973-08-28T02:18:03.898Z\",\n    \"modifiedDateUtc\": \"1980-02-17T03:02:04.002Z\",\n    \"dueDate\": \"1947-10-22T12:24:24.113Z\",\n    \"duration\": 1249.787622178432,\n    \"status\": \"Complete\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-sandbox.lawvu.com/account-apis",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "5449c99f-670d-4456-8683-a0912b2781a2",
+    "name": "LawVu Account Auth MatterTasks API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Apis for account related resources (authentication, profiles, organisation details etc)",
+      "type": "text/plain"
+    }
+  }
+}

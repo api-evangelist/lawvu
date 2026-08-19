@@ -1,0 +1,2462 @@
+{
+  "item": [
+    {
+      "id": "2945a4bd-64df-4087-9db6-50685efaba74",
+      "name": "Contracts",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "57283675-cfea-49dc-be56-cb9c7524133b",
+          "name": "Get contracts",
+          "request": {
+            "name": "Get contracts",
+            "description": {
+              "content": "Retrieve a list of contracts",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "contracts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "$filter",
+                  "value": "<string>",
+                  "description": "Filter the results using OData filter syntax"
+                },
+                {
+                  "disabled": false,
+                  "key": "$orderby",
+                  "value": "<string>",
+                  "description": "Order the results using OData orderby syntax"
+                },
+                {
+                  "disabled": false,
+                  "key": "$skip",
+                  "value": "<integer>",
+                  "description": "Skip the specified number of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "$top",
+                  "value": "<integer>",
+                  "description": "Limit the number of results returned"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f2aea09a-8b83-4378-b7b4-0573f1580de0",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "contracts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$orderby",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"id\": 5348,\n      \"name\": \"My contract\",\n      \"document\": {\n        \"id\": 9456,\n        \"name\": \"Standard NDA.docx\",\n        \"version\": 3\n      },\n      \"type\": {\n        \"id\": 1234,\n        \"name\": \"NDA\"\n      },\n      \"owner\": {\n        \"email\": \"api.developer@lawvu.com\",\n        \"firstName\": \"Api\",\n        \"id\": \"f0f1e06e-3005-4093-af7f-1934d55617e1\",\n        \"lastName\": \"Developer\",\n        \"organizationId\": 8134\n      },\n      \"expiry\": \"2024-12-25T00:00:00\",\n      \"externalId\": \"external-01\",\n      \"fields\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      },\n      \"restricted\": false,\n      \"status\": \"Expired\",\n      \"teamAssigned\": {\n        \"id\": 469,\n        \"name\": \"Legal - Commercial\"\n      },\n      \"created\": {\n        \"dateUtc\": \"2024-12-25T00:00:00Z\",\n        \"user\": {\n          \"email\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"firstName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"lastName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"organizationId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"userName\": \"api.developer@lawvu.com\"\n      }\n    },\n    {\n      \"id\": 5348,\n      \"name\": \"My contract\",\n      \"document\": {\n        \"id\": 9456,\n        \"name\": \"Standard NDA.docx\",\n        \"version\": 3\n      },\n      \"type\": {\n        \"id\": 1234,\n        \"name\": \"NDA\"\n      },\n      \"owner\": {\n        \"email\": \"api.developer@lawvu.com\",\n        \"firstName\": \"Api\",\n        \"id\": \"f0f1e06e-3005-4093-af7f-1934d55617e1\",\n        \"lastName\": \"Developer\",\n        \"organizationId\": 8134\n      },\n      \"expiry\": \"2024-12-25T00:00:00\",\n      \"externalId\": \"external-01\",\n      \"fields\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      },\n      \"restricted\": false,\n      \"status\": \"Void\",\n      \"teamAssigned\": {\n        \"id\": 469,\n        \"name\": \"Legal - Commercial\"\n      },\n      \"created\": {\n        \"dateUtc\": \"2024-12-25T00:00:00Z\",\n        \"user\": {\n          \"email\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"firstName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"lastName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"organizationId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"userName\": \"api.developer@lawvu.com\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dd902dcc-bec0-433f-a256-b849f9cd300d",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "contracts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$orderby",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"The request was invalid and could not be processed\",\n  \"errors\": {\n    \"Name\": \"Operation 'gt' is not supported for 'Name'\"\n  },\n  \"instance\": \"/contracts\",\n  \"operationId\": \"7edb5d62-f5bf-463b-9410-cdd8b3293d89\",\n  \"status\": 400,\n  \"title\": \"Invalid request\",\n  \"type\": \"https://api-docs.lawvu.com/errors/invalid_request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7ef4cdd9-fe66-463a-956a-4b99896d860d",
+          "name": "Create contract",
+          "request": {
+            "name": "Create contract",
+            "description": {
+              "content": "Creates a contract based on the provided contract type.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "contracts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": {\n    \"id\": \"<integer>\"\n  },\n  \"name\": \"<string>\",\n  \"owner\": {\n    \"id\": \"<string>\"\n  },\n  \"document\": {\n    \"id\": \"<integer>\"\n  },\n  \"expiry\": \"<dateTime>\",\n  \"externalId\": \"<string>\",\n  \"fields\": {\n    \"key_0\": {}\n  },\n  \"restricted\": false,\n  \"teamAssigned\": {\n    \"id\": \"<integer>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2afbfae4-57a3-4229-9521-c6e2ecbe2e74",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "contracts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": {\n    \"id\": 1234\n  },\n  \"name\": \"My contract\",\n  \"owner\": {\n    \"id\": \"f0f1e06e-3005-4093-af7f-1934d55617e1\"\n  },\n  \"document\": {\n    \"id\": 9456\n  },\n  \"expiry\": \"2024-12-25T00:00:00\",\n  \"externalId\": \"external-01\",\n  \"fields\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  },\n  \"restricted\": false,\n  \"teamAssigned\": {\n    \"id\": 469\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Location to retrieve the created contract",
+                  "key": "Location",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 5348\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "da79a85f-f31f-4b42-a5fa-3216925d9cad",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "contracts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": {\n    \"id\": 1234\n  },\n  \"name\": \"My contract\",\n  \"owner\": {\n    \"id\": \"f0f1e06e-3005-4093-af7f-1934d55617e1\"\n  },\n  \"document\": {\n    \"id\": 9456\n  },\n  \"expiry\": \"2024-12-25T00:00:00\",\n  \"externalId\": \"external-01\",\n  \"fields\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  },\n  \"restricted\": false,\n  \"teamAssigned\": {\n    \"id\": 469\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"The request was invalid and could not be processed\",\n  \"errors\": {\n    \"Name\": \"Required\"\n  },\n  \"instance\": \"/contracts/\",\n  \"operationId\": \"7edb5d62-f5bf-463b-9410-cdd8b3293d89\",\n  \"status\": 400,\n  \"title\": \"Invalid request\",\n  \"type\": \"https://api-docs.lawvu.com/errors/invalid_request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3e0868f9-64d9-435f-91dc-c681a0355838",
+              "name": "Conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "contracts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": {\n    \"id\": 1234\n  },\n  \"name\": \"My contract\",\n  \"owner\": {\n    \"id\": \"f0f1e06e-3005-4093-af7f-1934d55617e1\"\n  },\n  \"document\": {\n    \"id\": 9456\n  },\n  \"expiry\": \"2024-12-25T00:00:00\",\n  \"externalId\": \"external-01\",\n  \"fields\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  },\n  \"restricted\": false,\n  \"teamAssigned\": {\n    \"id\": 469\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"The request could not be processed due to a conflict\",\n  \"errors\": {\n    \"ExternalId\": \"Is already in use\"\n  },\n  \"instance\": \"/contracts/\",\n  \"operationId\": \"7edb5d62-f5bf-463b-9410-cdd8b3293d89\",\n  \"status\": 409,\n  \"title\": \"Conflict\",\n  \"type\": \"https://api-docs.lawvu.com/errors/conflict\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0f74a523-d9f7-4de4-8935-348b40947844",
+          "name": "Get contract",
+          "request": {
+            "name": "Get contract",
+            "description": {
+              "content": "Retrieve a contract by its identifier",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "contracts",
+                ":contractId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "contractId",
+                  "description": "(Required) The system identifier for the contract"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bf36f9fb-05c8-40bb-859c-782d116d821f",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "contracts",
+                    ":contractId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "contractId",
+                      "description": "(Required) The system identifier for the contract"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 5348,\n  \"name\": \"My contract\",\n  \"document\": {\n    \"id\": 9456,\n    \"name\": \"Standard NDA.docx\",\n    \"version\": 3\n  },\n  \"type\": {\n    \"id\": 1234,\n    \"name\": \"NDA\"\n  },\n  \"owner\": {\n    \"email\": \"api.developer@lawvu.com\",\n    \"firstName\": \"Api\",\n    \"id\": \"f0f1e06e-3005-4093-af7f-1934d55617e1\",\n    \"lastName\": \"Developer\",\n    \"organizationId\": 8134\n  },\n  \"expiry\": \"2024-12-25T00:00:00\",\n  \"externalId\": \"external-01\",\n  \"fields\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  },\n  \"restricted\": false,\n  \"status\": \"Signing\",\n  \"teamAssigned\": {\n    \"id\": 469,\n    \"name\": \"Legal - Commercial\"\n  },\n  \"created\": {\n    \"dateUtc\": \"2024-12-25T00:00:00Z\",\n    \"user\": {\n      \"email\": \"api.developer@lawvu.com\",\n      \"firstName\": \"Api\",\n      \"id\": \"f0f1e06e-3005-4093-af7f-1934d55617e1\",\n      \"lastName\": \"Developer\",\n      \"organizationId\": 8134\n    },\n    \"userName\": \"api.developer@lawvu.com\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9ff49f3c-7cd7-45e7-8e21-4ef60ba8d1f0",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "contracts",
+                    ":contractId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "contractId",
+                      "description": "(Required) The system identifier for the contract"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"The requested resource could not be found\",\n  \"instance\": \"/contracts/5348\",\n  \"operationId\": \"7edb5d62-f5bf-463b-9410-cdd8b3293d89\",\n  \"status\": 404,\n  \"title\": \"Resource not found\",\n  \"type\": \"https://api-docs.lawvu.com/errors/resource_not_found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d559a6cb-ea5e-4fc0-892d-8c027333e3e8",
+          "name": "Update contract",
+          "request": {
+            "name": "Update contract",
+            "description": {
+              "content": "Updates a contracts details",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "contracts",
+                ":contractId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "contractId",
+                  "description": "(Required) The system identifier for the contract"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/merge-patch+json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/problem+json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"owner\": {\n    \"id\": \"<string>\"\n  },\n  \"expiry\": \"<dateTime>\",\n  \"externalId\": \"<string>\",\n  \"fields\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  },\n  \"restricted\": \"<boolean>\",\n  \"status\": \"<string>\",\n  \"teamAssigned\": {\n    \"id\": \"<integer>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "87042ca7-cd32-4fb8-b3a1-2f6ba8957bc0",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "contracts",
+                    ":contractId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "contractId",
+                      "description": "(Required) The system identifier for the contract"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"owner\": {\n    \"id\": \"f0f1e06e-3005-4093-af7f-1934d55617e1\"\n  },\n  \"expiry\": \"<dateTime>\",\n  \"externalId\": \"<string>\",\n  \"fields\": {\n    \"key_0\": {},\n    \"key_1\": {},\n    \"key_2\": {}\n  },\n  \"restricted\": false,\n  \"status\": \"<string>\",\n  \"teamAssigned\": {\n    \"id\": 469\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2ddeb673-2d4e-4fbf-8dc6-e3324a6b66a4",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "contracts",
+                    ":contractId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "contractId",
+                      "description": "(Required) The system identifier for the contract"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"owner\": {\n    \"id\": \"f0f1e06e-3005-4093-af7f-1934d55617e1\"\n  },\n  \"expiry\": \"<dateTime>\",\n  \"externalId\": \"<string>\",\n  \"fields\": {\n    \"key_0\": {},\n    \"key_1\": {},\n    \"key_2\": {}\n  },\n  \"restricted\": false,\n  \"status\": \"<string>\",\n  \"teamAssigned\": {\n    \"id\": 469\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"The request was invalid and could not be processed\",\n  \"errors\": {\n    \"Name\": \"Required\"\n  },\n  \"instance\": \"/contracts/5348\",\n  \"operationId\": \"7edb5d62-f5bf-463b-9410-cdd8b3293d89\",\n  \"status\": 400,\n  \"title\": \"Invalid request\",\n  \"type\": \"https://api-docs.lawvu.com/errors/invalid_request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "18c88868-a1e5-4d02-96c6-3f9ace3af2a6",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "contracts",
+                    ":contractId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "contractId",
+                      "description": "(Required) The system identifier for the contract"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"owner\": {\n    \"id\": \"f0f1e06e-3005-4093-af7f-1934d55617e1\"\n  },\n  \"expiry\": \"<dateTime>\",\n  \"externalId\": \"<string>\",\n  \"fields\": {\n    \"key_0\": {},\n    \"key_1\": {},\n    \"key_2\": {}\n  },\n  \"restricted\": false,\n  \"status\": \"<string>\",\n  \"teamAssigned\": {\n    \"id\": 469\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"You do not have permission to update this contract\",\n  \"instance\": \"/contracts/5348\",\n  \"operationId\": \"7edb5d62-f5bf-463b-9410-cdd8b3293d89\",\n  \"status\": 403,\n  \"title\": \"Forbidden\",\n  \"type\": \"https://api-docs.lawvu.com/errors/forbidden\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "97e9eaf3-e125-4585-949a-97f978e47b41",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "contracts",
+                    ":contractId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "contractId",
+                      "description": "(Required) The system identifier for the contract"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"owner\": {\n    \"id\": \"f0f1e06e-3005-4093-af7f-1934d55617e1\"\n  },\n  \"expiry\": \"<dateTime>\",\n  \"externalId\": \"<string>\",\n  \"fields\": {\n    \"key_0\": {},\n    \"key_1\": {},\n    \"key_2\": {}\n  },\n  \"restricted\": false,\n  \"status\": \"<string>\",\n  \"teamAssigned\": {\n    \"id\": 469\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"The requested resource could not be found\",\n  \"instance\": \"/contracts/5348\",\n  \"operationId\": \"7edb5d62-f5bf-463b-9410-cdd8b3293d89\",\n  \"status\": 404,\n  \"title\": \"Resource not found\",\n  \"type\": \"https://api-docs.lawvu.com/errors/resource_not_found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ce03e4d5-c246-4f62-91f6-75eed3f9200f",
+              "name": "Conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "contracts",
+                    ":contractId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "contractId",
+                      "description": "(Required) The system identifier for the contract"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"owner\": {\n    \"id\": \"f0f1e06e-3005-4093-af7f-1934d55617e1\"\n  },\n  \"expiry\": \"<dateTime>\",\n  \"externalId\": \"<string>\",\n  \"fields\": {\n    \"key_0\": {},\n    \"key_1\": {},\n    \"key_2\": {}\n  },\n  \"restricted\": false,\n  \"status\": \"<string>\",\n  \"teamAssigned\": {\n    \"id\": 469\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"The request could not be processed due to a conflict\",\n  \"errors\": {\n    \"ExternalId\": \"Is already in use\"\n  },\n  \"instance\": \"/contracts/5348\",\n  \"operationId\": \"7edb5d62-f5bf-463b-9410-cdd8b3293d89\",\n  \"status\": 409,\n  \"title\": \"Conflict\",\n  \"type\": \"https://api-docs.lawvu.com/errors/conflict\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f8cf6f14-320f-45cb-b0de-6562b4ee72e5",
+          "name": "Get contract file",
+          "request": {
+            "name": "Get contract file",
+            "description": {
+              "content": "Retrieve information about a file on a contract",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "contracts",
+                ":contractId",
+                "files",
+                ":fileId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "contractId",
+                  "description": "(Required) The system identifier for the contract"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "fileId",
+                  "description": "(Required) The system identifier for the file"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9d967878-cd65-4a75-abfa-23e27332d03c",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "contracts",
+                    ":contractId",
+                    "files",
+                    ":fileId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "contractId",
+                      "description": "(Required) The system identifier for the contract"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "fileId",
+                      "description": "(Required) The system identifier for the file"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 9456,\n  \"name\": \"document.txt\",\n  \"displayId\": \"LV0001-0000123.1\",\n  \"type\": \"File\",\n  \"folder\": {\n    \"folder\": {\n      \"description\": \"The parent folder. \\n\\nThe folder will be null when the folder is at the root of the resource\",\n      \"nullable\": true,\n      \"readOnly\": true,\n      \"value\": \"<Circular reference to #/components/schemas/FolderReference detected>\"\n    },\n    \"id\": 786,\n    \"name\": \"Drafts\"\n  },\n  \"contentType\": \"text/plain\",\n  \"resource\": {\n    \"id\": 78914,\n    \"type\": \"Contract\"\n  },\n  \"restricted\": false,\n  \"size\": 18139,\n  \"version\": 3,\n  \"created\": {\n    \"dateUtc\": \"2024-12-25T00:00:00Z\",\n    \"user\": {\n      \"email\": \"api.developer@lawvu.com\",\n      \"firstName\": \"Api\",\n      \"id\": \"f0f1e06e-3005-4093-af7f-1934d55617e1\",\n      \"lastName\": \"Developer\",\n      \"organizationId\": 8134\n    },\n    \"userName\": \"api.developer@lawvu.com\"\n  },\n  \"modified\": {\n    \"dateUtc\": \"2024-12-25T00:00:00Z\",\n    \"userName\": \"api.developer@lawvu.com\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ec530038-61aa-40ea-9a51-769087e2597d",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "contracts",
+                    ":contractId",
+                    "files",
+                    ":fileId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "contractId",
+                      "description": "(Required) The system identifier for the contract"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "fileId",
+                      "description": "(Required) The system identifier for the file"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"The requested resource could not be found\",\n  \"instance\": \"/contracts/5348/files/9456\",\n  \"operationId\": \"7edb5d62-f5bf-463b-9410-cdd8b3293d89\",\n  \"status\": 404,\n  \"title\": \"Resource not found\",\n  \"type\": \"https://api-docs.lawvu.com/errors/resource_not_found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "85667c56-7781-456e-90a1-e24ebf0dcb44",
+          "name": "Get contract types",
+          "request": {
+            "name": "Get contract types",
+            "description": {
+              "content": "Retrieve a list of contract types",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "contractTypes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "$skip",
+                  "value": "0",
+                  "description": "Specifies the number of items to skip"
+                },
+                {
+                  "disabled": false,
+                  "key": "$top",
+                  "value": "25",
+                  "description": "Specifies the maximum number of items to return"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "162703ef-8416-4bc7-b4a1-7a718fd6ed50",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "contractTypes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$skip",
+                      "value": "0"
+                    },
+                    {
+                      "key": "$top",
+                      "value": "25"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"id\": 1234,\n      \"name\": \"Contractor Agreement\",\n      \"parent\": {\n        \"id\": 5002,\n        \"name\": \"Employment\"\n      },\n      \"hasWizard\": false,\n      \"teamAssignmentRequired\": false\n    },\n    {\n      \"id\": 1234,\n      \"name\": \"Contractor Agreement\",\n      \"parent\": {\n        \"id\": 5002,\n        \"name\": \"Employment\"\n      },\n      \"hasWizard\": false,\n      \"teamAssignmentRequired\": false\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "636e7c92-0d92-4555-9a35-c71d653d22ed",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "contractTypes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$skip",
+                      "value": "0"
+                    },
+                    {
+                      "key": "$top",
+                      "value": "25"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"The request was invalid and could not be processed\",\n  \"instance\": \"/contractsTypes/\",\n  \"operationId\": \"7edb5d62-f5bf-463b-9410-cdd8b3293d89\",\n  \"status\": 400,\n  \"title\": \"Invalid request\",\n  \"type\": \"https://api-docs.lawvu.com/errors/invalid_request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "398ed49c-a674-4610-b583-a007a6c681f3",
+          "name": "Create contract by upload",
+          "request": {
+            "name": "Create contract by upload",
+            "description": {
+              "content": "Creates a new contract, with the main contract file being sent in the body of the request",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "contracts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "ContractTemplateId",
+                  "value": "<integer>",
+                  "type": "text",
+                  "description": "(Required) The template for the category"
+                },
+                {
+                  "key": "Name",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "(Required) The contract name"
+                },
+                {
+                  "key": "MatterId",
+                  "value": "<integer>",
+                  "type": "text",
+                  "description": "Optionally set the parent matter id"
+                },
+                {
+                  "key": "ParentContractId",
+                  "value": "<integer>",
+                  "type": "text",
+                  "description": "Optionally set the parent contract id"
+                },
+                {
+                  "key": "Fields",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "The fields (from contract template) for the contract"
+                },
+                {
+                  "key": "ExternalId",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "Optionally set an ID from an external system. Uniqueness is enforced for your organisation"
+                },
+                {
+                  "key": "TeamId",
+                  "value": "<integer>",
+                  "type": "text",
+                  "description": "Assigns a team to the contract. This can be required [ref: contractTemplate: TeamRequired]"
+                },
+                {
+                  "key": "ContractFile",
+                  "type": "file",
+                  "description": ""
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "6b2fddc1-2885-4de4-8f5b-2948839a62ab",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "contracts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "contractTemplateId",
+                      "value": "1",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "matterId",
+                      "value": "321",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "parentContractId",
+                      "value": "123",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "fields",
+                      "value": "{\"field_1\":\"field 1\",\"field_2\":123,\"field_3\":[\"yes\"],\"field_4\":true}",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "Test Contract",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "externalId",
+                      "value": "123",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "teamId",
+                      "value": "null",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "contractFile",
+                      "value": "null",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "3938",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8f48f7f2-9d82-4672-ae69-e47e0548cb12",
+          "name": "Get contracts",
+          "request": {
+            "name": "Get contracts",
+            "description": {
+              "content": "Gets contracts filtered by single or multiple fields.\r\n<br /> \r\n_To filter by one field_: \"filtering.field\", \"filtering.operator\" and \"filtering.value\" parameters must be filled.\r\n<br /> \r\n_To filter by multiple fields_: \"filtering.logic\" and \"filtering.filters\" parameters must be filled.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "contracts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "skip",
+                  "value": "<integer>",
+                  "description": "The number of contracts to skip (used for paging)"
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "Fields to include in the response"
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "Fields to include in the response"
+                },
+                {
+                  "disabled": false,
+                  "key": "filtering.logic",
+                  "value": "<string>",
+                  "description": "Gets or sets the filtering logic for filters. Value by default is 'and'"
+                },
+                {
+                  "disabled": false,
+                  "key": "filtering.filters",
+                  "value": "{\"field\":\"<string>\",\"operator\":\"<string>\",\"value\":\"<string>\"}",
+                  "description": "Array of filters object (optional)\r\n<br /> \r\n_Object Properties_:\r\n<br /> \r\n* _Field_: field to filter by\r\n<br /> \r\n* _Operator_: operator used to filter by\r\n<br /> \r\n* _Value_: value to filter by"
+                },
+                {
+                  "disabled": false,
+                  "key": "filtering.filters",
+                  "value": "{\"field\":\"<string>\",\"operator\":\"<string>\",\"value\":\"<string>\"}",
+                  "description": "Array of filters object (optional)\r\n<br /> \r\n_Object Properties_:\r\n<br /> \r\n* _Field_: field to filter by\r\n<br /> \r\n* _Operator_: operator used to filter by\r\n<br /> \r\n* _Value_: value to filter by"
+                },
+                {
+                  "disabled": false,
+                  "key": "filtering.field",
+                  "value": "<string>",
+                  "description": "Field to filter by (optional)"
+                },
+                {
+                  "disabled": false,
+                  "key": "filtering.operator",
+                  "value": "<string>",
+                  "description": "Operator used for filtering (optional)"
+                },
+                {
+                  "disabled": false,
+                  "key": "filtering.value",
+                  "value": "<string>",
+                  "description": "Value to filter by (optional)"
+                },
+                {
+                  "disabled": false,
+                  "key": "sorting.direction",
+                  "value": "<string>",
+                  "description": "Set the sorting direction"
+                },
+                {
+                  "disabled": false,
+                  "key": "sorting.field",
+                  "value": "<string>",
+                  "description": "Set the sorting fields"
+                },
+                {
+                  "disabled": false,
+                  "key": "take",
+                  "value": "50",
+                  "description": "The maximum number of contracts to return<p>Default: 50</p>"
+                },
+                {
+                  "disabled": false,
+                  "key": "context",
+                  "value": "Personal",
+                  "description": "Controls the scope of contracts returned by this operation<p>Default: Personal</p><p>Options:</p><ul><li>All - Returns all contracts regardless of whether the authenticated user is a member. Requires the authenticated user to be a member of the Contract Administrators security group</li><li>Personal - Returns contracts which the authenticated user is a member of. Equivalent to the \"My contracts\" view in LawVu</li><li>Teams - Returns all contracts that are accessible by teams that the authenticated user is a member of</li><li>Restricted - Returns restricted contracts. Requires the authenticated user to be an Organization Administrator</li></ul>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3d9e5bcc-a2d8-4903-8476-98c6fe10b344",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "contracts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filtering.logic",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filtering.filters",
+                      "value": "[object Object]"
+                    },
+                    {
+                      "key": "filtering.filters",
+                      "value": "[object Object]"
+                    },
+                    {
+                      "key": "filtering.field",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filtering.operator",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filtering.value",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sorting.direction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sorting.field",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "take",
+                      "value": "50"
+                    },
+                    {
+                      "key": "context",
+                      "value": "Personal"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"restricted\": false,\n      \"$id\": 123,\n      \"name\": \"Example contract\",\n      \"onContract\": true\n    }\n  ],\n  \"total\": 1\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "35af2181-aa8d-45ec-a4a0-5b732a28df9a",
+          "name": "Find contracts",
+          "request": {
+            "name": "Find contracts",
+            "description": {
+              "content": "Quickly find and filter contracts",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "contracts",
+                "quickfind"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "term",
+                  "value": "<string>",
+                  "description": "A term to search contracts by"
+                },
+                {
+                  "disabled": false,
+                  "key": "take",
+                  "value": "<integer>",
+                  "description": "The number of contracts to return (maximum: 100, default: 20)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2c5506e3-dd22-4017-946a-7b2dd4d6a5bf",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "contracts",
+                    "quickfind"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "term",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "take",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 6422,\n    \"name\": \"string\",\n    \"relationship\": \"Master\",\n    \"parentId\": 6818,\n    \"status\": \"Negotiating\",\n    \"ownerFullName\": \"string\"\n  },\n  {\n    \"id\": 9823,\n    \"name\": \"string\",\n    \"relationship\": \"Amendment\",\n    \"parentId\": 1900,\n    \"status\": \"Draft\",\n    \"ownerFullName\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f02ef7c0-4c05-4750-bb3c-bfa32c21fb32",
+          "name": "Recent  contracts",
+          "request": {
+            "name": "Recent  contracts",
+            "description": {
+              "content": "Returns recently viewed (ref:take) contracts for the user",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "contracts",
+                "recent"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "take",
+                  "value": "5",
+                  "description": "The number of recently viewed contracts to return<p>Default: 5</p>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e8cdc8f5-115a-4977-8617-8fcb3985f51d",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "contracts",
+                    "recent"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "take",
+                      "value": "5"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 95,\n    \"title\": \"My Contract\",\n    \"description\": \"Contract ID: 95\",\n    \"name\": \"My Contract\",\n    \"matterNumber\": \"LV1234-0012\",\n    \"contractStatus\": \"Draft\",\n    \"ownerId\": \"08FD1ED1-627E-4CB9-8388-731227584D21\",\n    \"lastActivityDateUtc\": \"2023-12-15T20:30:00Z\"\n  },\n  {\n    \"id\": 789,\n    \"title\": \"Another Contract\",\n    \"description\": \"Contract ID: 789\",\n    \"name\": \"Another Contract\",\n    \"matterNumber\": null,\n    \"contractStatus\": \"Void\",\n    \"ownerId\": \"BE17D7D6-721A-4F6D-B081-CAABB6D8F5B9\",\n    \"lastActivityDateUtc\": \"2024-01-12T10:00:00Z\"\n  },\n  {\n    \"id\": 684,\n    \"title\": \"Different Contract\",\n    \"description\": \"Contract ID: 684\",\n    \"name\": \"Different Contract\",\n    \"matterNumber\": null,\n    \"contractStatus\": \"Executed\",\n    \"ownerId\": \"BE17D7D6-721A-4F6D-B081-CAABB6D8F5B9\",\n    \"lastActivityDateUtc\": \"2023-12-10T15:30:00Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fff77a24-c6d9-476c-95c2-928b9acad076",
+          "name": "Contract entities",
+          "request": {
+            "name": "Contract entities",
+            "description": {
+              "content": "Gets contract entities (other parties)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "contracts",
+                "entities"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "18c7bf7e-dbb1-4053-be70-df3205d48acd",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "contracts",
+                    "entities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 1,\n    \"name\": \"Entity 1\"\n  },\n  {\n    \"id\": 2,\n    \"name\": \"Entity 2\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b124c443-4151-4622-a739-d176f91ea04a",
+          "name": "Create contract entity",
+          "request": {
+            "name": "Create contract entity",
+            "description": {
+              "content": "Creates a contract entity",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "contracts",
+                "entities"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<string>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8e2ba3ba-6ece-451b-bcee-5b9eb20f6ab4",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "contracts",
+                    "entities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<string>",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "3938",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b0b43dc7-e8f1-442c-978f-cbab1fdc927c",
+          "name": "ExternalId lookup",
+          "request": {
+            "name": "ExternalId lookup",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "contracts",
+                "externalid",
+                ":externalId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "externalId",
+                  "description": "(Required) The externalId to lookup"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d6eb49b8-c6b1-492f-87fb-060c7df4f8f8",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "contracts",
+                    "externalid",
+                    ":externalId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalId",
+                      "description": "(Required) The externalId to lookup"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 2998\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bfa698a9-e77a-4e21-a50c-4bf42f6a984f",
+          "name": "Update contract",
+          "request": {
+            "name": "Update contract",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "contracts",
+                ":contractId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "contractId",
+                  "description": "(Required) The Id of the contract"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"value\": \"<object>\",\n    \"path\": \"<string>\",\n    \"op\": \"<string>\",\n    \"from\": \"<string>\"\n  },\n  {\n    \"value\": \"<object>\",\n    \"path\": \"<string>\",\n    \"op\": \"<string>\",\n    \"from\": \"<string>\"\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "94dc4ebc-8cf0-4833-9bb2-4683fc011e46",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "contracts",
+                    ":contractId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "contractId",
+                      "description": "(Required) The Id of the contract"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"value\": \"123\",\n    \"path\": \"ExternalId\",\n    \"op\": \"replace\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "afd34895-2bf4-4c3c-a579-53a75902cecd",
+          "name": "Get contract",
+          "request": {
+            "name": "Get contract",
+            "description": {
+              "content": "Get contract details by contract id",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "contracts",
+                ":contractId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "contractId",
+                  "description": "(Required) The Id of the contract"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a3920bfc-26f3-4221-b320-cd233bd555a8",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "contracts",
+                    ":contractId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "contractId",
+                      "description": "(Required) The Id of the contract"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 7467,\n  \"name\": \"string\",\n  \"status\": \"Draft\",\n  \"category\": \"Purchasing\",\n  \"templateId\": 6453,\n  \"templateName\": \"string\",\n  \"typeName\": \"string\",\n  \"createdBy\": \"string\",\n  \"createdByUserId\": \"string\",\n  \"ownerId\": \"string\",\n  \"matterId\": 3904,\n  \"matterName\": \"string\",\n  \"matterNumber\": \"string\",\n  \"createdDateUtc\": \"2002-08-08T15:09:48.157Z\",\n  \"restricted\": false,\n  \"hasSow\": false,\n  \"parentContractId\": 4618,\n  \"documentFileId\": 6158,\n  \"parentIsRestricted\": false,\n  \"onContract\": false,\n  \"onMatter\": false,\n  \"contractSpecificEmail\": \"string\",\n  \"expiry\": \"1956-12-26T17:37:25.120Z\",\n  \"teamId\": 9521,\n  \"externalId\": \"string\",\n  \"lastStatusMessage\": {\n    \"message\": \"string\",\n    \"createdDateUtc\": \"1964-12-20T14:57:35.845Z\",\n    \"userId\": \"string\",\n    \"userFirstname\": \"string\",\n    \"userLastname\": \"string\",\n    \"userOrganisationId\": 673,\n    \"userOrganisationName\": \"string\",\n    \"userHasPicture\": true,\n    \"userPictureCacheId\": 6098,\n    \"userFullName\": \"string\",\n    \"userInitials\": \"string\",\n    \"userOrganisationHasLogo\": false,\n    \"userOrganisationPictureCacheId\": 1567\n  },\n  \"owner\": {\n    \"userId\": \"string\",\n    \"userFirstname\": \"string\",\n    \"userLastname\": \"string\",\n    \"userOrganisationId\": 5589,\n    \"userOrganisationName\": \"string\",\n    \"userHasPicture\": false,\n    \"userPictureCacheId\": 3318,\n    \"userFullName\": \"string\",\n    \"userInitials\": \"string\"\n  },\n  \"executedDateUtc\": \"2003-01-14T05:49:07.004Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "51e100ce-5482-4ac1-98fe-d751f02ca445",
+          "name": "Get contract fields",
+          "request": {
+            "name": "Get contract fields",
+            "description": {
+              "content": "Get contract fields by contract id",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "contracts",
+                ":contractId",
+                "fields"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "contractId",
+                  "description": "(Required) The Id of the contract"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "31e09af1-5c9a-4393-bd24-3bd17511017e",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "contracts",
+                    ":contractId",
+                    "fields"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "contractId",
+                      "description": "(Required) The Id of the contract"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detailFields\": {\n    \"schema\": {\n      \"properties\": {\n        \"field_1\": {\n          \"fieldId\": 1,\n          \"title\": \"An example field name\",\n          \"description\": \"Example field description\",\n          \"lawvuType\": 7,\n          \"isReadOnly\": false,\n          \"type\": \"boolean\",\n          \"label\": \"\"\n        }\n      },\n      \"order\": [\n        \"field_1\"\n      ],\n      \"required\": [\n        \"field_1\"\n      ]\n    },\n    \"model\": {\n      \"field_1\": true\n    }\n  },\n  \"coreFields\": {\n    \"schema\": null,\n    \"model\": null\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d4699f07-8c3c-42b7-ba4c-b2d6367fab2e",
+          "name": "Update fields",
+          "request": {
+            "name": "Update fields",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "contracts",
+                ":contractId",
+                "fields"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "contractId",
+                  "description": "(Required) The Id of the contract"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"value\": \"<object>\",\n    \"path\": \"<string>\",\n    \"op\": \"<string>\",\n    \"from\": \"<string>\"\n  },\n  {\n    \"value\": \"<object>\",\n    \"path\": \"<string>\",\n    \"op\": \"<string>\",\n    \"from\": \"<string>\"\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "36ad1fa4-4c4f-4335-9a03-bcafbc47db30",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "contracts",
+                    ":contractId",
+                    "fields"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "contractId",
+                      "description": "(Required) The Id of the contract"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"value\": \"new value\",\n  \"path\": \"/field_string\",\n  \"op\": \"replace\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a6f0e0a2-511e-4dab-a147-219051f860d8",
+          "name": "Create contract",
+          "request": {
+            "name": "Create contract",
+            "description": {
+              "content": "Creates a new contract, using the contract template wizard",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "contracts",
+                "wizard"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"contractTemplateId\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"matterId\": \"<integer>\",\n  \"parentContractId\": \"<integer>\",\n  \"fields\": \"<string>\",\n  \"externalId\": \"<string>\",\n  \"teamId\": \"<integer>\",\n  \"contractFile\": \"<binary>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a3eb31be-61cf-4528-aac4-8d0466fdeb69",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "contracts",
+                    "wizard"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contractTemplateId\": 1,\n  \"matterId\": 321,\n  \"parentContractId\": 123,\n  \"fields\": \"{\\\"field_1\\\":\\\"field 1\\\",\\\"field_2\\\":123,\\\"field_3\\\":[\\\"yes\\\"],\\\"field_4\\\":true}\",\n  \"name\": \"Test Contract\",\n  \"externalId\": \"123\",\n  \"teamId\": null,\n  \"contractFile\": null\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "3938",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-sandbox.lawvu.com/account-apis",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "7528e729-4c1f-4ab8-9d81-d7de37538806",
+    "name": "LawVu Account Auth Contracts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Apis for account related resources (authentication, profiles, organisation details etc)",
+      "type": "text/plain"
+    }
+  }
+}
