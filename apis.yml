@@ -39,6 +39,17 @@ tags:
 - Legal Operations
 - Contract Lifecycle Management
 - Matter Management
+- Document-Management
+- Spend Management
+- Software-as-a-Service
+- Workflows
+tags_raw:
+- Company
+- Legal
+- Legal Technology
+- Legal Operations
+- Contract Lifecycle Management
+- Matter Management
 - Document Management
 - Spend Management
 - SaaS
@@ -50,6 +61,8 @@ apis:
   humanURL: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
   baseURL: https://api.lawvu.com
   tags:
+  - Authentication
+  tags_raw:
   - Auth
   properties:
   - type: OpenAPI
@@ -62,6 +75,8 @@ apis:
   humanURL: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
   baseURL: https://api.lawvu.com
   tags:
+  - Contract Files
+  tags_raw:
   - ContractFiles
   properties:
   - type: OpenAPI
@@ -110,6 +125,8 @@ apis:
   humanURL: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
   baseURL: https://api.lawvu.com
   tags:
+  - Contract Templates
+  tags_raw:
   - ContractTemplates
   properties:
   - type: OpenAPI
@@ -170,6 +187,8 @@ apis:
   humanURL: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
   baseURL: https://api.lawvu.com
   tags:
+  - File
+  tags_raw:
   - Files
   properties:
   - type: OpenAPI
@@ -326,6 +345,8 @@ apis:
   humanURL: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
   baseURL: https://api.lawvu.com
   tags:
+  - Team
+  tags_raw:
   - Teams
   properties:
   - type: OpenAPI
@@ -338,6 +359,8 @@ apis:
   humanURL: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
   baseURL: https://api.lawvu.com
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
@@ -350,6 +373,8 @@ apis:
   humanURL: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
   baseURL: https://api.lawvu.com
   tags:
+  - Webhook Subscriptions
+  tags_raw:
   - WebhookSubscriptions
   properties:
   - type: OpenAPI
