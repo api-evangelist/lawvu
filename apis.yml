@@ -87,7 +87,7 @@ apis:
   humanURL: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
   baseURL: https://api.lawvu.com
   tags:
-  - Contract Files
+  - ContractFiles
   tags_raw:
   - ContractFiles
   properties:
@@ -137,7 +137,7 @@ apis:
   humanURL: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
   baseURL: https://api.lawvu.com
   tags:
-  - Contract Templates
+  - ContractTemplates
   tags_raw:
   - ContractTemplates
   properties:
