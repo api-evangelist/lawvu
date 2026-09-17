@@ -81,20 +81,6 @@ apis:
     url: openapi/lawvu-auth-api-openapi.yml
   - type: Documentation
     url: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
-- aid: lawvu:lawvu-contractfiles-api
-  name: LawVu ContractFiles API
-  description: The ContractFiles API from LawVu — 1 operation(s) for contractfiles.
-  humanURL: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
-  baseURL: https://api.lawvu.com
-  tags:
-  - Contract Files
-  tags_raw:
-  - ContractFiles
-  properties:
-  - type: OpenAPI
-    url: openapi/lawvu-contractfiles-api-openapi.yml
-  - type: Documentation
-    url: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
 - aid: lawvu:lawvu-contractkeydate-api
   name: LawVu ContractKeyDate API
   description: The ContractKeyDate API from LawVu — 1 operation(s) for contractkeydate.
@@ -129,20 +115,6 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/lawvu-contractstatusmessage-api-openapi.yml
-  - type: Documentation
-    url: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
-- aid: lawvu:lawvu-contracttemplates-api
-  name: LawVu ContractTemplates API
-  description: The ContractTemplates API from LawVu — 2 operation(s) for contracttemplates.
-  humanURL: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
-  baseURL: https://api.lawvu.com
-  tags:
-  - Contract Templates
-  tags_raw:
-  - ContractTemplates
-  properties:
-  - type: OpenAPI
-    url: openapi/lawvu-contracttemplates-api-openapi.yml
   - type: Documentation
     url: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
 - aid: lawvu:lawvu-contractuser-api
@@ -379,18 +351,40 @@ apis:
     url: openapi/lawvu-users-api-openapi.yml
   - type: Documentation
     url: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
-- aid: lawvu:lawvu-webhooksubscriptions-api
-  name: LawVu WebhookSubscriptions API
-  description: The WebhookSubscriptions API from LawVu — 2 operation(s) for webhooksubscriptions.
+- aid: lawvu:lawvu-contract-files-api
+  name: LawVu Contract Files API
+  description: The Contract Files API from LawVu — 1 operation(s) for contract files.
+  humanURL: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
+  baseURL: https://api.lawvu.com
+  tags:
+  - Contract Files
+  properties:
+  - type: OpenAPI
+    url: openapi/lawvu-contract-files-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
+- aid: lawvu:lawvu-contract-templates-api
+  name: LawVu Contract Templates API
+  description: The Contract Templates API from LawVu — 2 operation(s) for contract templates.
+  humanURL: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
+  baseURL: https://api.lawvu.com
+  tags:
+  - Contract Templates
+  properties:
+  - type: OpenAPI
+    url: openapi/lawvu-contract-templates-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
+- aid: lawvu:lawvu-webhook-subscriptions-api
+  name: LawVu Webhook Subscriptions API
+  description: The Webhook Subscriptions API from LawVu — 2 operation(s) for webhook subscriptions.
   humanURL: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
   baseURL: https://api.lawvu.com
   tags:
   - Webhook Subscriptions
-  tags_raw:
-  - WebhookSubscriptions
   properties:
   - type: OpenAPI
-    url: openapi/lawvu-webhooksubscriptions-api-openapi.yml
+    url: openapi/lawvu-webhook-subscriptions-api-openapi.yml
   - type: Documentation
     url: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
 maintainers:
