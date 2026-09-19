@@ -135,6 +135,8 @@ apis:
   humanURL: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
   baseURL: https://api.lawvu.com
   tags:
+  - Email
+  tags_raw:
   - Emails
   properties:
   - type: OpenAPI
@@ -245,6 +247,8 @@ apis:
   humanURL: https://api-docs.lawvu.com/new-api/lawvuapi.openapi
   baseURL: https://api.lawvu.com
   tags:
+  - Matter
+  tags_raw:
   - Matters
   properties:
   - type: OpenAPI
