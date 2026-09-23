@@ -1,12 +1,12 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: LawVu Account Auth MatterCategories API
-  description: Apis for account related resources (authentication, profiles, organisation details etc)
+  title: LawVu Matters Matter Categories API
+  description: Apis for matter resources
   version: '1.0'
 servers:
-- url: https://api-sandbox.lawvu.com/account-apis
+- url: https://api-sandbox.lawvu.com/matter-apis
   description: Sandbox API
-- url: https://api.lawvu.com/account-apis
+- url: https://api.lawvu.com/matter-apis
   description: Production API
 tags:
 - name: MatterCategories
@@ -51,6 +51,10 @@ paths:
           description: Success
 components:
   schemas:
+    MatterCategoryArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/MatterCategory'
     MatterCategory:
       type: object
       properties:
@@ -58,21 +62,25 @@ components:
           type: integer
           format: int32
         parentId:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
         name:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         children:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             $ref: '#/components/schemas/MatterCategory'
-          nullable: true
         teamId:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
         isDeleted:
           type: boolean
         teamRequired:
@@ -80,7 +88,3 @@ components:
         hasRules:
           type: boolean
       additionalProperties: false
-    MatterCategoryArray:
-      type: array
-      items:
-        $ref: '#/components/schemas/MatterCategory'

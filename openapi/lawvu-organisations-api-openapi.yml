@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: LawVu Account Auth Organisations API
+  title: LawVu Account Organisations API
   description: Apis for account related resources (authentication, profiles, organisation details etc)
   version: '1.0'
 servers:
@@ -180,6 +180,22 @@ paths:
                 currencySymbol: $
 components:
   schemas:
+    OrganisationArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/Organisation'
+    ClientArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/Client'
+    RegionArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/Region'
+    DepartmentArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/Department'
     Region:
       type: object
       properties:
@@ -187,46 +203,10 @@ components:
           type: integer
           format: int32
         name:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
       additionalProperties: false
-    OrganisationArray:
-      type: array
-      items:
-        $ref: '#/components/schemas/Organisation'
-    RegionArray:
-      type: array
-      items:
-        $ref: '#/components/schemas/Region'
-    Client:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: The organisation id of the client
-          format: int32
-        name:
-          type: string
-          description: The name of the client organisation
-          nullable: true
-        type:
-          enum:
-          - ServiceProvider
-          - Customer
-          type: string
-          description: The type of the organisation<p>Options:</p><ul><li>ServiceProvider</li><li>Customer</li></ul>
-        permissions:
-          type: array
-          items:
-            type: integer
-            format: int32
-          description: The permissions the user has for the organisation
-          nullable: true
-      additionalProperties: false
-    DepartmentArray:
-      type: array
-      items:
-        $ref: '#/components/schemas/Department'
     OrganisationFinancialSettings:
       type: object
       properties:
@@ -243,23 +223,54 @@ components:
           description: The month corresponding to financial year end
           format: int32
         accountsPayableContacts:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Accounts payable contact details
-          nullable: true
         currency:
-          type: string
+          type:
+          - string
+          - 'null'
           description: ISO code of the organisation's default currency e.g. USD
-          nullable: true
         currencyName:
-          type: string
+          type:
+          - string
+          - 'null'
           description: The Name of the organisation's default currency e.g. US Dollar
-          nullable: true
           readOnly: true
         currencySymbol:
-          type: string
+          type:
+          - string
+          - 'null'
           description: The Symbol of the organisation's default currency e.g. $
-          nullable: true
           readOnly: true
+      additionalProperties: false
+    Client:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The organisation id of the client
+          format: int32
+        name:
+          type:
+          - string
+          - 'null'
+          description: The name of the client organisation
+        type:
+          enum:
+          - ServiceProvider
+          - Customer
+          type: string
+          description: The type of the organisation<p>Options:</p><ul><li>ServiceProvider</li><li>Customer</li></ul>
+        permissions:
+          type:
+          - array
+          - 'null'
+          items:
+            type: integer
+            format: int32
+          description: The permissions the user has for the organisation
       additionalProperties: false
     Organisation:
       type: object
@@ -268,13 +279,10 @@ components:
           type: integer
           format: int32
         name:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
       additionalProperties: false
-    ClientArray:
-      type: array
-      items:
-        $ref: '#/components/schemas/Client'
     Department:
       type: object
       properties:
@@ -282,14 +290,17 @@ components:
           type: integer
           format: int32
         name:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         parentId:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
         deletedDateUtc:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
       additionalProperties: false

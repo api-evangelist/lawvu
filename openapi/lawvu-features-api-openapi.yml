@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: LawVu Account Auth Features API
+  title: LawVu Account Features API
   description: Apis for account related resources (authentication, profiles, organisation details etc)
   version: '1.0'
 servers:
@@ -46,6 +46,7 @@ components:
         isEnabled:
           type: boolean
         featureCode:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
       additionalProperties: false

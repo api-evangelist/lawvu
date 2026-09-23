@@ -1,12 +1,12 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: LawVu Account Auth Invoices API
-  description: Apis for account related resources (authentication, profiles, organisation details etc)
+  title: LawVu Invoices API
+  description: Apis for invoice resources
   version: '1.0'
 servers:
-- url: https://api-sandbox.lawvu.com/account-apis
+- url: https://api-sandbox.lawvu.com/invoice-apis
   description: Sandbox API
-- url: https://api.lawvu.com/account-apis
+- url: https://api.lawvu.com/invoice-apis
   description: Production API
 tags:
 - name: Invoices
@@ -206,6 +206,21 @@ paths:
                 contactEmail: anotheremailaddress@gmail.com
 components:
   schemas:
+    InvoiceDataSourceResult:
+      type: object
+      properties:
+        data:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Invoice'
+          description: Represents a single page of processed data.
+        total:
+          type: integer
+          description: The total number of records available.
+          format: int32
+      additionalProperties: false
     OperationArray:
       type: array
       items:
@@ -217,167 +232,192 @@ components:
           type: integer
           format: int32
         invoiceNo:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         invoiceDate:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
         dueDate:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
         disbursements:
-          type: number
+          type:
+          - number
+          - 'null'
           format: double
-          nullable: true
         fees:
-          type: number
+          type:
+          - number
+          - 'null'
           format: double
-          nullable: true
         otherFees:
-          type: number
+          type:
+          - number
+          - 'null'
           format: double
-          nullable: true
         fileId:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
         status:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         fileName:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         batchId:
           type: integer
           format: int32
         thirdParty:
           type: boolean
         paid:
-          type: boolean
-          nullable: true
+          type:
+          - boolean
+          - 'null'
         paidDateUtc:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
         paymentNote:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         description:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         matterId:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
         approvedDateUtc:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
         purchaseOrderNo:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         totalTax:
-          type: number
+          type:
+          - number
+          - 'null'
           format: double
-          nullable: true
         approvedFees:
-          type: number
+          type:
+          - number
+          - 'null'
           format: double
-          nullable: true
         currency:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         postedDateUtc:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
         internalNotes:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         billingPeriodStart:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
         billingPeriodEnd:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
         serviceProviderName:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         serviceProviderId:
-          type: string
-          nullable: true
-      additionalProperties: false
-    BillingRecipient:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          nullable: true
-        name:
-          type: string
-          nullable: true
-        addressLine1:
-          type: string
-          nullable: true
-        addressLine2:
-          type: string
-          nullable: true
-        addressLine3:
-          type: string
-          nullable: true
-        taxType:
-          enum:
-          - GST
-          - TAX
-          - VAT
-          type: string
-          description: <p>Options:</p><ul><li>GST</li><li>TAX</li><li>VAT</li></ul>
-          nullable: true
-        taxNumber:
-          type: string
-          nullable: true
-        contactName:
-          type: string
-          nullable: true
-        contactPhone:
-          type: string
-          nullable: true
-        contactEmail:
-          type: string
-          nullable: true
-      additionalProperties: false
-    InvoiceDataSourceResult:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Invoice'
-          description: Represents a single page of processed data.
-          nullable: true
-        total:
-          type: integer
-          description: The total number of records available.
-          format: int32
+          type:
+          - string
+          - 'null'
       additionalProperties: false
     Operation:
       type: object
       properties:
         value:
-          type: object
-          nullable: true
+          type:
+          - object
+          - 'null'
         path:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         op:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         from:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    BillingRecipient:
+      type: object
+      properties:
+        id:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        name:
+          type:
+          - string
+          - 'null'
+        addressLine1:
+          type:
+          - string
+          - 'null'
+        addressLine2:
+          type:
+          - string
+          - 'null'
+        addressLine3:
+          type:
+          - string
+          - 'null'
+        taxType:
+          enum:
+          - GST
+          - TAX
+          - VAT
+          type:
+          - string
+          - 'null'
+          description: <p>Options:</p><ul><li>GST</li><li>TAX</li><li>VAT</li></ul>
+        taxNumber:
+          type:
+          - string
+          - 'null'
+        contactName:
+          type:
+          - string
+          - 'null'
+        contactPhone:
+          type:
+          - string
+          - 'null'
+        contactEmail:
+          type:
+          - string
+          - 'null'
       additionalProperties: false

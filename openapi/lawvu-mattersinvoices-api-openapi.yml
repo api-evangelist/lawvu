@@ -1,12 +1,12 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: LawVu Account Auth MattersInvoices API
-  description: Apis for account related resources (authentication, profiles, organisation details etc)
+  title: LawVu Matters Matters Invoices API
+  description: Apis for matter resources
   version: '1.0'
 servers:
-- url: https://api-sandbox.lawvu.com/account-apis
+- url: https://api-sandbox.lawvu.com/matter-apis
   description: Sandbox API
-- url: https://api.lawvu.com/account-apis
+- url: https://api.lawvu.com/matter-apis
   description: Production API
 tags:
 - name: MattersInvoices
@@ -97,11 +97,12 @@ components:
       type: object
       properties:
         data:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             $ref: '#/components/schemas/Invoice'
           description: Represents a single page of processed data.
-          nullable: true
         total:
           type: integer
           description: The total number of records available.
@@ -114,51 +115,63 @@ components:
           type: integer
           format: int32
         invoiceNo:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         invoiceDate:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
         dueDate:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
         disbursements:
-          type: number
+          type:
+          - number
+          - 'null'
           format: double
-          nullable: true
         fees:
-          type: number
+          type:
+          - number
+          - 'null'
           format: double
-          nullable: true
         otherFees:
-          type: number
+          type:
+          - number
+          - 'null'
           format: double
-          nullable: true
         fileId:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
         status:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         fileName:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         batchId:
           type: integer
           format: int32
         thirdParty:
           type: boolean
         paid:
-          type: boolean
-          nullable: true
+          type:
+          - boolean
+          - 'null'
         paidDateUtc:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
         description:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
       additionalProperties: false

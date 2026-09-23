@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: LawVu Account Auth WebhookSubscriptions API
+  title: LawVu Account Webhook Subscriptions API
   description: Apis for account related resources (authentication, profiles, organisation details etc)
   version: '1.0'
 servers:
@@ -9,12 +9,12 @@ servers:
 - url: https://api.lawvu.com/account-apis
   description: Production API
 tags:
-- name: WebhookSubscriptions
+- name: Webhook Subscriptions
 paths:
   /v1/webhooks/subscriptions:
     post:
       tags:
-      - WebhookSubscriptions
+      - Webhook Subscriptions
       summary: Create a subscription
       description: Create a webhook subscription to receive notifications on events occuring in LawVu
       operationId: post-v1-webhooks-subscriptions
@@ -79,7 +79,7 @@ paths:
                 format: int32
     get:
       tags:
-      - WebhookSubscriptions
+      - Webhook Subscriptions
       summary: Get all subscriptions
       description: Retrieve all existing webhook subscriptions
       operationId: GetWebhookSubscriptions
@@ -168,7 +168,7 @@ paths:
   /v1/webhooks/subscriptions/{id}:
     get:
       tags:
-      - WebhookSubscriptions
+      - Webhook Subscriptions
       summary: Get a subscription
       description: Retrieve an existing webhook subscription
       operationId: GetWebhookSubscription
@@ -234,7 +234,7 @@ paths:
                 modifiedBy: 461fffa2-950f-4961-b313-09fef67d419c
     delete:
       tags:
-      - WebhookSubscriptions
+      - Webhook Subscriptions
       summary: Delete a subscription
       description: Deleting a webhook subscription will stop notifications for that subscription
       operationId: DeleteWebHookSubscription
@@ -251,10 +251,66 @@ paths:
           description: No Content
 components:
   schemas:
+    WebhookSubscription:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        topics:
+          $ref: '#/components/schemas/WebhookTopicArray'
+        subscriptionUrl:
+          type:
+          - string
+          - 'null'
+        clientState:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - string
+          - 'null'
+        createdDateUtc:
+          type: string
+          format: date-time
+        createdBy:
+          type:
+          - string
+          - 'null'
+        modifiedDateUtc:
+          type: string
+          format: date-time
+        modifiedBy:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
     WebhookSubscriptionArray:
       type: array
       items:
         $ref: '#/components/schemas/WebhookSubscription'
+    SaveWebhookSubscriptionModel:
+      required:
+      - subscriptionUrl
+      - topics
+      type: object
+      properties:
+        topics:
+          $ref: '#/components/schemas/WebhookTopicArray'
+        subscriptionUrl:
+          maxLength: 2048
+          minLength: 1
+          type: string
+          description: The publicly accessible URL of the endpoint which will be notified
+          format: uri
+        clientState:
+          maxLength: 128
+          type:
+          - string
+          - 'null'
+          description: A custom string which will be included with each notification to help identify the notification came from LawVu
+      additionalProperties: false
     WebhookTopicArray:
       type: array
       items:
@@ -277,53 +333,3 @@ components:
         - contract.keydate.updated
         type: string
         description: <p>Options:</p><ul><li>MatterCreated</li><li>MatterUpdated</li><li>ContractCreated</li><li>ContractUpdated</li><li>MatterStatusUpdated</li><li>ContractStatusUpdated</li><li>MatterFileCreated</li><li>ContractFileCreated</li><li>MatterFileUpdated</li><li>ContractFileUpdated</li><li>ContractDocumentUpdated</li><li>MatterStatusMessageCreated</li><li>ContractStatusMessageCreated</li><li>MatterTagCreated</li><li>ContractKeyDateCreated</li><li>ContractKeyDateUpdated</li></ul>
-    WebhookSubscription:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        topics:
-          $ref: '#/components/schemas/WebhookTopicArray'
-        subscriptionUrl:
-          type: string
-          nullable: true
-        clientState:
-          type: string
-          nullable: true
-        status:
-          type: string
-          nullable: true
-        createdDateUtc:
-          type: string
-          format: date-time
-        createdBy:
-          type: string
-          nullable: true
-        modifiedDateUtc:
-          type: string
-          format: date-time
-        modifiedBy:
-          type: string
-          nullable: true
-      additionalProperties: false
-    SaveWebhookSubscriptionModel:
-      required:
-      - subscriptionUrl
-      - topics
-      type: object
-      properties:
-        topics:
-          $ref: '#/components/schemas/WebhookTopicArray'
-        subscriptionUrl:
-          maxLength: 2048
-          minLength: 1
-          type: string
-          description: The publicly accessible URL of the endpoint which will be notified
-          format: uri
-        clientState:
-          maxLength: 128
-          type: string
-          description: A custom string which will be included with each notification to help identify the notification came from LawVu
-          nullable: true
-      additionalProperties: false

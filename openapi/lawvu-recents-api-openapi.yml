@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: LawVu Account Auth Recents API
+  title: LawVu Account Recents API
   description: Apis for account related resources (authentication, profiles, organisation details etc)
   version: '1.0'
 servers:
@@ -195,34 +195,42 @@ components:
           type: integer
           format: int32
         title:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         description:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         lastActivityDateUtc:
           type: string
           format: date-time
         matterId:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
         contractId:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
         fileContentType:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         fileId:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         ownerId:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         managerId:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         contractStatus:
           enum:
           - Draft
@@ -232,10 +240,12 @@ components:
           - Executed
           - Expired
           - Void
-          type: string
+          type:
+          - string
+          - 'null'
           description: <p>Options:</p><ul><li>Draft</li><li>Negotiating</li><li>Approval</li><li>Signing</li><li>Executed</li><li>Expired</li><li>Void</li></ul>
-          nullable: true
         matterCategoryName:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
       additionalProperties: false

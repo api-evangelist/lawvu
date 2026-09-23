@@ -1,12 +1,12 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: LawVu Account Auth MatterStatusMessage API
-  description: Apis for account related resources (authentication, profiles, organisation details etc)
+  title: LawVu Matters Matter Status Message API
+  description: Apis for matter resources
   version: '1.0'
 servers:
-- url: https://api-sandbox.lawvu.com/account-apis
+- url: https://api-sandbox.lawvu.com/matter-apis
   description: Sandbox API
-- url: https://api.lawvu.com/account-apis
+- url: https://api.lawvu.com/matter-apis
   description: Production API
 tags:
 - name: MatterStatusMessage

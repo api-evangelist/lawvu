@@ -1,12 +1,12 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: LawVu Account Auth ContractUser API
-  description: Apis for account related resources (authentication, profiles, organisation details etc)
+  title: LawVu Contracts Contract User API
+  description: Apis for contract resources
   version: '1.0'
 servers:
-- url: https://api-sandbox.lawvu.com/account-apis
+- url: https://api-sandbox.lawvu.com/contract-apis
   description: Sandbox API
-- url: https://api.lawvu.com/account-apis
+- url: https://api.lawvu.com/contract-apis
   description: Production API
 tags:
 - name: ContractUser
@@ -135,51 +135,6 @@ paths:
                 $ref: '#/components/schemas/ContractUserDataSourceResult'
 components:
   schemas:
-    ContractUserDataSourceResult:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/ContractUser'
-          description: Represents a single page of processed data.
-          nullable: true
-        total:
-          type: integer
-          description: The total number of records available.
-          format: int32
-      additionalProperties: false
-    ContractUser:
-      type: object
-      properties:
-        userId:
-          type: string
-          nullable: true
-        userFirstname:
-          type: string
-          nullable: true
-        userLastname:
-          type: string
-          nullable: true
-        userOrganisationId:
-          type: integer
-          format: int32
-          nullable: true
-        userOrganisationName:
-          type: string
-          nullable: true
-        userHasPicture:
-          type: boolean
-        userPictureCacheId:
-          type: integer
-          format: int32
-        userFullName:
-          type: string
-          nullable: true
-        userInitials:
-          type: string
-          nullable: true
-      additionalProperties: false
     AssignContractUser:
       required:
       - userId
@@ -187,4 +142,57 @@ components:
       properties:
         userId:
           type: string
+      additionalProperties: false
+    ContractUser:
+      type: object
+      properties:
+        userId:
+          type:
+          - string
+          - 'null'
+        userFirstname:
+          type:
+          - string
+          - 'null'
+        userLastname:
+          type:
+          - string
+          - 'null'
+        userOrganisationId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        userOrganisationName:
+          type:
+          - string
+          - 'null'
+        userHasPicture:
+          type: boolean
+        userPictureCacheId:
+          type: integer
+          format: int32
+        userFullName:
+          type:
+          - string
+          - 'null'
+        userInitials:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ContractUserDataSourceResult:
+      type: object
+      properties:
+        data:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ContractUser'
+          description: Represents a single page of processed data.
+        total:
+          type: integer
+          description: The total number of records available.
+          format: int32
       additionalProperties: false

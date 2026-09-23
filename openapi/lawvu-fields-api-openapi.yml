@@ -1,12 +1,16 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: LawVu Account Auth Fields API
-  description: Apis for account related resources (authentication, profiles, organisation details etc)
+  title: Lawvu Fields API
   version: '1.0'
+  description: 'Operations tagged Fields across 2 of this provider''s published API definitions: lawvu-api-openapi-original.yml, lawvu-fields-openapi-original.json. Each path carries the servers of the definition it was published in.'
 servers:
-- url: https://api-sandbox.lawvu.com/account-apis
+- url: https://api-sandbox.lawvu.com
   description: Sandbox API
-- url: https://api.lawvu.com/account-apis
+- url: https://api.lawvu.com
+  description: Production API
+- url: https://api-sandbox.lawvu.com/field-apis
+  description: Sandbox API
+- url: https://api.lawvu.com/field-apis
   description: Production API
 tags:
 - name: Fields
@@ -54,6 +58,11 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/ProblemDetails'
+    servers:
+    - url: https://api-sandbox.lawvu.com
+      description: Sandbox API
+    - url: https://api.lawvu.com
+      description: Production API
   /v2/fields/{fieldId}/options:
     get:
       tags:
@@ -235,6 +244,11 @@ paths:
                 status: 404
                 title: Resource not found
                 type: https://api-docs.lawvu.com/errors/resource_not_found
+    servers:
+    - url: https://api-sandbox.lawvu.com
+      description: Sandbox API
+    - url: https://api.lawvu.com
+      description: Production API
   /v2/fields/{fieldId}/options/{value}:
     get:
       tags:
@@ -477,6 +491,11 @@ paths:
                 status: 404
                 title: Resource not found
                 type: https://api-docs.lawvu.com/errors/resource_not_found
+    servers:
+    - url: https://api-sandbox.lawvu.com
+      description: Sandbox API
+    - url: https://api.lawvu.com
+      description: Production API
   /v1/fields:
     get:
       tags:
@@ -567,6 +586,11 @@ paths:
             text/json:
               schema:
                 $ref: '#/components/schemas/FieldListItemDataSourceResult'
+    servers:
+    - url: https://api-sandbox.lawvu.com/field-apis
+      description: Sandbox API
+    - url: https://api.lawvu.com/field-apis
+      description: Production API
   /v1/fields/{fieldId}:
     get:
       tags:
@@ -594,135 +618,38 @@ paths:
             text/json:
               schema:
                 $ref: '#/components/schemas/FieldDetailGetModel'
+    servers:
+    - url: https://api-sandbox.lawvu.com/field-apis
+      description: Sandbox API
+    - url: https://api.lawvu.com/field-apis
+      description: Production API
 components:
   schemas:
-    AuditableReference:
-      type: object
-      properties:
-        dateUtc:
-          type: string
-          description: The date and time the action was performed. The date and time uses the ISO-8601 format and will be in UTC
-          format: date-time
-          readOnly: true
-          example: '2024-12-25T00:00:00Z'
-        userName:
-          type: string
-          description: The username of who performed the action
-          readOnly: true
-          example: api.developer@lawvu.com
-      additionalProperties: false
     UpdateFieldOption:
       type: object
       properties:
         label:
-          type: string
+          type:
+          - string
+          - 'null'
           description: The user defined label of the field option
-          nullable: true
         properties:
-          type: object
+          type:
+          - object
+          - 'null'
           additionalProperties: {}
           description: Specific properties for the field option, varies by field type
-          nullable: true
       additionalProperties: false
-    FieldListItemDataSourceResult:
+    FieldCollectionResponse:
       type: object
       properties:
-        data:
+        items:
           type: array
           items:
-            $ref: '#/components/schemas/FieldListItem'
-          description: Represents a single page of processed data.
-          nullable: true
-        total:
-          type: integer
-          description: The total number of records available.
-          format: int32
+            $ref: '#/components/schemas/Field'
+          description: The collection of items
       additionalProperties: false
-    StringArray:
-      type: array
-      items:
-        type: string
-    FieldListItem:
-      required:
-      - id
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        title:
-          type: string
-          nullable: true
-        description:
-          type: string
-          nullable: true
-        category:
-          enum:
-          - Custom
-          - Lawvu
-          type: string
-          description: <p>Options:</p><ul><li>Custom</li><li>Lawvu</li></ul>
-        lawvuType:
-          type: integer
-          format: int32
-        webMergeFieldName:
-          type: string
-          nullable: true
-        contractCount:
-          type: integer
-          format: int32
-        matterCount:
-          type: integer
-          format: int32
-        _links:
-          type: array
-          items:
-            $ref: '#/components/schemas/HyperMediaLink'
-          nullable: true
-      additionalProperties: false
-    LookupSingleOptionModel:
-      type: object
-      properties:
-        Value:
-          type: string
-          nullable: true
-        id:
-          type: integer
-          format: int32
-        label:
-          type: string
-          nullable: true
-      additionalProperties: false
-    FieldDetailParameters:
-      type: object
-      properties:
-        options:
-          type: array
-          items:
-            $ref: '#/components/schemas/LookupSingleOptionModel'
-          nullable: true
-        default:
-          type: object
-          nullable: true
-        rangeStart:
-          type: number
-          format: double
-          nullable: true
-        rangeEnd:
-          type: number
-          format: double
-          nullable: true
-        stepSize:
-          type: number
-          format: double
-          nullable: true
-        allowExternalUsers:
-          type: boolean
-          nullable: true
-        canAddOptions:
-          type: boolean
-          nullable: true
-      additionalProperties: false
+      description: Response wrapper of a collection of items
     FieldType:
       enum:
       - Text
@@ -737,107 +664,12 @@ components:
       type: object
       properties:
         userCanAddOption:
-          type: boolean
+          type:
+          - boolean
+          - 'null'
           description: Indicates if an option can be added without the user having access to further manage the field options
-          nullable: true
           example: true
       additionalProperties: false
-    FieldOption:
-      required:
-      - label
-      type: object
-      properties:
-        label:
-          type: string
-          description: The user defined label of the field option
-          nullable: true
-          example: Option A
-        value:
-          type: string
-          description: The system generated value for the field option
-          nullable: true
-          readOnly: true
-          example: option_1
-        properties:
-          type: object
-          additionalProperties:
-            x-additionalPropertiesName: propertyName
-          description: Additional properties based on the type of field option. See examples for more details.
-          nullable: true
-      additionalProperties: false
-    Field:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The API name for the field
-          nullable: true
-          readOnly: true
-          example: my_field
-        name:
-          type: string
-          description: The user defined name of the field
-          nullable: true
-          example: My dropdown field
-        type:
-          allOf:
-          - $ref: '#/components/schemas/FieldType'
-          description: The type of the field
-          nullable: true
-          example: text
-        properties:
-          oneOf:
-          - $ref: '#/components/schemas/MultiOptionFieldProperties'
-          - $ref: '#/components/schemas/OptionFieldProperties'
-          description: Specific properties for the field, varies by type
-          nullable: true
-          readOnly: true
-        created:
-          allOf:
-          - $ref: '#/components/schemas/AuditableReference'
-          description: The username who created the field and when
-          nullable: true
-          readOnly: true
-        modified:
-          allOf:
-          - $ref: '#/components/schemas/AuditableReference'
-          description: The username who modified the field and when
-          nullable: true
-          readOnly: true
-      additionalProperties: false
-    FieldOptionCollectionResponse:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/FieldOption'
-          description: The collection of items
-      additionalProperties: false
-      description: Response wrapper of a collection of items
-    ProblemDetails:
-      type: object
-      properties:
-        detail:
-          type: string
-          description: More information about the problem.
-        instance:
-          type: string
-          description: The URI of the resource which the error relates to.
-        operationId:
-          type: string
-          description: A unique trace identifier for the request. This should be provided when requesting support.
-        status:
-          type: integer
-          description: The HTTP status code for the problem.
-          format: int32
-        title:
-          type: string
-          description: A short description of the error.
-        type:
-          type: string
-          description: A URI which can be followed to find out more about the problem.
-      additionalProperties: {}
     CreateFieldOption:
       required:
       - label
@@ -848,96 +680,13 @@ components:
           description: The user defined label of the field option
           example: Option A
         properties:
-          type: object
+          type:
+          - object
+          - 'null'
           additionalProperties:
             x-additionalPropertiesName: propertyName
           description: Additional properties based on the type of field option. See examples for more details.
-          nullable: true
       additionalProperties: false
-    MultiOptionFieldProperties:
-      type: object
-      properties:
-        userCanAddOption:
-          type: boolean
-          description: Indicates if an option can be added without the user having access to further manage the field options
-          nullable: true
-          example: true
-      additionalProperties: false
-    FieldDetailGetModel:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        organisationId:
-          type: integer
-          format: int32
-          nullable: true
-        isAlwaysRequired:
-          type: boolean
-        entityColumnName:
-          type: string
-          nullable: true
-        name:
-          type: string
-          nullable: true
-        description:
-          type: string
-          nullable: true
-        category:
-          type: string
-          nullable: true
-        lawvuType:
-          enum:
-          - ShortText
-          - LongText
-          - Slider
-          - Currency
-          - Decimal
-          - Checkbox
-          - Date
-          - Dropdown
-          - Department
-          - Region
-          - BillingMethod
-          - BillingIntention
-          - Priority
-          - ContractEntity
-          - ConflictCheck
-          - CheckboxList
-          - RadioGroup
-          - SectionHeader
-          - ContractOwner
-          - Restricted
-          - List
-          - InvoiceRecipient
-          - User
-          - Lookup
-          type: string
-          description: <p>Options:</p><ul><li>ShortText</li><li>LongText</li><li>Slider</li><li>Currency</li><li>Decimal</li><li>Checkbox</li><li>Date</li><li>Dropdown</li><li>Department</li><li>Region</li><li>BillingMethod</li><li>BillingIntention</li><li>Priority</li><li>ContractEntity</li><li>ConflictCheck</li><li>CheckboxList</li><li>RadioGroup</li><li>SectionHeader</li><li>ContractOwner</li><li>Restricted</li><li>List</li><li>Lookup</li><li>InvoiceRecipient</li><li>User</li></ul>
-        webMergeFieldName:
-          type: string
-          nullable: true
-        contractCount:
-          type: integer
-          format: int32
-        matterCount:
-          type: integer
-          format: int32
-        parameters:
-          $ref: '#/components/schemas/FieldDetailParameters'
-      additionalProperties: false
-      description: This model represents the payload returned from the Private API for getting details related to a single lookup field
-    FieldCollectionResponse:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Field'
-          description: The collection of items
-      additionalProperties: false
-      description: Response wrapper of a collection of items
     HttpValidationProblemDetails:
       type: object
       properties:
@@ -968,17 +717,53 @@ components:
           type: string
           description: A URI which can be followed to find out more about the problem.
       additionalProperties: {}
-    HyperMediaLink:
+    Field:
       type: object
       properties:
+        id:
+          type:
+          - string
+          - 'null'
+          description: The API name for the field
+          readOnly: true
+          example: my_field
         name:
-          type: string
-          nullable: true
-        uri:
-          type: string
-          nullable: true
-        methods:
-          $ref: '#/components/schemas/StringArray'
+          type:
+          - string
+          - 'null'
+          description: The user defined name of the field
+          example: My dropdown field
+        type:
+          allOf:
+          - $ref: '#/components/schemas/FieldType'
+          description: The type of the field
+          example: text
+        properties:
+          oneOf:
+          - $ref: '#/components/schemas/MultiOptionFieldProperties'
+          - $ref: '#/components/schemas/OptionFieldProperties'
+          description: Specific properties for the field, varies by type
+          readOnly: true
+        created:
+          allOf:
+          - $ref: '#/components/schemas/AuditableReference'
+          description: The username who created the field and when
+          readOnly: true
+        modified:
+          allOf:
+          - $ref: '#/components/schemas/AuditableReference'
+          description: The username who modified the field and when
+          readOnly: true
+      additionalProperties: false
+    MultiOptionFieldProperties:
+      type: object
+      properties:
+        userCanAddOption:
+          type:
+          - boolean
+          - 'null'
+          description: Indicates if an option can be added without the user having access to further manage the field options
+          example: true
       additionalProperties: false
     CreatedFieldOption:
       type: object
@@ -989,3 +774,278 @@ components:
           example: option_1
       additionalProperties: false
       description: Represents a field option that has been created
+    FieldOption:
+      required:
+      - label
+      type: object
+      properties:
+        label:
+          type:
+          - string
+          - 'null'
+          description: The user defined label of the field option
+          example: Option A
+        value:
+          type:
+          - string
+          - 'null'
+          description: The system generated value for the field option
+          readOnly: true
+          example: option_1
+        properties:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            x-additionalPropertiesName: propertyName
+          description: Additional properties based on the type of field option. See examples for more details.
+      additionalProperties: false
+    FieldOptionCollectionResponse:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldOption'
+          description: The collection of items
+      additionalProperties: false
+      description: Response wrapper of a collection of items
+    AuditableReference:
+      type: object
+      properties:
+        dateUtc:
+          type: string
+          description: The date and time the action was performed. The date and time uses the ISO-8601 format and will be in UTC
+          format: date-time
+          readOnly: true
+          example: '2024-12-25T00:00:00Z'
+        userName:
+          type: string
+          description: The username of who performed the action
+          readOnly: true
+          example: api.developer@lawvu.com
+      additionalProperties: false
+    ProblemDetails:
+      type: object
+      properties:
+        detail:
+          type: string
+          description: More information about the problem.
+        instance:
+          type: string
+          description: The URI of the resource which the error relates to.
+        operationId:
+          type: string
+          description: A unique trace identifier for the request. This should be provided when requesting support.
+        status:
+          type: integer
+          description: The HTTP status code for the problem.
+          format: int32
+        title:
+          type: string
+          description: A short description of the error.
+        type:
+          type: string
+          description: A URI which can be followed to find out more about the problem.
+      additionalProperties: {}
+    StringArray:
+      type: array
+      items:
+        type: string
+    LookupSingleOptionModel:
+      type: object
+      properties:
+        Value:
+          type:
+          - string
+          - 'null'
+        id:
+          type: integer
+          format: int32
+        label:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    FieldDetailGetModel:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        organisationId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        isAlwaysRequired:
+          type: boolean
+        entityColumnName:
+          type:
+          - string
+          - 'null'
+        name:
+          type:
+          - string
+          - 'null'
+        description:
+          type:
+          - string
+          - 'null'
+        category:
+          type:
+          - string
+          - 'null'
+        lawvuType:
+          enum:
+          - ShortText
+          - LongText
+          - Slider
+          - Currency
+          - Decimal
+          - Checkbox
+          - Date
+          - Dropdown
+          - Department
+          - Region
+          - BillingMethod
+          - BillingIntention
+          - Priority
+          - ContractEntity
+          - ConflictCheck
+          - CheckboxList
+          - RadioGroup
+          - SectionHeader
+          - ContractOwner
+          - Restricted
+          - List
+          - InvoiceRecipient
+          - User
+          - Lookup
+          type: string
+          description: <p>Options:</p><ul><li>ShortText</li><li>LongText</li><li>Slider</li><li>Currency</li><li>Decimal</li><li>Checkbox</li><li>Date</li><li>Dropdown</li><li>Department</li><li>Region</li><li>BillingMethod</li><li>BillingIntention</li><li>Priority</li><li>ContractEntity</li><li>ConflictCheck</li><li>CheckboxList</li><li>RadioGroup</li><li>SectionHeader</li><li>ContractOwner</li><li>Restricted</li><li>List</li><li>Lookup</li><li>InvoiceRecipient</li><li>User</li></ul>
+        webMergeFieldName:
+          type:
+          - string
+          - 'null'
+        contractCount:
+          type: integer
+          format: int32
+        matterCount:
+          type: integer
+          format: int32
+        parameters:
+          $ref: '#/components/schemas/FieldDetailParameters'
+      additionalProperties: false
+      description: This model represents the payload returned from the Private API for getting details related to a single lookup field
+    HyperMediaLink:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        uri:
+          type:
+          - string
+          - 'null'
+        methods:
+          $ref: '#/components/schemas/StringArray'
+      additionalProperties: false
+    FieldListItem:
+      required:
+      - id
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        title:
+          type:
+          - string
+          - 'null'
+        description:
+          type:
+          - string
+          - 'null'
+        category:
+          enum:
+          - Custom
+          - Lawvu
+          type: string
+          description: <p>Options:</p><ul><li>Custom</li><li>Lawvu</li></ul>
+        lawvuType:
+          type: integer
+          format: int32
+        webMergeFieldName:
+          type:
+          - string
+          - 'null'
+        contractCount:
+          type: integer
+          format: int32
+        matterCount:
+          type: integer
+          format: int32
+        _links:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/HyperMediaLink'
+      additionalProperties: false
+    FieldDetailParameters:
+      type: object
+      properties:
+        options:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/LookupSingleOptionModel'
+        default:
+          type:
+          - object
+          - 'null'
+        rangeStart:
+          type:
+          - number
+          - 'null'
+          format: double
+        rangeEnd:
+          type:
+          - number
+          - 'null'
+          format: double
+        stepSize:
+          type:
+          - number
+          - 'null'
+          format: double
+        allowExternalUsers:
+          type:
+          - boolean
+          - 'null'
+        canAddOptions:
+          type:
+          - boolean
+          - 'null'
+      additionalProperties: false
+    FieldListItemDataSourceResult:
+      type: object
+      properties:
+        data:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/FieldListItem'
+          description: Represents a single page of processed data.
+        total:
+          type: integer
+          description: The total number of records available.
+          format: int32
+      additionalProperties: false
+x-refined-from:
+- lawvu-api-openapi-original.yml
+- lawvu-fields-openapi-original.json

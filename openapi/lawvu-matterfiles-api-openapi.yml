@@ -1,12 +1,12 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: LawVu Account Auth MatterFiles API
-  description: Apis for account related resources (authentication, profiles, organisation details etc)
+  title: LawVu Matters Matter Files API
+  description: Apis for matter resources
   version: '1.0'
 servers:
-- url: https://api-sandbox.lawvu.com/account-apis
+- url: https://api-sandbox.lawvu.com/matter-apis
   description: Sandbox API
-- url: https://api.lawvu.com/account-apis
+- url: https://api.lawvu.com/matter-apis
   description: Production API
 tags:
 - name: MatterFiles
@@ -16,7 +16,11 @@ paths:
       tags:
       - MatterFiles
       summary: Upload file
-      description: "Add or update a file in a matter. \\\r\n \\\r\nThe body of the request must be content-type 'multipart/form-data' and contain the file data."
+      description: 'Add or update a file in a matter. \
+
+        \
+
+        The body of the request must be content-type ''multipart/form-data'' and contain the file data.'
       operationId: post-v1-matters-matterid-files
       parameters:
       - name: matterId

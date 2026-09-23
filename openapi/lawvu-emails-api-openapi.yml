@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: LawVu Account Auth Emails API
+  title: LawVu Account Emails API
   description: Apis for account related resources (authentication, profiles, organisation details etc)
   version: '1.0'
 servers:
@@ -242,23 +242,216 @@ paths:
                 $ref: '#/components/schemas/CrossUserEmailTrackingResponse'
 components:
   schemas:
+    StringArray:
+      type: array
+      items:
+        type: string
+    CrossUserEmailTrackingResponse:
+      type: object
+      properties:
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/CrossUserEmailTracking'
+      additionalProperties: false
+    MessageDraft:
+      type: object
+      properties:
+        matterId:
+          type: integer
+          format: int32
+        mode:
+          enum:
+          - Message
+          - File
+          type: string
+          description: <p>Options:</p><ul><li>Message</li><li>File</li></ul>
+        recipients:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/MessageDraftRecipient'
+      additionalProperties: false
+    MessageDraftRecipient:
+      required:
+      - userId
+      type: object
+      properties:
+        userId:
+          minLength: 1
+          type: string
+      additionalProperties: false
+    EmailThreadArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/EmailThread'
+    CreateMessageDraft:
+      type: object
+      properties:
+        sourceId:
+          type:
+          - string
+          - 'null'
+        authorEmailAddress:
+          type:
+          - string
+          - 'null'
+          deprecated: true
+        expectedFromAddress:
+          type:
+          - string
+          - 'null'
+        matterId:
+          type: integer
+          format: int32
+        mode:
+          enum:
+          - Message
+          - File
+          type: string
+          description: <p>Options:</p><ul><li>Message</li><li>File</li></ul>
+        recipients:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/MessageDraftRecipient'
+      additionalProperties: false
+    CrossUserEmailTracking:
+      type: object
+      properties:
+        externalReferenceId:
+          type:
+          - string
+          - 'null'
+        tracking:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/UserEmailTracking'
+      additionalProperties: false
+    SaveEmailThread:
+      required:
+      - client
+      - threadIdentifier
+      type: object
+      properties:
+        threadIdentifier:
+          minLength: 1
+          type: string
+        track:
+          type: boolean
+        client:
+          enum:
+          - Outlook
+          - Gmail
+          type: string
+          description: <p>Options:</p><ul><li>Outlook</li><li>Gmail</li></ul>
+        matterId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        fileId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        contractId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+      additionalProperties: false
+    EmailThread:
+      type: object
+      properties:
+        threadIdentifier:
+          type:
+          - string
+          - 'null'
+        track:
+          type: boolean
+        client:
+          enum:
+          - Outlook
+          - Gmail
+          type: string
+          description: <p>Options:</p><ul><li>Outlook</li><li>Gmail</li></ul>
+        matterId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        matterNumber:
+          type:
+          - string
+          - 'null'
+        matterName:
+          type:
+          - string
+          - 'null'
+        matterStatus:
+          type:
+          - string
+          - 'null'
+        matterIsDeleted:
+          type: boolean
+        fileEntryId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          deprecated: true
+        fileId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        filePath:
+          type:
+          - string
+          - 'null'
+        contractId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        contractName:
+          type:
+          - string
+          - 'null'
+        contractStatus:
+          type:
+          - string
+          - 'null'
+        contractIsDeleted:
+          type: boolean
+      additionalProperties: false
     CrossUserEmailTrackingByExternalReferenceIdRequest:
       type: object
       properties:
         externalReferenceIds:
           $ref: '#/components/schemas/StringArray'
       additionalProperties: false
-    CrossUserEmailTracking:
+    PagedEmailThread:
       type: object
       properties:
-        externalReferenceId:
-          type: string
-          nullable: true
-        tracking:
-          type: array
+        threads:
+          type:
+          - array
+          - 'null'
           items:
-            $ref: '#/components/schemas/UserEmailTracking'
-          nullable: true
+            $ref: '#/components/schemas/EmailThread'
+        nextPageCursor:
+          type:
+          - integer
+          - 'null'
+          format: int32
       additionalProperties: false
     UserEmailTrackingRecord:
       type: object
@@ -290,185 +483,18 @@ components:
           type: integer
           format: int32
       additionalProperties: false
-    CreateMessageDraft:
-      type: object
-      properties:
-        sourceId:
-          type: string
-          nullable: true
-        authorEmailAddress:
-          type: string
-          nullable: true
-          deprecated: true
-        expectedFromAddress:
-          type: string
-          nullable: true
-        matterId:
-          type: integer
-          format: int32
-        mode:
-          enum:
-          - Message
-          - File
-          type: string
-          description: <p>Options:</p><ul><li>Message</li><li>File</li></ul>
-        recipients:
-          type: array
-          items:
-            $ref: '#/components/schemas/MessageDraftRecipient'
-          nullable: true
-      additionalProperties: false
     UserEmailTracking:
       type: object
       properties:
         trackedByUserId:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         trackedOnDateTimeUtc:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
         trackedToRecord:
           $ref: '#/components/schemas/UserEmailTrackingRecord'
-      additionalProperties: false
-    PagedEmailThread:
-      type: object
-      properties:
-        threads:
-          type: array
-          items:
-            $ref: '#/components/schemas/EmailThread'
-          nullable: true
-        nextPageCursor:
-          type: integer
-          format: int32
-          nullable: true
-      additionalProperties: false
-    MessageDraftRecipient:
-      required:
-      - userId
-      type: object
-      properties:
-        userId:
-          minLength: 1
-          type: string
-      additionalProperties: false
-    SaveEmailThread:
-      required:
-      - client
-      - threadIdentifier
-      type: object
-      properties:
-        threadIdentifier:
-          minLength: 1
-          type: string
-        track:
-          type: boolean
-        client:
-          enum:
-          - Outlook
-          - Gmail
-          type: string
-          description: <p>Options:</p><ul><li>Outlook</li><li>Gmail</li></ul>
-        matterId:
-          type: integer
-          format: int32
-          nullable: true
-        fileId:
-          type: integer
-          format: int32
-          nullable: true
-        contractId:
-          type: integer
-          format: int32
-          nullable: true
-      additionalProperties: false
-    EmailThreadArray:
-      type: array
-      items:
-        $ref: '#/components/schemas/EmailThread'
-    StringArray:
-      type: array
-      items:
-        type: string
-    EmailThread:
-      type: object
-      properties:
-        threadIdentifier:
-          type: string
-          nullable: true
-        track:
-          type: boolean
-        client:
-          enum:
-          - Outlook
-          - Gmail
-          type: string
-          description: <p>Options:</p><ul><li>Outlook</li><li>Gmail</li></ul>
-        matterId:
-          type: integer
-          format: int32
-          nullable: true
-        matterNumber:
-          type: string
-          nullable: true
-        matterName:
-          type: string
-          nullable: true
-        matterStatus:
-          type: string
-          nullable: true
-        matterIsDeleted:
-          type: boolean
-        fileEntryId:
-          type: integer
-          format: int32
-          nullable: true
-          deprecated: true
-        fileId:
-          type: integer
-          format: int32
-          nullable: true
-        filePath:
-          type: string
-          nullable: true
-        contractId:
-          type: integer
-          format: int32
-          nullable: true
-        contractName:
-          type: string
-          nullable: true
-        contractStatus:
-          type: string
-          nullable: true
-        contractIsDeleted:
-          type: boolean
-      additionalProperties: false
-    CrossUserEmailTrackingResponse:
-      type: object
-      properties:
-        value:
-          type: array
-          items:
-            $ref: '#/components/schemas/CrossUserEmailTracking'
-          nullable: true
-      additionalProperties: false
-    MessageDraft:
-      type: object
-      properties:
-        matterId:
-          type: integer
-          format: int32
-        mode:
-          enum:
-          - Message
-          - File
-          type: string
-          description: <p>Options:</p><ul><li>Message</li><li>File</li></ul>
-        recipients:
-          type: array
-          items:
-            $ref: '#/components/schemas/MessageDraftRecipient'
-          nullable: true
       additionalProperties: false

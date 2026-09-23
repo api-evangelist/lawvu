@@ -1,12 +1,12 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: LawVu Account Auth LookupFields API
-  description: Apis for account related resources (authentication, profiles, organisation details etc)
+  title: LawVu Fields Lookup Fields API
+  description: Apis for field resources
   version: '1.0'
 servers:
-- url: https://api-sandbox.lawvu.com/account-apis
+- url: https://api-sandbox.lawvu.com/field-apis
   description: Sandbox API
-- url: https://api.lawvu.com/account-apis
+- url: https://api.lawvu.com/field-apis
   description: Production API
 tags:
 - name: LookupFields
@@ -266,12 +266,21 @@ paths:
                 $ref: '#/components/schemas/SingleLookupOptionPaganationResult'
 components:
   schemas:
-    LookupOptionCreate:
+    SingleLookupOptionPaganationResult:
       type: object
       properties:
-        label:
-          type: string
-          nullable: true
+        skip:
+          type: integer
+          format: int32
+        take:
+          type: integer
+          format: int32
+        results:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SingleLookupOption'
       additionalProperties: false
     LookupOptionPaganationResult:
       type: object
@@ -283,25 +292,11 @@ components:
           type: integer
           format: int32
         results:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             $ref: '#/components/schemas/LookupOption'
-          nullable: true
-      additionalProperties: false
-    SingleLookupOptionPaganationResult:
-      type: object
-      properties:
-        skip:
-          type: integer
-          format: int32
-        take:
-          type: integer
-          format: int32
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/SingleLookupOption'
-          nullable: true
       additionalProperties: false
     OperationArray:
       type: array
@@ -314,32 +309,47 @@ components:
           type: integer
           format: int32
         label:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
       additionalProperties: false
     SingleLookupOption:
       type: object
       properties:
         id:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         label:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    LookupOptionCreate:
+      type: object
+      properties:
+        label:
+          type:
+          - string
+          - 'null'
       additionalProperties: false
     Operation:
       type: object
       properties:
         value:
-          type: object
-          nullable: true
+          type:
+          - object
+          - 'null'
         path:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         op:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         from:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
       additionalProperties: false

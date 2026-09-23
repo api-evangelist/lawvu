@@ -1,12 +1,12 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: LawVu Account Auth ContractKeyDate API
-  description: Apis for account related resources (authentication, profiles, organisation details etc)
+  title: LawVu Contracts Contract Key Date API
+  description: Apis for contract resources
   version: '1.0'
 servers:
-- url: https://api-sandbox.lawvu.com/account-apis
+- url: https://api-sandbox.lawvu.com/contract-apis
   description: Sandbox API
-- url: https://api.lawvu.com/account-apis
+- url: https://api.lawvu.com/contract-apis
   description: Production API
 tags:
 - name: ContractKeyDate
@@ -68,10 +68,6 @@ paths:
                 value: 2
 components:
   schemas:
-    ContractKeyDateModelArray:
-      type: array
-      items:
-        $ref: '#/components/schemas/ContractKeyDateModel'
     ContractKeyDateModel:
       type: object
       properties:
@@ -79,12 +75,18 @@ components:
           type: integer
           format: int32
         date:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         name:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         value:
           type: number
           format: double
       additionalProperties: false
+    ContractKeyDateModelArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/ContractKeyDateModel'

@@ -1,12 +1,16 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: LawVu Account Auth Matters API
-  description: Apis for account related resources (authentication, profiles, organisation details etc)
+  title: Lawvu Matters API
   version: '1.0'
+  description: 'Operations tagged Matters across 2 of this provider''s published API definitions: lawvu-api-openapi-original.yml, lawvu-matters-openapi-original.json. Each path carries the servers of the definition it was published in.'
 servers:
-- url: https://api-sandbox.lawvu.com/account-apis
+- url: https://api-sandbox.lawvu.com
   description: Sandbox API
-- url: https://api.lawvu.com/account-apis
+- url: https://api.lawvu.com
+  description: Production API
+- url: https://api-sandbox.lawvu.com/matter-apis
+  description: Sandbox API
+- url: https://api.lawvu.com/matter-apis
   description: Production API
 tags:
 - name: Matters
@@ -117,6 +121,11 @@ paths:
                 status: 409
                 title: Conflict
                 type: https://api-docs.lawvu.com/errors/conflict
+    servers:
+    - url: https://api-sandbox.lawvu.com
+      description: Sandbox API
+    - url: https://api.lawvu.com
+      description: Production API
   /v2/matters/{matterId}:
     get:
       tags:
@@ -237,6 +246,11 @@ paths:
                 status: 409
                 title: Conflict
                 type: https://api-docs.lawvu.com/errors/conflict
+    servers:
+    - url: https://api-sandbox.lawvu.com
+      description: Sandbox API
+    - url: https://api.lawvu.com
+      description: Production API
   /v2/matters/{matterId}/files/{fileId}:
     get:
       tags:
@@ -285,6 +299,11 @@ paths:
                 status: 404
                 title: Resource not found
                 type: https://api-docs.lawvu.com/errors/resource_not_found
+    servers:
+    - url: https://api-sandbox.lawvu.com
+      description: Sandbox API
+    - url: https://api.lawvu.com
+      description: Production API
   /v2/matterTypes:
     get:
       tags:
@@ -329,6 +348,11 @@ paths:
                 status: 400
                 title: Invalid request
                 type: https://api-docs.lawvu.com/errors/invalid_request
+    servers:
+    - url: https://api-sandbox.lawvu.com
+      description: Sandbox API
+    - url: https://api.lawvu.com
+      description: Production API
   /v1/matters/quickfind:
     get:
       tags:
@@ -367,11 +391,16 @@ paths:
             text/json:
               schema:
                 $ref: '#/components/schemas/QuickFindMatterArray'
+    servers:
+    - url: https://api-sandbox.lawvu.com/matter-apis
+      description: Sandbox API
+    - url: https://api.lawvu.com/matter-apis
+      description: Production API
   /v1/matters/recent:
     get:
       tags:
       - Matters
-      summary: Recent  matters
+      summary: Recent matters
       description: Returns recently viewed (ref:take) matters for the user
       operationId: get-v1-matters-recent
       parameters:
@@ -461,6 +490,11 @@ paths:
                 organisationId: 1234
                 managerId: C7541186-26CE-4C6C-ABFF-37FE3EF57F88
                 ownerId: BE17D7D6-721A-4F6D-B081-CAABB6D8F5B9
+    servers:
+    - url: https://api-sandbox.lawvu.com/matter-apis
+      description: Sandbox API
+    - url: https://api.lawvu.com/matter-apis
+      description: Production API
   /v1/matters:
     post:
       tags:
@@ -504,7 +538,13 @@ paths:
       tags:
       - Matters
       summary: Get matters
-      description: "Gets matters filtered by single or multiple fields.\r\n<br /> \r\n_To filter by one field_: \"filtering.field\", \"filtering.operator\" and \"filtering.value\" parameters must be filled.\r\n<br /> \r\n_To filter by multiple fields_: \"filtering.logic\" and \"filtering.filters\" parameters must be filled."
+      description: 'Gets matters filtered by single or multiple fields.
+
+
+        _To filter by one field_: "filtering.field", "filtering.operator" and "filtering.value" parameters must be filled.
+
+
+        _To filter by multiple fields_: "filtering.logic" and "filtering.filters" parameters must be filled.'
       operationId: get-v1-matters
       parameters:
       - name: skip
@@ -530,7 +570,7 @@ paths:
           type: string
       - name: filtering.filters
         in: query
-        description: "Array of filters object (optional)\r\n<br /> \r\n_Object Properties_:\r\n<br /> \r\n* _Field_: field to filter by\r\n<br /> \r\n* _Operator_: operator used to filter by\r\n<br /> \r\n* _Value_: value to filter by"
+        description: "Array of filters object (optional)\n<br /> \n_Object Properties_:\n<br /> \n* _Field_: field to filter by\n<br /> \n* _Operator_: operator used to filter by\n<br /> \n* _Value_: value to filter by"
         schema:
           $ref: '#/components/schemas/FilteringArray'
       - name: filtering.field
@@ -606,6 +646,11 @@ paths:
             text/json:
               schema:
                 $ref: '#/components/schemas/ObjectDataSourceResultModel'
+    servers:
+    - url: https://api-sandbox.lawvu.com/matter-apis
+      description: Sandbox API
+    - url: https://api.lawvu.com/matter-apis
+      description: Production API
   /v1/matters/{matterId}:
     get:
       tags:
@@ -665,6 +710,11 @@ paths:
       responses:
         '200':
           description: Success
+    servers:
+    - url: https://api-sandbox.lawvu.com/matter-apis
+      description: Sandbox API
+    - url: https://api.lawvu.com/matter-apis
+      description: Production API
   /v1/matters/{matterId}/users:
     post:
       tags:
@@ -779,6 +829,11 @@ paths:
             text/json:
               schema:
                 $ref: '#/components/schemas/MatterUserDataSourceResult'
+    servers:
+    - url: https://api-sandbox.lawvu.com/matter-apis
+      description: Sandbox API
+    - url: https://api.lawvu.com/matter-apis
+      description: Production API
   /v1/matters/externalid/{externalId}:
     get:
       tags:
@@ -805,6 +860,11 @@ paths:
             text/json:
               schema:
                 $ref: '#/components/schemas/ExternalIdLookupModel'
+    servers:
+    - url: https://api-sandbox.lawvu.com/matter-apis
+      description: Sandbox API
+    - url: https://api.lawvu.com/matter-apis
+      description: Production API
   /v1/matters/{matterId}/fields:
     get:
       tags:
@@ -1107,9 +1167,28 @@ paths:
       responses:
         '200':
           description: Success
+    servers:
+    - url: https://api-sandbox.lawvu.com/matter-apis
+      description: Sandbox API
+    - url: https://api.lawvu.com/matter-apis
+      description: Production API
 components:
   schemas:
-    AuditableReference:
+    TeamReference:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The identifier of the team
+          format: int32
+          example: 469
+        name:
+          type: string
+          description: The full name of the team
+          readOnly: true
+          example: Legal - Commercial
+      additionalProperties: false
+    AuditableUserReference:
       type: object
       properties:
         dateUtc:
@@ -1118,260 +1197,29 @@ components:
           format: date-time
           readOnly: true
           example: '2024-12-25T00:00:00Z'
+        user:
+          allOf:
+          - $ref: '#/components/schemas/UserReference'
+          description: The user who performed the action
+          readOnly: true
         userName:
           type: string
           description: The username of who performed the action
           readOnly: true
           example: api.developer@lawvu.com
       additionalProperties: false
-    Filtering:
-      type: object
-      properties:
-        field:
-          type: string
-          description: Field to filter by (optional)
-          nullable: true
-        operator:
-          enum:
-          - eq
-          - neq
-          - lt
-          - lte
-          - gt
-          - gte
-          - startswith
-          - endswith
-          - contains
-          - doesnotcon
-          - isnull
-          type: string
-          description: Operator used for filtering (optional)<p>Options:</p><ul><li>eq</li><li>neq</li><li>lt</li><li>lte</li><li>gt</li><li>gte</li><li>startswith</li><li>endswith</li><li>contains</li><li>doesnotcon</li><li>isnull</li></ul>
-        value:
-          type: string
-          description: Value to filter by (optional)
-          nullable: true
-      additionalProperties: false
-    FileType:
-      enum:
-      - File
-      - Folder
-      - ContractDocument
-      type: string
-      description: The type of file entry
-    OperationArray:
-      type: array
-      items:
-        $ref: '#/components/schemas/Operation'
-    QuickFindMatterArray:
-      type: array
-      items:
-        $ref: '#/components/schemas/QuickFindMatter'
-    FieldData:
-      type: object
-      properties:
-        schema:
-          type: object
-          nullable: true
-        model:
-          type: object
-          nullable: true
-      additionalProperties: false
-    MatterUser:
-      type: object
-      properties:
-        userId:
-          type: string
-          description: ID of the user
-          nullable: true
-        userFirstname:
-          type: string
-          nullable: true
-        userLastname:
-          type: string
-          nullable: true
-        userOrganisationId:
-          type: integer
-          format: int32
-          nullable: true
-        userOrganisationName:
-          type: string
-          nullable: true
-        userHasPicture:
-          type: boolean
-        userPictureCacheId:
-          type: integer
-          format: int32
-        userFullName:
-          type: string
-          nullable: true
-        userInitials:
-          type: string
-          nullable: true
-        permissions:
-          type: array
-          items:
-            type: integer
-            format: int32
-          description: The permissions that the user has for the matter
-          nullable: true
-        isDelegateOwner:
-          type: boolean
-          description: User has been assigned delegate owner
-        isDelegateManager:
-          type: boolean
-          description: User is a delegate manager
-      additionalProperties: false
-    QuickFindMatter:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        matterNumber:
-          type: string
-          nullable: true
-        name:
-          type: string
-          nullable: true
-        organisationName:
-          type: string
-          nullable: true
-        reference:
-          type: string
-          nullable: true
-        managerReference:
-          type: string
-          nullable: true
-        purchaseOrderNumber:
-          type: string
-          nullable: true
-        parentId:
-          type: integer
-          format: int32
-          nullable: true
-        organisationId:
-          type: integer
-          format: int32
-      additionalProperties: false
-    ExternalIdLookupModel:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-      additionalProperties: false
-    RecentMatterArray:
-      type: array
-      items:
-        $ref: '#/components/schemas/RecentMatter'
-    Operation:
-      type: object
-      properties:
-        value:
-          type: object
-          nullable: true
-        path:
-          type: string
-          nullable: true
-        op:
-          type: string
-          nullable: true
-        from:
-          type: string
-          nullable: true
-      additionalProperties: false
-    IntakeQueueReference:
-      type: object
-      properties:
-        organizationId:
-          type: integer
-          description: The system identifier for the organization
-          format: int32
-          example: 8134
-        organizationName:
-          type: string
-          description: The name of the organization
-          readOnly: true
-          example: Api Development Organization
-      additionalProperties: false
-    MatterTagModel:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        description:
-          type: string
-          nullable: true
-      additionalProperties: false
-    MatterFieldData:
-      type: object
-      properties:
-        detailFields:
-          $ref: '#/components/schemas/FieldData'
-        coreFields:
-          $ref: '#/components/schemas/FieldData'
-      additionalProperties: false
-    FilteringArray:
-      type: array
-      items:
-        $ref: '#/components/schemas/Filtering'
-    MatterTypeCollectionResponse:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/MatterType'
-          description: The collection of items
-      additionalProperties: false
-      description: Response wrapper of a collection of items
-    MatterUserDataSourceResult:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/MatterUser'
-          description: Represents a single page of processed data.
-          nullable: true
-        total:
-          type: integer
-          description: The total number of records available.
-          format: int32
-      additionalProperties: false
-    FolderReference:
-      type: object
-      properties:
-        folder:
-          allOf:
-          - $ref: '#/components/schemas/FolderReference'
-          description: "The parent folder. \n\nThe folder will be null when the folder is at the root of the resource"
-          nullable: true
-          readOnly: true
-        id:
-          type: integer
-          description: The system identifier for the folder
-          format: int32
-          example: 786
-        name:
-          type: string
-          description: The name of the folder
-          readOnly: true
-          example: Drafts
-      additionalProperties: false
     UpdateMatter:
       type: object
       properties:
         name:
-          type: string
+          type:
+          - string
+          - 'null'
           description: "The user defined name of the matter \n\nWhen simple ticketing is enabled for the organization then the Name is going to be optional and will default to simple ticketing rules, otherwise is required."
-          nullable: true
         owner:
           allOf:
           - $ref: '#/components/schemas/UserReference'
           description: The user assigned as the owner of the matter
-          nullable: true
         manager:
           allOf:
           - $ref: '#/components/schemas/MatterManager'
@@ -1381,13 +1229,15 @@ components:
             Only one of User and IntakeQueue can be assigned to a matter at a time.
 
             '
-          nullable: true
         externalId:
-          type: string
+          type:
+          - string
+          - 'null'
           description: A unique user defined identifier that can be used to reference another system
-          nullable: true
         fields:
-          type: object
+          type:
+          - object
+          - 'null'
           additionalProperties:
             oneOf:
             - title: 'null'
@@ -1411,7 +1261,6 @@ components:
             - $ref: '#/components/schemas/UserFieldValue'
             x-additionalPropertiesName: fieldApiName
           description: The collection of fields associated with the matter
-          nullable: true
           example:
             my_text_field: my text value
             my_decimal_field: 78659.84
@@ -1425,285 +1274,68 @@ components:
             my_user_field:
               id: f0f1e06e-3005-4093-af7f-1934d55617e1
         restricted:
-          type: boolean
+          type:
+          - boolean
+          - 'null'
           description: 'Is the matter only available to members
 
 
             An indicator where the matter requires membership to access'
-          nullable: true
           example: false
         status:
           allOf:
           - $ref: '#/components/schemas/MatterStatus'
           description: The current status of the matter
-          nullable: true
         teamAssigned:
           allOf:
           - $ref: '#/components/schemas/TeamReference'
           description: The team which this matter is assigned to
-          nullable: true
       additionalProperties: false
-    CreateMatter:
-      required:
-      - type
+    MatterCollectionResponse:
       type: object
       properties:
-        type:
-          allOf:
-          - $ref: '#/components/schemas/MatterTypeReference'
-          description: The type of the matter
-        id:
-          type: integer
-          description: The system identifier for the matter
-          format: int32
-          nullable: true
-          readOnly: true
-          example: 1056
-        name:
-          type: string
-          description: "The user defined name of the matter \n\nWhen simple ticketing is enabled for the organization then the Name is going to be optional and will default to simple ticketing rules, otherwise is required."
-          nullable: true
-          example: My matter
-        displayId:
-          type: string
-          description: 'A system generated identifier of the matter.
-
-            Also known as "LawVu ID" or "Matter Number"'
-          nullable: true
-          readOnly: true
-          example: LV0001-0001
-        owner:
-          allOf:
-          - $ref: '#/components/schemas/UserReference'
-          description: The user assigned as the owner of the matter
-          nullable: true
-        manager:
-          allOf:
-          - $ref: '#/components/schemas/MatterManager'
-          description: 'The user managing the matter or the intake queue for an organization.
-
-
-            Only one of User and IntakeQueue can be assigned to a matter at a time.
-
-
-            During creation a default manager may be assigned when none is provided depending on the matter type configuration. More information can be found <a href="https://help.lawvu.com/en/articles/6102905-setting-a-default-matter-manager-intake-assignment">here</a>.'
-          nullable: true
-        externalId:
-          type: string
-          description: A unique user defined identifier that can be used to reference another system
-          nullable: true
-          example: external-01
-        fields:
-          type: object
-          additionalProperties:
-            oneOf:
-            - title: 'null'
-            - title: Text
-              type: string
-              example: my text value
-            - title: Decimal
-              type: number
-              example: 78659.84
-            - title: Boolean
-              type: boolean
-              example: true
-            - title: Date
-              type: string
-              example: '2025-05-06'
-            - $ref: '#/components/schemas/OptionFieldValue'
-            - title: MultiOption
-              type: array
-              items:
-                $ref: '#/components/schemas/OptionFieldValue'
-            - $ref: '#/components/schemas/UserFieldValue'
-            x-additionalPropertiesName: fieldApiName
-          description: The collection of fields associated with the matter
-          nullable: true
-          example:
-            my_text_field: my text value
-            my_decimal_field: 78659.84
-            my_boolean_field: true
-            my_date_field: '2025-05-06'
-            my_option_field:
-              value: option_1
-            my_multioption_field:
-            - value: option_a
-            - value: option_d
-            my_user_field:
-              id: f0f1e06e-3005-4093-af7f-1934d55617e1
-        restricted:
-          type: boolean
-          description: 'Is the matter only available to members
-
-
-            An indicator where the matter requires membership to access'
-          default: false
-          nullable: true
-          example: false
-        teamAssigned:
-          allOf:
-          - $ref: '#/components/schemas/TeamReference'
-          description: The team which this matter is assigned to
-          nullable: true
-        created:
-          allOf:
-          - $ref: '#/components/schemas/AuditableUserReference'
-          description: The user who created the matter and when
-          nullable: true
-          readOnly: true
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Matter'
+          description: The collection of items
       additionalProperties: false
-    CreatedMatter:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: The system identifier for the matter
-          format: int32
-          example: 1056
-      additionalProperties: false
-      description: Represents a matter that has been created
-    ResourceType:
-      enum:
-      - Contract
-      - Matter
-      type: string
-    MatterStatus:
-      enum:
-      - Draft
-      - Scoping
-      - Review
-      - Active
-      - TasksLate
-      - MilestonesLate
-      - TasksAndMilestonesLate
-      - AwaitingManagerAcceptance
-      - AwaitingOwnerAcceptance
-      - Complete
-      - Archived
-      - OnHold
-      type: string
-    UserFieldValue:
-      title: User
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/UserReference'
-    File:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: The system identifier for the file
-          format: int32
-          nullable: true
-          readOnly: true
-          example: 9456
-        name:
-          type: string
-          description: 'The user defined name of the file resource
-
-            For file resources with a type of file this includes the file extension'
-          nullable: true
-          example: document.txt
-        displayId:
-          type: string
-          description: 'A system generated identifier of the file resource.
-
-            Also known as "Document ID"'
-          nullable: true
-          readOnly: true
-          example: LV0001-0000123.1
-        type:
-          allOf:
-          - $ref: '#/components/schemas/FileType'
-          description: The type of file resource
-          nullable: true
-          readOnly: true
-          example: File
-        folder:
-          allOf:
-          - $ref: '#/components/schemas/FolderReference'
-          description: "The folder where the file resource is located \n\nFolder is null when the file resource is located at the root of the resource"
-          nullable: true
-        contentType:
-          type: string
-          description: The content type of the file binary
-          nullable: true
-          readOnly: true
-          example: text/plain
-        resource:
-          allOf:
-          - $ref: '#/components/schemas/ResourceReference'
-          description: The resource where the file resource is located within
-          nullable: true
-          readOnly: true
-        restricted:
-          type: boolean
-          description: Is the file resource access restricted
-          default: false
-          nullable: true
-          readOnly: true
-          example: false
-        size:
-          type: integer
-          description: The size of the file binary in bytes
-          format: int64
-          nullable: true
-          readOnly: true
-          example: 18139
-        version:
-          type: integer
-          description: The version number of the file resource
-          format: int32
-          nullable: true
-          readOnly: true
-          example: 3
-        created:
-          allOf:
-          - $ref: '#/components/schemas/AuditableUserReference'
-          description: The user who created the file resource and when
-          nullable: true
-          readOnly: true
-        modified:
-          allOf:
-          - $ref: '#/components/schemas/AuditableReference'
-          description: The username who modified the file resource and when
-          nullable: true
-          readOnly: true
-      additionalProperties: false
+      description: Response wrapper of a collection of items
     Matter:
       type: object
       properties:
         id:
-          type: integer
+          type:
+          - integer
+          - 'null'
           description: The system identifier for the matter
           format: int32
-          nullable: true
           readOnly: true
           example: 1056
         name:
-          type: string
+          type:
+          - string
+          - 'null'
           description: "The user defined name of the matter \n\nWhen simple ticketing is enabled for the organization then the Name is going to be optional and will default to simple ticketing rules, otherwise is required."
-          nullable: true
           example: My matter
         displayId:
-          type: string
+          type:
+          - string
+          - 'null'
           description: 'A system generated identifier of the matter.
 
             Also known as "LawVu ID" or "Matter Number"'
-          nullable: true
           readOnly: true
           example: LV0001-0001
         type:
           allOf:
           - $ref: '#/components/schemas/MatterTypeReference'
           description: The type of the matter
-          nullable: true
           readOnly: true
         owner:
           allOf:
           - $ref: '#/components/schemas/UserReference'
           description: The user assigned as the owner of the matter
-          nullable: true
         manager:
           allOf:
           - $ref: '#/components/schemas/MatterManager'
@@ -1713,14 +1345,16 @@ components:
             Only one of User and IntakeQueue can be assigned to a matter at a time.
 
             '
-          nullable: true
         externalId:
-          type: string
+          type:
+          - string
+          - 'null'
           description: A unique user defined identifier that can be used to reference another system
-          nullable: true
           example: external-01
         fields:
-          type: object
+          type:
+          - object
+          - 'null'
           additionalProperties:
             oneOf:
             - title: 'null'
@@ -1744,7 +1378,6 @@ components:
             - $ref: '#/components/schemas/UserFieldValue'
             x-additionalPropertiesName: fieldApiName
           description: The collection of fields associated with the matter
-          nullable: true
           example:
             my_text_field: my text value
             my_decimal_field: 78659.84
@@ -1765,45 +1398,99 @@ components:
               lastName: Developer
               organizationId: 8134
         restricted:
-          type: boolean
+          type:
+          - boolean
+          - 'null'
           description: 'Is the matter only available to members
 
 
             An indicator where the matter requires membership to access'
           default: false
-          nullable: true
           example: false
         status:
           allOf:
           - $ref: '#/components/schemas/MatterStatus'
           description: The current status of the matter
-          nullable: true
           example: Active
         teamAssigned:
           allOf:
           - $ref: '#/components/schemas/TeamReference'
           description: The team which this matter is assigned to
-          nullable: true
         created:
           allOf:
           - $ref: '#/components/schemas/AuditableUserReference'
           description: The user who created the matter and when
-          nullable: true
           readOnly: true
       additionalProperties: false
-    TermsAndConditions:
+    OptionFieldValue:
+      title: Option
       type: object
       properties:
-        fileId:
+        label:
+          type: string
+          readOnly: true
+          example: Option 1
+        value:
+          type: string
+          example: option_1
+    MatterStatus:
+      enum:
+      - Draft
+      - Scoping
+      - Review
+      - Active
+      - TasksLate
+      - MilestonesLate
+      - TasksAndMilestonesLate
+      - AwaitingManagerAcceptance
+      - AwaitingOwnerAcceptance
+      - Complete
+      - Archived
+      - OnHold
+      type: string
+    MatterTypeReference:
+      type: object
+      properties:
+        id:
           type: integer
+          description: The system identifier for the matter type
           format: int32
-        code:
+          example: 7492
+        name:
           type: string
-          nullable: true
-        fileName:
-          type: string
-          nullable: true
+          description: The name of the matter type
+          readOnly: true
+          example: NDA
       additionalProperties: false
+    FolderReference:
+      type: object
+      properties:
+        folder:
+          allOf:
+          - $ref: '#/components/schemas/FolderReference'
+          description: "The parent folder. \n\nThe folder will be null when the folder is at the root of the resource"
+          readOnly: true
+        id:
+          type: integer
+          description: The system identifier for the folder
+          format: int32
+          example: 786
+        name:
+          type: string
+          description: The name of the folder
+          readOnly: true
+          example: Drafts
+      additionalProperties: false
+    MatterTypeCollectionResponse:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/MatterType'
+          description: The collection of items
+      additionalProperties: false
+      description: Response wrapper of a collection of items
     UserReference:
       type: object
       properties:
@@ -1833,92 +1520,106 @@ components:
           readOnly: true
           example: 8134
       additionalProperties: false
-    CreateMatter_2:
-      required:
-      - categoryId
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of the matter
-          nullable: true
-        categoryId:
-          type: integer
-          description: 'To retrieve categories ref: /mattercategories'
-          format: int32
-        organisationId:
-          type: integer
-          description: Leave null for default organisation
-          format: int32
-          nullable: true
-        fields:
-          type: object
-          description: "To retrieve fields for matter creation ref: mattercategories/{categoryId}/createSchema\r\nFields without grouping example serialization: \"fields\":{ \"field_[fieldId]\":null, \"field_[fieldId]\":false }\r\nFields with grouping example serialization: \"fields\":{ \"group_[groupId]\": { \"field_[fieldId]\":null, \"field_[fieldId]\":false } }"
-          nullable: true
-        restricted:
-          type: boolean
-          description: Is the matter restricted
-        urgent:
-          type: boolean
-          description: Is the matter urgent
-        parentId:
-          type: integer
-          format: int32
-          nullable: true
-        managerId:
-          type: string
-          description: Optionally set the Manager of the new Matter
-          nullable: true
-        ownerId:
-          type: string
-          description: Optionally set the Owner of the new Matter
-          nullable: true
-        externalId:
-          type: string
-          description: Optionally set an ID from an external system. Uniqueness is enforced for your organisation
-          nullable: true
-        teamId:
-          type: integer
-          description: Set the team assignment. This can be required [ref:MatterTemplate.TeamRequired]
-          format: int32
-          nullable: true
-      additionalProperties: false
-    MatterType:
+    File:
       type: object
       properties:
         id:
-          type: integer
-          description: The system identifier for the matter type
+          type:
+          - integer
+          - 'null'
+          description: The system identifier for the file
           format: int32
-          nullable: true
           readOnly: true
-          example: 7492
+          example: 9456
         name:
-          type: string
-          description: The user defined name of the matter type
-          nullable: true
-          example: My matter type
-        parent:
-          allOf:
-          - $ref: '#/components/schemas/MatterTypeReference'
-          description: The parent matter type
-          nullable: true
-      additionalProperties: false
-    ResourceReference:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: The system identifier for the resource
-          format: int32
-          example: 78914
+          type:
+          - string
+          - 'null'
+          description: 'The user defined name of the file resource
+
+            For file resources with a type of file this includes the file extension'
+          example: document.txt
+        displayId:
+          type:
+          - string
+          - 'null'
+          description: 'A system generated identifier of the file resource.
+
+            Also known as "Document ID"'
+          readOnly: true
+          example: LV0001-0000123.1
         type:
           allOf:
-          - $ref: '#/components/schemas/ResourceType'
-          description: The type of the resource
+          - $ref: '#/components/schemas/FileType'
+          description: The type of file resource
           readOnly: true
-          example: Contract
+          example: File
+        folder:
+          allOf:
+          - $ref: '#/components/schemas/FolderReference'
+          description: "The folder where the file resource is located \n\nFolder is null when the file resource is located at the root of the resource"
+        contentType:
+          type:
+          - string
+          - 'null'
+          description: The content type of the file binary
+          readOnly: true
+          example: text/plain
+        resource:
+          allOf:
+          - $ref: '#/components/schemas/ResourceReference'
+          description: The resource where the file resource is located within
+          readOnly: true
+        restricted:
+          type:
+          - boolean
+          - 'null'
+          description: Is the file resource access restricted
+          default: false
+          readOnly: true
+          example: false
+        size:
+          type:
+          - integer
+          - 'null'
+          description: The size of the file binary in bytes
+          format: int64
+          readOnly: true
+          example: 18139
+        version:
+          type:
+          - integer
+          - 'null'
+          description: The version number of the file resource
+          format: int32
+          readOnly: true
+          example: 3
+        created:
+          allOf:
+          - $ref: '#/components/schemas/AuditableUserReference'
+          description: The user who created the file resource and when
+          readOnly: true
+        modified:
+          allOf:
+          - $ref: '#/components/schemas/AuditableReference'
+          description: The username who modified the file resource and when
+          readOnly: true
       additionalProperties: false
+    UserFieldValue:
+      title: User
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/UserReference'
+    CreatedMatter:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The system identifier for the matter
+          format: int32
+          example: 1056
+      additionalProperties: false
+      description: Represents a matter that has been created
     ProblemDetails:
       type: object
       properties:
@@ -1942,122 +1643,11 @@ components:
           type: string
           description: A URI which can be followed to find out more about the problem.
       additionalProperties: {}
-    StatusMessage:
-      type: object
-      properties:
-        message:
-          type: string
-          nullable: true
-        createdDateUtc:
-          type: string
-          format: date-time
-        id:
-          type: integer
-          format: int32
-        userId:
-          type: string
-          nullable: true
-        userFirstname:
-          type: string
-          nullable: true
-        userLastname:
-          type: string
-          nullable: true
-        userOrganisationId:
-          type: integer
-          format: int32
-          nullable: true
-        userOrganisationName:
-          type: string
-          nullable: true
-        userHasPicture:
-          type: boolean
-        userPictureCacheId:
-          type: integer
-          format: int32
-        role:
-          enum:
-          - Administrator
-          - InhouseLegal
-          - Contributor
-          - Standard
-          - External
-          - MatterManager
-          type: string
-          description: <p>Options:</p><ul><li>Administrator</li><li>InhouseLegal</li><li>Contributor</li><li>Standard</li><li>External</li><li>MatterManager</li></ul>
-        userFullName:
-          type: string
-          nullable: true
-        userInitials:
-          type: string
-          nullable: true
-      additionalProperties: false
-    RecentMatter:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-          nullable: true
-        matterNumber:
-          type: string
-          nullable: true
-        lastActivityDateUtc:
-          type: string
-          description: The UTC date of when the current user last viewed the Matter
-          format: date-time
-          nullable: true
-        organisationId:
-          type: integer
-          format: int32
-        managerId:
-          type: string
-          nullable: true
-        ownerId:
-          type: string
-          nullable: true
-      additionalProperties: false
-    TeamReference:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: The identifier of the team
-          format: int32
-          example: 469
-        name:
-          type: string
-          description: The full name of the team
-          readOnly: true
-          example: Legal - Commercial
-      additionalProperties: false
-    ObjectDataSourceResultModel:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            type: object
-          description: Represents a single page of processed data.
-          nullable: true
-        total:
-          type: integer
-          description: The total number of records available.
-          format: int32
-      additionalProperties: false
-    OptionFieldValue:
-      title: Option
-      type: object
-      properties:
-        label:
-          type: string
-          readOnly: true
-          example: Option 1
-        value:
-          type: string
-          example: option_1
+    ResourceType:
+      enum:
+      - Contract
+      - Matter
+      type: string
     HttpValidationProblemDetails:
       type: object
       properties:
@@ -2088,19 +1678,347 @@ components:
           type: string
           description: A URI which can be followed to find out more about the problem.
       additionalProperties: {}
-    MatterTypeReference:
+    CreateMatter:
+      required:
+      - type
+      type: object
+      properties:
+        type:
+          allOf:
+          - $ref: '#/components/schemas/MatterTypeReference'
+          description: The type of the matter
+        id:
+          type:
+          - integer
+          - 'null'
+          description: The system identifier for the matter
+          format: int32
+          readOnly: true
+          example: 1056
+        name:
+          type:
+          - string
+          - 'null'
+          description: "The user defined name of the matter \n\nWhen simple ticketing is enabled for the organization then the Name is going to be optional and will default to simple ticketing rules, otherwise is required."
+          example: My matter
+        displayId:
+          type:
+          - string
+          - 'null'
+          description: 'A system generated identifier of the matter.
+
+            Also known as "LawVu ID" or "Matter Number"'
+          readOnly: true
+          example: LV0001-0001
+        owner:
+          allOf:
+          - $ref: '#/components/schemas/UserReference'
+          description: The user assigned as the owner of the matter
+        manager:
+          allOf:
+          - $ref: '#/components/schemas/MatterManager'
+          description: 'The user managing the matter or the intake queue for an organization.
+
+
+            Only one of User and IntakeQueue can be assigned to a matter at a time.
+
+
+            During creation a default manager may be assigned when none is provided depending on the matter type configuration. More information can be found <a href="https://help.lawvu.com/en/articles/6102905-setting-a-default-matter-manager-intake-assignment">here</a>.'
+        externalId:
+          type:
+          - string
+          - 'null'
+          description: A unique user defined identifier that can be used to reference another system
+          example: external-01
+        fields:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            oneOf:
+            - title: 'null'
+            - title: Text
+              type: string
+              example: my text value
+            - title: Decimal
+              type: number
+              example: 78659.84
+            - title: Boolean
+              type: boolean
+              example: true
+            - title: Date
+              type: string
+              example: '2025-05-06'
+            - $ref: '#/components/schemas/OptionFieldValue'
+            - title: MultiOption
+              type: array
+              items:
+                $ref: '#/components/schemas/OptionFieldValue'
+            - $ref: '#/components/schemas/UserFieldValue'
+            x-additionalPropertiesName: fieldApiName
+          description: The collection of fields associated with the matter
+          example:
+            my_text_field: my text value
+            my_decimal_field: 78659.84
+            my_boolean_field: true
+            my_date_field: '2025-05-06'
+            my_option_field:
+              value: option_1
+            my_multioption_field:
+            - value: option_a
+            - value: option_d
+            my_user_field:
+              id: f0f1e06e-3005-4093-af7f-1934d55617e1
+        restricted:
+          type:
+          - boolean
+          - 'null'
+          description: 'Is the matter only available to members
+
+
+            An indicator where the matter requires membership to access'
+          default: false
+          example: false
+        teamAssigned:
+          allOf:
+          - $ref: '#/components/schemas/TeamReference'
+          description: The team which this matter is assigned to
+        created:
+          allOf:
+          - $ref: '#/components/schemas/AuditableUserReference'
+          description: The user who created the matter and when
+          readOnly: true
+      additionalProperties: false
+    MatterType:
+      type: object
+      properties:
+        id:
+          type:
+          - integer
+          - 'null'
+          description: The system identifier for the matter type
+          format: int32
+          readOnly: true
+          example: 7492
+        name:
+          type:
+          - string
+          - 'null'
+          description: The user defined name of the matter type
+          example: My matter type
+        parent:
+          allOf:
+          - $ref: '#/components/schemas/MatterTypeReference'
+          description: The parent matter type
+      additionalProperties: false
+    MatterManager:
+      type: object
+      properties:
+        intakeQueue:
+          allOf:
+          - $ref: '#/components/schemas/IntakeQueueReference'
+          description: The intake queue for the organization that is assigned to manage the matter
+        user:
+          allOf:
+          - $ref: '#/components/schemas/UserReference'
+          description: The user who is assigned to manage the matter
+      additionalProperties: false
+    FileType:
+      enum:
+      - File
+      - Folder
+      - ContractDocument
+      type: string
+      description: The type of file entry
+    IntakeQueueReference:
+      type: object
+      properties:
+        organizationId:
+          type: integer
+          description: The system identifier for the organization
+          format: int32
+          example: 8134
+        organizationName:
+          type: string
+          description: The name of the organization
+          readOnly: true
+          example: Api Development Organization
+      additionalProperties: false
+    AuditableReference:
+      type: object
+      properties:
+        dateUtc:
+          type: string
+          description: The date and time the action was performed. The date and time uses the ISO-8601 format and will be in UTC
+          format: date-time
+          readOnly: true
+          example: '2024-12-25T00:00:00Z'
+        userName:
+          type: string
+          description: The username of who performed the action
+          readOnly: true
+          example: api.developer@lawvu.com
+      additionalProperties: false
+    ResourceReference:
       type: object
       properties:
         id:
           type: integer
-          description: The system identifier for the matter type
+          description: The system identifier for the resource
           format: int32
-          example: 7492
-        name:
-          type: string
-          description: The name of the matter type
+          example: 78914
+        type:
+          allOf:
+          - $ref: '#/components/schemas/ResourceType'
+          description: The type of the resource
           readOnly: true
-          example: NDA
+          example: Contract
+      additionalProperties: false
+    OperationArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/Operation'
+    ExternalIdLookupModel:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+      additionalProperties: false
+    RecentMatter:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type:
+          - string
+          - 'null'
+        matterNumber:
+          type:
+          - string
+          - 'null'
+        lastActivityDateUtc:
+          type:
+          - string
+          - 'null'
+          description: The UTC date of when the current user last viewed the Matter
+          format: date-time
+        organisationId:
+          type: integer
+          format: int32
+        managerId:
+          type:
+          - string
+          - 'null'
+        ownerId:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    Matter_2:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        matterNumber:
+          type:
+          - string
+          - 'null'
+        matterUrl:
+          type:
+          - string
+          - 'null'
+        createdDateUtc:
+          type: string
+          format: date-time
+        managerOrganisationId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        owner:
+          $ref: '#/components/schemas/MatterUser'
+        manager:
+          $ref: '#/components/schemas/MatterUser'
+        organisationId:
+          type: integer
+          format: int32
+        organisationName:
+          type:
+          - string
+          - 'null'
+        lastStatusMessage:
+          $ref: '#/components/schemas/StatusMessage'
+        terms:
+          $ref: '#/components/schemas/TermsAndConditions'
+        matterSpecificEmail:
+          type:
+          - string
+          - 'null'
+        tags:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/MatterTagModel'
+        categoryId:
+          type: integer
+          format: int32
+        externalId:
+          type:
+          - string
+          - 'null'
+        name:
+          type:
+          - string
+          - 'null'
+        parentId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        restricted:
+          type: boolean
+        status:
+          type:
+          - string
+          - 'null'
+        teamId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        urgent:
+          type: boolean
+      additionalProperties: false
+    ObjectDataSourceResultModel:
+      type: object
+      properties:
+        data:
+          type:
+          - array
+          - 'null'
+          items:
+            type: object
+          description: Represents a single page of processed data.
+        total:
+          type: integer
+          description: The total number of records available.
+          format: int32
+      additionalProperties: false
+    MatterTagModel:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        description:
+          type:
+          - string
+          - 'null'
       additionalProperties: false
     AssignMatterUser:
       required:
@@ -2119,118 +2037,334 @@ components:
           type: string
           description: The target of the assignment (Matter, MatterOwner or MatterManager)<p>Options:</p><ul><li>Matter</li><li>MatterOwner</li><li>MatterManager</li></ul>
         note:
-          type: string
+          type:
+          - string
+          - 'null'
           description: An optional note
-          nullable: true
       additionalProperties: false
-    MatterCollectionResponse:
+    StatusMessage:
       type: object
       properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Matter'
-          description: The collection of items
-      additionalProperties: false
-      description: Response wrapper of a collection of items
-    MatterManager:
-      type: object
-      properties:
-        intakeQueue:
-          allOf:
-          - $ref: '#/components/schemas/IntakeQueueReference'
-          description: The intake queue for the organization that is assigned to manage the matter
-          nullable: true
-        user:
-          allOf:
-          - $ref: '#/components/schemas/UserReference'
-          description: The user who is assigned to manage the matter
-          nullable: true
-      additionalProperties: false
-    AuditableUserReference:
-      type: object
-      properties:
-        dateUtc:
+        message:
+          type:
+          - string
+          - 'null'
+        createdDateUtc:
           type: string
-          description: The date and time the action was performed. The date and time uses the ISO-8601 format and will be in UTC
           format: date-time
-          readOnly: true
-          example: '2024-12-25T00:00:00Z'
-        user:
-          allOf:
-          - $ref: '#/components/schemas/UserReference'
-          description: The user who performed the action
-          nullable: true
-          readOnly: true
-        userName:
+        id:
+          type: integer
+          format: int32
+        userId:
+          type:
+          - string
+          - 'null'
+        userFirstname:
+          type:
+          - string
+          - 'null'
+        userLastname:
+          type:
+          - string
+          - 'null'
+        userOrganisationId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        userOrganisationName:
+          type:
+          - string
+          - 'null'
+        userHasPicture:
+          type: boolean
+        userPictureCacheId:
+          type: integer
+          format: int32
+        role:
+          enum:
+          - Administrator
+          - InhouseLegal
+          - Contributor
+          - Standard
+          - External
+          - MatterManager
           type: string
-          description: The username of who performed the action
-          readOnly: true
-          example: api.developer@lawvu.com
+          description: <p>Options:</p><ul><li>Administrator</li><li>InhouseLegal</li><li>Contributor</li><li>Standard</li><li>External</li><li>MatterManager</li></ul>
+        userFullName:
+          type:
+          - string
+          - 'null'
+        userInitials:
+          type:
+          - string
+          - 'null'
       additionalProperties: false
-    Matter_2:
+    Filtering:
+      type: object
+      properties:
+        field:
+          type:
+          - string
+          - 'null'
+          description: Field to filter by (optional)
+        operator:
+          enum:
+          - eq
+          - neq
+          - lt
+          - lte
+          - gt
+          - gte
+          - startswith
+          - endswith
+          - contains
+          - doesnotcon
+          - isnull
+          type: string
+          description: Operator used for filtering (optional)<p>Options:</p><ul><li>eq</li><li>neq</li><li>lt</li><li>lte</li><li>gt</li><li>gte</li><li>startswith</li><li>endswith</li><li>contains</li><li>doesnotcon</li><li>isnull</li></ul>
+        value:
+          type:
+          - string
+          - 'null'
+          description: Value to filter by (optional)
+      additionalProperties: false
+    RecentMatterArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/RecentMatter'
+    FilteringArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/Filtering'
+    TermsAndConditions:
+      type: object
+      properties:
+        fileId:
+          type: integer
+          format: int32
+        code:
+          type:
+          - string
+          - 'null'
+        fileName:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    QuickFindMatterArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/QuickFindMatter'
+    Operation:
+      type: object
+      properties:
+        value:
+          type:
+          - object
+          - 'null'
+        path:
+          type:
+          - string
+          - 'null'
+        op:
+          type:
+          - string
+          - 'null'
+        from:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    MatterFieldData:
+      type: object
+      properties:
+        detailFields:
+          $ref: '#/components/schemas/FieldData'
+        coreFields:
+          $ref: '#/components/schemas/FieldData'
+      additionalProperties: false
+    MatterUserDataSourceResult:
+      type: object
+      properties:
+        data:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/MatterUser'
+          description: Represents a single page of processed data.
+        total:
+          type: integer
+          description: The total number of records available.
+          format: int32
+      additionalProperties: false
+    QuickFindMatter:
       type: object
       properties:
         id:
           type: integer
           format: int32
         matterNumber:
-          type: string
-          nullable: true
-        matterUrl:
-          type: string
-          nullable: true
-        createdDateUtc:
-          type: string
-          format: date-time
-        managerOrganisationId:
-          type: integer
+          type:
+          - string
+          - 'null'
+        name:
+          type:
+          - string
+          - 'null'
+        organisationName:
+          type:
+          - string
+          - 'null'
+        reference:
+          type:
+          - string
+          - 'null'
+        managerReference:
+          type:
+          - string
+          - 'null'
+        purchaseOrderNumber:
+          type:
+          - string
+          - 'null'
+        parentId:
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
-        owner:
-          $ref: '#/components/schemas/MatterUser'
-        manager:
-          $ref: '#/components/schemas/MatterUser'
         organisationId:
           type: integer
           format: int32
-        organisationName:
-          type: string
-          nullable: true
-        lastStatusMessage:
-          $ref: '#/components/schemas/StatusMessage'
-        terms:
-          $ref: '#/components/schemas/TermsAndConditions'
-        matterSpecificEmail:
-          type: string
-          nullable: true
-        tags:
-          type: array
-          items:
-            $ref: '#/components/schemas/MatterTagModel'
-          nullable: true
+      additionalProperties: false
+    CreateMatter_2:
+      required:
+      - categoryId
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+          description: Name of the matter
         categoryId:
           type: integer
+          description: 'To retrieve categories ref: /mattercategories'
           format: int32
-        externalId:
-          type: string
-          nullable: true
-        name:
-          type: string
-          nullable: true
-        parentId:
-          type: integer
+        organisationId:
+          type:
+          - integer
+          - 'null'
+          description: Leave null for default organisation
           format: int32
-          nullable: true
+        fields:
+          type:
+          - object
+          - 'null'
+          description: 'To retrieve fields for matter creation ref: mattercategories/{categoryId}/createSchema
+
+            Fields without grouping example serialization: "fields":{ "field_[fieldId]":null, "field_[fieldId]":false }
+
+            Fields with grouping example serialization: "fields":{ "group_[groupId]": { "field_[fieldId]":null, "field_[fieldId]":false } }'
         restricted:
           type: boolean
-        status:
-          type: string
-          nullable: true
-        teamId:
-          type: integer
-          format: int32
-          nullable: true
+          description: Is the matter restricted
         urgent:
           type: boolean
+          description: Is the matter urgent
+        parentId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        managerId:
+          type:
+          - string
+          - 'null'
+          description: Optionally set the Manager of the new Matter
+        ownerId:
+          type:
+          - string
+          - 'null'
+          description: Optionally set the Owner of the new Matter
+        externalId:
+          type:
+          - string
+          - 'null'
+          description: Optionally set an ID from an external system. Uniqueness is enforced for your organisation
+        teamId:
+          type:
+          - integer
+          - 'null'
+          description: Set the team assignment. This can be required [ref:MatterTemplate.TeamRequired]
+          format: int32
       additionalProperties: false
+    FieldData:
+      type: object
+      properties:
+        schema:
+          type:
+          - object
+          - 'null'
+        model:
+          type:
+          - object
+          - 'null'
+      additionalProperties: false
+    MatterUser:
+      type: object
+      properties:
+        userId:
+          type:
+          - string
+          - 'null'
+          description: ID of the user
+        userFirstname:
+          type:
+          - string
+          - 'null'
+        userLastname:
+          type:
+          - string
+          - 'null'
+        userOrganisationId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        userOrganisationName:
+          type:
+          - string
+          - 'null'
+        userHasPicture:
+          type: boolean
+        userPictureCacheId:
+          type: integer
+          format: int32
+        userFullName:
+          type:
+          - string
+          - 'null'
+        userInitials:
+          type:
+          - string
+          - 'null'
+        permissions:
+          type:
+          - array
+          - 'null'
+          items:
+            type: integer
+            format: int32
+          description: The permissions that the user has for the matter
+        isDelegateOwner:
+          type: boolean
+          description: User has been assigned delegate owner
+        isDelegateManager:
+          type: boolean
+          description: User is a delegate manager
+      additionalProperties: false
+x-refined-from:
+- lawvu-api-openapi-original.yml
+- lawvu-matters-openapi-original.json

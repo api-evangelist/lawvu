@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: LawVu Account Auth Users API
+  title: LawVu Account Users API
   description: Apis for account related resources (authentication, profiles, organisation details etc)
   version: '1.0'
 servers:
@@ -50,7 +50,11 @@ paths:
           type: boolean
       - name: filter.uselitequery
         in: query
-        description: "Use a lite query\r\nWhen enabled the response will return only partial information about the user:\r\nUserId, FirstName, LastName, UserFullName and OrganisationName"
+        description: 'Use a lite query
+
+          When enabled the response will return only partial information about the user:
+
+          UserId, FirstName, LastName, UserFullName and OrganisationName'
         schema:
           type: boolean
       responses:
@@ -231,110 +235,140 @@ components:
       type: object
       properties:
         id:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         userName:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         firstName:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         lastName:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         organisationName:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         organisationPictureCacheId:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
         directPhone:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         mobilePhone:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         email:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         hasPicture:
           type: boolean
         pictureCacheId:
           type: integer
           format: int32
         invitationSentUtc:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
         userFullName:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         userInitials:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         isRemoved:
           type: boolean
         isDisabled:
           type: boolean
         hourlyRate:
-          type: number
+          type:
+          - number
+          - 'null'
           format: double
-          nullable: true
         liveMattersCount:
           type: integer
           format: int32
       additionalProperties: false
+    UserArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/User'
     UserProfile:
       type: object
       properties:
         id:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         firstName:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         lastName:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         email:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         mobilePhone:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         directPhone:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         jobTitle:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         departmentId:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
         specialityIds:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: integer
             format: int32
-          nullable: true
         biography:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         hourlyRate:
-          type: number
+          type:
+          - number
+          - 'null'
           format: double
-          nullable: true
         linkedInUrl:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         organisationId:
           type: integer
           format: int32
         organisationName:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         organisationType:
           enum:
           - ServiceProvider
@@ -352,17 +386,19 @@ components:
           type: string
           description: <p>Options:</p><ul><li>Administrator</li><li>InhouseLegal</li><li>Contributor</li><li>Standard</li><li>External</li><li>MatterManager</li></ul>
         departmentName:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         hasPicture:
           type: boolean
         pictureCacheId:
           type: integer
           format: int32
         invitationSentUtc:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
         status:
           enum:
           - Pending
@@ -373,7 +409,3 @@ components:
           type: string
           description: <p>Options:</p><ul><li>Disabled</li><li>Pending</li><li>Active</li><li>Invited</li><li>LockedOut</li></ul>
       additionalProperties: false
-    UserArray:
-      type: array
-      items:
-        $ref: '#/components/schemas/User'
