@@ -106,15 +106,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/TaskTemplates'
-    AddTaskFromTemplateModel:
-      required:
-      - templateId
-      type: object
-      properties:
-        templateId:
-          type: integer
-          format: int32
-      additionalProperties: false
     TaskTemplates:
       type: object
       properties:
@@ -132,4 +123,13 @@ components:
         createdDateUtc:
           type: string
           format: date-time
+      additionalProperties: false
+    AddTaskFromTemplateModel:
+      required:
+      - templateId
+      type: object
+      properties:
+        templateId:
+          type: integer
+          format: int32
       additionalProperties: false

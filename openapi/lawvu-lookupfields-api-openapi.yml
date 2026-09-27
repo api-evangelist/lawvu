@@ -266,21 +266,16 @@ paths:
                 $ref: '#/components/schemas/SingleLookupOptionPaganationResult'
 components:
   schemas:
-    SingleLookupOptionPaganationResult:
+    LookupOption:
       type: object
       properties:
-        skip:
+        id:
           type: integer
           format: int32
-        take:
-          type: integer
-          format: int32
-        results:
+        label:
           type:
-          - array
+          - string
           - 'null'
-          items:
-            $ref: '#/components/schemas/SingleLookupOption'
       additionalProperties: false
     LookupOptionPaganationResult:
       type: object
@@ -298,41 +293,6 @@ components:
           items:
             $ref: '#/components/schemas/LookupOption'
       additionalProperties: false
-    OperationArray:
-      type: array
-      items:
-        $ref: '#/components/schemas/Operation'
-    LookupOption:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        label:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    SingleLookupOption:
-      type: object
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-        label:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    LookupOptionCreate:
-      type: object
-      properties:
-        label:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
     Operation:
       type: object
       properties:
@@ -349,6 +309,46 @@ components:
           - string
           - 'null'
         from:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    OperationArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/Operation'
+    SingleLookupOptionPaganationResult:
+      type: object
+      properties:
+        skip:
+          type: integer
+          format: int32
+        take:
+          type: integer
+          format: int32
+        results:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SingleLookupOption'
+      additionalProperties: false
+    LookupOptionCreate:
+      type: object
+      properties:
+        label:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    SingleLookupOption:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        label:
           type:
           - string
           - 'null'

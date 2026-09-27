@@ -231,77 +231,6 @@ paths:
                 status: LockedOut
 components:
   schemas:
-    User:
-      type: object
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-        userName:
-          type:
-          - string
-          - 'null'
-        firstName:
-          type:
-          - string
-          - 'null'
-        lastName:
-          type:
-          - string
-          - 'null'
-        organisationName:
-          type:
-          - string
-          - 'null'
-        organisationPictureCacheId:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        directPhone:
-          type:
-          - string
-          - 'null'
-        mobilePhone:
-          type:
-          - string
-          - 'null'
-        email:
-          type:
-          - string
-          - 'null'
-        hasPicture:
-          type: boolean
-        pictureCacheId:
-          type: integer
-          format: int32
-        invitationSentUtc:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        userFullName:
-          type:
-          - string
-          - 'null'
-        userInitials:
-          type:
-          - string
-          - 'null'
-        isRemoved:
-          type: boolean
-        isDisabled:
-          type: boolean
-        hourlyRate:
-          type:
-          - number
-          - 'null'
-          format: double
-        liveMattersCount:
-          type: integer
-          format: int32
-      additionalProperties: false
     UserArray:
       type: array
       items:
@@ -408,4 +337,75 @@ components:
           - Disabled
           type: string
           description: <p>Options:</p><ul><li>Disabled</li><li>Pending</li><li>Active</li><li>Invited</li><li>LockedOut</li></ul>
+      additionalProperties: false
+    User:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        userName:
+          type:
+          - string
+          - 'null'
+        firstName:
+          type:
+          - string
+          - 'null'
+        lastName:
+          type:
+          - string
+          - 'null'
+        organisationName:
+          type:
+          - string
+          - 'null'
+        organisationPictureCacheId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        directPhone:
+          type:
+          - string
+          - 'null'
+        mobilePhone:
+          type:
+          - string
+          - 'null'
+        email:
+          type:
+          - string
+          - 'null'
+        hasPicture:
+          type: boolean
+        pictureCacheId:
+          type: integer
+          format: int32
+        invitationSentUtc:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        userFullName:
+          type:
+          - string
+          - 'null'
+        userInitials:
+          type:
+          - string
+          - 'null'
+        isRemoved:
+          type: boolean
+        isDisabled:
+          type: boolean
+        hourlyRate:
+          type:
+          - number
+          - 'null'
+          format: double
+        liveMattersCount:
+          type: integer
+          format: int32
       additionalProperties: false

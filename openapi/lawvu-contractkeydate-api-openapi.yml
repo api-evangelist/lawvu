@@ -68,6 +68,10 @@ paths:
                 value: 2
 components:
   schemas:
+    ContractKeyDateModelArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/ContractKeyDateModel'
     ContractKeyDateModel:
       type: object
       properties:
@@ -86,7 +90,3 @@ components:
           type: number
           format: double
       additionalProperties: false
-    ContractKeyDateModelArray:
-      type: array
-      items:
-        $ref: '#/components/schemas/ContractKeyDateModel'

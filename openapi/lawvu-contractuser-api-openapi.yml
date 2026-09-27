@@ -135,13 +135,20 @@ paths:
                 $ref: '#/components/schemas/ContractUserDataSourceResult'
 components:
   schemas:
-    AssignContractUser:
-      required:
-      - userId
+    ContractUserDataSourceResult:
       type: object
       properties:
-        userId:
-          type: string
+        data:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ContractUser'
+          description: Represents a single page of processed data.
+        total:
+          type: integer
+          description: The total number of records available.
+          format: int32
       additionalProperties: false
     ContractUser:
       type: object
@@ -181,18 +188,11 @@ components:
           - string
           - 'null'
       additionalProperties: false
-    ContractUserDataSourceResult:
+    AssignContractUser:
+      required:
+      - userId
       type: object
       properties:
-        data:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/ContractUser'
-          description: Represents a single page of processed data.
-        total:
-          type: integer
-          description: The total number of records available.
-          format: int32
+        userId:
+          type: string
       additionalProperties: false

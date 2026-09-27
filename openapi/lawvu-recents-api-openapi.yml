@@ -161,10 +161,6 @@ paths:
                 matterCategoryName: null
 components:
   schemas:
-    RecentItemModelArray:
-      type: array
-      items:
-        $ref: '#/components/schemas/RecentItemModel'
     RecentItemModel:
       type: object
       properties:
@@ -249,3 +245,7 @@ components:
           - string
           - 'null'
       additionalProperties: false
+    RecentItemModelArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/RecentItemModel'

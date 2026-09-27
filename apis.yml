@@ -47,11 +47,11 @@ modified: '2026-07-19'
 tags:
 - Company
 - Legal
-- Legal Technology
+- Legal Tech
 - Legal Operations
 - Contract Lifecycle Management
 - Matter Management
-- Document-Management
+- Document Management
 - Spend Management
 - Software-as-a-Service
 - Workflows
@@ -66,6 +66,7 @@ tags_raw:
 - Spend Management
 - SaaS
 - Workflow
+- Document-Management
 apis:
 - aid: lawvu:lawvu-auth-api
   name: LawVu Auth API
