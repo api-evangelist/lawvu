@@ -242,61 +242,6 @@ paths:
                 $ref: '#/components/schemas/CrossUserEmailTrackingResponse'
 components:
   schemas:
-    StringArray:
-      type: array
-      items:
-        type: string
-    PagedEmailThread:
-      type: object
-      properties:
-        threads:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/EmailThread'
-        nextPageCursor:
-          type:
-          - integer
-          - 'null'
-          format: int32
-      additionalProperties: false
-    EmailThreadArray:
-      type: array
-      items:
-        $ref: '#/components/schemas/EmailThread'
-    CreateMessageDraft:
-      type: object
-      properties:
-        sourceId:
-          type:
-          - string
-          - 'null'
-        authorEmailAddress:
-          type:
-          - string
-          - 'null'
-          deprecated: true
-        expectedFromAddress:
-          type:
-          - string
-          - 'null'
-        matterId:
-          type: integer
-          format: int32
-        mode:
-          enum:
-          - Message
-          - File
-          type: string
-          description: <p>Options:</p><ul><li>Message</li><li>File</li></ul>
-        recipients:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/MessageDraftRecipient'
-      additionalProperties: false
     MessageDraft:
       type: object
       properties:
@@ -316,12 +261,6 @@ components:
           items:
             $ref: '#/components/schemas/MessageDraftRecipient'
       additionalProperties: false
-    CrossUserEmailTrackingByExternalReferenceIdRequest:
-      type: object
-      properties:
-        externalReferenceIds:
-          $ref: '#/components/schemas/StringArray'
-      additionalProperties: false
     CrossUserEmailTrackingResponse:
       type: object
       properties:
@@ -331,30 +270,6 @@ components:
           - 'null'
           items:
             $ref: '#/components/schemas/CrossUserEmailTracking'
-      additionalProperties: false
-    MessageDraftRecipient:
-      required:
-      - userId
-      type: object
-      properties:
-        userId:
-          minLength: 1
-          type: string
-      additionalProperties: false
-    UserEmailTracking:
-      type: object
-      properties:
-        trackedByUserId:
-          type:
-          - string
-          - 'null'
-        trackedOnDateTimeUtc:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        trackedToRecord:
-          $ref: '#/components/schemas/UserEmailTrackingRecord'
       additionalProperties: false
     CrossUserEmailTracking:
       type: object
@@ -369,6 +284,21 @@ components:
           - 'null'
           items:
             $ref: '#/components/schemas/UserEmailTracking'
+      additionalProperties: false
+    PagedEmailThread:
+      type: object
+      properties:
+        threads:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/EmailThread'
+        nextPageCursor:
+          type:
+          - integer
+          - 'null'
+          format: int32
       additionalProperties: false
     SaveEmailThread:
       required:
@@ -468,6 +398,21 @@ components:
         contractIsDeleted:
           type: boolean
       additionalProperties: false
+    UserEmailTracking:
+      type: object
+      properties:
+        trackedByUserId:
+          type:
+          - string
+          - 'null'
+        trackedOnDateTimeUtc:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        trackedToRecord:
+          $ref: '#/components/schemas/UserEmailTrackingRecord'
+      additionalProperties: false
     UserEmailTrackingRecord:
       type: object
       properties:
@@ -497,4 +442,59 @@ components:
         recordId:
           type: integer
           format: int32
+      additionalProperties: false
+    StringArray:
+      type: array
+      items:
+        type: string
+    CreateMessageDraft:
+      type: object
+      properties:
+        sourceId:
+          type:
+          - string
+          - 'null'
+        authorEmailAddress:
+          type:
+          - string
+          - 'null'
+          deprecated: true
+        expectedFromAddress:
+          type:
+          - string
+          - 'null'
+        matterId:
+          type: integer
+          format: int32
+        mode:
+          enum:
+          - Message
+          - File
+          type: string
+          description: <p>Options:</p><ul><li>Message</li><li>File</li></ul>
+        recipients:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/MessageDraftRecipient'
+      additionalProperties: false
+    EmailThreadArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/EmailThread'
+    MessageDraftRecipient:
+      required:
+      - userId
+      type: object
+      properties:
+        userId:
+          minLength: 1
+          type: string
+      additionalProperties: false
+    CrossUserEmailTrackingByExternalReferenceIdRequest:
+      type: object
+      properties:
+        externalReferenceIds:
+          $ref: '#/components/schemas/StringArray'
       additionalProperties: false

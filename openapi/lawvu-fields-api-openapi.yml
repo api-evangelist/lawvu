@@ -625,102 +625,6 @@ paths:
       description: Production API
 components:
   schemas:
-    FieldCollectionResponse:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Field'
-          description: The collection of items
-      additionalProperties: false
-      description: Response wrapper of a collection of items
-    CreateFieldOption:
-      required:
-      - label
-      type: object
-      properties:
-        label:
-          type: string
-          description: The user defined label of the field option
-          example: Option A
-        properties:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            x-additionalPropertiesName: propertyName
-          description: Additional properties based on the type of field option. See examples for more details.
-      additionalProperties: false
-    MultiOptionFieldProperties:
-      type: object
-      properties:
-        userCanAddOption:
-          type:
-          - boolean
-          - 'null'
-          description: Indicates if an option can be added without the user having access to further manage the field options
-          example: true
-      additionalProperties: false
-    AuditableReference:
-      type: object
-      properties:
-        dateUtc:
-          type: string
-          description: The date and time the action was performed. The date and time uses the ISO-8601 format and will be in UTC
-          format: date-time
-          readOnly: true
-          example: '2024-12-25T00:00:00Z'
-        userName:
-          type: string
-          description: The username of who performed the action
-          readOnly: true
-          example: api.developer@lawvu.com
-      additionalProperties: false
-    CreatedFieldOption:
-      type: object
-      properties:
-        value:
-          type: string
-          description: The system generated value for the field option
-          example: option_1
-      additionalProperties: false
-      description: Represents a field option that has been created
-    UpdateFieldOption:
-      type: object
-      properties:
-        label:
-          type:
-          - string
-          - 'null'
-          description: The user defined label of the field option
-        properties:
-          type:
-          - object
-          - 'null'
-          additionalProperties: {}
-          description: Specific properties for the field option, varies by field type
-      additionalProperties: false
-    FieldOptionCollectionResponse:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/FieldOption'
-          description: The collection of items
-      additionalProperties: false
-      description: Response wrapper of a collection of items
-    FieldType:
-      enum:
-      - Text
-      - Decimal
-      - Boolean
-      - Date
-      - Option
-      - MultiOption
-      - User
-      type: string
     ProblemDetails:
       type: object
       properties:
@@ -744,36 +648,63 @@ components:
           type: string
           description: A URI which can be followed to find out more about the problem.
       additionalProperties: {}
-    HttpValidationProblemDetails:
+    MultiOptionFieldProperties:
       type: object
       properties:
-        detail:
+        userCanAddOption:
+          type:
+          - boolean
+          - 'null'
+          description: Indicates if an option can be added without the user having access to further manage the field options
+          example: true
+      additionalProperties: false
+    FieldType:
+      enum:
+      - Text
+      - Decimal
+      - Boolean
+      - Date
+      - Option
+      - MultiOption
+      - User
+      type: string
+    CreateFieldOption:
+      required:
+      - label
+      type: object
+      properties:
+        label:
           type: string
-          description: More information about the problem.
-        errors:
-          type: object
+          description: The user defined label of the field option
+          example: Option A
+        properties:
+          type:
+          - object
+          - 'null'
           additionalProperties:
-            type: array
-            items:
-              type: string
-          description: A dictionary of validation errors, where each key is a field api name and the value is a list of error messages.
-        instance:
-          type: string
-          description: The URI of the resource which the error relates to.
-        operationId:
-          type: string
-          description: A unique trace identifier for the request. This should be provided when requesting support.
-        status:
-          type: integer
-          description: The HTTP status code for the problem.
-          format: int32
-        title:
-          type: string
-          description: A short description of the error.
-        type:
-          type: string
-          description: A URI which can be followed to find out more about the problem.
-      additionalProperties: {}
+            x-additionalPropertiesName: propertyName
+          description: Additional properties based on the type of field option. See examples for more details.
+      additionalProperties: false
+    OptionFieldProperties:
+      type: object
+      properties:
+        userCanAddOption:
+          type:
+          - boolean
+          - 'null'
+          description: Indicates if an option can be added without the user having access to further manage the field options
+          example: true
+      additionalProperties: false
+    FieldCollectionResponse:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Field'
+          description: The collection of items
+      additionalProperties: false
+      description: Response wrapper of a collection of items
     Field:
       type: object
       properties:
@@ -812,16 +743,70 @@ components:
           description: The username who modified the field and when
           readOnly: true
       additionalProperties: false
-    OptionFieldProperties:
+    AuditableReference:
       type: object
       properties:
-        userCanAddOption:
-          type:
-          - boolean
-          - 'null'
-          description: Indicates if an option can be added without the user having access to further manage the field options
-          example: true
+        dateUtc:
+          type: string
+          description: The date and time the action was performed. The date and time uses the ISO-8601 format and will be in UTC
+          format: date-time
+          readOnly: true
+          example: '2024-12-25T00:00:00Z'
+        userName:
+          type: string
+          description: The username of who performed the action
+          readOnly: true
+          example: api.developer@lawvu.com
       additionalProperties: false
+    FieldOptionCollectionResponse:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldOption'
+          description: The collection of items
+      additionalProperties: false
+      description: Response wrapper of a collection of items
+    HttpValidationProblemDetails:
+      type: object
+      properties:
+        detail:
+          type: string
+          description: More information about the problem.
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+          description: A dictionary of validation errors, where each key is a field api name and the value is a list of error messages.
+        instance:
+          type: string
+          description: The URI of the resource which the error relates to.
+        operationId:
+          type: string
+          description: A unique trace identifier for the request. This should be provided when requesting support.
+        status:
+          type: integer
+          description: The HTTP status code for the problem.
+          format: int32
+        title:
+          type: string
+          description: A short description of the error.
+        type:
+          type: string
+          description: A URI which can be followed to find out more about the problem.
+      additionalProperties: {}
+    CreatedFieldOption:
+      type: object
+      properties:
+        value:
+          type: string
+          description: The system generated value for the field option
+          example: option_1
+      additionalProperties: false
+      description: Represents a field option that has been created
     FieldOption:
       required:
       - label
@@ -848,10 +833,21 @@ components:
             x-additionalPropertiesName: propertyName
           description: Additional properties based on the type of field option. See examples for more details.
       additionalProperties: false
-    StringArray:
-      type: array
-      items:
-        type: string
+    UpdateFieldOption:
+      type: object
+      properties:
+        label:
+          type:
+          - string
+          - 'null'
+          description: The user defined label of the field option
+        properties:
+          type:
+          - object
+          - 'null'
+          additionalProperties: {}
+          description: Specific properties for the field option, varies by field type
+      additionalProperties: false
     FieldDetailGetModel:
       type: object
       properties:
@@ -923,6 +919,35 @@ components:
           $ref: '#/components/schemas/FieldDetailParameters'
       additionalProperties: false
       description: This model represents the payload returned from the Private API for getting details related to a single lookup field
+    HyperMediaLink:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        uri:
+          type:
+          - string
+          - 'null'
+        methods:
+          $ref: '#/components/schemas/StringArray'
+      additionalProperties: false
+    LookupSingleOptionModel:
+      type: object
+      properties:
+        Value:
+          type:
+          - string
+          - 'null'
+        id:
+          type: integer
+          format: int32
+        label:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
     FieldDetailParameters:
       type: object
       properties:
@@ -960,50 +985,10 @@ components:
           - boolean
           - 'null'
       additionalProperties: false
-    LookupSingleOptionModel:
-      type: object
-      properties:
-        Value:
-          type:
-          - string
-          - 'null'
-        id:
-          type: integer
-          format: int32
-        label:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    FieldListItemDataSourceResult:
-      type: object
-      properties:
-        data:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/FieldListItem'
-          description: Represents a single page of processed data.
-        total:
-          type: integer
-          description: The total number of records available.
-          format: int32
-      additionalProperties: false
-    HyperMediaLink:
-      type: object
-      properties:
-        name:
-          type:
-          - string
-          - 'null'
-        uri:
-          type:
-          - string
-          - 'null'
-        methods:
-          $ref: '#/components/schemas/StringArray'
-      additionalProperties: false
+    StringArray:
+      type: array
+      items:
+        type: string
     FieldListItem:
       required:
       - id
@@ -1045,6 +1030,21 @@ components:
           - 'null'
           items:
             $ref: '#/components/schemas/HyperMediaLink'
+      additionalProperties: false
+    FieldListItemDataSourceResult:
+      type: object
+      properties:
+        data:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/FieldListItem'
+          description: Represents a single page of processed data.
+        total:
+          type: integer
+          description: The total number of records available.
+          format: int32
       additionalProperties: false
 x-refined-from:
 - lawvu-api-openapi-original.yml

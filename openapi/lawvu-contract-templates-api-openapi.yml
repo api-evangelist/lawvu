@@ -126,6 +126,21 @@ paths:
           description: Success
 components:
   schemas:
+    Team:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type:
+          - string
+          - 'null'
+        description:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
     ContractTemplate:
       type: object
       properties:
@@ -144,19 +159,4 @@ components:
           type: boolean
         hasRules:
           type: boolean
-      additionalProperties: false
-    Team:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type:
-          - string
-          - 'null'
-        description:
-          type:
-          - string
-          - 'null'
       additionalProperties: false

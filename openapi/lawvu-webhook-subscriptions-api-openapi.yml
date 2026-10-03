@@ -251,28 +251,27 @@ paths:
           description: No Content
 components:
   schemas:
-    WebhookTopicArray:
-      type: array
-      items:
-        enum:
-        - matter.created
-        - matter.updated
-        - contract.created
-        - contract.updated
-        - matter.status.updated
-        - contract.status.updated
-        - matter.file.created
-        - contract.file.created
-        - matter.file.updated
-        - contract.file.updated
-        - contract.document.updated
-        - matter.statusmessage.created
-        - contract.statusmessage.created
-        - matter.tag.created
-        - contract.keydate.created
-        - contract.keydate.updated
-        type: string
-        description: <p>Options:</p><ul><li>MatterCreated</li><li>MatterUpdated</li><li>ContractCreated</li><li>ContractUpdated</li><li>MatterStatusUpdated</li><li>ContractStatusUpdated</li><li>MatterFileCreated</li><li>ContractFileCreated</li><li>MatterFileUpdated</li><li>ContractFileUpdated</li><li>ContractDocumentUpdated</li><li>MatterStatusMessageCreated</li><li>ContractStatusMessageCreated</li><li>MatterTagCreated</li><li>ContractKeyDateCreated</li><li>ContractKeyDateUpdated</li></ul>
+    SaveWebhookSubscriptionModel:
+      required:
+      - subscriptionUrl
+      - topics
+      type: object
+      properties:
+        topics:
+          $ref: '#/components/schemas/WebhookTopicArray'
+        subscriptionUrl:
+          maxLength: 2048
+          minLength: 1
+          type: string
+          description: The publicly accessible URL of the endpoint which will be notified
+          format: uri
+        clientState:
+          maxLength: 128
+          type:
+          - string
+          - 'null'
+          description: A custom string which will be included with each notification to help identify the notification came from LawVu
+      additionalProperties: false
     WebhookSubscription:
       type: object
       properties:
@@ -308,27 +307,28 @@ components:
           - string
           - 'null'
       additionalProperties: false
-    SaveWebhookSubscriptionModel:
-      required:
-      - subscriptionUrl
-      - topics
-      type: object
-      properties:
-        topics:
-          $ref: '#/components/schemas/WebhookTopicArray'
-        subscriptionUrl:
-          maxLength: 2048
-          minLength: 1
-          type: string
-          description: The publicly accessible URL of the endpoint which will be notified
-          format: uri
-        clientState:
-          maxLength: 128
-          type:
-          - string
-          - 'null'
-          description: A custom string which will be included with each notification to help identify the notification came from LawVu
-      additionalProperties: false
+    WebhookTopicArray:
+      type: array
+      items:
+        enum:
+        - matter.created
+        - matter.updated
+        - contract.created
+        - contract.updated
+        - matter.status.updated
+        - contract.status.updated
+        - matter.file.created
+        - contract.file.created
+        - matter.file.updated
+        - contract.file.updated
+        - contract.document.updated
+        - matter.statusmessage.created
+        - contract.statusmessage.created
+        - matter.tag.created
+        - contract.keydate.created
+        - contract.keydate.updated
+        type: string
+        description: <p>Options:</p><ul><li>MatterCreated</li><li>MatterUpdated</li><li>ContractCreated</li><li>ContractUpdated</li><li>MatterStatusUpdated</li><li>ContractStatusUpdated</li><li>MatterFileCreated</li><li>ContractFileCreated</li><li>MatterFileUpdated</li><li>ContractFileUpdated</li><li>ContractDocumentUpdated</li><li>MatterStatusMessageCreated</li><li>ContractStatusMessageCreated</li><li>MatterTagCreated</li><li>ContractKeyDateCreated</li><li>ContractKeyDateUpdated</li></ul>
     WebhookSubscriptionArray:
       type: array
       items:

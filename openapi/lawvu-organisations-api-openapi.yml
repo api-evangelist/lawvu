@@ -180,6 +180,17 @@ paths:
                 currencySymbol: $
 components:
   schemas:
+    Region:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
     OrganisationFinancialSettings:
       type: object
       properties:
@@ -218,27 +229,6 @@ components:
           description: The Symbol of the organisation's default currency e.g. $
           readOnly: true
       additionalProperties: false
-    Department:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type:
-          - string
-          - 'null'
-        parentId:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        deletedDateUtc:
-          type:
-          - string
-          - 'null'
-          format: date-time
-      additionalProperties: false
     DepartmentArray:
       type: array
       items:
@@ -247,32 +237,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Organisation'
-    Region:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    RegionArray:
-      type: array
-      items:
-        $ref: '#/components/schemas/Region'
-    Organisation:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
     Client:
       type: object
       properties:
@@ -304,3 +268,39 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Client'
+    RegionArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/Region'
+    Department:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type:
+          - string
+          - 'null'
+        parentId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        deletedDateUtc:
+          type:
+          - string
+          - 'null'
+          format: date-time
+      additionalProperties: false
+    Organisation:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false

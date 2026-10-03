@@ -150,6 +150,14 @@ components:
           description: The total number of records available.
           format: int32
       additionalProperties: false
+    AssignContractUser:
+      required:
+      - userId
+      type: object
+      properties:
+        userId:
+          type: string
+      additionalProperties: false
     ContractUser:
       type: object
       properties:
@@ -187,12 +195,4 @@ components:
           type:
           - string
           - 'null'
-      additionalProperties: false
-    AssignContractUser:
-      required:
-      - userId
-      type: object
-      properties:
-        userId:
-          type: string
       additionalProperties: false

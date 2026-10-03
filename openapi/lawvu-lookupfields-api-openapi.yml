@@ -277,7 +277,7 @@ components:
           - string
           - 'null'
       additionalProperties: false
-    LookupOptionPaganationResult:
+    SingleLookupOptionPaganationResult:
       type: object
       properties:
         skip:
@@ -291,7 +291,19 @@ components:
           - array
           - 'null'
           items:
-            $ref: '#/components/schemas/LookupOption'
+            $ref: '#/components/schemas/SingleLookupOption'
+      additionalProperties: false
+    SingleLookupOption:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        label:
+          type:
+          - string
+          - 'null'
       additionalProperties: false
     Operation:
       type: object
@@ -313,11 +325,19 @@ components:
           - string
           - 'null'
       additionalProperties: false
+    LookupOptionCreate:
+      type: object
+      properties:
+        label:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
     OperationArray:
       type: array
       items:
         $ref: '#/components/schemas/Operation'
-    SingleLookupOptionPaganationResult:
+    LookupOptionPaganationResult:
       type: object
       properties:
         skip:
@@ -331,25 +351,5 @@ components:
           - array
           - 'null'
           items:
-            $ref: '#/components/schemas/SingleLookupOption'
-      additionalProperties: false
-    LookupOptionCreate:
-      type: object
-      properties:
-        label:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    SingleLookupOption:
-      type: object
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-        label:
-          type:
-          - string
-          - 'null'
+            $ref: '#/components/schemas/LookupOption'
       additionalProperties: false
