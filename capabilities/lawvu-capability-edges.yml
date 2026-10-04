@@ -1,0 +1,92 @@
+slug: lawvu
+provider: LawVu
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 8
+edges:
+- tag: Contracts
+  spec_file: lawvu-contracts-api-openapi.yml
+  capability_id: BC-150.10
+  capability_id_l1: BC-150
+  capability_name: Contract Management
+  confidence: 0.95
+  evidence: POST /v2/contracts  Create contract; PATCH /v2/contracts/{contractId}  Update contract; GET
+    /v2/contractTypes
+  reason: Full CRUD over contract records and contract types on an in-house legal CLM platform — plainly
+    Contract Management.
+- tag: Matters
+  spec_file: lawvu-matters-api-openapi.yml
+  capability_id: BC-150.50
+  capability_id_l1: BC-150
+  capability_name: Legal Operations Management
+  confidence: 0.88
+  evidence: POST /v2/matters "Create matter"; PATCH /v2/matters/{matterId} "Update matter"; schemas Matter,
+    MatterStatus, MatterManager, IntakeQueueReference
+  reason: Full CRUD over legal matters including types, statuses, managers and intake queues — this is
+    matter management, explicitly named within Legal Operations Management.
+- tag: ContractKeyDate
+  spec_file: lawvu-contractkeydate-api-openapi.yml
+  capability_id: BC-150.10
+  capability_id_l1: BC-150
+  capability_name: Contract Management
+  confidence: 0.85
+  evidence: GET /v1/contracts/{contractId}/keyDates  Get contract key dates; ContractKeyDateModel
+  reason: Key dates (expiry, renewal, obligations) are core contract lifecycle data on a legal CLM platform.
+- tag: Contract Templates
+  spec_file: lawvu-contract-templates-api-openapi.yml
+  capability_id: BC-150.10
+  capability_id_l1: BC-150
+  capability_name: Contract Management
+  confidence: 0.8
+  evidence: GET /v1/contractsTemplates  Get contract templates; schema ContractTemplate
+  reason: Contract templates are drafting artefacts in the contract lifecycle; vendor is a legal CLM platform.
+- tag: Webhook Subscriptions
+  spec_file: lawvu-webhook-subscriptions-api-openapi.yml
+  capability_id: BC-4270.80
+  capability_id_l1: BC-4270
+  capability_name: Webhook & Event Subscription Management
+  confidence: 0.8
+  evidence: POST /v1/webhooks/subscriptions 'Create a subscription'; schemas SaveWebhookSubscriptionModel,
+    WebhookTopicArray, WebhookSubscriptionArray
+  reason: Operations are purely the lifecycle (create/list/get/delete) of outbound webhook subscriptions
+    on a public developer API, which is exactly Webhook & Event Subscription Management within the developer
+    platform / API ecosystem capability. No LawVu legal-domain business object is touched here.
+- tag: MattersInvoices
+  spec_file: lawvu-mattersinvoices-api-openapi.yml
+  capability_id: BC-150.50
+  capability_id_l1: BC-150
+  capability_name: Legal Operations Management
+  confidence: 0.75
+  evidence: GET /v1/matters/{matterId}/invoices "Get matter invoices"; schemas Invoice, InvoiceDataSourceResult
+  reason: Law-firm invoices attached to a legal matter — legal spend management / e-billing, which Legal
+    Operations Management explicitly covers. Not AP accounting, as the surface is matter-scoped legal
+    billing.
+- tag: ContractStatusMessage
+  spec_file: lawvu-contractstatusmessage-api-openapi.yml
+  capability_id: BC-150.10
+  capability_id_l1: BC-150
+  capability_name: Contract Management
+  confidence: 0.7
+  evidence: POST /v1/contracts/{contractId}/statusMessages  Add a status message to a contract
+  reason: Status tracking on a contract record supports contract lifecycle progression; thin surface so
+    moderate confidence.
+- tag: MatterCategories
+  spec_file: lawvu-mattercategories-api-openapi.yml
+  capability_id: BC-150.50
+  capability_id_l1: BC-150
+  capability_name: Legal Operations Management
+  confidence: 0.7
+  evidence: GET /v1/mattercategories "Matter categories"; GET /v1/mattercategories/{categoryId}/createSchema
+    "Matter creation schema"; schema MatterCategory
+  reason: Reference data that classifies legal matters in an in-house legal matter-management platform
+    — supporting configuration for legal matter management (Legal Operations). Confidence moderate since
+    it is taxonomy/config rather than the matter lifecycle itself.

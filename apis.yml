@@ -398,6 +398,9 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: CapabilityMap
+  url: capabilities/lawvu-capability-edges.yml
+  name: LawVu Business Capability Map
 - type: Overlay
   url: overlays/lawvu-account-overlay.yaml
 - type: Website
