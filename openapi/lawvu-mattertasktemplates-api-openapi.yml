@@ -102,6 +102,19 @@ paths:
           description: No Content
 components:
   schemas:
+    AddTaskFromTemplateModel:
+      required:
+      - templateId
+      type: object
+      properties:
+        templateId:
+          type: integer
+          format: int32
+      additionalProperties: false
+    TaskTemplatesArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/TaskTemplates'
     TaskTemplates:
       type: object
       properties:
@@ -119,17 +132,4 @@ components:
         createdDateUtc:
           type: string
           format: date-time
-      additionalProperties: false
-    TaskTemplatesArray:
-      type: array
-      items:
-        $ref: '#/components/schemas/TaskTemplates'
-    AddTaskFromTemplateModel:
-      required:
-      - templateId
-      type: object
-      properties:
-        templateId:
-          type: integer
-          format: int32
       additionalProperties: false

@@ -93,21 +93,6 @@ paths:
                 $ref: '#/components/schemas/InvoiceDataSourceResult'
 components:
   schemas:
-    InvoiceDataSourceResult:
-      type: object
-      properties:
-        data:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/Invoice'
-          description: Represents a single page of processed data.
-        total:
-          type: integer
-          description: The total number of records available.
-          format: int32
-      additionalProperties: false
     Invoice:
       type: object
       properties:
@@ -174,4 +159,19 @@ components:
           type:
           - string
           - 'null'
+      additionalProperties: false
+    InvoiceDataSourceResult:
+      type: object
+      properties:
+        data:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Invoice'
+          description: Represents a single page of processed data.
+        total:
+          type: integer
+          description: The total number of records available.
+          format: int32
       additionalProperties: false

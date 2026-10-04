@@ -272,6 +272,10 @@ components:
           - 'null'
           description: A custom string which will be included with each notification to help identify the notification came from LawVu
       additionalProperties: false
+    WebhookSubscriptionArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/WebhookSubscription'
     WebhookSubscription:
       type: object
       properties:
@@ -329,7 +333,3 @@ components:
         - contract.keydate.updated
         type: string
         description: <p>Options:</p><ul><li>MatterCreated</li><li>MatterUpdated</li><li>ContractCreated</li><li>ContractUpdated</li><li>MatterStatusUpdated</li><li>ContractStatusUpdated</li><li>MatterFileCreated</li><li>ContractFileCreated</li><li>MatterFileUpdated</li><li>ContractFileUpdated</li><li>ContractDocumentUpdated</li><li>MatterStatusMessageCreated</li><li>ContractStatusMessageCreated</li><li>MatterTagCreated</li><li>ContractKeyDateCreated</li><li>ContractKeyDateUpdated</li></ul>
-    WebhookSubscriptionArray:
-      type: array
-      items:
-        $ref: '#/components/schemas/WebhookSubscription'

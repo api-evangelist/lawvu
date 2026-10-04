@@ -86,10 +86,6 @@ paths:
                 $ref: '#/components/schemas/TaskSummaryArray'
 components:
   schemas:
-    TaskSummaryArray:
-      type: array
-      items:
-        $ref: '#/components/schemas/TaskSummary'
     TaskSummary:
       type: object
       properties:
@@ -147,3 +143,7 @@ components:
           type: string
           description: <p>Options:</p><ul><li>NotRequired</li><li>OnHold</li><li>NotStarted</li><li>InProgress</li><li>Complete</li></ul>
       additionalProperties: false
+    TaskSummaryArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/TaskSummary'

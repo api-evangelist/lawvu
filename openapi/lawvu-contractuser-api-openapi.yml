@@ -135,6 +135,14 @@ paths:
                 $ref: '#/components/schemas/ContractUserDataSourceResult'
 components:
   schemas:
+    AssignContractUser:
+      required:
+      - userId
+      type: object
+      properties:
+        userId:
+          type: string
+      additionalProperties: false
     ContractUserDataSourceResult:
       type: object
       properties:
@@ -149,14 +157,6 @@ components:
           type: integer
           description: The total number of records available.
           format: int32
-      additionalProperties: false
-    AssignContractUser:
-      required:
-      - userId
-      type: object
-      properties:
-        userId:
-          type: string
       additionalProperties: false
     ContractUser:
       type: object

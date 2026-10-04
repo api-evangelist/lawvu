@@ -1296,31 +1296,6 @@ paths:
       description: Production API
 components:
   schemas:
-    ContractGroupReference:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: The system identifier for the contract group
-          format: int32
-          example: 5002
-        name:
-          type: string
-          description: The name of the contract type
-          readOnly: true
-          example: Employment
-      additionalProperties: false
-    OptionFieldValue:
-      title: Option
-      type: object
-      properties:
-        label:
-          type: string
-          readOnly: true
-          example: Option 1
-        value:
-          type: string
-          example: option_1
     CreateContract:
       required:
       - type
@@ -1427,50 +1402,36 @@ components:
           description: The user who created the contract and when
           readOnly: true
       additionalProperties: false
-    ContractType:
+    HttpValidationProblemDetails:
       type: object
       properties:
-        id:
-          type:
-          - integer
-          - 'null'
-          description: The system identifier for the contract type
+        detail:
+          type: string
+          description: More information about the problem.
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+          description: A dictionary of validation errors, where each key is a field api name and the value is a list of error messages.
+        instance:
+          type: string
+          description: The URI of the resource which the error relates to.
+        operationId:
+          type: string
+          description: A unique trace identifier for the request. This should be provided when requesting support.
+        status:
+          type: integer
+          description: The HTTP status code for the problem.
           format: int32
-          readOnly: true
-          example: 1234
-        name:
-          type:
-          - string
-          - 'null'
-          description: The user defined name of the contract type
-          example: Contractor Agreement
-        parent:
-          allOf:
-          - $ref: '#/components/schemas/ContractGroupReference'
-          description: The parent contract type
-        hasWizard:
-          type:
-          - boolean
-          - 'null'
-          description: The contract type has a wizard in place.
-          example: false
-        teamAssignmentRequired:
-          type:
-          - boolean
-          - 'null'
-          description: The contract type has a team assignment required.
-          example: false
-      additionalProperties: false
-    ContractCollectionResponse:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Contract'
-          description: The collection of items
-      additionalProperties: false
-      description: Response wrapper of a collection of items
+        title:
+          type: string
+          description: A short description of the error.
+        type:
+          type: string
+          description: A URI which can be followed to find out more about the problem.
+      additionalProperties: {}
     Contract:
       type: object
       properties:
@@ -1586,111 +1547,34 @@ components:
           description: The user who created the contract and when
           readOnly: true
       additionalProperties: false
-    UserFieldValue:
-      title: User
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/UserReference'
-    ContractTypeCollectionResponse:
+    UserReference:
       type: object
       properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/ContractType'
-          description: The collection of items
-      additionalProperties: false
-      description: Response wrapper of a collection of items
-    AuditableUserReference:
-      type: object
-      properties:
-        dateUtc:
+        email:
           type: string
-          description: The date and time the action was performed. The date and time uses the ISO-8601 format and will be in UTC
-          format: date-time
-          readOnly: true
-          example: '2024-12-25T00:00:00Z'
-        user:
-          allOf:
-          - $ref: '#/components/schemas/UserReference'
-          description: The user who performed the action
-          readOnly: true
-        userName:
-          type: string
-          description: The username of who performed the action
+          description: The email of the user
           readOnly: true
           example: api.developer@lawvu.com
-      additionalProperties: false
-    ContractTypeReference:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: The system identifier for the contract type
-          format: int32
-          example: 1234
-        name:
+        firstName:
           type: string
-          description: The name of the contract type
+          description: The first name of the user
           readOnly: true
-          example: NDA
-      additionalProperties: false
-    ResourceReference:
-      type: object
-      properties:
+          example: Api
         id:
-          type: integer
-          description: The system identifier for the resource
-          format: int32
-          example: 78914
-        type:
-          allOf:
-          - $ref: '#/components/schemas/ResourceType'
-          description: The type of the resource
+          type: string
+          description: The identifier of the user
+          example: f0f1e06e-3005-4093-af7f-1934d55617e1
+        lastName:
+          type: string
+          description: The last name of the user
           readOnly: true
-          example: Contract
-      additionalProperties: false
-    ProblemDetails:
-      type: object
-      properties:
-        detail:
-          type: string
-          description: More information about the problem.
-        instance:
-          type: string
-          description: The URI of the resource which the error relates to.
-        operationId:
-          type: string
-          description: A unique trace identifier for the request. This should be provided when requesting support.
-        status:
+          example: Developer
+        organizationId:
           type: integer
-          description: The HTTP status code for the problem.
+          description: The system identifier for the organization
           format: int32
-        title:
-          type: string
-          description: A short description of the error.
-        type:
-          type: string
-          description: A URI which can be followed to find out more about the problem.
-      additionalProperties: {}
-    ResourceType:
-      enum:
-      - Contract
-      - Matter
-      type: string
-    TeamReference:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: The identifier of the team
-          format: int32
-          example: 469
-        name:
-          type: string
-          description: The full name of the team
           readOnly: true
-          example: Legal - Commercial
+          example: 8134
       additionalProperties: false
     UpdateContract:
       type: object
@@ -1772,41 +1656,53 @@ components:
           - $ref: '#/components/schemas/TeamReference'
           description: The team which this contract is assigned to
       additionalProperties: false
-    FileType:
-      enum:
-      - File
-      - Folder
-      - ContractDocument
-      type: string
-      description: The type of file entry
-    UserReference:
+    ContractTypeReference:
       type: object
       properties:
-        email:
-          type: string
-          description: The email of the user
-          readOnly: true
-          example: api.developer@lawvu.com
-        firstName:
-          type: string
-          description: The first name of the user
-          readOnly: true
-          example: Api
         id:
-          type: string
-          description: The identifier of the user
-          example: f0f1e06e-3005-4093-af7f-1934d55617e1
-        lastName:
-          type: string
-          description: The last name of the user
-          readOnly: true
-          example: Developer
-        organizationId:
           type: integer
-          description: The system identifier for the organization
+          description: The system identifier for the contract type
+          format: int32
+          example: 1234
+        name:
+          type: string
+          description: The name of the contract type
+          readOnly: true
+          example: NDA
+      additionalProperties: false
+    ContractType:
+      type: object
+      properties:
+        id:
+          type:
+          - integer
+          - 'null'
+          description: The system identifier for the contract type
           format: int32
           readOnly: true
-          example: 8134
+          example: 1234
+        name:
+          type:
+          - string
+          - 'null'
+          description: The user defined name of the contract type
+          example: Contractor Agreement
+        parent:
+          allOf:
+          - $ref: '#/components/schemas/ContractGroupReference'
+          description: The parent contract type
+        hasWizard:
+          type:
+          - boolean
+          - 'null'
+          description: The contract type has a wizard in place.
+          example: false
+        teamAssignmentRequired:
+          type:
+          - boolean
+          - 'null'
+          description: The contract type has a team assignment required.
+          example: false
       additionalProperties: false
     FileReference:
       type: object
@@ -1828,24 +1724,155 @@ components:
           readOnly: true
           example: 3
       additionalProperties: false
-    FolderReference:
+    UserFieldValue:
+      title: User
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/UserReference'
+    FileType:
+      enum:
+      - File
+      - Folder
+      - ContractDocument
+      type: string
+      description: The type of file entry
+    ContractGroupReference:
       type: object
       properties:
-        folder:
-          allOf:
-          - $ref: '#/components/schemas/FolderReference'
-          description: "The parent folder. \n\nThe folder will be null when the folder is at the root of the resource"
-          readOnly: true
         id:
           type: integer
-          description: The system identifier for the folder
+          description: The system identifier for the contract group
           format: int32
-          example: 786
+          example: 5002
         name:
           type: string
-          description: The name of the folder
+          description: The name of the contract type
           readOnly: true
-          example: Drafts
+          example: Employment
+      additionalProperties: false
+    CreatedContract:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The system identifier for the contract
+          format: int32
+          readOnly: true
+          example: 5348
+      additionalProperties: false
+      description: Represents a contract that has been created
+    ContractTypeCollectionResponse:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContractType'
+          description: The collection of items
+      additionalProperties: false
+      description: Response wrapper of a collection of items
+    TeamReference:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The identifier of the team
+          format: int32
+          example: 469
+        name:
+          type: string
+          description: The full name of the team
+          readOnly: true
+          example: Legal - Commercial
+      additionalProperties: false
+    OptionFieldValue:
+      title: Option
+      type: object
+      properties:
+        label:
+          type: string
+          readOnly: true
+          example: Option 1
+        value:
+          type: string
+          example: option_1
+    ResourceReference:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The system identifier for the resource
+          format: int32
+          example: 78914
+        type:
+          allOf:
+          - $ref: '#/components/schemas/ResourceType'
+          description: The type of the resource
+          readOnly: true
+          example: Contract
+      additionalProperties: false
+    ProblemDetails:
+      type: object
+      properties:
+        detail:
+          type: string
+          description: More information about the problem.
+        instance:
+          type: string
+          description: The URI of the resource which the error relates to.
+        operationId:
+          type: string
+          description: A unique trace identifier for the request. This should be provided when requesting support.
+        status:
+          type: integer
+          description: The HTTP status code for the problem.
+          format: int32
+        title:
+          type: string
+          description: A short description of the error.
+        type:
+          type: string
+          description: A URI which can be followed to find out more about the problem.
+      additionalProperties: {}
+    ContractStatus:
+      enum:
+      - Draft
+      - Negotiating
+      - Approval
+      - Signing
+      - Executed
+      - Expired
+      - Void
+      type: string
+    ContractCollectionResponse:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Contract'
+          description: The collection of items
+      additionalProperties: false
+      description: Response wrapper of a collection of items
+    ResourceType:
+      enum:
+      - Contract
+      - Matter
+      type: string
+    AuditableReference:
+      type: object
+      properties:
+        dateUtc:
+          type: string
+          description: The date and time the action was performed. The date and time uses the ISO-8601 format and will be in UTC
+          format: date-time
+          readOnly: true
+          example: '2024-12-25T00:00:00Z'
+        userName:
+          type: string
+          description: The username of who performed the action
+          readOnly: true
+          example: api.developer@lawvu.com
       additionalProperties: false
     File:
       type: object
@@ -1932,28 +1959,26 @@ components:
           description: The username who modified the file resource and when
           readOnly: true
       additionalProperties: false
-    ContractStatus:
-      enum:
-      - Draft
-      - Negotiating
-      - Approval
-      - Signing
-      - Executed
-      - Expired
-      - Void
-      type: string
-    CreatedContract:
+    FolderReference:
       type: object
       properties:
+        folder:
+          allOf:
+          - $ref: '#/components/schemas/FolderReference'
+          description: "The parent folder. \n\nThe folder will be null when the folder is at the root of the resource"
+          readOnly: true
         id:
           type: integer
-          description: The system identifier for the contract
+          description: The system identifier for the folder
           format: int32
+          example: 786
+        name:
+          type: string
+          description: The name of the folder
           readOnly: true
-          example: 5348
+          example: Drafts
       additionalProperties: false
-      description: Represents a contract that has been created
-    AuditableReference:
+    AuditableUserReference:
       type: object
       properties:
         dateUtc:
@@ -1962,61 +1987,142 @@ components:
           format: date-time
           readOnly: true
           example: '2024-12-25T00:00:00Z'
+        user:
+          allOf:
+          - $ref: '#/components/schemas/UserReference'
+          description: The user who performed the action
+          readOnly: true
         userName:
           type: string
           description: The username of who performed the action
           readOnly: true
           example: api.developer@lawvu.com
       additionalProperties: false
-    HttpValidationProblemDetails:
-      type: object
-      properties:
-        detail:
-          type: string
-          description: More information about the problem.
-        errors:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: string
-          description: A dictionary of validation errors, where each key is a field api name and the value is a list of error messages.
-        instance:
-          type: string
-          description: The URI of the resource which the error relates to.
-        operationId:
-          type: string
-          description: A unique trace identifier for the request. This should be provided when requesting support.
-        status:
-          type: integer
-          description: The HTTP status code for the problem.
-          format: int32
-        title:
-          type: string
-          description: A short description of the error.
-        type:
-          type: string
-          description: A URI which can be followed to find out more about the problem.
-      additionalProperties: {}
-    ContractEntity:
+    RecentContract:
       type: object
       properties:
         id:
           type: integer
           format: int32
+        title:
+          type:
+          - string
+          - 'null'
+        description:
+          type:
+          - string
+          - 'null'
         name:
           type:
           - string
           - 'null'
+        matterNumber:
+          type:
+          - string
+          - 'null'
+        contractStatus:
+          enum:
+          - Draft
+          - Negotiating
+          - Approval
+          - Signing
+          - Executed
+          - Expired
+          - Void
+          type: string
+          description: <p>Options:</p><ul><li>Draft</li><li>Negotiating</li><li>Approval</li><li>Signing</li><li>Executed</li><li>Expired</li><li>Void</li></ul>
+        ownerId:
+          type:
+          - string
+          - 'null'
+        lastActivityDateUtc:
+          type:
+          - string
+          - 'null'
+          description: The UTC date of when the current user last viewed the Contract
+          format: date-time
       additionalProperties: false
-    RecentContractArray:
+    Filtering:
+      type: object
+      properties:
+        field:
+          type:
+          - string
+          - 'null'
+          description: Field to filter by (optional)
+        operator:
+          enum:
+          - eq
+          - neq
+          - lt
+          - lte
+          - gt
+          - gte
+          - startswith
+          - endswith
+          - contains
+          - doesnotcon
+          - isnull
+          type: string
+          description: Operator used for filtering (optional)<p>Options:</p><ul><li>eq</li><li>neq</li><li>lt</li><li>lte</li><li>gt</li><li>gte</li><li>startswith</li><li>endswith</li><li>contains</li><li>doesnotcon</li><li>isnull</li></ul>
+        value:
+          type:
+          - string
+          - 'null'
+          description: Value to filter by (optional)
+      additionalProperties: false
+    CreateContract_2:
+      required:
+      - contractTemplateId
+      - name
+      type: object
+      properties:
+        contractTemplateId:
+          type: integer
+          description: The template for the category
+          format: int32
+        matterId:
+          type:
+          - integer
+          - 'null'
+          description: Optionally set the parent matter id
+          format: int32
+        parentContractId:
+          type:
+          - integer
+          - 'null'
+          description: Optionally set the parent contract id
+          format: int32
+        fields:
+          type:
+          - string
+          - 'null'
+          description: The fields (from contract template) for the contract
+        name:
+          minLength: 1
+          type: string
+          description: The contract name
+        externalId:
+          type:
+          - string
+          - 'null'
+          description: Optionally set an ID from an external system. Uniqueness is enforced for your organisation
+        teamId:
+          type:
+          - integer
+          - 'null'
+          description: 'Assigns a team to the contract. This can be required [ref: contractTemplate: TeamRequired]'
+          format: int32
+        contractFile:
+          type:
+          - string
+          - 'null'
+          format: binary
+      additionalProperties: false
+    QuickFindContractArray:
       type: array
       items:
-        $ref: '#/components/schemas/RecentContract'
-    FilteringArray:
-      type: array
-      items:
-        $ref: '#/components/schemas/Filtering'
+        $ref: '#/components/schemas/QuickFindContract'
     ContractDetails:
       type: object
       properties:
@@ -2132,102 +2238,18 @@ components:
           - 'null'
           format: date-time
       additionalProperties: false
-    ExternalIdLookupModel:
+    DataSourceResultModel:
       type: object
       properties:
-        id:
+        data:
+          type:
+          - object
+          - 'null'
+          description: Represents a single page of processed data.
+        total:
           type: integer
-          format: int32
-      additionalProperties: false
-    QuickFindContractArray:
-      type: array
-      items:
-        $ref: '#/components/schemas/QuickFindContract'
-    ContractEntityArray:
-      type: array
-      items:
-        $ref: '#/components/schemas/ContractEntity'
-    ContractUser:
-      type: object
-      properties:
-        userId:
-          type:
-          - string
-          - 'null'
-        userFirstname:
-          type:
-          - string
-          - 'null'
-        userLastname:
-          type:
-          - string
-          - 'null'
-        userOrganisationId:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        userOrganisationName:
-          type:
-          - string
-          - 'null'
-        userHasPicture:
-          type: boolean
-        userPictureCacheId:
-          type: integer
-          format: int32
-        userFullName:
-          type:
-          - string
-          - 'null'
-        userInitials:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    RecentContract:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        title:
-          type:
-          - string
-          - 'null'
-        description:
-          type:
-          - string
-          - 'null'
-        name:
-          type:
-          - string
-          - 'null'
-        matterNumber:
-          type:
-          - string
-          - 'null'
-        contractStatus:
-          enum:
-          - Draft
-          - Negotiating
-          - Approval
-          - Signing
-          - Executed
-          - Expired
-          - Void
-          type: string
-          description: <p>Options:</p><ul><li>Draft</li><li>Negotiating</li><li>Approval</li><li>Signing</li><li>Executed</li><li>Expired</li><li>Void</li></ul>
-        ownerId:
-          type:
-          - string
-          - 'null'
-        lastActivityDateUtc:
-          type:
-          - string
-          - 'null'
-          description: The UTC date of when the current user last viewed the Contract
-          format: date-time
+          description: The total number of records available.
+          format: int64
       additionalProperties: false
     QuickFindContract:
       type: object
@@ -2275,73 +2297,16 @@ components:
         coreFields:
           $ref: '#/components/schemas/FieldData'
       additionalProperties: false
-    Operation:
+    ContractEntity:
       type: object
       properties:
-        value:
-          type:
-          - object
-          - 'null'
-        path:
-          type:
-          - string
-          - 'null'
-        op:
-          type:
-          - string
-          - 'null'
-        from:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    CreateContract_2:
-      required:
-      - contractTemplateId
-      - name
-      type: object
-      properties:
-        contractTemplateId:
+        id:
           type: integer
-          description: The template for the category
           format: int32
-        matterId:
-          type:
-          - integer
-          - 'null'
-          description: Optionally set the parent matter id
-          format: int32
-        parentContractId:
-          type:
-          - integer
-          - 'null'
-          description: Optionally set the parent contract id
-          format: int32
-        fields:
-          type:
-          - string
-          - 'null'
-          description: The fields (from contract template) for the contract
         name:
-          minLength: 1
-          type: string
-          description: The contract name
-        externalId:
           type:
           - string
           - 'null'
-          description: Optionally set an ID from an external system. Uniqueness is enforced for your organisation
-        teamId:
-          type:
-          - integer
-          - 'null'
-          description: 'Assigns a team to the contract. This can be required [ref: contractTemplate: TeamRequired]'
-          format: int32
-        contractFile:
-          type:
-          - string
-          - 'null'
-          format: binary
       additionalProperties: false
     StatusMessage:
       type: object
@@ -2395,6 +2360,14 @@ components:
           - 'null'
           format: int32
       additionalProperties: false
+    OperationArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/Operation'
+    FilteringArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/Filtering'
     FieldData:
       type: object
       properties:
@@ -2407,52 +2380,79 @@ components:
           - object
           - 'null'
       additionalProperties: false
-    Filtering:
+    ContractUser:
       type: object
       properties:
-        field:
+        userId:
           type:
           - string
           - 'null'
-          description: Field to filter by (optional)
-        operator:
-          enum:
-          - eq
-          - neq
-          - lt
-          - lte
-          - gt
-          - gte
-          - startswith
-          - endswith
-          - contains
-          - doesnotcon
-          - isnull
-          type: string
-          description: Operator used for filtering (optional)<p>Options:</p><ul><li>eq</li><li>neq</li><li>lt</li><li>lte</li><li>gt</li><li>gte</li><li>startswith</li><li>endswith</li><li>contains</li><li>doesnotcon</li><li>isnull</li></ul>
-        value:
+        userFirstname:
           type:
           - string
           - 'null'
-          description: Value to filter by (optional)
+        userLastname:
+          type:
+          - string
+          - 'null'
+        userOrganisationId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        userOrganisationName:
+          type:
+          - string
+          - 'null'
+        userHasPicture:
+          type: boolean
+        userPictureCacheId:
+          type: integer
+          format: int32
+        userFullName:
+          type:
+          - string
+          - 'null'
+        userInitials:
+          type:
+          - string
+          - 'null'
       additionalProperties: false
-    DataSourceResultModel:
+    RecentContractArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/RecentContract'
+    Operation:
       type: object
       properties:
-        data:
+        value:
           type:
           - object
           - 'null'
-          description: Represents a single page of processed data.
-        total:
-          type: integer
-          description: The total number of records available.
-          format: int64
+        path:
+          type:
+          - string
+          - 'null'
+        op:
+          type:
+          - string
+          - 'null'
+        from:
+          type:
+          - string
+          - 'null'
       additionalProperties: false
-    OperationArray:
+    ContractEntityArray:
       type: array
       items:
-        $ref: '#/components/schemas/Operation'
+        $ref: '#/components/schemas/ContractEntity'
+    ExternalIdLookupModel:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+      additionalProperties: false
 x-refined-from:
 - lawvu-api-openapi-original.yml
 - lawvu-contracts-openapi-original.json

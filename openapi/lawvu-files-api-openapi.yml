@@ -1140,6 +1140,107 @@ paths:
       description: Production API
 components:
   schemas:
+    CreateFolder:
+      required:
+      - name
+      - resource
+      type: object
+      properties:
+        name:
+          type: string
+          description: 'The user defined name of the file resource
+
+            For file resources with a type of file this includes the file extension'
+          example: document.txt
+        resource:
+          allOf:
+          - $ref: '#/components/schemas/ResourceReference'
+          description: The resource where the file resource is located within
+        id:
+          type:
+          - integer
+          - 'null'
+          description: The system identifier for the file
+          format: int32
+          readOnly: true
+          example: 9456
+        displayId:
+          type:
+          - string
+          - 'null'
+          description: 'A system generated identifier of the file resource.
+
+            Also known as "Document ID"'
+          readOnly: true
+          example: LV0001-0000123.1
+        type:
+          allOf:
+          - $ref: '#/components/schemas/FileType'
+          description: The type of file resource
+          readOnly: true
+          example: File
+        folder:
+          allOf:
+          - $ref: '#/components/schemas/FolderReference'
+          description: "The folder where the file resource is located \n\nFolder is null when the file resource is located at the root of the resource"
+        contentType:
+          type:
+          - string
+          - 'null'
+          description: The content type of the file binary
+          readOnly: true
+          example: text/plain
+        restricted:
+          type:
+          - boolean
+          - 'null'
+          description: Is the file resource access restricted
+          default: false
+          readOnly: true
+          example: false
+        size:
+          type:
+          - integer
+          - 'null'
+          description: The size of the file binary in bytes
+          format: int64
+          readOnly: true
+          example: 18139
+        version:
+          type:
+          - integer
+          - 'null'
+          description: The version number of the file resource
+          format: int32
+          readOnly: true
+          example: 3
+        created:
+          allOf:
+          - $ref: '#/components/schemas/AuditableUserReference'
+          description: The user who created the file resource and when
+          readOnly: true
+        modified:
+          allOf:
+          - $ref: '#/components/schemas/AuditableReference'
+          description: The username who modified the file resource and when
+          readOnly: true
+      additionalProperties: false
+      description: Request model for creating a folder
+    ResourceReference:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The system identifier for the resource
+          format: int32
+          example: 78914
+        type:
+          allOf:
+          - $ref: '#/components/schemas/ResourceType'
+          description: The type of the resource
+          readOnly: true
+          example: Contract
+      additionalProperties: false
     ProblemDetails:
       type: object
       properties:
@@ -1178,31 +1279,84 @@ components:
           - $ref: '#/components/schemas/FolderReference'
           description: "The folder where the file resource is located \n\nFolder is null when the file resource is located at the root of the resource"
       additionalProperties: false
+    FileType:
+      enum:
+      - File
+      - Folder
+      - ContractDocument
+      type: string
+      description: The type of file entry
+    FileUploadResourceType:
+      enum:
+      - Matter
+      - Contract
+      - ContractCreation
+      type: string
+    HttpValidationProblemDetails:
+      type: object
+      properties:
+        detail:
+          type: string
+          description: More information about the problem.
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+          description: A dictionary of validation errors, where each key is a field api name and the value is a list of error messages.
+        instance:
+          type: string
+          description: The URI of the resource which the error relates to.
+        operationId:
+          type: string
+          description: A unique trace identifier for the request. This should be provided when requesting support.
+        status:
+          type: integer
+          description: The HTTP status code for the problem.
+          format: int32
+        title:
+          type: string
+          description: A short description of the error.
+        type:
+          type: string
+          description: A URI which can be followed to find out more about the problem.
+      additionalProperties: {}
+    UserReference:
+      type: object
+      properties:
+        email:
+          type: string
+          description: The email of the user
+          readOnly: true
+          example: api.developer@lawvu.com
+        firstName:
+          type: string
+          description: The first name of the user
+          readOnly: true
+          example: Api
+        id:
+          type: string
+          description: The identifier of the user
+          example: f0f1e06e-3005-4093-af7f-1934d55617e1
+        lastName:
+          type: string
+          description: The last name of the user
+          readOnly: true
+          example: Developer
+        organizationId:
+          type: integer
+          description: The system identifier for the organization
+          format: int32
+          readOnly: true
+          example: 8134
+      additionalProperties: false
     ResourceType:
       enum:
       - Contract
       - Matter
       type: string
-    FolderReference:
-      type: object
-      properties:
-        folder:
-          allOf:
-          - $ref: '#/components/schemas/FolderReference'
-          description: "The parent folder. \n\nThe folder will be null when the folder is at the root of the resource"
-          readOnly: true
-        id:
-          type: integer
-          description: The system identifier for the folder
-          format: int32
-          example: 786
-        name:
-          type: string
-          description: The name of the folder
-          readOnly: true
-          example: Drafts
-      additionalProperties: false
-    AuditableUserReference:
+    AuditableReference:
       type: object
       properties:
         dateUtc:
@@ -1211,11 +1365,6 @@ components:
           format: date-time
           readOnly: true
           example: '2024-12-25T00:00:00Z'
-        user:
-          allOf:
-          - $ref: '#/components/schemas/UserReference'
-          description: The user who performed the action
-          readOnly: true
         userName:
           type: string
           description: The username of who performed the action
@@ -1307,92 +1456,45 @@ components:
           description: The username who modified the file resource and when
           readOnly: true
       additionalProperties: false
-    CreateFolder:
-      required:
-      - name
-      - resource
+    FolderReference:
       type: object
       properties:
-        name:
-          type: string
-          description: 'The user defined name of the file resource
-
-            For file resources with a type of file this includes the file extension'
-          example: document.txt
-        resource:
-          allOf:
-          - $ref: '#/components/schemas/ResourceReference'
-          description: The resource where the file resource is located within
-        id:
-          type:
-          - integer
-          - 'null'
-          description: The system identifier for the file
-          format: int32
-          readOnly: true
-          example: 9456
-        displayId:
-          type:
-          - string
-          - 'null'
-          description: 'A system generated identifier of the file resource.
-
-            Also known as "Document ID"'
-          readOnly: true
-          example: LV0001-0000123.1
-        type:
-          allOf:
-          - $ref: '#/components/schemas/FileType'
-          description: The type of file resource
-          readOnly: true
-          example: File
         folder:
           allOf:
           - $ref: '#/components/schemas/FolderReference'
-          description: "The folder where the file resource is located \n\nFolder is null when the file resource is located at the root of the resource"
-        contentType:
-          type:
-          - string
-          - 'null'
-          description: The content type of the file binary
+          description: "The parent folder. \n\nThe folder will be null when the folder is at the root of the resource"
           readOnly: true
-          example: text/plain
-        restricted:
-          type:
-          - boolean
-          - 'null'
-          description: Is the file resource access restricted
-          default: false
-          readOnly: true
-          example: false
-        size:
-          type:
-          - integer
-          - 'null'
-          description: The size of the file binary in bytes
-          format: int64
-          readOnly: true
-          example: 18139
-        version:
-          type:
-          - integer
-          - 'null'
-          description: The version number of the file resource
+        id:
+          type: integer
+          description: The system identifier for the folder
           format: int32
+          example: 786
+        name:
+          type: string
+          description: The name of the folder
           readOnly: true
-          example: 3
-        created:
-          allOf:
-          - $ref: '#/components/schemas/AuditableUserReference'
-          description: The user who created the file resource and when
-          readOnly: true
-        modified:
-          allOf:
-          - $ref: '#/components/schemas/AuditableReference'
-          description: The username who modified the file resource and when
-          readOnly: true
+          example: Drafts
       additionalProperties: false
-      description: Request model for creating a folder
+    AuditableUserReference:
+      type: object
+      properties:
+        dateUtc:
+          type: string
+          description: The date and time the action was performed. The date and time uses the ISO-8601 format and will be in UTC
+          format: date-time
+          readOnly: true
+          example: '2024-12-25T00:00:00Z'
+        user:
+          allOf:
+          - $ref: '#/components/schemas/UserReference'
+          description: The user who performed the action
+          readOnly: true
+        userName:
+          type: string
+          description: The username of who performed the action
+          readOnly: true
+          example: api.developer@lawvu.com
+      additionalProperties: false
     UploadedFile:
       type: object
       properties:
@@ -1435,222 +1537,6 @@ components:
           description: The parent folder id of the file. Leave null if the file is not in a folder
           format: int32
           example: 32535
-      additionalProperties: false
-    AuditableReference:
-      type: object
-      properties:
-        dateUtc:
-          type: string
-          description: The date and time the action was performed. The date and time uses the ISO-8601 format and will be in UTC
-          format: date-time
-          readOnly: true
-          example: '2024-12-25T00:00:00Z'
-        userName:
-          type: string
-          description: The username of who performed the action
-          readOnly: true
-          example: api.developer@lawvu.com
-      additionalProperties: false
-    ResourceReference:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: The system identifier for the resource
-          format: int32
-          example: 78914
-        type:
-          allOf:
-          - $ref: '#/components/schemas/ResourceType'
-          description: The type of the resource
-          readOnly: true
-          example: Contract
-      additionalProperties: false
-    FileType:
-      enum:
-      - File
-      - Folder
-      - ContractDocument
-      type: string
-      description: The type of file entry
-    UserReference:
-      type: object
-      properties:
-        email:
-          type: string
-          description: The email of the user
-          readOnly: true
-          example: api.developer@lawvu.com
-        firstName:
-          type: string
-          description: The first name of the user
-          readOnly: true
-          example: Api
-        id:
-          type: string
-          description: The identifier of the user
-          example: f0f1e06e-3005-4093-af7f-1934d55617e1
-        lastName:
-          type: string
-          description: The last name of the user
-          readOnly: true
-          example: Developer
-        organizationId:
-          type: integer
-          description: The system identifier for the organization
-          format: int32
-          readOnly: true
-          example: 8134
-      additionalProperties: false
-    HttpValidationProblemDetails:
-      type: object
-      properties:
-        detail:
-          type: string
-          description: More information about the problem.
-        errors:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: string
-          description: A dictionary of validation errors, where each key is a field api name and the value is a list of error messages.
-        instance:
-          type: string
-          description: The URI of the resource which the error relates to.
-        operationId:
-          type: string
-          description: A unique trace identifier for the request. This should be provided when requesting support.
-        status:
-          type: integer
-          description: The HTTP status code for the problem.
-          format: int32
-        title:
-          type: string
-          description: A short description of the error.
-        type:
-          type: string
-          description: A URI which can be followed to find out more about the problem.
-      additionalProperties: {}
-    FileUploadResourceType:
-      enum:
-      - Matter
-      - Contract
-      - ContractCreation
-      type: string
-    FileListItem:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        type:
-          enum:
-          - Folder
-          - File
-          type: string
-          description: <p>Options:</p><ul><li>Folder</li><li>File</li></ul>
-        name:
-          type:
-          - string
-          - 'null'
-        size:
-          type: integer
-          format: int64
-        version:
-          type: integer
-          format: int32
-        uploadedDateUtc:
-          type: string
-          format: date-time
-        isPrivate:
-          type: boolean
-        uploadedBy:
-          type:
-          - string
-          - 'null'
-        uploadedByOrganisation:
-          type:
-          - string
-          - 'null'
-        fileModifiedDateUtc:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        documentId:
-          type:
-          - string
-          - 'null'
-        path:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    FileListItemDataSourceResult:
-      type: object
-      properties:
-        data:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/FileListItem'
-          description: Represents a single page of processed data.
-        total:
-          type: integer
-          description: The total number of records available.
-          format: int32
-      additionalProperties: false
-    Operation:
-      type: object
-      properties:
-        value:
-          type:
-          - object
-          - 'null'
-        path:
-          type:
-          - string
-          - 'null'
-        op:
-          type:
-          - string
-          - 'null'
-        from:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    FinaliseUploadModel:
-      type: object
-      properties:
-        outcome:
-          enum:
-          - Succeeded
-          - Failed
-          type: string
-          description: <p>Options:</p><ul><li>Failed</li><li>Succeeded</li></ul>
-        conflictResolution:
-          enum:
-          - Replace
-          - KeepBoth
-          - SaveVersion
-          - Skip
-          type:
-          - string
-          - 'null'
-          description: <p>Options:</p><ul><li>Replace</li><li>KeepBoth</li><li>SaveVersion</li><li>Skip</li></ul>
-        failureReason:
-          type:
-          - string
-          - 'null'
-        comments:
-          type:
-          - string
-          - 'null'
-        isSigned:
-          type: boolean
       additionalProperties: false
     FileDetailModel:
       type: object
@@ -1757,10 +1643,124 @@ components:
           description: The upload file details
           format: binary
       additionalProperties: false
+    FileListItemDataSourceResult:
+      type: object
+      properties:
+        data:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/FileListItem'
+          description: Represents a single page of processed data.
+        total:
+          type: integer
+          description: The total number of records available.
+          format: int32
+      additionalProperties: false
+    FinaliseUploadModel:
+      type: object
+      properties:
+        outcome:
+          enum:
+          - Succeeded
+          - Failed
+          type: string
+          description: <p>Options:</p><ul><li>Failed</li><li>Succeeded</li></ul>
+        conflictResolution:
+          enum:
+          - Replace
+          - KeepBoth
+          - SaveVersion
+          - Skip
+          type:
+          - string
+          - 'null'
+          description: <p>Options:</p><ul><li>Replace</li><li>KeepBoth</li><li>SaveVersion</li><li>Skip</li></ul>
+        failureReason:
+          type:
+          - string
+          - 'null'
+        comments:
+          type:
+          - string
+          - 'null'
+        isSigned:
+          type: boolean
+      additionalProperties: false
     OperationArray:
       type: array
       items:
         $ref: '#/components/schemas/Operation'
+    Operation:
+      type: object
+      properties:
+        value:
+          type:
+          - object
+          - 'null'
+        path:
+          type:
+          - string
+          - 'null'
+        op:
+          type:
+          - string
+          - 'null'
+        from:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    FileListItem:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        type:
+          enum:
+          - Folder
+          - File
+          type: string
+          description: <p>Options:</p><ul><li>Folder</li><li>File</li></ul>
+        name:
+          type:
+          - string
+          - 'null'
+        size:
+          type: integer
+          format: int64
+        version:
+          type: integer
+          format: int32
+        uploadedDateUtc:
+          type: string
+          format: date-time
+        isPrivate:
+          type: boolean
+        uploadedBy:
+          type:
+          - string
+          - 'null'
+        uploadedByOrganisation:
+          type:
+          - string
+          - 'null'
+        fileModifiedDateUtc:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        documentId:
+          type:
+          - string
+          - 'null'
+        path:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
 x-refined-from:
 - lawvu-api-openapi-original.yml
 - lawvu-files-openapi-original.json

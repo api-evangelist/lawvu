@@ -266,18 +266,19 @@ paths:
                 $ref: '#/components/schemas/SingleLookupOptionPaganationResult'
 components:
   schemas:
-    LookupOption:
+    OperationArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/Operation'
+    LookupOptionCreate:
       type: object
       properties:
-        id:
-          type: integer
-          format: int32
         label:
           type:
           - string
           - 'null'
       additionalProperties: false
-    SingleLookupOptionPaganationResult:
+    LookupOptionPaganationResult:
       type: object
       properties:
         skip:
@@ -291,19 +292,7 @@ components:
           - array
           - 'null'
           items:
-            $ref: '#/components/schemas/SingleLookupOption'
-      additionalProperties: false
-    SingleLookupOption:
-      type: object
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-        label:
-          type:
-          - string
-          - 'null'
+            $ref: '#/components/schemas/LookupOption'
       additionalProperties: false
     Operation:
       type: object
@@ -325,19 +314,7 @@ components:
           - string
           - 'null'
       additionalProperties: false
-    LookupOptionCreate:
-      type: object
-      properties:
-        label:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    OperationArray:
-      type: array
-      items:
-        $ref: '#/components/schemas/Operation'
-    LookupOptionPaganationResult:
+    SingleLookupOptionPaganationResult:
       type: object
       properties:
         skip:
@@ -351,5 +328,28 @@ components:
           - array
           - 'null'
           items:
-            $ref: '#/components/schemas/LookupOption'
+            $ref: '#/components/schemas/SingleLookupOption'
+      additionalProperties: false
+    LookupOption:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        label:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    SingleLookupOption:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        label:
+          type:
+          - string
+          - 'null'
       additionalProperties: false

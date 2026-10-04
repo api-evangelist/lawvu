@@ -231,6 +231,10 @@ paths:
                 status: LockedOut
 components:
   schemas:
+    UserArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/User'
     User:
       type: object
       properties:
@@ -405,7 +409,3 @@ components:
           type: string
           description: <p>Options:</p><ul><li>Disabled</li><li>Pending</li><li>Active</li><li>Invited</li><li>LockedOut</li></ul>
       additionalProperties: false
-    UserArray:
-      type: array
-      items:
-        $ref: '#/components/schemas/User'
