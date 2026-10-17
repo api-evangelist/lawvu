@@ -157,6 +157,10 @@ paths:
                 format: int32
 components:
   schemas:
+    FolderModelArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/FolderModel'
     CreateFolderRequest:
       required:
       - name
@@ -173,10 +177,6 @@ components:
           description: The parent folder ID the folder will be created within, otherwise the folder is created at the root of the record.
           format: int32
       additionalProperties: false
-    FolderModelArray:
-      type: array
-      items:
-        $ref: '#/components/schemas/FolderModel'
     FolderModel:
       type: object
       properties:

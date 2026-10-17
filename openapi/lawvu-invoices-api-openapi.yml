@@ -332,25 +332,6 @@ components:
           - string
           - 'null'
       additionalProperties: false
-    InvoiceDataSourceResult:
-      type: object
-      properties:
-        data:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/Invoice'
-          description: Represents a single page of processed data.
-        total:
-          type: integer
-          description: The total number of records available.
-          format: int32
-      additionalProperties: false
-    OperationArray:
-      type: array
-      items:
-        $ref: '#/components/schemas/Operation'
     BillingRecipient:
       type: object
       properties:
@@ -400,6 +381,25 @@ components:
           type:
           - string
           - 'null'
+      additionalProperties: false
+    OperationArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/Operation'
+    InvoiceDataSourceResult:
+      type: object
+      properties:
+        data:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Invoice'
+          description: Represents a single page of processed data.
+        total:
+          type: integer
+          description: The total number of records available.
+          format: int32
       additionalProperties: false
     Operation:
       type: object

@@ -51,6 +51,10 @@ paths:
           description: Success
 components:
   schemas:
+    MatterCategoryArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/MatterCategory'
     MatterCategory:
       type: object
       properties:
@@ -84,7 +88,3 @@ components:
         hasRules:
           type: boolean
       additionalProperties: false
-    MatterCategoryArray:
-      type: array
-      items:
-        $ref: '#/components/schemas/MatterCategory'

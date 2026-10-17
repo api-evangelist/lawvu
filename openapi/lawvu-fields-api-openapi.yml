@@ -625,133 +625,20 @@ paths:
       description: Production API
 components:
   schemas:
-    FieldType:
-      enum:
-      - Text
-      - Decimal
-      - Boolean
-      - Date
-      - Option
-      - MultiOption
-      - User
-      type: string
-    ProblemDetails:
+    AuditableReference:
       type: object
       properties:
-        detail:
+        dateUtc:
           type: string
-          description: More information about the problem.
-        instance:
-          type: string
-          description: The URI of the resource which the error relates to.
-        operationId:
-          type: string
-          description: A unique trace identifier for the request. This should be provided when requesting support.
-        status:
-          type: integer
-          description: The HTTP status code for the problem.
-          format: int32
-        title:
-          type: string
-          description: A short description of the error.
-        type:
-          type: string
-          description: A URI which can be followed to find out more about the problem.
-      additionalProperties: {}
-    CreatedFieldOption:
-      type: object
-      properties:
-        value:
-          type: string
-          description: The system generated value for the field option
-          example: option_1
-      additionalProperties: false
-      description: Represents a field option that has been created
-    MultiOptionFieldProperties:
-      type: object
-      properties:
-        userCanAddOption:
-          type:
-          - boolean
-          - 'null'
-          description: Indicates if an option can be added without the user having access to further manage the field options
-          example: true
-      additionalProperties: false
-    FieldOption:
-      required:
-      - label
-      type: object
-      properties:
-        label:
-          type:
-          - string
-          - 'null'
-          description: The user defined label of the field option
-          example: Option A
-        value:
-          type:
-          - string
-          - 'null'
-          description: The system generated value for the field option
+          description: The date and time the action was performed. The date and time uses the ISO-8601 format and will be in UTC
+          format: date-time
           readOnly: true
-          example: option_1
-        properties:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            x-additionalPropertiesName: propertyName
-          description: Additional properties based on the type of field option. See examples for more details.
-      additionalProperties: false
-    HttpValidationProblemDetails:
-      type: object
-      properties:
-        detail:
+          example: '2024-12-25T00:00:00Z'
+        userName:
           type: string
-          description: More information about the problem.
-        errors:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: string
-          description: A dictionary of validation errors, where each key is a field api name and the value is a list of error messages.
-        instance:
-          type: string
-          description: The URI of the resource which the error relates to.
-        operationId:
-          type: string
-          description: A unique trace identifier for the request. This should be provided when requesting support.
-        status:
-          type: integer
-          description: The HTTP status code for the problem.
-          format: int32
-        title:
-          type: string
-          description: A short description of the error.
-        type:
-          type: string
-          description: A URI which can be followed to find out more about the problem.
-      additionalProperties: {}
-    FieldCollectionResponse:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Field'
-          description: The collection of items
-      additionalProperties: false
-      description: Response wrapper of a collection of items
-    OptionFieldProperties:
-      type: object
-      properties:
-        userCanAddOption:
-          type:
-          - boolean
-          - 'null'
-          description: Indicates if an option can be added without the user having access to further manage the field options
-          example: true
+          description: The username of who performed the action
+          readOnly: true
+          example: api.developer@lawvu.com
       additionalProperties: false
     Field:
       type: object
@@ -791,21 +678,72 @@ components:
           description: The username who modified the field and when
           readOnly: true
       additionalProperties: false
-    AuditableReference:
+    FieldOption:
+      required:
+      - label
       type: object
       properties:
-        dateUtc:
-          type: string
-          description: The date and time the action was performed. The date and time uses the ISO-8601 format and will be in UTC
-          format: date-time
+        label:
+          type:
+          - string
+          - 'null'
+          description: The user defined label of the field option
+          example: Option A
+        value:
+          type:
+          - string
+          - 'null'
+          description: The system generated value for the field option
           readOnly: true
-          example: '2024-12-25T00:00:00Z'
-        userName:
-          type: string
-          description: The username of who performed the action
-          readOnly: true
-          example: api.developer@lawvu.com
+          example: option_1
+        properties:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            x-additionalPropertiesName: propertyName
+          description: Additional properties based on the type of field option. See examples for more details.
       additionalProperties: false
+    FieldType:
+      enum:
+      - Text
+      - Decimal
+      - Boolean
+      - Date
+      - Option
+      - MultiOption
+      - User
+      type: string
+    HttpValidationProblemDetails:
+      type: object
+      properties:
+        detail:
+          type: string
+          description: More information about the problem.
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+          description: A dictionary of validation errors, where each key is a field api name and the value is a list of error messages.
+        instance:
+          type: string
+          description: The URI of the resource which the error relates to.
+        operationId:
+          type: string
+          description: A unique trace identifier for the request. This should be provided when requesting support.
+        status:
+          type: integer
+          description: The HTTP status code for the problem.
+          format: int32
+        title:
+          type: string
+          description: A short description of the error.
+        type:
+          type: string
+          description: A URI which can be followed to find out more about the problem.
+      additionalProperties: {}
     CreateFieldOption:
       required:
       - label
@@ -823,6 +761,58 @@ components:
             x-additionalPropertiesName: propertyName
           description: Additional properties based on the type of field option. See examples for more details.
       additionalProperties: false
+    CreatedFieldOption:
+      type: object
+      properties:
+        value:
+          type: string
+          description: The system generated value for the field option
+          example: option_1
+      additionalProperties: false
+      description: Represents a field option that has been created
+    OptionFieldProperties:
+      type: object
+      properties:
+        userCanAddOption:
+          type:
+          - boolean
+          - 'null'
+          description: Indicates if an option can be added without the user having access to further manage the field options
+          example: true
+      additionalProperties: false
+    ProblemDetails:
+      type: object
+      properties:
+        detail:
+          type: string
+          description: More information about the problem.
+        instance:
+          type: string
+          description: The URI of the resource which the error relates to.
+        operationId:
+          type: string
+          description: A unique trace identifier for the request. This should be provided when requesting support.
+        status:
+          type: integer
+          description: The HTTP status code for the problem.
+          format: int32
+        title:
+          type: string
+          description: A short description of the error.
+        type:
+          type: string
+          description: A URI which can be followed to find out more about the problem.
+      additionalProperties: {}
+    FieldCollectionResponse:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Field'
+          description: The collection of items
+      additionalProperties: false
+      description: Response wrapper of a collection of items
     FieldOptionCollectionResponse:
       type: object
       properties:
@@ -848,6 +838,16 @@ components:
           additionalProperties: {}
           description: Specific properties for the field option, varies by field type
       additionalProperties: false
+    MultiOptionFieldProperties:
+      type: object
+      properties:
+        userCanAddOption:
+          type:
+          - boolean
+          - 'null'
+          description: Indicates if an option can be added without the user having access to further manage the field options
+          example: true
+      additionalProperties: false
     FieldListItemDataSourceResult:
       type: object
       properties:
@@ -863,103 +863,19 @@ components:
           description: The total number of records available.
           format: int32
       additionalProperties: false
-    FieldListItem:
-      required:
-      - id
+    HyperMediaLink:
       type: object
       properties:
-        id:
-          type: integer
-          format: int32
-        title:
+        name:
           type:
           - string
           - 'null'
-        description:
+        uri:
           type:
           - string
           - 'null'
-        category:
-          enum:
-          - Custom
-          - Lawvu
-          type: string
-          description: <p>Options:</p><ul><li>Custom</li><li>Lawvu</li></ul>
-        lawvuType:
-          type: integer
-          format: int32
-        webMergeFieldName:
-          type:
-          - string
-          - 'null'
-        contractCount:
-          type: integer
-          format: int32
-        matterCount:
-          type: integer
-          format: int32
-        _links:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/HyperMediaLink'
-      additionalProperties: false
-    FieldDetailParameters:
-      type: object
-      properties:
-        options:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/LookupSingleOptionModel'
-        default:
-          type:
-          - object
-          - 'null'
-        rangeStart:
-          type:
-          - number
-          - 'null'
-          format: double
-        rangeEnd:
-          type:
-          - number
-          - 'null'
-          format: double
-        stepSize:
-          type:
-          - number
-          - 'null'
-          format: double
-        allowExternalUsers:
-          type:
-          - boolean
-          - 'null'
-        canAddOptions:
-          type:
-          - boolean
-          - 'null'
-      additionalProperties: false
-    StringArray:
-      type: array
-      items:
-        type: string
-    LookupSingleOptionModel:
-      type: object
-      properties:
-        Value:
-          type:
-          - string
-          - 'null'
-        id:
-          type: integer
-          format: int32
-        label:
-          type:
-          - string
-          - 'null'
+        methods:
+          $ref: '#/components/schemas/StringArray'
       additionalProperties: false
     FieldDetailGetModel:
       type: object
@@ -1032,19 +948,103 @@ components:
           $ref: '#/components/schemas/FieldDetailParameters'
       additionalProperties: false
       description: This model represents the payload returned from the Private API for getting details related to a single lookup field
-    HyperMediaLink:
+    FieldDetailParameters:
       type: object
       properties:
-        name:
+        options:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/LookupSingleOptionModel'
+        default:
+          type:
+          - object
+          - 'null'
+        rangeStart:
+          type:
+          - number
+          - 'null'
+          format: double
+        rangeEnd:
+          type:
+          - number
+          - 'null'
+          format: double
+        stepSize:
+          type:
+          - number
+          - 'null'
+          format: double
+        allowExternalUsers:
+          type:
+          - boolean
+          - 'null'
+        canAddOptions:
+          type:
+          - boolean
+          - 'null'
+      additionalProperties: false
+    FieldListItem:
+      required:
+      - id
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        title:
           type:
           - string
           - 'null'
-        uri:
+        description:
           type:
           - string
           - 'null'
-        methods:
-          $ref: '#/components/schemas/StringArray'
+        category:
+          enum:
+          - Custom
+          - Lawvu
+          type: string
+          description: <p>Options:</p><ul><li>Custom</li><li>Lawvu</li></ul>
+        lawvuType:
+          type: integer
+          format: int32
+        webMergeFieldName:
+          type:
+          - string
+          - 'null'
+        contractCount:
+          type: integer
+          format: int32
+        matterCount:
+          type: integer
+          format: int32
+        _links:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/HyperMediaLink'
+      additionalProperties: false
+    StringArray:
+      type: array
+      items:
+        type: string
+    LookupSingleOptionModel:
+      type: object
+      properties:
+        Value:
+          type:
+          - string
+          - 'null'
+        id:
+          type: integer
+          format: int32
+        label:
+          type:
+          - string
+          - 'null'
       additionalProperties: false
 x-refined-from:
 - lawvu-api-openapi-original.yml

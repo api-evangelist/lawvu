@@ -242,40 +242,10 @@ paths:
                 $ref: '#/components/schemas/CrossUserEmailTrackingResponse'
 components:
   schemas:
-    MessageDraftRecipient:
-      required:
-      - userId
-      type: object
-      properties:
-        userId:
-          minLength: 1
-          type: string
-      additionalProperties: false
-    UserEmailTracking:
-      type: object
-      properties:
-        trackedByUserId:
-          type:
-          - string
-          - 'null'
-        trackedOnDateTimeUtc:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        trackedToRecord:
-          $ref: '#/components/schemas/UserEmailTrackingRecord'
-      additionalProperties: false
-    CrossUserEmailTrackingResponse:
-      type: object
-      properties:
-        value:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/CrossUserEmailTracking'
-      additionalProperties: false
+    EmailThreadArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/EmailThread'
     PagedEmailThread:
       type: object
       properties:
@@ -291,10 +261,15 @@ components:
           - 'null'
           format: int32
       additionalProperties: false
-    StringArray:
-      type: array
-      items:
-        type: string
+    MessageDraftRecipient:
+      required:
+      - userId
+      type: object
+      properties:
+        userId:
+          minLength: 1
+          type: string
+      additionalProperties: false
     MessageDraft:
       type: object
       properties:
@@ -313,6 +288,140 @@ components:
           - 'null'
           items:
             $ref: '#/components/schemas/MessageDraftRecipient'
+      additionalProperties: false
+    CrossUserEmailTracking:
+      type: object
+      properties:
+        externalReferenceId:
+          type:
+          - string
+          - 'null'
+        tracking:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/UserEmailTracking'
+      additionalProperties: false
+    CrossUserEmailTrackingResponse:
+      type: object
+      properties:
+        value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/CrossUserEmailTracking'
+      additionalProperties: false
+    SaveEmailThread:
+      required:
+      - client
+      - threadIdentifier
+      type: object
+      properties:
+        threadIdentifier:
+          minLength: 1
+          type: string
+        track:
+          type: boolean
+        client:
+          enum:
+          - Outlook
+          - Gmail
+          type: string
+          description: <p>Options:</p><ul><li>Outlook</li><li>Gmail</li></ul>
+        matterId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        fileId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        contractId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+      additionalProperties: false
+    CreateMessageDraft:
+      type: object
+      properties:
+        sourceId:
+          type:
+          - string
+          - 'null'
+        authorEmailAddress:
+          type:
+          - string
+          - 'null'
+          deprecated: true
+        expectedFromAddress:
+          type:
+          - string
+          - 'null'
+        matterId:
+          type: integer
+          format: int32
+        mode:
+          enum:
+          - Message
+          - File
+          type: string
+          description: <p>Options:</p><ul><li>Message</li><li>File</li></ul>
+        recipients:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/MessageDraftRecipient'
+      additionalProperties: false
+    UserEmailTracking:
+      type: object
+      properties:
+        trackedByUserId:
+          type:
+          - string
+          - 'null'
+        trackedOnDateTimeUtc:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        trackedToRecord:
+          $ref: '#/components/schemas/UserEmailTrackingRecord'
+      additionalProperties: false
+    UserEmailTrackingRecord:
+      type: object
+      properties:
+        recordType:
+          enum:
+          - Matter
+          - Milestone
+          - Task
+          - Organisation
+          - Contract
+          - File
+          - InvoiceBatch
+          - KnowledgeArticle
+          - Folder
+          - FolderTemplate
+          - KnowledgeLibrary
+          - InboundEmail
+          - User
+          - MessageThread
+          - TimelineEntry
+          - MatterStatus
+          - ContractStatus
+          - Message
+          - Comment
+          type: string
+          description: <p>Options:</p><ul><li>Matter</li><li>Milestone</li><li>Task</li><li>Organisation</li><li>Contract</li><li>File</li><li>InvoiceBatch</li><li>KnowledgeArticle</li><li>Folder</li><li>FolderTemplate</li><li>KnowledgeLibrary</li><li>InboundEmail</li><li>User</li><li>MessageThread</li><li>TimelineEntry</li><li>MatterStatus</li><li>ContractStatus</li><li>Message</li><li>Comment</li></ul>
+        recordId:
+          type: integer
+          format: int32
       additionalProperties: false
     EmailThread:
       type: object
@@ -379,122 +488,13 @@ components:
         contractIsDeleted:
           type: boolean
       additionalProperties: false
-    EmailThreadArray:
+    StringArray:
       type: array
       items:
-        $ref: '#/components/schemas/EmailThread'
-    UserEmailTrackingRecord:
-      type: object
-      properties:
-        recordType:
-          enum:
-          - Matter
-          - Milestone
-          - Task
-          - Organisation
-          - Contract
-          - File
-          - InvoiceBatch
-          - KnowledgeArticle
-          - Folder
-          - FolderTemplate
-          - KnowledgeLibrary
-          - InboundEmail
-          - User
-          - MessageThread
-          - TimelineEntry
-          - MatterStatus
-          - ContractStatus
-          - Message
-          - Comment
-          type: string
-          description: <p>Options:</p><ul><li>Matter</li><li>Milestone</li><li>Task</li><li>Organisation</li><li>Contract</li><li>File</li><li>InvoiceBatch</li><li>KnowledgeArticle</li><li>Folder</li><li>FolderTemplate</li><li>KnowledgeLibrary</li><li>InboundEmail</li><li>User</li><li>MessageThread</li><li>TimelineEntry</li><li>MatterStatus</li><li>ContractStatus</li><li>Message</li><li>Comment</li></ul>
-        recordId:
-          type: integer
-          format: int32
-      additionalProperties: false
-    CreateMessageDraft:
-      type: object
-      properties:
-        sourceId:
-          type:
-          - string
-          - 'null'
-        authorEmailAddress:
-          type:
-          - string
-          - 'null'
-          deprecated: true
-        expectedFromAddress:
-          type:
-          - string
-          - 'null'
-        matterId:
-          type: integer
-          format: int32
-        mode:
-          enum:
-          - Message
-          - File
-          type: string
-          description: <p>Options:</p><ul><li>Message</li><li>File</li></ul>
-        recipients:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/MessageDraftRecipient'
-      additionalProperties: false
-    CrossUserEmailTracking:
-      type: object
-      properties:
-        externalReferenceId:
-          type:
-          - string
-          - 'null'
-        tracking:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/UserEmailTracking'
-      additionalProperties: false
+        type: string
     CrossUserEmailTrackingByExternalReferenceIdRequest:
       type: object
       properties:
         externalReferenceIds:
           $ref: '#/components/schemas/StringArray'
-      additionalProperties: false
-    SaveEmailThread:
-      required:
-      - client
-      - threadIdentifier
-      type: object
-      properties:
-        threadIdentifier:
-          minLength: 1
-          type: string
-        track:
-          type: boolean
-        client:
-          enum:
-          - Outlook
-          - Gmail
-          type: string
-          description: <p>Options:</p><ul><li>Outlook</li><li>Gmail</li></ul>
-        matterId:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        fileId:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        contractId:
-          type:
-          - integer
-          - 'null'
-          format: int32
       additionalProperties: false

@@ -180,7 +180,7 @@ paths:
                 currencySymbol: $
 components:
   schemas:
-    Department:
+    Region:
       type: object
       properties:
         id:
@@ -190,25 +190,30 @@ components:
           type:
           - string
           - 'null'
-        parentId:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        deletedDateUtc:
-          type:
-          - string
-          - 'null'
-          format: date-time
       additionalProperties: false
     ClientArray:
       type: array
       items:
         $ref: '#/components/schemas/Client'
+    Organisation:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
     OrganisationArray:
       type: array
       items:
         $ref: '#/components/schemas/Organisation'
+    RegionArray:
+      type: array
+      items:
+        $ref: '#/components/schemas/Region'
     OrganisationFinancialSettings:
       type: object
       properties:
@@ -247,11 +252,7 @@ components:
           description: The Symbol of the organisation's default currency e.g. $
           readOnly: true
       additionalProperties: false
-    RegionArray:
-      type: array
-      items:
-        $ref: '#/components/schemas/Region'
-    Region:
+    Department:
       type: object
       properties:
         id:
@@ -261,22 +262,21 @@ components:
           type:
           - string
           - 'null'
+        parentId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        deletedDateUtc:
+          type:
+          - string
+          - 'null'
+          format: date-time
       additionalProperties: false
     DepartmentArray:
       type: array
       items:
         $ref: '#/components/schemas/Department'
-    Organisation:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
     Client:
       type: object
       properties:
