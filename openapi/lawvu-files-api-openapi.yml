@@ -1,20 +1,328 @@
 openapi: 3.2.0
 info:
-  title: Lawvu Files API
-  version: '1.0'
-  description: 'Operations tagged Files across 2 of this provider''s published API definitions: lawvu-api-openapi-original.yml, lawvu-files-openapi-original.json. Each path carries the servers of the definition it was published in.'
+  title: LawVu Files API
+  description: The next generation of the LawVu API.
+  termsOfService: https://developer.lawvu.com/developer-terms
+  contact:
+    name: LawVu Developer Support Team
+    url: https://developer.lawvu.com
+    email: developer@lawvu.com
+  version: ''
 servers:
 - url: https://api-sandbox.lawvu.com
   description: Sandbox API
 - url: https://api.lawvu.com
   description: Production API
-- url: https://api-sandbox.lawvu.com/file-apis
-  description: Sandbox API
-- url: https://api.lawvu.com/file-apis
-  description: Production API
 tags:
 - name: Files
 paths:
+  /v2/files:
+    get:
+      tags:
+      - Files
+      summary: Get files
+      description: 'Retrieve a list of file resources (File, Folder, ContractDocument)
+
+
+        **Recursive behavior:**
+
+        - When filtering by `Folder.Id` (parent folder): `recursive=false` by default (returns direct children only)
+
+        - When no folder filter is specified: `recursive=true` by default (returns all files/folders)
+
+        - Use the `recursive` query parameter to explicitly override these defaults
+
+
+        **Examples:**
+
+        - `GET /v2/files?$filter=Folder/Id eq 786` (direct children only)
+
+        - `GET /v2/files?$filter=Folder/Id eq 786&recursive=true` (include nested descendants)
+
+        - `GET /v2/files?$filter=Type eq ''Folder''` (folders only)
+
+
+        **Filtering:**
+
+        - Only a single `Folder.Id` filter is allowed per request
+
+        - Results are automatically filtered to include only Matter and Contract file types'
+      operationId: get-v2-files
+      parameters:
+      - name: $filter
+        in: query
+        description: Filter the results using OData filter syntax
+        schema:
+          type: string
+      - name: $orderby
+        in: query
+        description: Order the results using OData orderby syntax
+        schema:
+          type: string
+      - name: $skip
+        in: query
+        description: Skip the specified number of results
+        schema:
+          type: integer
+      - name: $top
+        in: query
+        description: Limit the number of results returned
+        schema:
+          type: integer
+      - name: recursive
+        in: query
+        description: Specifies if child files and folders should be returned
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileCollectionResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                detail: The request was invalid and could not be processed
+                errors:
+                  $filter: Only a single folder filter (Folder/Id) is allowed per request
+                instance: /files
+                operationId: 7edb5d62-f5bf-463b-9410-cdd8b3293d89
+                status: 400
+                title: Invalid request
+                type: https://api-docs.lawvu.com/errors/invalid_request
+    post:
+      tags:
+      - Files
+      summary: Create file
+      description: 'Creates a file resource (File, Folder, ContractDocument).
+
+        - File or ContractDocument upload: Use `Content-Type: multipart/form-data`
+
+        - Folder creation: Use `Content-Type: application/json`'
+      operationId: post-v2-files
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UploadFileForm'
+            examples:
+              Contract:
+                summary: Example of a file uploaded to create a contract
+                description: '**Request header**
+
+
+                  `Content-Type: multipart/form-data; boundary=----Boundary7MA4YWxkTrZu0gW`'
+                value: '------Boundary7MA4YWxkTrZu0gW
+
+                  Content-Disposition: form-data; name="file"; filename="contract.pdf"
+
+                  Content-Type: application/pdf
+
+
+                  <Binary file contents>
+
+                  ------Boundary7MA4YWxkTrZu0gW
+
+                  Content-Disposition: form-data; name="targetResourceType"
+
+
+                  ContractCreation
+
+                  ------Boundary7MA4YWxkTrZu0gW--
+
+                  '
+              Contract file:
+                summary: Example of a file uploaded to a contract
+                description: '**Request header**
+
+
+                  `Content-Type: multipart/form-data; boundary=----Boundary7MA4YWxkTrZu0gW`'
+                value: '------Boundary7MA4YWxkTrZu0gW
+
+                  Content-Disposition: form-data; name="file"; filename="contract-file.pdf"
+
+                  Content-Type: application/pdf
+
+
+                  <Binary file contents>
+
+                  ------Boundary7MA4YWxkTrZu0gW
+
+                  Content-Disposition: form-data; name="targetResourceType"
+
+
+                  Contract
+
+                  ------Boundary7MA4YWxkTrZu0gW
+
+                  Content-Disposition: form-data; name="targetResourceId"
+
+
+                  5348
+
+                  ------Boundary7MA4YWxkTrZu0gW--
+
+                  '
+              Matter file:
+                summary: Example of a file uploaded to a matter
+                description: '**Request header**
+
+
+                  `Content-Type: multipart/form-data; boundary=----Boundary7MA4YWxkTrZu0gW`'
+                value: '------Boundary7MA4YWxkTrZu0gW
+
+                  Content-Disposition: form-data; name="file"; filename="matter-file.pdf"
+
+                  Content-Type: application/pdf
+
+
+                  <Binary file contents>
+
+                  ------Boundary7MA4YWxkTrZu0gW
+
+                  Content-Disposition: form-data; name="targetResourceType"
+
+
+                  Matter
+
+                  ------Boundary7MA4YWxkTrZu0gW
+
+                  Content-Disposition: form-data; name="targetResourceId"
+
+
+                  1056
+
+                  ------Boundary7MA4YWxkTrZu0gW--
+
+                  '
+              Contract file folder:
+                summary: Example of a file uploaded into a folder within a contract
+                description: '**Request header**
+
+
+                  `Content-Type: multipart/form-data; boundary=----Boundary7MA4YWxkTrZu0gW`'
+                value: '------Boundary7MA4YWxkTrZu0gW
+
+                  Content-Disposition: form-data; name="file"; filename="contract-file.pdf"
+
+                  Content-Type: application/pdf
+
+
+                  <Binary file contents>
+
+                  ------Boundary7MA4YWxkTrZu0gW
+
+                  Content-Disposition: form-data; name="targetResourceType"
+
+
+                  Contract
+
+                  ------Boundary7MA4YWxkTrZu0gW
+
+                  Content-Disposition: form-data; name="targetResourceId"
+
+
+                  5348
+
+                  ------Boundary7MA4YWxkTrZu0gW
+
+                  Content-Disposition: form-data; name="folderId"
+
+
+                  786
+
+                  ------Boundary7MA4YWxkTrZu0gW--
+
+                  '
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateFolder'
+            examples:
+              Matter folder:
+                summary: Example of creating a folder within a matter
+                value:
+                  name: My Documents
+                  resource:
+                    type: Matter
+                    id: 1056
+              Contract folder:
+                summary: Example of creating a folder within a contract
+                value:
+                  name: Legal Documents
+                  resource:
+                    type: Contract
+                    id: 5348
+              Nested folder:
+                summary: Example of creating a nested folder within an existing folder
+                value:
+                  name: Drafts
+                  folder:
+                    id: 786
+                  resource:
+                    type: Contract
+                    id: 5348
+        required: true
+      responses:
+        '201':
+          description: Created
+          headers:
+            Location:
+              description: Relative location to retrieve the created file or folder
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadedFile'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/HttpValidationProblemDetails'
+              example:
+                detail: The request was invalid and could not be processed
+                errors:
+                  TargetResourceId: Is required when adding a file to a matter
+                instance: /files
+                operationId: 7edb5d62-f5bf-463b-9410-cdd8b3293d89
+                status: 400
+                title: Invalid request
+                type: https://api-docs.lawvu.com/errors/invalid_request
+        '409':
+          description: Conflict
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                detail: The request could not be processed due to a conflict
+                errors:
+                  Name: A file or folder with the same name already exists in this location
+                instance: /files
+                operationId: 7edb5d62-f5bf-463b-9410-cdd8b3293d89
+                status: 409
+                title: Conflict
+                type: https://api-docs.lawvu.com/errors/conflict
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                detail: The Content-Type must be either 'multipart/form-data' for file uploads or 'application/json' for folder creation
+                instance: /files
+                operationId: 7edb5d62-f5bf-463b-9410-cdd8b3293d89
+                status: 415
+                title: Unsupported media type
+                type: https://api-docs.lawvu.com/errors/unsupported_media_type
   /v2/files/{fileId}:
     get:
       tags:
@@ -340,18 +648,21 @@ paths:
                   format: binary
             examples:
               multipart/form-data:
-                summary: Example of a upload a new version of an existing file
-                value: 'boundary=abc1234
+                summary: Example of uploading a new version of an existing file
+                description: '**Request header**
 
-                  abc1234
+
+                  `Content-Type: multipart/form-data; boundary=----Boundary7MA4YWxkTrZu0gW`'
+                value: '------Boundary7MA4YWxkTrZu0gW
 
                   Content-Disposition: form-data; name="file"; filename="new-file-version.pdf"
 
                   Content-Type: application/pdf
 
+
                   <Binary file contents>
 
-                  abc1234
+                  ------Boundary7MA4YWxkTrZu0gW--
 
                   '
             encoding:
@@ -412,11 +723,6 @@ paths:
                 status: 409
                 title: Conflict
                 type: https://api-docs.lawvu.com/errors/conflict
-    servers:
-    - url: https://api-sandbox.lawvu.com
-      description: Sandbox API
-    - url: https://api.lawvu.com
-      description: Production API
   /v2/files/{fileId}/content:
     get:
       tags:
@@ -473,671 +779,6 @@ paths:
                 status: 404
                 title: Resource not found
                 type: https://api-docs.lawvu.com/errors/resource_not_found
-    servers:
-    - url: https://api-sandbox.lawvu.com
-      description: Sandbox API
-    - url: https://api.lawvu.com
-      description: Production API
-  /v2/files:
-    post:
-      tags:
-      - Files
-      summary: Create file
-      description: 'Creates a file resource (File, Folder, ContractDocument).
-
-        - File or ContractDocument upload: Use `Content-Type: multipart/form-data`
-
-        - Folder creation: Use `Content-Type: application/json`'
-      operationId: post-v2-files
-      requestBody:
-        content:
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/UploadFileForm'
-            examples:
-              Contract:
-                summary: Example of a file uploaded to create a contract
-                value: 'boundary=abc1234
-
-                  abc1234
-
-                  Content-Disposition: form-data; name="file"; filename="contract.pdf"
-
-                  Content-Type: application/pdf
-
-                  <Binary file contents>
-
-                  abc1234
-
-                  Content-Disposition: form-data; name="targetResourceType"
-
-                  ContractCreation
-
-                  abc1234
-
-                  '
-              Contract file:
-                summary: Example of a file uploaded to a contract
-                value: 'boundary=abc1234
-
-                  abc1234
-
-                  Content-Disposition: form-data; name="file"; filename="contract-file.pdf"
-
-                  Content-Type: application/pdf
-
-                  <Binary file contents>
-
-                  abc1234
-
-                  Content-Disposition: form-data; name="targetResourceType"
-
-                  Contract
-
-                  abc1234
-
-                  Content-Disposition: form-data; name="targetResourceId"
-
-                  5348
-
-                  abc1234
-
-                  '
-              Matter file:
-                summary: Example of a file uploaded to a matter
-                value: 'boundary=abc1234
-
-                  abc1234
-
-                  Content-Disposition: form-data; name="file"; filename="matter-file.pdf"
-
-                  Content-Type: application/pdf
-
-                  <Binary file contents>
-
-                  abc1234
-
-                  Content-Disposition: form-data; name="targetResourceType"
-
-                  Matter
-
-                  abc1234
-
-                  Content-Disposition: form-data; name="targetResourceId"
-
-                  1056
-
-                  abc1234
-
-                  '
-              Contract file folder:
-                summary: Example of a file uploaded into a folder within a contract
-                value: 'boundary=abc1234
-
-                  abc1234
-
-                  Content-Disposition: form-data; name="file"; filename="contract-file.pdf"
-
-                  Content-Type: application/pdf
-
-                  <Binary file contents>
-
-                  abc1234
-
-                  Content-Disposition: form-data; name="targetResourceType"
-
-                  Contract
-
-                  abc1234
-
-                  Content-Disposition: form-data; name="targetResourceId"
-
-                  5348
-
-                  abc1234
-
-                  Content-Disposition: form-data; name="folderId"
-
-                  786
-
-                  abc1234
-
-                  '
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CreateFolder'
-            examples:
-              Matter folder:
-                summary: Example of creating a folder within a matter
-                value:
-                  name: My Documents
-                  resource:
-                    type: Matter
-                    id: 1056
-              Contract folder:
-                summary: Example of creating a folder within a contract
-                value:
-                  name: Legal Documents
-                  resource:
-                    type: Contract
-                    id: 5348
-              Nested folder:
-                summary: Example of creating a nested folder within an existing folder
-                value:
-                  name: Drafts
-                  folder:
-                    id: 786
-                  resource:
-                    type: Contract
-                    id: 5348
-        required: true
-      responses:
-        '201':
-          description: Created
-          headers:
-            Location:
-              description: Relative location to retrieve the created file or folder
-              schema:
-                type: string
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UploadedFile'
-        '400':
-          description: Bad Request
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/HttpValidationProblemDetails'
-              example:
-                detail: The request was invalid and could not be processed
-                errors:
-                  TargetResourceId: Is required when adding a file to a matter
-                instance: /files
-                operationId: 7edb5d62-f5bf-463b-9410-cdd8b3293d89
-                status: 400
-                title: Invalid request
-                type: https://api-docs.lawvu.com/errors/invalid_request
-        '409':
-          description: Conflict
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/ProblemDetails'
-              example:
-                detail: The request could not be processed due to a conflict
-                errors:
-                  Name: A file or folder with the same name already exists in this location
-                instance: /files
-                operationId: 7edb5d62-f5bf-463b-9410-cdd8b3293d89
-                status: 409
-                title: Conflict
-                type: https://api-docs.lawvu.com/errors/conflict
-        '415':
-          description: Unsupported Media Type
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/ProblemDetails'
-              example:
-                detail: The Content-Type must be either 'multipart/form-data' for file uploads or 'application/json' for folder creation
-                instance: /files
-                operationId: 7edb5d62-f5bf-463b-9410-cdd8b3293d89
-                status: 415
-                title: Unsupported media type
-                type: https://api-docs.lawvu.com/errors/unsupported_media_type
-    servers:
-    - url: https://api-sandbox.lawvu.com
-      description: Sandbox API
-    - url: https://api.lawvu.com
-      description: Production API
-  /v1/files:
-    get:
-      tags:
-      - Files
-      summary: Get files
-      description: Gets a list of files in LawVu (with filters)
-      operationId: get-v1-files
-      parameters:
-      - name: recordType
-        in: query
-        description: The record type the file in linked to (Matter, Contract, Organisation etc)<p>Options:</p><ul><li>Matter</li><li>Milestone</li><li>Task</li><li>Organisation</li><li>Contract</li><li>File</li><li>InvoiceBatch</li><li>KnowledgeArticle</li><li>Folder</li><li>FolderTemplate</li><li>KnowledgeLibrary</li><li>InboundEmail</li><li>User</li><li>MessageThread</li><li>TimelineEntry</li><li>MatterStatus</li><li>ContractStatus</li><li>Message</li><li>Comment</li></ul>
-        schema:
-          enum:
-          - Matter
-          - Milestone
-          - Task
-          - Organisation
-          - Contract
-          - File
-          - InvoiceBatch
-          - KnowledgeArticle
-          - Folder
-          - FolderTemplate
-          - KnowledgeLibrary
-          - InboundEmail
-          - User
-          - MessageThread
-          - TimelineEntry
-          - MatterStatus
-          - ContractStatus
-          - Message
-          - Comment
-          type: string
-          description: <p>Options:</p><ul><li>Matter</li><li>Milestone</li><li>Task</li><li>Organisation</li><li>Contract</li><li>File</li><li>InvoiceBatch</li><li>KnowledgeArticle</li><li>Folder</li><li>FolderTemplate</li><li>KnowledgeLibrary</li><li>InboundEmail</li><li>User</li><li>MessageThread</li><li>TimelineEntry</li><li>MatterStatus</li><li>ContractStatus</li><li>Message</li><li>Comment</li></ul>
-      - name: recordId
-        in: query
-        description: The record id the file is linked to
-        schema:
-          type: integer
-          format: int32
-      - name: skip
-        in: query
-        description: The number of files to skip (used for paging)
-        schema:
-          type: integer
-          format: int32
-      - name: folderId
-        in: query
-        description: The folder id to get files from
-        schema:
-          type: integer
-          format: int32
-      - name: filtering.field
-        in: query
-        description: Field to filter by (optional)
-        schema:
-          type: string
-      - name: filtering.operator
-        in: query
-        description: Operator used for filtering (optional)
-        schema:
-          enum:
-          - eq
-          - neq
-          - lt
-          - lte
-          - gt
-          - gte
-          - startswith
-          - endswith
-          - contains
-          - doesnotcon
-          - isnull
-          type: string
-      - name: filtering.value
-        in: query
-        description: Value to filter by (optional)
-        schema:
-          type: string
-      - name: sorting.direction
-        in: query
-        description: Set the sorting direction
-        schema:
-          enum:
-          - asc
-          - desc
-          type: string
-      - name: sorting.field
-        in: query
-        description: Set the sorting fields
-        schema:
-          type: string
-      - name: take
-        in: query
-        description: 'The maximum number of files to return<p>Default: 50</p>'
-        schema:
-          type: integer
-          format: int32
-          default: 50
-      - name: recursive
-        in: query
-        description: 'Set to true in order to include subdirectories and nested files<p>Default: False</p>'
-        schema:
-          type: boolean
-          default: false
-      responses:
-        '200':
-          description: Success
-          content:
-            text/plain:
-              schema:
-                $ref: '#/components/schemas/FileListItemDataSourceResult'
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FileListItemDataSourceResult'
-            text/json:
-              schema:
-                $ref: '#/components/schemas/FileListItemDataSourceResult'
-    servers:
-    - url: https://api-sandbox.lawvu.com/file-apis
-      description: Sandbox API
-    - url: https://api.lawvu.com/file-apis
-      description: Production API
-  /v1/files/{fileId}:
-    get:
-      tags:
-      - Files
-      summary: Get file
-      description: Get file meta from LawVu
-      operationId: get-v1-files-fileid
-      parameters:
-      - name: fileId
-        in: path
-        description: The Id of the file
-        required: true
-        schema:
-          type: integer
-          format: int32
-      responses:
-        '200':
-          description: Success
-          content:
-            text/plain:
-              schema:
-                $ref: '#/components/schemas/FileDetailModel'
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FileDetailModel'
-            text/json:
-              schema:
-                $ref: '#/components/schemas/FileDetailModel'
-    delete:
-      tags:
-      - Files
-      summary: Delete file
-      description: Deletes a file in LawVu
-      operationId: delete-v1-files-fileid
-      parameters:
-      - name: fileId
-        in: path
-        description: The Id of the file
-        required: true
-        schema:
-          type: integer
-          format: int32
-      responses:
-        '200':
-          description: Success
-    patch:
-      tags:
-      - Files
-      summary: Patch file
-      description: Updates a file
-      operationId: patch-v1-files-fileid
-      parameters:
-      - name: fileId
-        in: path
-        description: The Id of the file
-        required: true
-        schema:
-          type: integer
-          format: int32
-      requestBody:
-        description: JSON patch definition for the update. Currently only [name] is supported (file rename)
-        content:
-          application/json-patch+json:
-            schema:
-              $ref: '#/components/schemas/OperationArray'
-          application/json:
-            schema:
-              $ref: '#/components/schemas/OperationArray'
-          text/json:
-            schema:
-              $ref: '#/components/schemas/OperationArray'
-          application/*+json:
-            schema:
-              $ref: '#/components/schemas/OperationArray'
-      responses:
-        '200':
-          description: Success
-    servers:
-    - url: https://api-sandbox.lawvu.com/file-apis
-      description: Sandbox API
-    - url: https://api.lawvu.com/file-apis
-      description: Production API
-  /v1/files/{fileId}/download:
-    get:
-      tags:
-      - Files
-      summary: Download file
-      operationId: get-v1-files-fileid-download
-      parameters:
-      - name: fileId
-        in: path
-        description: The Id of the file
-        required: true
-        schema:
-          type: integer
-          format: int32
-      responses:
-        '200':
-          description: Success
-          content:
-            text/plain:
-              schema:
-                type: integer
-                format: int32
-            application/json:
-              schema:
-                type: integer
-                format: int32
-            text/json:
-              schema:
-                type: integer
-                format: int32
-    servers:
-    - url: https://api-sandbox.lawvu.com/file-apis
-      description: Sandbox API
-    - url: https://api.lawvu.com/file-apis
-      description: Production API
-  /v1/files/{fileId}/move/{destinationId}:
-    post:
-      tags:
-      - Files
-      summary: Move file
-      description: 'Moves a file. If there is a conflict in the destination, set the ConflictResolution
-
-
-        See notes for destinationId when moving a file to the root folder of a matter or contract'
-      operationId: post-v1-files-fileid-move-destinationid
-      parameters:
-      - name: fileId
-        in: path
-        description: The Id of the file
-        required: true
-        schema:
-          type: integer
-          format: int32
-      - name: conflictResolution
-        in: query
-        description: Conflict handling<p>Options:</p><ul><li>Replace</li><li>KeepBoth</li><li>SaveVersion</li><li>Skip</li></ul>
-        schema:
-          enum:
-          - Replace
-          - KeepBoth
-          - SaveVersion
-          - Skip
-          type: string
-          description: <p>Options:</p><ul><li>Replace</li><li>KeepBoth</li><li>SaveVersion</li><li>Skip</li></ul>
-      - name: destinationId
-        in: path
-        description: The destination location for the file.<br />If moving the file to the root folder of the matter or contract, omit this value from the path i.e. 'POST /{fileId}/move/'
-        required: true
-        schema:
-          type: integer
-          format: int32
-      responses:
-        '204':
-          description: No Content
-    servers:
-    - url: https://api-sandbox.lawvu.com/file-apis
-      description: Sandbox API
-    - url: https://api.lawvu.com/file-apis
-      description: Production API
-  /v1/files/{targetType}/{targetId}:
-    post:
-      tags:
-      - Files
-      summary: Upload file
-      description: Upload a file to LawVu. The body of the post should be the contents of the file.
-      operationId: post-v1-files-targettype-targetid
-      parameters:
-      - name: targetType
-        in: path
-        description: The target entity type in LawVu<p>Options:</p><ul><li>Matter</li><li>Milestone</li><li>Task</li><li>Organisation</li><li>Contract</li><li>File</li><li>InvoiceBatch</li><li>KnowledgeArticle</li><li>Folder</li><li>FolderTemplate</li><li>KnowledgeLibrary</li><li>InboundEmail</li><li>User</li><li>MessageThread</li><li>TimelineEntry</li><li>MatterStatus</li><li>ContractStatus</li><li>Message</li><li>Comment</li></ul>
-        required: true
-        schema:
-          enum:
-          - Matter
-          - Milestone
-          - Task
-          - Organisation
-          - Contract
-          - File
-          - InvoiceBatch
-          - KnowledgeArticle
-          - Folder
-          - FolderTemplate
-          - KnowledgeLibrary
-          - InboundEmail
-          - User
-          - MessageThread
-          - TimelineEntry
-          - MatterStatus
-          - ContractStatus
-          - Message
-          - Comment
-          type: string
-          description: <p>Options:</p><ul><li>Matter</li><li>Milestone</li><li>Task</li><li>Organisation</li><li>Contract</li><li>File</li><li>InvoiceBatch</li><li>KnowledgeArticle</li><li>Folder</li><li>FolderTemplate</li><li>KnowledgeLibrary</li><li>InboundEmail</li><li>User</li><li>MessageThread</li><li>TimelineEntry</li><li>MatterStatus</li><li>ContractStatus</li><li>Message</li><li>Comment</li></ul>
-      - name: targetId
-        in: path
-        description: The target entity in LawVu
-        required: true
-        schema:
-          type: integer
-          format: int32
-      requestBody:
-        description: The upload details
-        content:
-          application/json-patch+json:
-            schema:
-              $ref: '#/components/schemas/UploadFilesRequest'
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UploadFilesRequest'
-          text/json:
-            schema:
-              $ref: '#/components/schemas/UploadFilesRequest'
-          application/*+json:
-            schema:
-              $ref: '#/components/schemas/UploadFilesRequest'
-      responses:
-        '200':
-          description: Success
-          content:
-            text/plain:
-              schema:
-                type: integer
-                format: int32
-            application/json:
-              schema:
-                type: integer
-                format: int32
-            text/json:
-              schema:
-                type: integer
-                format: int32
-    servers:
-    - url: https://api-sandbox.lawvu.com/file-apis
-      description: Sandbox API
-    - url: https://api.lawvu.com/file-apis
-      description: Production API
-  /v1/files/{targetType}/{targetId}/uploads/{uploadId}:
-    put:
-      tags:
-      - Files
-      summary: Finalise upload
-      description: (communicate the outcome) of an individual file upload (which may be one of a set of files being uploaded)
-      operationId: put-v1-files-targettype-targetid-uploads-uploadid
-      parameters:
-      - name: targetType
-        in: path
-        description: The target of the upload<p>Options:</p><ul><li>Matter</li><li>Milestone</li><li>Task</li><li>Organisation</li><li>Contract</li><li>File</li><li>InvoiceBatch</li><li>KnowledgeArticle</li><li>Folder</li><li>FolderTemplate</li><li>KnowledgeLibrary</li><li>InboundEmail</li><li>User</li><li>MessageThread</li><li>TimelineEntry</li><li>MatterStatus</li><li>ContractStatus</li><li>Message</li><li>Comment</li></ul>
-        required: true
-        schema:
-          enum:
-          - Matter
-          - Milestone
-          - Task
-          - Organisation
-          - Contract
-          - File
-          - InvoiceBatch
-          - KnowledgeArticle
-          - Folder
-          - FolderTemplate
-          - KnowledgeLibrary
-          - InboundEmail
-          - User
-          - MessageThread
-          - TimelineEntry
-          - MatterStatus
-          - ContractStatus
-          - Message
-          - Comment
-          type: string
-          description: <p>Options:</p><ul><li>Matter</li><li>Milestone</li><li>Task</li><li>Organisation</li><li>Contract</li><li>File</li><li>InvoiceBatch</li><li>KnowledgeArticle</li><li>Folder</li><li>FolderTemplate</li><li>KnowledgeLibrary</li><li>InboundEmail</li><li>User</li><li>MessageThread</li><li>TimelineEntry</li><li>MatterStatus</li><li>ContractStatus</li><li>Message</li><li>Comment</li></ul>
-      - name: targetId
-        in: path
-        description: The id of the target type
-        required: true
-        schema:
-          type: integer
-          format: int32
-      - name: uploadId
-        in: path
-        description: The id of the upload
-        required: true
-        schema:
-          type: integer
-          format: int32
-      requestBody:
-        description: The details of the finalisation
-        content:
-          application/json-patch+json:
-            schema:
-              $ref: '#/components/schemas/FinaliseUploadModel'
-          application/json:
-            schema:
-              $ref: '#/components/schemas/FinaliseUploadModel'
-          text/json:
-            schema:
-              $ref: '#/components/schemas/FinaliseUploadModel'
-          application/*+json:
-            schema:
-              $ref: '#/components/schemas/FinaliseUploadModel'
-      responses:
-        '200':
-          description: Success
-          content:
-            text/plain:
-              schema:
-                type: integer
-                format: int32
-            application/json:
-              schema:
-                type: integer
-                format: int32
-            text/json:
-              schema:
-                type: integer
-                format: int32
-    servers:
-    - url: https://api-sandbox.lawvu.com/file-apis
-      description: Sandbox API
-    - url: https://api.lawvu.com/file-apis
-      description: Production API
 components:
   schemas:
     ResourceType:
@@ -1145,48 +786,22 @@ components:
       - Contract
       - Matter
       type: string
-    AuditableReference:
+    FileCollectionResponse:
       type: object
       properties:
-        dateUtc:
-          type: string
-          description: The date and time the action was performed. The date and time uses the ISO-8601 format and will be in UTC
-          format: date-time
-          readOnly: true
-          example: '2024-12-25T00:00:00Z'
-        userName:
-          type: string
-          description: The username of who performed the action
-          readOnly: true
-          example: api.developer@lawvu.com
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/File'
+          description: The collection of items
       additionalProperties: false
-    FileUploadResourceType:
-      enum:
-      - Matter
-      - Contract
-      - ContractCreation
-      type: string
-    UpdateFile:
-      type: object
-      properties:
-        name:
-          type:
-          - string
-          - 'null'
-          description: 'The user defined name of the file resource
-
-            For file resources with a type of file this includes the file extension'
-        folder:
-          allOf:
-          - $ref: '#/components/schemas/FolderReference'
-          description: "The folder where the file resource is located \n\nFolder is null when the file resource is located at the root of the resource"
-      additionalProperties: false
+      description: Response wrapper of a collection of items
     UserReference:
       type: object
       properties:
         email:
           type: string
-          description: The email of the user
+          description: The email address of the user
           readOnly: true
           example: api.developer@lawvu.com
         firstName:
@@ -1196,13 +811,18 @@ components:
           example: Api
         id:
           type: string
-          description: The identifier of the user
+          description: The unique identifier of the user
           example: f0f1e06e-3005-4093-af7f-1934d55617e1
         lastName:
           type: string
           description: The last name of the user
           readOnly: true
           example: Developer
+        organization:
+          allOf:
+          - $ref: '#/components/schemas/OrganizationReference'
+          description: The organization the user belongs to
+          readOnly: true
         organizationId:
           type: integer
           description: The system identifier for the organization
@@ -1210,190 +830,33 @@ components:
           readOnly: true
           example: 8134
       additionalProperties: false
-    HttpValidationProblemDetails:
-      type: object
-      properties:
-        detail:
-          type: string
-          description: More information about the problem.
-        errors:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: string
-          description: A dictionary of validation errors, where each key is a field api name and the value is a list of error messages.
-        instance:
-          type: string
-          description: The URI of the resource which the error relates to.
-        operationId:
-          type: string
-          description: A unique trace identifier for the request. This should be provided when requesting support.
-        status:
-          type: integer
-          description: The HTTP status code for the problem.
-          format: int32
-        title:
-          type: string
-          description: A short description of the error.
-        type:
-          type: string
-          description: A URI which can be followed to find out more about the problem.
-      additionalProperties: {}
-    ProblemDetails:
-      type: object
-      properties:
-        detail:
-          type: string
-          description: More information about the problem.
-        instance:
-          type: string
-          description: The URI of the resource which the error relates to.
-        operationId:
-          type: string
-          description: A unique trace identifier for the request. This should be provided when requesting support.
-        status:
-          type: integer
-          description: The HTTP status code for the problem.
-          format: int32
-        title:
-          type: string
-          description: A short description of the error.
-        type:
-          type: string
-          description: A URI which can be followed to find out more about the problem.
-      additionalProperties: {}
-    UploadedFile:
+    OrganizationReference:
       type: object
       properties:
         id:
           type: integer
-          description: The system identifier for the file
+          description: The system identifier for the organization
           format: int32
-          readOnly: true
-          example: 9456
-      additionalProperties: false
-      description: Represents a file that has been uploaded
-    File:
-      type: object
-      properties:
-        id:
-          type:
-          - integer
-          - 'null'
-          description: The system identifier for the file
-          format: int32
-          readOnly: true
-          example: 9456
+          example: 8134
         name:
-          type:
-          - string
-          - 'null'
-          description: 'The user defined name of the file resource
-
-            For file resources with a type of file this includes the file extension'
-          example: document.txt
-        displayId:
-          type:
-          - string
-          - 'null'
-          description: 'A system generated identifier of the file resource.
-
-            Also known as "Document ID"'
-          readOnly: true
-          example: LV0001-0000123.1
-        type:
-          allOf:
-          - $ref: '#/components/schemas/FileType'
-          description: The type of file resource
-          readOnly: true
-          example: File
-        folder:
-          allOf:
-          - $ref: '#/components/schemas/FolderReference'
-          description: "The folder where the file resource is located \n\nFolder is null when the file resource is located at the root of the resource"
-        contentType:
-          type:
-          - string
-          - 'null'
-          description: The content type of the file binary
-          readOnly: true
-          example: text/plain
-        resource:
-          allOf:
-          - $ref: '#/components/schemas/ResourceReference'
-          description: The resource where the file resource is located within
-          readOnly: true
-        restricted:
-          type:
-          - boolean
-          - 'null'
-          description: Is the file resource access restricted
-          default: false
-          readOnly: true
-          example: false
-        size:
-          type:
-          - integer
-          - 'null'
-          description: The size of the file binary in bytes
-          format: int64
-          readOnly: true
-          example: 18139
-        version:
-          type:
-          - integer
-          - 'null'
-          description: The version number of the file resource
-          format: int32
-          readOnly: true
-          example: 3
-        created:
-          allOf:
-          - $ref: '#/components/schemas/AuditableUserReference'
-          description: The user who created the file resource and when
-          readOnly: true
-        modified:
-          allOf:
-          - $ref: '#/components/schemas/AuditableReference'
-          description: The username who modified the file resource and when
-          readOnly: true
-      additionalProperties: false
-    AuditableUserReference:
-      type: object
-      properties:
-        dateUtc:
           type: string
-          description: The date and time the action was performed. The date and time uses the ISO-8601 format and will be in UTC
-          format: date-time
+          description: The name of the organization
           readOnly: true
-          example: '2024-12-25T00:00:00Z'
-        user:
-          allOf:
-          - $ref: '#/components/schemas/UserReference'
-          description: The user who performed the action
-          readOnly: true
-        userName:
-          type: string
-          description: The username of who performed the action
-          readOnly: true
-          example: api.developer@lawvu.com
+          example: Api Development Organization
       additionalProperties: false
-    ResourceReference:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: The system identifier for the resource
-          format: int32
-          example: 78914
-        type:
-          allOf:
-          - $ref: '#/components/schemas/ResourceType'
-          description: The type of the resource
-          readOnly: true
-          example: Contract
-      additionalProperties: false
+    FileType:
+      enum:
+      - File
+      - Folder
+      - ContractDocument
+      type: string
+      description: The type of file entry
+    FileUploadResourceType:
+      enum:
+      - Matter
+      - Contract
+      - ContractCreation
+      type: string
     FolderReference:
       type: object
       properties:
@@ -1413,92 +876,48 @@ components:
           readOnly: true
           example: Drafts
       additionalProperties: false
-    CreateFolder:
-      required:
-      - name
-      - resource
+    UploadedFile:
       type: object
       properties:
-        name:
-          type: string
-          description: 'The user defined name of the file resource
-
-            For file resources with a type of file this includes the file extension'
-          example: document.txt
-        resource:
-          allOf:
-          - $ref: '#/components/schemas/ResourceReference'
-          description: The resource where the file resource is located within
         id:
-          type:
-          - integer
-          - 'null'
+          type: integer
           description: The system identifier for the file
           format: int32
           readOnly: true
           example: 9456
-        displayId:
+      additionalProperties: false
+      description: Represents a file that has been uploaded
+    ResourceReference:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The system identifier for the resource
+          format: int32
+          example: 78914
+        type:
+          allOf:
+          - $ref: '#/components/schemas/ResourceType'
+          description: The type of the resource
+          readOnly: true
+          example: Contract
+      additionalProperties: false
+    UpdateFile:
+      type: object
+      properties:
+        name:
           type:
           - string
           - 'null'
-          description: 'A system generated identifier of the file resource.
+          description: 'The user defined name of the file resource
 
-            Also known as "Document ID"'
-          readOnly: true
-          example: LV0001-0000123.1
-        type:
-          allOf:
-          - $ref: '#/components/schemas/FileType'
-          description: The type of file resource
-          readOnly: true
-          example: File
+            For file resources with a type of file this includes the file extension'
+          example: Standard NDA.docx
         folder:
           allOf:
           - $ref: '#/components/schemas/FolderReference'
           description: "The folder where the file resource is located \n\nFolder is null when the file resource is located at the root of the resource"
-        contentType:
-          type:
-          - string
-          - 'null'
-          description: The content type of the file binary
-          readOnly: true
-          example: text/plain
-        restricted:
-          type:
-          - boolean
-          - 'null'
-          description: Is the file resource access restricted
-          default: false
-          readOnly: true
-          example: false
-        size:
-          type:
-          - integer
-          - 'null'
-          description: The size of the file binary in bytes
-          format: int64
-          readOnly: true
-          example: 18139
-        version:
-          type:
-          - integer
-          - 'null'
-          description: The version number of the file resource
-          format: int32
-          readOnly: true
-          example: 3
-        created:
-          allOf:
-          - $ref: '#/components/schemas/AuditableUserReference'
-          description: The user who created the file resource and when
-          readOnly: true
-        modified:
-          allOf:
-          - $ref: '#/components/schemas/AuditableReference'
-          description: The username who modified the file resource and when
-          readOnly: true
       additionalProperties: false
-      description: Request model for creating a folder
     UploadFileForm:
       required:
       - file
@@ -1531,236 +950,197 @@ components:
           format: int32
           example: 32535
       additionalProperties: false
-    FileType:
-      enum:
-      - File
-      - Folder
-      - ContractDocument
-      type: string
-      description: The type of file entry
-    UploadFilesRequest:
+    CreateFolder:
+      required:
+      - name
+      - resource
       type: object
       properties:
-        folderId:
+        name:
+          type: string
+          description: 'The user defined name of the file resource
+
+            For file resources with a type of file this includes the file extension'
+          example: Standard NDA.docx
+        resource:
+          allOf:
+          - $ref: '#/components/schemas/ResourceReference'
+          description: The resource where the file resource is located within
+        folder:
+          allOf:
+          - $ref: '#/components/schemas/FolderReference'
+          description: "The folder where the file resource is located \n\nFolder is null when the file resource is located at the root of the resource"
+      additionalProperties: false
+    File:
+      type: object
+      properties:
+        id:
           type:
           - integer
           - 'null'
-          description: Id of the folder for the file upload
+          description: The system identifier for the file
           format: int32
-        isBrowsable:
-          type: boolean
-          description: File is browseable in the files collection
-        fileData:
-          type:
-          - string
-          - 'null'
-          description: The upload file details
-          format: binary
-      additionalProperties: false
-    FileDetailModel:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        type:
-          enum:
-          - Folder
-          - File
-          type: string
-          description: <p>Options:</p><ul><li>Folder</li><li>File</li></ul>
-        size:
-          type: integer
-          format: int64
-        description:
-          type:
-          - string
-          - 'null'
-        name:
-          type:
-          - string
-          - 'null'
-        version:
-          type: integer
-          format: int32
-        createdDateUtc:
-          type: string
-          format: date-time
-        uploadedBy:
-          type:
-          - string
-          - 'null'
-        path:
-          type:
-          - string
-          - 'null'
-        isLocked:
-          type: boolean
           readOnly: true
-        isPrivate:
-          type: boolean
-        lockExpiryUtc:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        documentId:
-          type:
-          - string
-          - 'null'
-        externalContentType:
-          type:
-          - string
-          - 'null'
-        externalWebUri:
-          type:
-          - string
-          - 'null'
-        parentRecordId:
-          type: integer
-          format: int32
-        parentRecordType:
-          enum:
-          - Matter
-          - Milestone
-          - Task
-          - Organisation
-          - Contract
-          - File
-          - InvoiceBatch
-          - KnowledgeArticle
-          - Folder
-          - FolderTemplate
-          - KnowledgeLibrary
-          - InboundEmail
-          - User
-          - MessageThread
-          - TimelineEntry
-          - MatterStatus
-          - ContractStatus
-          - Message
-          - Comment
-          type: string
-          description: <p>Options:</p><ul><li>Matter</li><li>Milestone</li><li>Task</li><li>Organisation</li><li>Contract</li><li>File</li><li>InvoiceBatch</li><li>KnowledgeArticle</li><li>Folder</li><li>FolderTemplate</li><li>KnowledgeLibrary</li><li>InboundEmail</li><li>User</li><li>MessageThread</li><li>TimelineEntry</li><li>MatterStatus</li><li>ContractStatus</li><li>Message</li><li>Comment</li></ul>
-      additionalProperties: false
-    OperationArray:
-      type: array
-      items:
-        $ref: '#/components/schemas/Operation'
-    FileListItem:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        type:
-          enum:
-          - Folder
-          - File
-          type: string
-          description: <p>Options:</p><ul><li>Folder</li><li>File</li></ul>
+          example: 9456
         name:
           type:
           - string
           - 'null'
+          description: 'The user defined name of the file resource
+
+            For file resources with a type of file this includes the file extension'
+          example: Standard NDA.docx
+        displayId:
+          type:
+          - string
+          - 'null'
+          description: 'A system generated identifier of the file resource.
+
+            Also known as "Document ID"'
+          readOnly: true
+          example: LV0001-0000123.1
+        type:
+          allOf:
+          - $ref: '#/components/schemas/FileType'
+          description: The type of file resource
+          readOnly: true
+          example: File
+        folder:
+          allOf:
+          - $ref: '#/components/schemas/FolderReference'
+          description: "The folder where the file resource is located \n\nFolder is null when the file resource is located at the root of the resource"
+        contentType:
+          type:
+          - string
+          - 'null'
+          description: The content type of the file binary
+          readOnly: true
+          example: text/plain
+        resource:
+          allOf:
+          - $ref: '#/components/schemas/ResourceReference'
+          description: The resource where the file resource is located within
+          readOnly: true
+        restricted:
+          type:
+          - boolean
+          - 'null'
+          description: Is the file resource access restricted
+          default: false
+          readOnly: true
+          example: false
         size:
-          type: integer
+          type:
+          - integer
+          - 'null'
+          description: The size of the file binary in bytes
           format: int64
+          readOnly: true
+          example: 18139
         version:
-          type: integer
+          type:
+          - integer
+          - 'null'
+          description: The version of the file
           format: int32
-        uploadedDateUtc:
-          type: string
-          format: date-time
-        isPrivate:
-          type: boolean
-        uploadedBy:
-          type:
-          - string
-          - 'null'
-        uploadedByOrganisation:
-          type:
-          - string
-          - 'null'
-        fileModifiedDateUtc:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        documentId:
-          type:
-          - string
-          - 'null'
-        path:
-          type:
-          - string
-          - 'null'
+          readOnly: true
+          example: 3
+        created:
+          allOf:
+          - $ref: '#/components/schemas/AuditableUserReference'
+          description: The user who created the file resource and when
+          readOnly: true
+        modified:
+          allOf:
+          - $ref: '#/components/schemas/AuditableReference'
+          description: The username who modified the file resource and when
+          readOnly: true
       additionalProperties: false
-    FinaliseUploadModel:
+    ProblemDetails:
       type: object
       properties:
-        outcome:
-          enum:
-          - Succeeded
-          - Failed
+        detail:
           type: string
-          description: <p>Options:</p><ul><li>Failed</li><li>Succeeded</li></ul>
-        conflictResolution:
-          enum:
-          - Replace
-          - KeepBoth
-          - SaveVersion
-          - Skip
-          type:
-          - string
-          - 'null'
-          description: <p>Options:</p><ul><li>Replace</li><li>KeepBoth</li><li>SaveVersion</li><li>Skip</li></ul>
-        failureReason:
-          type:
-          - string
-          - 'null'
-        comments:
-          type:
-          - string
-          - 'null'
-        isSigned:
-          type: boolean
-      additionalProperties: false
-    FileListItemDataSourceResult:
-      type: object
-      properties:
-        data:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/FileListItem'
-          description: Represents a single page of processed data.
-        total:
+          description: More information about the problem.
+        instance:
+          type: string
+          description: The URI of the resource which the error relates to.
+        operationId:
+          type: string
+          description: A unique trace identifier for the request. This should be provided when requesting support.
+        status:
           type: integer
-          description: The total number of records available.
+          description: The HTTP status code for the problem.
           format: int32
-      additionalProperties: false
-    Operation:
+        title:
+          type: string
+          description: A short description of the error.
+        type:
+          type: string
+          description: A URI which can be followed to find out more about the problem.
+      additionalProperties: {}
+    HttpValidationProblemDetails:
       type: object
       properties:
-        value:
-          type:
-          - object
-          - 'null'
-        path:
-          type:
-          - string
-          - 'null'
-        op:
-          type:
-          - string
-          - 'null'
-        from:
-          type:
-          - string
-          - 'null'
+        detail:
+          type: string
+          description: More information about the problem.
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+          description: A dictionary of validation errors, where each key is a field api name and the value is a list of error messages.
+        instance:
+          type: string
+          description: The URI of the resource which the error relates to.
+        operationId:
+          type: string
+          description: A unique trace identifier for the request. This should be provided when requesting support.
+        status:
+          type: integer
+          description: The HTTP status code for the problem.
+          format: int32
+        title:
+          type: string
+          description: A short description of the error.
+        type:
+          type: string
+          description: A URI which can be followed to find out more about the problem.
+      additionalProperties: {}
+    AuditableReference:
+      type: object
+      properties:
+        dateUtc:
+          type: string
+          description: The date and time the action was performed. The date and time uses the ISO-8601 format and will be in UTC
+          format: date-time
+          readOnly: true
+          example: '2024-12-25T00:00:00Z'
+        userName:
+          type: string
+          description: The username of who performed the action
+          readOnly: true
+          example: api.developer@lawvu.com
       additionalProperties: false
-x-refined-from:
-- lawvu-api-openapi-original.yml
-- lawvu-files-openapi-original.json
+    AuditableUserReference:
+      type: object
+      properties:
+        dateUtc:
+          type: string
+          description: The date and time the action was performed. The date and time uses the ISO-8601 format and will be in UTC
+          format: date-time
+          readOnly: true
+          example: '2024-12-25T00:00:00Z'
+        user:
+          allOf:
+          - $ref: '#/components/schemas/UserReference'
+          description: The user who performed the action
+          readOnly: true
+        userName:
+          type: string
+          description: The username of who performed the action
+          readOnly: true
+          example: api.developer@lawvu.com
+      additionalProperties: false

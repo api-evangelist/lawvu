@@ -1,71 +1,220 @@
 openapi: 3.2.0
 info:
-  title: LawVu Account Teams API
-  description: Apis for account related resources (authentication, profiles, organisation details etc)
-  version: '1.0'
+  title: LawVu Teams API
+  description: The next generation of the LawVu API.
+  termsOfService: https://developer.lawvu.com/developer-terms
+  contact:
+    name: LawVu Developer Support Team
+    url: https://developer.lawvu.com
+    email: developer@lawvu.com
+  version: ''
 servers:
-- url: https://api-sandbox.lawvu.com/account-apis
+- url: https://api-sandbox.lawvu.com
   description: Sandbox API
-- url: https://api.lawvu.com/account-apis
+- url: https://api.lawvu.com
   description: Production API
 tags:
 - name: Teams
 paths:
-  /v1/teams:
+  /v2/teams:
     get:
       tags:
       - Teams
       summary: Get teams
-      operationId: get-v1-teams
+      description: Retrieve a list of teams
+      operationId: get-v2-teams
       parameters:
-      - name: allowAssigment
+      - name: $filter
         in: query
-        description: 'Only return teams that allow work assignment<p>Default: False</p>'
+        description: Filter the results using OData filter syntax
         schema:
-          type: boolean
-          default: false
+          type: string
+      - name: $orderby
+        in: query
+        description: Order the results using OData orderby syntax
+        schema:
+          type: string
+      - name: $skip
+        in: query
+        description: Skip the specified number of results
+        schema:
+          type: integer
+      - name: $top
+        in: query
+        description: Limit the number of results returned
+        schema:
+          type: integer
       responses:
         '200':
-          description: Success
+          description: OK
           content:
-            text/plain:
-              schema:
-                $ref: '#/components/schemas/TeamArray'
-              example:
-              - id: 1
-                name: Team 1
-              - id: 2
-                name: Team 2
             application/json:
               schema:
-                $ref: '#/components/schemas/TeamArray'
-              example:
-              - id: 1
-                name: Team 1
-              - id: 2
-                name: Team 2
-            text/json:
+                $ref: '#/components/schemas/TeamCollectionResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
               schema:
-                $ref: '#/components/schemas/TeamArray'
+                $ref: '#/components/schemas/HttpValidationProblemDetails'
               example:
-              - id: 1
-                name: Team 1
-              - id: 2
-                name: Team 2
+                detail: The request was invalid and could not be processed
+                errors:
+                  Name: Operation 'gt' is not supported for 'Name'
+                instance: /teams
+                operationId: 7edb5d62-f5bf-463b-9410-cdd8b3293d89
+                status: 400
+                title: Invalid request
+                type: https://api-docs.lawvu.com/errors/invalid_request
+  /v2/teams/{teamId}:
+    get:
+      tags:
+      - Teams
+      summary: Get team
+      description: Retrieve a team by its identifier
+      operationId: get-v2-teams-teamid
+      parameters:
+      - name: teamId
+        in: path
+        description: The system identifier for the team
+        required: true
+        schema:
+          type: integer
+          description: The system identifier for the team
+          format: int32
+          example: 469
+        example: 469
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Team'
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                detail: The requested resource could not be found
+                instance: /teams/469
+                operationId: 7edb5d62-f5bf-463b-9410-cdd8b3293d89
+                status: 404
+                title: Resource not found
+                type: https://api-docs.lawvu.com/errors/resource_not_found
 components:
   schemas:
-    TeamArray:
-      type: array
-      items:
-        $ref: '#/components/schemas/Team'
+    TeamCollectionResponse:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Team'
+          description: The collection of items
+      additionalProperties: false
+      description: Response wrapper of a collection of items
+    ProblemDetails:
+      type: object
+      properties:
+        detail:
+          type: string
+          description: More information about the problem.
+        instance:
+          type: string
+          description: The URI of the resource which the error relates to.
+        operationId:
+          type: string
+          description: A unique trace identifier for the request. This should be provided when requesting support.
+        status:
+          type: integer
+          description: The HTTP status code for the problem.
+          format: int32
+        title:
+          type: string
+          description: A short description of the error.
+        type:
+          type: string
+          description: A URI which can be followed to find out more about the problem.
+      additionalProperties: {}
+    HttpValidationProblemDetails:
+      type: object
+      properties:
+        detail:
+          type: string
+          description: More information about the problem.
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+          description: A dictionary of validation errors, where each key is a field api name and the value is a list of error messages.
+        instance:
+          type: string
+          description: The URI of the resource which the error relates to.
+        operationId:
+          type: string
+          description: A unique trace identifier for the request. This should be provided when requesting support.
+        status:
+          type: integer
+          description: The HTTP status code for the problem.
+          format: int32
+        title:
+          type: string
+          description: A short description of the error.
+        type:
+          type: string
+          description: A URI which can be followed to find out more about the problem.
+      additionalProperties: {}
     Team:
       type: object
       properties:
+        allowAssignment:
+          type:
+          - boolean
+          - 'null'
+          description: Indicates whether the team can be assigned to supported records
+          example: true
         id:
-          type: integer
+          type:
+          - integer
+          - 'null'
+          description: The system identifier for the team
           format: int32
+          readOnly: true
+          example: 469
         name:
           type:
           - string
           - 'null'
+          description: The full name of the team
+          example: Legal - Commercial
+        created:
+          allOf:
+          - $ref: '#/components/schemas/AuditableReference'
+          description: The user who created the team and when
+          readOnly: true
+        modified:
+          allOf:
+          - $ref: '#/components/schemas/AuditableReference'
+          description: The username who modified the team and when
+          readOnly: true
+      additionalProperties: false
+    AuditableReference:
+      type: object
+      properties:
+        dateUtc:
+          type: string
+          description: The date and time the action was performed. The date and time uses the ISO-8601 format and will be in UTC
+          format: date-time
+          readOnly: true
+          example: '2024-12-25T00:00:00Z'
+        userName:
+          type: string
+          description: The username of who performed the action
+          readOnly: true
+          example: api.developer@lawvu.com
       additionalProperties: false

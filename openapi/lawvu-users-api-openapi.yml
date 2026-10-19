@@ -1,343 +1,177 @@
 openapi: 3.2.0
 info:
-  title: LawVu Account Users API
-  description: Apis for account related resources (authentication, profiles, organisation details etc)
-  version: '1.0'
+  title: LawVu Users API
+  description: The next generation of the LawVu API.
+  termsOfService: https://developer.lawvu.com/developer-terms
+  contact:
+    name: LawVu Developer Support Team
+    url: https://developer.lawvu.com
+    email: developer@lawvu.com
+  version: ''
 servers:
-- url: https://api-sandbox.lawvu.com/account-apis
+- url: https://api-sandbox.lawvu.com
   description: Sandbox API
-- url: https://api.lawvu.com/account-apis
+- url: https://api.lawvu.com
   description: Production API
 tags:
 - name: Users
 paths:
-  /v1/users:
+  /v2/users:
     get:
       tags:
       - Users
-      summary: Search users
-      description: Returns a list of users based on the filter criteria
-      operationId: get-v1-users
+      summary: Get users
+      description: Retrieve a list of users
+      operationId: get-v2-users
       parameters:
-      - name: filter.search
+      - name: $filter
         in: query
-        description: 'Search text (applies to: name & email address)'
+        description: Filter the results using OData filter syntax
         schema:
           type: string
-      - name: filter.permission
+      - name: $orderby
         in: query
-        description: <p>Options:</p><ul><li>CreateMatters</li><li>ContractCreator</li></ul>
+        description: Order the results using OData orderby syntax
         schema:
-          enum:
-          - CreateMatters
-          - ContractCreator
           type: string
-          description: <p>Options:</p><ul><li>CreateMatters</li><li>ContractCreator</li></ul>
-      - name: filter.activeandinvitedusersonly
+      - name: $skip
         in: query
-        description: Only users that are active or invited
-        schema:
-          type: boolean
-      - name: filter.primaryorganisationid
-        in: query
+        description: Skip the specified number of results
         schema:
           type: integer
-          format: int32
-      - name: filter.activeusersonly
+      - name: $top
         in: query
-        description: Only users that are active
+        description: Limit the number of results returned
         schema:
-          type: boolean
-      - name: filter.uselitequery
-        in: query
-        description: 'Use a lite query
-
-          When enabled the response will return only partial information about the user:
-
-          UserId, FirstName, LastName, UserFullName and OrganisationName'
-        schema:
-          type: boolean
+          type: integer
       responses:
         '200':
-          description: Success
+          description: OK
           content:
-            text/plain:
-              schema:
-                $ref: '#/components/schemas/UserArray'
-              example:
-              - id: 633182f3-130b-4917-99ba-4c3e88080eb4
-                userName: null
-                firstName: Example
-                lastName: User
-                organisationName: null
-                organisationPictureCacheId: null
-                directPhone: null
-                mobilePhone: null
-                email: exampleuser@noemail.com
-                hasPicture: false
-                pictureCacheId: 0
-                invitationSentUtc: null
-                userFullName: Example User
-                userInitials: EU
-                isRemoved: false
-                isDisabled: false
-                hourlyRate: null
-                liveMattersCount: 277
             application/json:
               schema:
-                $ref: '#/components/schemas/UserArray'
-              example:
-              - id: 633182f3-130b-4917-99ba-4c3e88080eb4
-                userName: null
-                firstName: Example
-                lastName: User
-                organisationName: null
-                organisationPictureCacheId: null
-                directPhone: null
-                mobilePhone: null
-                email: exampleuser@noemail.com
-                hasPicture: false
-                pictureCacheId: 0
-                invitationSentUtc: null
-                userFullName: Example User
-                userInitials: EU
-                isRemoved: false
-                isDisabled: false
-                hourlyRate: null
-                liveMattersCount: 277
-            text/json:
+                $ref: '#/components/schemas/UserCollectionResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
               schema:
-                $ref: '#/components/schemas/UserArray'
+                $ref: '#/components/schemas/HttpValidationProblemDetails'
               example:
-              - id: 633182f3-130b-4917-99ba-4c3e88080eb4
-                userName: null
-                firstName: Example
-                lastName: User
-                organisationName: null
-                organisationPictureCacheId: null
-                directPhone: null
-                mobilePhone: null
-                email: exampleuser@noemail.com
-                hasPicture: false
-                pictureCacheId: 0
-                invitationSentUtc: null
-                userFullName: Example User
-                userInitials: EU
-                isRemoved: false
-                isDisabled: false
-                hourlyRate: null
-                liveMattersCount: 277
-  /v1/users/{id}/profile:
+                detail: The request was invalid and could not be processed
+                errors:
+                  Email: Operation 'gt' is not supported for 'Email'
+                instance: /users
+                operationId: 7edb5d62-f5bf-463b-9410-cdd8b3293d89
+                status: 400
+                title: Invalid request
+                type: https://api-docs.lawvu.com/errors/invalid_request
+  /v2/users/{userId}:
     get:
       tags:
       - Users
-      summary: Get user profile
-      description: Returns the profile of a specific user.
-      operationId: get-v1-users-id-profile
+      summary: Get user
+      description: Retrieve a user by their identifier
+      operationId: get-v2-users-userid
       parameters:
-      - name: id
+      - name: userId
         in: path
-        description: User Id (e.g. e1bf0987-8844-49ab-a6b6-10562b58e230)
+        description: The unique identifier of the user
         required: true
         schema:
           type: string
+          description: The unique identifier of the user
+          example: f0f1e06e-3005-4093-af7f-1934d55617e1
+        example: f0f1e06e-3005-4093-af7f-1934d55617e1
       responses:
         '200':
-          description: Success
+          description: OK
           content:
-            text/plain:
-              schema:
-                $ref: '#/components/schemas/UserProfile'
-              example:
-                id: 123-456-789
-                firstName: Joey
-                lastName: Tribiani
-                email: emailaddress@gmail.com
-                mobilePhone: '987654321'
-                directPhone: '24680'
-                jobTitle: Worker
-                departmentId: 4
-                specialityIds:
-                - 1
-                - 2
-                - 3
-                biography: Biography
-                hourlyRate: 9.99
-                linkedInUrl: url
-                organisationId: 5
-                organisationName: The Workplace
-                organisationType: Customer
-                role: Administrator
-                departmentName: Department
-                hasPicture: true
-                pictureCacheId: 78
-                invitationSentUtc: '2025-01-21T00:44:36.422387+00:00'
-                status: LockedOut
             application/json:
               schema:
-                $ref: '#/components/schemas/UserProfile'
-              example:
-                id: 123-456-789
-                firstName: Joey
-                lastName: Tribiani
-                email: emailaddress@gmail.com
-                mobilePhone: '987654321'
-                directPhone: '24680'
-                jobTitle: Worker
-                departmentId: 4
-                specialityIds:
-                - 1
-                - 2
-                - 3
-                biography: Biography
-                hourlyRate: 9.99
-                linkedInUrl: url
-                organisationId: 5
-                organisationName: The Workplace
-                organisationType: Customer
-                role: Administrator
-                departmentName: Department
-                hasPicture: true
-                pictureCacheId: 78
-                invitationSentUtc: '2025-01-21T00:44:36.422387+00:00'
-                status: LockedOut
-            text/json:
+                $ref: '#/components/schemas/User'
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
               schema:
-                $ref: '#/components/schemas/UserProfile'
+                $ref: '#/components/schemas/ProblemDetails'
               example:
-                id: 123-456-789
-                firstName: Joey
-                lastName: Tribiani
-                email: emailaddress@gmail.com
-                mobilePhone: '987654321'
-                directPhone: '24680'
-                jobTitle: Worker
-                departmentId: 4
-                specialityIds:
-                - 1
-                - 2
-                - 3
-                biography: Biography
-                hourlyRate: 9.99
-                linkedInUrl: url
-                organisationId: 5
-                organisationName: The Workplace
-                organisationType: Customer
-                role: Administrator
-                departmentName: Department
-                hasPicture: true
-                pictureCacheId: 78
-                invitationSentUtc: '2025-01-21T00:44:36.422387+00:00'
-                status: LockedOut
+                detail: The requested resource could not be found
+                instance: /users/f0f1e06e-3005-4093-af7f-1934d55617e1
+                operationId: 7edb5d62-f5bf-463b-9410-cdd8b3293d89
+                status: 404
+                title: Resource not found
+                type: https://api-docs.lawvu.com/errors/resource_not_found
 components:
   schemas:
-    UserArray:
-      type: array
-      items:
-        $ref: '#/components/schemas/User'
-    UserProfile:
+    OrganizationReference:
       type: object
       properties:
         id:
-          type:
-          - string
-          - 'null'
-        firstName:
-          type:
-          - string
-          - 'null'
-        lastName:
-          type:
-          - string
-          - 'null'
-        email:
-          type:
-          - string
-          - 'null'
-        mobilePhone:
-          type:
-          - string
-          - 'null'
-        directPhone:
-          type:
-          - string
-          - 'null'
-        jobTitle:
-          type:
-          - string
-          - 'null'
-        departmentId:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        specialityIds:
-          type:
-          - array
-          - 'null'
-          items:
-            type: integer
-            format: int32
-        biography:
-          type:
-          - string
-          - 'null'
-        hourlyRate:
-          type:
-          - number
-          - 'null'
-          format: double
-        linkedInUrl:
-          type:
-          - string
-          - 'null'
-        organisationId:
           type: integer
+          description: The system identifier for the organization
           format: int32
-        organisationName:
-          type:
-          - string
-          - 'null'
-        organisationType:
-          enum:
-          - ServiceProvider
-          - Customer
+          example: 8134
+        name:
           type: string
-          description: <p>Options:</p><ul><li>ServiceProvider</li><li>Customer</li></ul>
-        role:
-          enum:
-          - Administrator
-          - InhouseLegal
-          - Contributor
-          - Standard
-          - External
-          - MatterManager
-          type: string
-          description: <p>Options:</p><ul><li>Administrator</li><li>InhouseLegal</li><li>Contributor</li><li>Standard</li><li>External</li><li>MatterManager</li></ul>
-        departmentName:
-          type:
-          - string
-          - 'null'
-        hasPicture:
-          type: boolean
-        pictureCacheId:
-          type: integer
-          format: int32
-        invitationSentUtc:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        status:
-          enum:
-          - Pending
-          - Active
-          - Invited
-          - LockedOut
-          - Disabled
-          type: string
-          description: <p>Options:</p><ul><li>Disabled</li><li>Pending</li><li>Active</li><li>Invited</li><li>LockedOut</li></ul>
+          description: The name of the organization
+          readOnly: true
+          example: Api Development Organization
       additionalProperties: false
+    ProblemDetails:
+      type: object
+      properties:
+        detail:
+          type: string
+          description: More information about the problem.
+        instance:
+          type: string
+          description: The URI of the resource which the error relates to.
+        operationId:
+          type: string
+          description: A unique trace identifier for the request. This should be provided when requesting support.
+        status:
+          type: integer
+          description: The HTTP status code for the problem.
+          format: int32
+        title:
+          type: string
+          description: A short description of the error.
+        type:
+          type: string
+          description: A URI which can be followed to find out more about the problem.
+      additionalProperties: {}
+    HttpValidationProblemDetails:
+      type: object
+      properties:
+        detail:
+          type: string
+          description: More information about the problem.
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+          description: A dictionary of validation errors, where each key is a field api name and the value is a list of error messages.
+        instance:
+          type: string
+          description: The URI of the resource which the error relates to.
+        operationId:
+          type: string
+          description: A unique trace identifier for the request. This should be provided when requesting support.
+        status:
+          type: integer
+          description: The HTTP status code for the problem.
+          format: int32
+        title:
+          type: string
+          description: A short description of the error.
+        type:
+          type: string
+          description: A URI which can be followed to find out more about the problem.
+      additionalProperties: {}
     User:
       type: object
       properties:
@@ -345,67 +179,130 @@ components:
           type:
           - string
           - 'null'
-        userName:
-          type:
-          - string
-          - 'null'
-        firstName:
-          type:
-          - string
-          - 'null'
-        lastName:
-          type:
-          - string
-          - 'null'
-        organisationName:
-          type:
-          - string
-          - 'null'
-        organisationPictureCacheId:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        directPhone:
-          type:
-          - string
-          - 'null'
-        mobilePhone:
-          type:
-          - string
-          - 'null'
+          description: The unique identifier of the user
+          readOnly: true
+          example: f0f1e06e-3005-4093-af7f-1934d55617e1
         email:
           type:
           - string
           - 'null'
-        hasPicture:
-          type: boolean
-        pictureCacheId:
-          type: integer
-          format: int32
-        invitationSentUtc:
+          description: The email address of the user
+          example: api.developer@lawvu.com
+        firstName:
           type:
           - string
           - 'null'
-          format: date-time
-        userFullName:
+          description: The first name of the user
+          example: Api
+        lastName:
           type:
           - string
           - 'null'
-        userInitials:
+          description: The last name of the user
+          example: Developer
+        organization:
+          allOf:
+          - $ref: '#/components/schemas/OrganizationReference'
+          description: The organization the user belongs to
+          readOnly: true
+        department:
+          allOf:
+          - $ref: '#/components/schemas/DepartmentReference'
+          description: The department the user belongs to
+        directPhone:
           type:
           - string
           - 'null'
-        isRemoved:
-          type: boolean
-        isDisabled:
-          type: boolean
-        hourlyRate:
+          description: The direct phone number of the user
+          example: +64 9 123 4567
+        jobTitle:
           type:
-          - number
+          - string
           - 'null'
-          format: double
-        liveMattersCount:
-          type: integer
-          format: int32
+          description: The job title of the user
+          example: Legal Counsel
+        mobilePhone:
+          type:
+          - string
+          - 'null'
+          description: The mobile phone number of the user
+          example: +64 21 123 4567
+        role:
+          allOf:
+          - $ref: '#/components/schemas/UserRole'
+          description: The role of the user
+          example: Standard
+        status:
+          allOf:
+          - $ref: '#/components/schemas/UserStatus'
+          description: The current state of the user's account
+          example: Active
+        created:
+          allOf:
+          - $ref: '#/components/schemas/AuditableReference'
+          description: The user who created the user and when
+          readOnly: true
+        modified:
+          allOf:
+          - $ref: '#/components/schemas/AuditableReference'
+          description: The user who last modified the user and when
+          readOnly: true
       additionalProperties: false
+    DepartmentReference:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The identifier of the department
+          format: int32
+          example: 123
+        name:
+          type: string
+          description: The name of the department
+          readOnly: true
+          example: Legal
+      additionalProperties: false
+    UserRole:
+      enum:
+      - OrganizationAdmin
+      - InHouseLegal
+      - Contributor
+      - Standard
+      - External
+      - MatterManager
+      type: string
+      description: Represents a role that can be assigned to a user.
+    AuditableReference:
+      type: object
+      properties:
+        dateUtc:
+          type: string
+          description: The date and time the action was performed. The date and time uses the ISO-8601 format and will be in UTC
+          format: date-time
+          readOnly: true
+          example: '2024-12-25T00:00:00Z'
+        userName:
+          type: string
+          description: The username of who performed the action
+          readOnly: true
+          example: api.developer@lawvu.com
+      additionalProperties: false
+    UserStatus:
+      enum:
+      - Pending
+      - Active
+      - Invited
+      - LockedOut
+      - Deactivated
+      type: string
+      description: Represents the status of the user
+    UserCollectionResponse:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+          description: The collection of items
+      additionalProperties: false
+      description: Response wrapper of a collection of items
