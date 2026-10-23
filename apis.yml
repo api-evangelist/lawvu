@@ -166,6 +166,8 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: PostmanWorkspace
+  url: https://www.postman.com/kinlaneapi/lawvu/overview
 - type: CapabilityMap
   url: capabilities/lawvu-capability-edges.yml
   name: LawVu Business Capability Map
