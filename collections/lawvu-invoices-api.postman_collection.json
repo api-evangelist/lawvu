@@ -1,342 +1,369 @@
 {
+  "info": {
+    "_postman_id": "6d5e231a-ad8d-4cc1-88f1-f4102b50dc56",
+    "name": "LawVu Invoices API",
+    "description": "Apis for invoice resources",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:27:07.000Z",
+    "updatedAt": "2026-10-21T20:27:07.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-6d5e231a-ad8d-4cc1-88f1-f4102b50dc56"
+  },
   "item": [
     {
-      "id": "31ea1968-6532-414a-9281-24ea87628848",
-      "name": "Invoices",
-      "description": {
-        "content": "",
-        "type": "text/plain"
-      },
+      "name": "v1",
       "item": [
         {
-          "id": "1eabe389-e94d-4526-baec-b38e965b0859",
-          "name": "Get invoices",
-          "request": {
-            "name": "Get invoices",
-            "description": {},
-            "url": {
-              "path": [
-                "v1",
-                "invoices"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
+          "name": "invoices",
+          "item": [
+            {
+              "name": "{invoiceId}",
+              "item": [
                 {
-                  "disabled": false,
-                  "key": "skip",
-                  "value": "<integer>",
-                  "description": "The number of invoices to skip (used for paging)"
-                },
-                {
-                  "disabled": false,
-                  "key": "filtering.field",
-                  "value": "<string>",
-                  "description": "Field to filter by (optional)"
-                },
-                {
-                  "disabled": false,
-                  "key": "filtering.operator",
-                  "value": "<string>",
-                  "description": "Operator used for filtering (optional)"
-                },
-                {
-                  "disabled": false,
-                  "key": "filtering.value",
-                  "value": "<string>",
-                  "description": "Value to filter by (optional)"
-                },
-                {
-                  "disabled": false,
-                  "key": "sorting.direction",
-                  "value": "<string>",
-                  "description": "Set the sorting direction"
-                },
-                {
-                  "disabled": false,
-                  "key": "sorting.field",
-                  "value": "<string>",
-                  "description": "Set the sorting fields"
-                },
-                {
-                  "disabled": false,
-                  "key": "take",
-                  "value": "50",
-                  "description": "The maximum number of invoices to return<p>Default: 50</p>"
+                  "name": "Update invoice",
+                  "id": "874fb868-9944-4771-89f3-63d5ec4ed0a7",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "[\n  {\n    \"value\": \"<object,null>\",\n    \"path\": \"<string,null>\",\n    \"op\": \"<string,null>\",\n    \"from\": \"<string,null>\"\n  },\n  {\n    \"value\": \"<object,null>\",\n    \"path\": \"<string,null>\",\n    \"op\": \"<string,null>\",\n    \"from\": \"<string,null>\"\n  }\n]",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/invoices/:invoiceId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "invoices",
+                        ":invoiceId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "5abcf153-8626-4fd3-809a-1130301da1e2",
+                          "key": "invoiceId",
+                          "value": "<integer>",
+                          "description": "(Required) The invoice Id"
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "8b8b2ba0-b5b2-480a-a906-bd0cb0ab4a73",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "[\n  {\n    \"value\": \"<object,null>\",\n    \"path\": \"<string,null>\",\n    \"op\": \"<string,null>\",\n    \"from\": \"<string,null>\"\n  },\n  {\n    \"value\": \"<object,null>\",\n    \"path\": \"<string,null>\",\n    \"op\": \"<string,null>\",\n    \"from\": \"<string,null>\"\n  }\n]",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/invoices/:invoiceId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "invoices",
+                            ":invoiceId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "invoiceId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-21T20:27:07.000Z",
+                      "updatedAt": "2026-10-21T20:27:07.000Z",
+                      "uid": "35240-8b8b2ba0-b5b2-480a-a906-bd0cb0ab4a73"
+                    }
+                  ],
+                  "createdAt": "2026-10-21T20:27:07.000Z",
+                  "updatedAt": "2026-10-21T20:27:07.000Z",
+                  "uid": "35240-874fb868-9944-4771-89f3-63d5ec4ed0a7"
                 }
               ],
-              "variable": []
+              "id": "050d946c-612b-4513-9ddb-02d035ea83c0",
+              "createdAt": "2026-10-21T20:27:07.000Z",
+              "updatedAt": "2026-10-21T20:27:07.000Z",
+              "uid": "35240-050d946c-612b-4513-9ddb-02d035ea83c0"
             },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "text/plain"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
             {
-              "id": "5582973d-df1b-466b-b5ae-b51cb160c1dc",
-              "name": "Success",
-              "originalRequest": {
+              "name": "recipients",
+              "item": [
+                {
+                  "name": "Retrieve Invoice Recipients",
+                  "id": "b1b08a84-f963-4601-8415-a1e8e36e7e81",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "text/plain"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/invoices/recipients",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "invoices",
+                        "recipients"
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "37f15d07-5e6b-49d2-8e71-9584680821d3",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "text/plain"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/invoices/recipients",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "invoices",
+                            "recipients"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"id\": \"<integer,null>\",\n    \"name\": \"<string,null>\",\n    \"addressLine1\": \"<string,null>\",\n    \"addressLine2\": \"<string,null>\",\n    \"addressLine3\": \"<string,null>\",\n    \"taxType\": \"TAX\",\n    \"taxNumber\": \"<string,null>\",\n    \"contactName\": \"<string,null>\",\n    \"contactPhone\": \"<string,null>\",\n    \"contactEmail\": \"<string,null>\"\n  },\n  {\n    \"id\": \"<integer,null>\",\n    \"name\": \"<string,null>\",\n    \"addressLine1\": \"<string,null>\",\n    \"addressLine2\": \"<string,null>\",\n    \"addressLine3\": \"<string,null>\",\n    \"taxType\": \"TAX\",\n    \"taxNumber\": \"<string,null>\",\n    \"contactName\": \"<string,null>\",\n    \"contactPhone\": \"<string,null>\",\n    \"contactEmail\": \"<string,null>\"\n  }\n]",
+                      "createdAt": "2026-10-21T20:27:07.000Z",
+                      "updatedAt": "2026-10-21T20:27:07.000Z",
+                      "uid": "35240-37f15d07-5e6b-49d2-8e71-9584680821d3"
+                    }
+                  ],
+                  "createdAt": "2026-10-21T20:27:07.000Z",
+                  "updatedAt": "2026-10-21T20:27:07.000Z",
+                  "uid": "35240-b1b08a84-f963-4601-8415-a1e8e36e7e81"
+                }
+              ],
+              "id": "a983bfb4-a56c-4b6b-a637-3845ac7ccabe",
+              "createdAt": "2026-10-21T20:27:07.000Z",
+              "updatedAt": "2026-10-21T20:27:07.000Z",
+              "uid": "35240-a983bfb4-a56c-4b6b-a637-3845ac7ccabe"
+            },
+            {
+              "name": "Get invoices",
+              "id": "2da9c8fd-0e0d-437b-bae9-5643f440b785",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
                 "url": {
+                  "raw": "{{baseUrl}}/v1/invoices?skip=<integer>&filtering.field=<string>&filtering.operator=doesnotcon&filtering.value=<string>&sorting.direction=desc&sorting.field=<string>&take=50",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "v1",
                     "invoices"
                   ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
                   "query": [
                     {
+                      "description": "The number of invoices to skip (used for paging)",
                       "key": "skip",
                       "value": "<integer>"
                     },
                     {
+                      "description": "Field to filter by (optional)",
                       "key": "filtering.field",
                       "value": "<string>"
                     },
                     {
+                      "description": "Operator used for filtering (optional)",
                       "key": "filtering.operator",
-                      "value": "<string>"
+                      "value": "doesnotcon"
                     },
                     {
+                      "description": "Value to filter by (optional)",
                       "key": "filtering.value",
                       "value": "<string>"
                     },
                     {
+                      "description": "Set the sorting direction",
                       "key": "sorting.direction",
-                      "value": "<string>"
+                      "value": "desc"
                     },
                     {
+                      "description": "Set the sorting fields",
                       "key": "sorting.field",
                       "value": "<string>"
                     },
                     {
+                      "description": "The maximum number of invoices to return<p>Default: 50</p>",
                       "key": "take",
                       "value": "50"
                     }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "text/plain"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": [\n    {\n      \"id\": 4529,\n      \"invoiceNo\": \"string\",\n      \"invoiceDate\": \"1963-08-18T00:17:11.770Z\",\n      \"dueDate\": \"1982-05-27T15:24:23.803Z\",\n      \"disbursements\": 4849.37367165169,\n      \"fees\": 4226.436390354063,\n      \"otherFees\": 2891.1769290595703,\n      \"fileId\": 6138,\n      \"status\": \"string\",\n      \"fileName\": \"string\",\n      \"batchId\": 8535,\n      \"thirdParty\": true,\n      \"paid\": true,\n      \"paidDateUtc\": \"1971-11-22T16:59:12.588Z\",\n      \"paymentNote\": \"string\",\n      \"description\": \"string\",\n      \"matterId\": 2325,\n      \"approvedDateUtc\": \"1995-10-20T19:34:31.042Z\",\n      \"purchaseOrderNo\": \"string\",\n      \"totalTax\": 1210.1790071750784,\n      \"approvedFees\": 7371.175148718952,\n      \"currency\": \"string\",\n      \"postedDateUtc\": \"1954-03-05T17:26:43.723Z\",\n      \"internalNotes\": \"string\",\n      \"billingPeriodStart\": \"1979-05-07T00:53:13.864Z\",\n      \"billingPeriodEnd\": \"2024-05-03T15:01:33.571Z\",\n      \"serviceProviderName\": \"string\",\n      \"serviceProviderId\": \"string\"\n    },\n    {\n      \"id\": 5974,\n      \"invoiceNo\": \"string\",\n      \"invoiceDate\": \"1968-01-14T09:53:13.156Z\",\n      \"dueDate\": \"1969-05-15T02:59:36.439Z\",\n      \"disbursements\": 2847.39627173738,\n      \"fees\": 101.67695802853926,\n      \"otherFees\": 2161.7029699377777,\n      \"fileId\": 6193,\n      \"status\": \"string\",\n      \"fileName\": \"string\",\n      \"batchId\": 2428,\n      \"thirdParty\": true,\n      \"paid\": true,\n      \"paidDateUtc\": \"2025-01-13T03:06:09.614Z\",\n      \"paymentNote\": \"string\",\n      \"description\": \"string\",\n      \"matterId\": 8310,\n      \"approvedDateUtc\": \"1968-07-05T08:05:05.492Z\",\n      \"purchaseOrderNo\": \"string\",\n      \"totalTax\": 5077.180178947579,\n      \"approvedFees\": 8663.061477223016,\n      \"currency\": \"string\",\n      \"postedDateUtc\": \"2020-03-31T03:59:53.989Z\",\n      \"internalNotes\": \"string\",\n      \"billingPeriodStart\": \"1951-05-16T04:34:19.645Z\",\n      \"billingPeriodEnd\": \"1953-09-03T10:41:57.598Z\",\n      \"serviceProviderName\": \"string\",\n      \"serviceProviderId\": \"string\"\n    }\n  ],\n  \"total\": 4615\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "0b80c9c4-f80c-47aa-a6ff-53b0839861f5",
-          "name": "Update invoice",
-          "request": {
-            "name": "Update invoice",
-            "description": {},
-            "url": {
-              "path": [
-                "v1",
-                "invoices",
-                ":invoiceId"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<integer>",
-                  "key": "invoiceId",
-                  "description": "(Required) The invoice Id"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "method": "PATCH",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "[\n  {\n    \"value\": \"<object>\",\n    \"path\": \"<string>\",\n    \"op\": \"<string>\",\n    \"from\": \"<string>\"\n  },\n  {\n    \"value\": \"<object>\",\n    \"path\": \"<string>\",\n    \"op\": \"<string>\",\n    \"from\": \"<string>\"\n  }\n]",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "f9da14e7-f7d2-4f7d-9c9f-496a9f3d04c6",
-              "name": "Success",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "v1",
-                    "invoices",
-                    ":invoiceId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<integer>",
-                      "key": "invoiceId",
-                      "description": "(Required) The invoice Id"
-                    }
                   ]
-                },
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "[\n  {\n    \"value\": \"<object>\",\n    \"path\": \"<string>\",\n    \"op\": \"<string>\",\n    \"from\": \"<string>\"\n  },\n  {\n    \"value\": \"<object>\",\n    \"path\": \"<string>\",\n    \"op\": \"<string>\",\n    \"from\": \"<string>\"\n  }\n]",
-                  "options": {
-                    "raw": {
-                      "language": "json"
+                }
+              },
+              "response": [
+                {
+                  "id": "c0f810b3-414c-4054-ad59-758a0555fc3b",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "text/plain"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/invoices?skip=<integer>&filtering.field=<string>&filtering.operator=doesnotcon&filtering.value=<string>&sorting.direction=desc&sorting.field=<string>&take=50",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "invoices"
+                      ],
+                      "query": [
+                        {
+                          "description": "The number of invoices to skip (used for paging)",
+                          "key": "skip",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Field to filter by (optional)",
+                          "key": "filtering.field",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Operator used for filtering (optional)",
+                          "key": "filtering.operator",
+                          "value": "doesnotcon"
+                        },
+                        {
+                          "description": "Value to filter by (optional)",
+                          "key": "filtering.value",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Set the sorting direction",
+                          "key": "sorting.direction",
+                          "value": "desc"
+                        },
+                        {
+                          "description": "Set the sorting fields",
+                          "key": "sorting.field",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The maximum number of invoices to return<p>Default: 50</p>",
+                          "key": "take",
+                          "value": "50"
+                        }
+                      ]
                     }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": \"<array,null>\",\n  \"total\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-21T20:27:07.000Z",
+                  "updatedAt": "2026-10-21T20:27:07.000Z",
+                  "uid": "35240-c0f810b3-414c-4054-ad59-758a0555fc3b"
                 }
               ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
+              "createdAt": "2026-10-21T20:27:07.000Z",
+              "updatedAt": "2026-10-21T20:27:07.000Z",
+              "uid": "35240-2da9c8fd-0e0d-437b-bae9-5643f440b785"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "e009f950-a130-4110-b31f-df4499ee831e",
-          "name": "Retrieve Invoice Recipients",
-          "request": {
-            "name": "Retrieve Invoice Recipients",
-            "description": {},
-            "url": {
-              "path": [
-                "v1",
-                "invoices",
-                "recipients"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "text/plain"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "2851c31c-a04c-4798-9aab-9a4d44c77de2",
-              "name": "Success",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "v1",
-                    "invoices",
-                    "recipients"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "text/plain"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "[\n  {\n    \"id\": 1,\n    \"name\": \"Jeff\",\n    \"addressLine1\": \"123 Sesame Street\",\n    \"addressLine2\": \"Narnia\",\n    \"addressLine3\": \"Antarctica\",\n    \"taxType\": \"GST\",\n    \"taxNumber\": \"4\",\n    \"contactName\": \"Bill\",\n    \"contactPhone\": \"17\",\n    \"contactEmail\": \"emailaddress@gmail.com\"\n  },\n  {\n    \"id\": 2,\n    \"name\": \"Steve\",\n    \"addressLine1\": \"124 Sesame Street\",\n    \"addressLine2\": \"South Narnia\",\n    \"addressLine3\": \"Antarctica\",\n    \"taxType\": \"TAX\",\n    \"taxNumber\": \"40\",\n    \"contactName\": \"Stan\",\n    \"contactPhone\": \"71\",\n    \"contactEmail\": \"anotheremailaddress@gmail.com\"\n  }\n]",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "2522ff8e-25e0-4812-bb26-67af2ff7e6dc",
+          "createdAt": "2026-10-21T20:27:07.000Z",
+          "updatedAt": "2026-10-21T20:27:07.000Z",
+          "uid": "35240-2522ff8e-25e0-4812-bb26-67af2ff7e6dc"
         }
       ],
-      "event": []
+      "id": "75e17944-dc2d-44ea-bbda-b62b30e65d14",
+      "createdAt": "2026-10-21T20:27:07.000Z",
+      "updatedAt": "2026-10-21T20:27:07.000Z",
+      "uid": "35240-75e17944-dc2d-44ea-bbda-b62b30e65d14"
     }
   ],
-  "event": [],
   "variable": [
     {
-      "type": "string",
-      "value": "https://api-sandbox.lawvu.com/account-apis",
-      "key": "baseUrl"
+      "key": "baseUrl",
+      "value": "https://api-sandbox.lawvu.com/invoice-apis"
     }
-  ],
-  "info": {
-    "_postman_id": "89506e12-8fe0-405f-aede-9077a4e3f03d",
-    "name": "LawVu Account Auth Invoices API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "Apis for account related resources (authentication, profiles, organisation details etc)",
-      "type": "text/plain"
-    }
-  }
+  ]
 }

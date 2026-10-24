@@ -1,1832 +1,1591 @@
 {
+  "info": {
+    "_postman_id": "979e0d70-9828-4840-8955-f00e4bcfe689",
+    "name": "LawVu Fields API",
+    "description": "The next generation of the LawVu API.\n\nContact Support:\n Name: LawVu Developer Support Team\n Email: developer@lawvu.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:26:54.000Z",
+    "updatedAt": "2026-10-21T20:26:55.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-979e0d70-9828-4840-8955-f00e4bcfe689"
+  },
   "item": [
     {
-      "id": "efcaf88f-d7ec-4d0f-9bf9-dc161f4f4891",
-      "name": "Fields",
-      "description": {
-        "content": "",
-        "type": "text/plain"
-      },
+      "name": "v2",
       "item": [
         {
-          "id": "8a14dfbf-3415-4d11-85bd-b382118d8c92",
-          "name": "Get fields",
-          "request": {
-            "name": "Get fields",
-            "description": {
-              "content": "Retrieve a list of available fields",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "v2",
-                "fields"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
+          "name": "fields",
+          "item": [
+            {
+              "name": "{fieldId}",
+              "item": [
                 {
-                  "disabled": false,
-                  "key": "$skip",
-                  "value": "0",
-                  "description": "Specifies the number of items to skip"
-                },
-                {
-                  "disabled": false,
-                  "key": "$top",
-                  "value": "25",
-                  "description": "Specifies the maximum number of items to return"
+                  "name": "options",
+                  "item": [
+                    {
+                      "name": "{value}",
+                      "item": [
+                        {
+                          "name": "Get an option for a field",
+                          "id": "7f327525-5b36-4a74-8968-f9c6fedc45a7",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/fields/:fieldId/options/:value",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "fields",
+                                ":fieldId",
+                                "options",
+                                ":value"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "d90d228c-0cdb-4d28-be51-84ea730c7219",
+                                  "key": "fieldId",
+                                  "value": "<string>",
+                                  "description": "(Required) The API name for the field"
+                                },
+                                {
+                                  "id": "b3d9c7f9-8482-4908-b628-aeb4e7ba8377",
+                                  "key": "value",
+                                  "value": "<string>",
+                                  "description": "(Required) The system generated value for the field option"
+                                }
+                              ]
+                            },
+                            "description": "Retrieve an option for a field based by value\n\nSupported field types: MultiOption, Option"
+                          },
+                          "response": [
+                            {
+                              "id": "ae80a507-d032-4ebd-937c-f6ae9f5a9f71",
+                              "name": "OK",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v2/fields/:fieldId/options/:value",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v2",
+                                    "fields",
+                                    ":fieldId",
+                                    "options",
+                                    ":value"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "fieldId"
+                                    },
+                                    {
+                                      "key": "value"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"label\": \"<string,null>\",\n  \"value\": \"<string,null>\",\n  \"properties\": \"<object,null>\"\n}",
+                              "createdAt": "2026-10-21T20:26:55.000Z",
+                              "updatedAt": "2026-10-21T20:26:55.000Z",
+                              "uid": "35240-ae80a507-d032-4ebd-937c-f6ae9f5a9f71"
+                            },
+                            {
+                              "id": "c95b2d3f-e374-4093-b744-08342fdeee31",
+                              "name": "Bad Request",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/problem+json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v2/fields/:fieldId/options/:value",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v2",
+                                    "fields",
+                                    ":fieldId",
+                                    "options",
+                                    ":value"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "fieldId"
+                                    },
+                                    {
+                                      "key": "value"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/problem+json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"detail\": \"<string>\",\n  \"errors\": {\n    \"in9\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"instance\": \"<string>\",\n  \"operationId\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"type\": \"<string>\",\n  \"sint_6\": {}\n}",
+                              "createdAt": "2026-10-21T20:26:55.000Z",
+                              "updatedAt": "2026-10-21T20:26:55.000Z",
+                              "uid": "35240-c95b2d3f-e374-4093-b744-08342fdeee31"
+                            },
+                            {
+                              "id": "f02e22cd-09c8-420e-af92-a8e01b27798d",
+                              "name": "Forbidden",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/problem+json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v2/fields/:fieldId/options/:value",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v2",
+                                    "fields",
+                                    ":fieldId",
+                                    "options",
+                                    ":value"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "fieldId"
+                                    },
+                                    {
+                                      "key": "value"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/problem+json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"detail\": \"<string>\",\n  \"instance\": \"<string>\",\n  \"operationId\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"type\": \"<string>\"\n}",
+                              "createdAt": "2026-10-21T20:26:55.000Z",
+                              "updatedAt": "2026-10-21T20:26:55.000Z",
+                              "uid": "35240-f02e22cd-09c8-420e-af92-a8e01b27798d"
+                            },
+                            {
+                              "id": "ca57af15-d432-4045-be3b-1a0ba950e1fa",
+                              "name": "Not Found",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/problem+json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v2/fields/:fieldId/options/:value",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v2",
+                                    "fields",
+                                    ":fieldId",
+                                    "options",
+                                    ":value"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "fieldId"
+                                    },
+                                    {
+                                      "key": "value"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/problem+json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"detail\": \"<string>\",\n  \"instance\": \"<string>\",\n  \"operationId\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"type\": \"<string>\"\n}",
+                              "createdAt": "2026-10-21T20:26:55.000Z",
+                              "updatedAt": "2026-10-21T20:26:55.000Z",
+                              "uid": "35240-ca57af15-d432-4045-be3b-1a0ba950e1fa"
+                            }
+                          ],
+                          "createdAt": "2026-10-21T20:26:55.000Z",
+                          "updatedAt": "2026-10-21T20:26:55.000Z",
+                          "uid": "35240-7f327525-5b36-4a74-8968-f9c6fedc45a7"
+                        },
+                        {
+                          "name": "Update an option on a field",
+                          "id": "c40dd0f8-e14c-4f2d-a221-40d21094ebb8",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/merge-patch+json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/problem+json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"label\": \"<string,null>\",\n  \"properties\": \"<object,null>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/fields/:fieldId/options/:value",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "fields",
+                                ":fieldId",
+                                "options",
+                                ":value"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "4e5fa2e5-8e0a-48a9-89e7-9743cd2de415",
+                                  "key": "fieldId",
+                                  "value": "<string>",
+                                  "description": "(Required) The API name for the field"
+                                },
+                                {
+                                  "id": "32142c61-f92b-4721-a4ba-8d36e303c076",
+                                  "key": "value",
+                                  "value": "<string>",
+                                  "description": "(Required) The value of the option to update"
+                                }
+                              ]
+                            },
+                            "description": "Update an option on a field by value.\n\nSupported field types: MultiOption, Option"
+                          },
+                          "response": [
+                            {
+                              "id": "5baffd2b-dcdd-4ac5-abbc-fc96b01a3fd9",
+                              "name": "No Content",
+                              "originalRequest": {
+                                "method": "PATCH",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/merge-patch+json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"label\": \"<string,null>\",\n  \"properties\": \"<object,null>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v2/fields/:fieldId/options/:value",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v2",
+                                    "fields",
+                                    ":fieldId",
+                                    "options",
+                                    ":value"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "fieldId"
+                                    },
+                                    {
+                                      "key": "value"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "No Content",
+                              "code": 204,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-10-21T20:26:55.000Z",
+                              "updatedAt": "2026-10-21T20:26:55.000Z",
+                              "uid": "35240-5baffd2b-dcdd-4ac5-abbc-fc96b01a3fd9"
+                            },
+                            {
+                              "id": "e82cff67-e868-4743-9d20-966ef71f174f",
+                              "name": "Bad Request",
+                              "originalRequest": {
+                                "method": "PATCH",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/merge-patch+json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/problem+json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"label\": \"<string,null>\",\n  \"properties\": \"<object,null>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v2/fields/:fieldId/options/:value",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v2",
+                                    "fields",
+                                    ":fieldId",
+                                    "options",
+                                    ":value"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "fieldId"
+                                    },
+                                    {
+                                      "key": "value"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/problem+json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"detail\": \"<string>\",\n  \"errors\": {\n    \"in9\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"instance\": \"<string>\",\n  \"operationId\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"type\": \"<string>\",\n  \"sint_6\": {}\n}",
+                              "createdAt": "2026-10-21T20:26:55.000Z",
+                              "updatedAt": "2026-10-21T20:26:55.000Z",
+                              "uid": "35240-e82cff67-e868-4743-9d20-966ef71f174f"
+                            },
+                            {
+                              "id": "a07022da-2996-4ea2-9587-660ec1115ec9",
+                              "name": "Forbidden",
+                              "originalRequest": {
+                                "method": "PATCH",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/merge-patch+json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/problem+json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"label\": \"<string,null>\",\n  \"properties\": \"<object,null>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v2/fields/:fieldId/options/:value",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v2",
+                                    "fields",
+                                    ":fieldId",
+                                    "options",
+                                    ":value"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "fieldId"
+                                    },
+                                    {
+                                      "key": "value"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/problem+json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"detail\": \"<string>\",\n  \"instance\": \"<string>\",\n  \"operationId\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"type\": \"<string>\"\n}",
+                              "createdAt": "2026-10-21T20:26:55.000Z",
+                              "updatedAt": "2026-10-21T20:26:55.000Z",
+                              "uid": "35240-a07022da-2996-4ea2-9587-660ec1115ec9"
+                            },
+                            {
+                              "id": "6364f4ea-e863-44a3-9011-6e10324d78a0",
+                              "name": "Not Found",
+                              "originalRequest": {
+                                "method": "PATCH",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/merge-patch+json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/problem+json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"label\": \"<string,null>\",\n  \"properties\": \"<object,null>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v2/fields/:fieldId/options/:value",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v2",
+                                    "fields",
+                                    ":fieldId",
+                                    "options",
+                                    ":value"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "fieldId"
+                                    },
+                                    {
+                                      "key": "value"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/problem+json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"detail\": \"<string>\",\n  \"instance\": \"<string>\",\n  \"operationId\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"type\": \"<string>\"\n}",
+                              "createdAt": "2026-10-21T20:26:55.000Z",
+                              "updatedAt": "2026-10-21T20:26:55.000Z",
+                              "uid": "35240-6364f4ea-e863-44a3-9011-6e10324d78a0"
+                            }
+                          ],
+                          "createdAt": "2026-10-21T20:26:55.000Z",
+                          "updatedAt": "2026-10-21T20:26:55.000Z",
+                          "uid": "35240-c40dd0f8-e14c-4f2d-a221-40d21094ebb8"
+                        },
+                        {
+                          "name": "Delete an option from a field",
+                          "id": "5104ade8-1983-48f7-929a-6785ac8c5ba4",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/problem+json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/fields/:fieldId/options/:value",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "fields",
+                                ":fieldId",
+                                "options",
+                                ":value"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "b5c137ac-1ae5-4420-876d-bd66c56f480e",
+                                  "key": "fieldId",
+                                  "value": "<string>",
+                                  "description": "(Required) The API name for the field"
+                                },
+                                {
+                                  "id": "05008454-720e-44a1-80a4-3185199c4a6d",
+                                  "key": "value",
+                                  "value": "<string>",
+                                  "description": "(Required) The system generated value for the field option"
+                                }
+                              ]
+                            },
+                            "description": "Removes an option from a field by value.\n\nSupported field types: MultiOption, Option"
+                          },
+                          "response": [
+                            {
+                              "id": "fd74e2c3-8bcd-453a-ae86-34048aa10521",
+                              "name": "No Content",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v2/fields/:fieldId/options/:value",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v2",
+                                    "fields",
+                                    ":fieldId",
+                                    "options",
+                                    ":value"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "fieldId"
+                                    },
+                                    {
+                                      "key": "value"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "No Content",
+                              "code": 204,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-10-21T20:26:55.000Z",
+                              "updatedAt": "2026-10-21T20:26:55.000Z",
+                              "uid": "35240-fd74e2c3-8bcd-453a-ae86-34048aa10521"
+                            },
+                            {
+                              "id": "8f15a84a-e851-4c8b-9d0f-4d37556d5a70",
+                              "name": "Bad Request",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/problem+json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v2/fields/:fieldId/options/:value",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v2",
+                                    "fields",
+                                    ":fieldId",
+                                    "options",
+                                    ":value"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "fieldId"
+                                    },
+                                    {
+                                      "key": "value"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/problem+json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"detail\": \"<string>\",\n  \"errors\": {\n    \"in9\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"instance\": \"<string>\",\n  \"operationId\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"type\": \"<string>\",\n  \"sint_6\": {}\n}",
+                              "createdAt": "2026-10-21T20:26:55.000Z",
+                              "updatedAt": "2026-10-21T20:26:55.000Z",
+                              "uid": "35240-8f15a84a-e851-4c8b-9d0f-4d37556d5a70"
+                            },
+                            {
+                              "id": "db4419ea-d768-47cd-ae49-85edb6be947e",
+                              "name": "Forbidden",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/problem+json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v2/fields/:fieldId/options/:value",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v2",
+                                    "fields",
+                                    ":fieldId",
+                                    "options",
+                                    ":value"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "fieldId"
+                                    },
+                                    {
+                                      "key": "value"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/problem+json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"detail\": \"<string>\",\n  \"instance\": \"<string>\",\n  \"operationId\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"type\": \"<string>\"\n}",
+                              "createdAt": "2026-10-21T20:26:55.000Z",
+                              "updatedAt": "2026-10-21T20:26:55.000Z",
+                              "uid": "35240-db4419ea-d768-47cd-ae49-85edb6be947e"
+                            },
+                            {
+                              "id": "658af2f8-654a-4b8c-bcfd-1784474e225d",
+                              "name": "Not Found",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/problem+json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v2/fields/:fieldId/options/:value",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v2",
+                                    "fields",
+                                    ":fieldId",
+                                    "options",
+                                    ":value"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "fieldId"
+                                    },
+                                    {
+                                      "key": "value"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/problem+json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"detail\": \"<string>\",\n  \"instance\": \"<string>\",\n  \"operationId\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"type\": \"<string>\"\n}",
+                              "createdAt": "2026-10-21T20:26:55.000Z",
+                              "updatedAt": "2026-10-21T20:26:55.000Z",
+                              "uid": "35240-658af2f8-654a-4b8c-bcfd-1784474e225d"
+                            }
+                          ],
+                          "createdAt": "2026-10-21T20:26:55.000Z",
+                          "updatedAt": "2026-10-21T20:26:55.000Z",
+                          "uid": "35240-5104ade8-1983-48f7-929a-6785ac8c5ba4"
+                        }
+                      ],
+                      "id": "46a9ba1f-063f-4de8-ba75-6261928da136",
+                      "createdAt": "2026-10-21T20:26:55.000Z",
+                      "updatedAt": "2026-10-21T20:26:55.000Z",
+                      "uid": "35240-46a9ba1f-063f-4de8-ba75-6261928da136"
+                    },
+                    {
+                      "name": "Get field options",
+                      "id": "370a2299-0d60-47c1-b33d-d37261f8dd06",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/fields/:fieldId/options?$filter=<string>&$skip=<integer>&$top=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "fields",
+                            ":fieldId",
+                            "options"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter the results using OData filter syntax",
+                              "key": "$filter",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Skip the specified number of results",
+                              "key": "$skip",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Limit the number of results returned",
+                              "key": "$top",
+                              "value": "<integer>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "9f7fa530-b1bc-4293-83b9-819f5deb18ab",
+                              "key": "fieldId",
+                              "value": "<string>",
+                              "description": "(Required) The API name for the field"
+                            }
+                          ]
+                        },
+                        "description": "Retrieve a list of available options for a field.\n\nSupported field types: MultiOption, Option"
+                      },
+                      "response": [
+                        {
+                          "id": "7b4bf1c2-3131-4465-b1a6-bd72afc0af16",
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/fields/:fieldId/options?$filter=<string>&$skip=<integer>&$top=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "fields",
+                                ":fieldId",
+                                "options"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Filter the results using OData filter syntax",
+                                  "key": "$filter",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Skip the specified number of results",
+                                  "key": "$skip",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "Limit the number of results returned",
+                                  "key": "$top",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "fieldId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"items\": [\n    {\n      \"label\": \"<string,null>\",\n      \"value\": \"<string,null>\",\n      \"properties\": \"<object,null>\"\n    },\n    {\n      \"label\": \"<string,null>\",\n      \"value\": \"<string,null>\",\n      \"properties\": \"<object,null>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-10-21T20:26:55.000Z",
+                          "updatedAt": "2026-10-21T20:26:55.000Z",
+                          "uid": "35240-7b4bf1c2-3131-4465-b1a6-bd72afc0af16"
+                        },
+                        {
+                          "id": "74e0dfff-a0cd-4eb3-a487-b69b241b0668",
+                          "name": "Bad Request",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/problem+json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/fields/:fieldId/options?$filter=<string>&$skip=<integer>&$top=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "fields",
+                                ":fieldId",
+                                "options"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Filter the results using OData filter syntax",
+                                  "key": "$filter",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Skip the specified number of results",
+                                  "key": "$skip",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "Limit the number of results returned",
+                                  "key": "$top",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "fieldId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/problem+json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"detail\": \"<string>\",\n  \"errors\": {\n    \"in9\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"instance\": \"<string>\",\n  \"operationId\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"type\": \"<string>\",\n  \"sint_6\": {}\n}",
+                          "createdAt": "2026-10-21T20:26:55.000Z",
+                          "updatedAt": "2026-10-21T20:26:55.000Z",
+                          "uid": "35240-74e0dfff-a0cd-4eb3-a487-b69b241b0668"
+                        },
+                        {
+                          "id": "edd3c5a0-1d1d-42d3-98b8-98672c40b352",
+                          "name": "Not Found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/problem+json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/fields/:fieldId/options?$filter=<string>&$skip=<integer>&$top=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "fields",
+                                ":fieldId",
+                                "options"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Filter the results using OData filter syntax",
+                                  "key": "$filter",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Skip the specified number of results",
+                                  "key": "$skip",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "Limit the number of results returned",
+                                  "key": "$top",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "fieldId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/problem+json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"detail\": \"<string>\",\n  \"instance\": \"<string>\",\n  \"operationId\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"type\": \"<string>\"\n}",
+                          "createdAt": "2026-10-21T20:26:55.000Z",
+                          "updatedAt": "2026-10-21T20:26:55.000Z",
+                          "uid": "35240-edd3c5a0-1d1d-42d3-98b8-98672c40b352"
+                        }
+                      ],
+                      "createdAt": "2026-10-21T20:26:55.000Z",
+                      "updatedAt": "2026-10-21T20:26:55.000Z",
+                      "uid": "35240-370a2299-0d60-47c1-b33d-d37261f8dd06"
+                    },
+                    {
+                      "name": "Add an option to a field",
+                      "id": "2e43a7df-2e68-41cb-8948-0dcd1ed05b0b",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"label\": \"<string>\",\n  \"properties\": \"<object,null>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/fields/:fieldId/options",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "fields",
+                            ":fieldId",
+                            "options"
+                          ],
+                          "variable": [
+                            {
+                              "id": "42667f29-8ec8-4c81-ad1b-8ce59bcc184e",
+                              "key": "fieldId",
+                              "value": "<string>",
+                              "description": "(Required) The API name for the field"
+                            }
+                          ]
+                        },
+                        "description": "Add a an option for a field.\n\nSupported field types: MultiOption, Option"
+                      },
+                      "response": [
+                        {
+                          "id": "e62e04c1-117d-4871-b5e1-c74ad3ae9a67",
+                          "name": "Created",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"label\": \"<string>\",\n  \"properties\": \"<object,null>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/fields/:fieldId/options",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "fields",
+                                ":fieldId",
+                                "options"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "fieldId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Created",
+                          "code": 201,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            },
+                            {
+                              "disabled": false,
+                              "description": {
+                                "content": "Location to retrieve the created resource",
+                                "type": "text/plain"
+                              },
+                              "key": "Location",
+                              "value": "<string>"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"value\": \"<string>\"\n}",
+                          "createdAt": "2026-10-21T20:26:55.000Z",
+                          "updatedAt": "2026-10-21T20:26:55.000Z",
+                          "uid": "35240-e62e04c1-117d-4871-b5e1-c74ad3ae9a67"
+                        },
+                        {
+                          "id": "3d5dc2a3-6cb2-46c4-ac45-652d5b6a6305",
+                          "name": "Bad Request",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/problem+json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"label\": \"<string>\",\n  \"properties\": \"<object,null>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/fields/:fieldId/options",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "fields",
+                                ":fieldId",
+                                "options"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "fieldId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/problem+json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"detail\": \"<string>\",\n  \"errors\": {\n    \"in9\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"instance\": \"<string>\",\n  \"operationId\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"type\": \"<string>\",\n  \"sint_6\": {}\n}",
+                          "createdAt": "2026-10-21T20:26:55.000Z",
+                          "updatedAt": "2026-10-21T20:26:55.000Z",
+                          "uid": "35240-3d5dc2a3-6cb2-46c4-ac45-652d5b6a6305"
+                        },
+                        {
+                          "id": "3d958d82-31ac-4a57-9789-2b046d1d1070",
+                          "name": "Forbidden",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/problem+json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"label\": \"<string>\",\n  \"properties\": \"<object,null>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/fields/:fieldId/options",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "fields",
+                                ":fieldId",
+                                "options"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "fieldId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/problem+json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"detail\": \"<string>\",\n  \"instance\": \"<string>\",\n  \"operationId\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"type\": \"<string>\"\n}",
+                          "createdAt": "2026-10-21T20:26:55.000Z",
+                          "updatedAt": "2026-10-21T20:26:55.000Z",
+                          "uid": "35240-3d958d82-31ac-4a57-9789-2b046d1d1070"
+                        },
+                        {
+                          "id": "dca0e28f-a63a-44c2-b9ae-9f0e656ceee3",
+                          "name": "Not Found",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/problem+json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"label\": \"<string>\",\n  \"properties\": \"<object,null>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/fields/:fieldId/options",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "fields",
+                                ":fieldId",
+                                "options"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "fieldId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/problem+json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"detail\": \"<string>\",\n  \"instance\": \"<string>\",\n  \"operationId\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"type\": \"<string>\"\n}",
+                          "createdAt": "2026-10-21T20:26:55.000Z",
+                          "updatedAt": "2026-10-21T20:26:55.000Z",
+                          "uid": "35240-dca0e28f-a63a-44c2-b9ae-9f0e656ceee3"
+                        }
+                      ],
+                      "createdAt": "2026-10-21T20:26:55.000Z",
+                      "updatedAt": "2026-10-21T20:26:55.000Z",
+                      "uid": "35240-2e43a7df-2e68-41cb-8948-0dcd1ed05b0b"
+                    }
+                  ],
+                  "id": "a6744910-0e0a-4b21-9c2e-3287c9e77533",
+                  "createdAt": "2026-10-21T20:26:55.000Z",
+                  "updatedAt": "2026-10-21T20:26:55.000Z",
+                  "uid": "35240-a6744910-0e0a-4b21-9c2e-3287c9e77533"
                 }
               ],
-              "variable": []
+              "id": "3a1ce4f8-3a0a-4186-a4f6-4631d615efd0",
+              "createdAt": "2026-10-21T20:26:55.000Z",
+              "updatedAt": "2026-10-21T20:26:55.000Z",
+              "uid": "35240-3a1ce4f8-3a0a-4186-a4f6-4631d615efd0"
             },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
             {
-              "id": "6e09130d-951c-41cb-96a1-abe094ae7003",
-              "name": "OK",
-              "originalRequest": {
+              "name": "Get fields",
+              "id": "2df2f129-498d-4b97-ae7f-e33199f84d88",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
                 "url": {
+                  "raw": "{{baseUrl}}/v2/fields?$skip=0&$top=25",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "v2",
                     "fields"
                   ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
                   "query": [
                     {
+                      "description": "Specifies the number of items to skip",
                       "key": "$skip",
                       "value": "0"
                     },
                     {
+                      "description": "Specifies the maximum number of items to return",
                       "key": "$top",
                       "value": "25"
                     }
-                  ],
-                  "variable": []
+                  ]
                 },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                "description": "Retrieve a list of available fields"
               },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "response": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"items\": [\n    {\n      \"id\": \"my_field\",\n      \"name\": \"My dropdown field\",\n      \"type\": \"User\",\n      \"properties\": {\n        \"userCanAddOption\": true\n      },\n      \"created\": {\n        \"dateUtc\": \"2024-12-25T00:00:00Z\",\n        \"userName\": \"api.developer@lawvu.com\"\n      },\n      \"modified\": {\n        \"dateUtc\": \"2024-12-25T00:00:00Z\",\n        \"userName\": \"api.developer@lawvu.com\"\n      }\n    },\n    {\n      \"id\": \"my_field\",\n      \"name\": \"My dropdown field\",\n      \"type\": \"User\",\n      \"properties\": {\n        \"userCanAddOption\": true\n      },\n      \"created\": {\n        \"dateUtc\": \"2024-12-25T00:00:00Z\",\n        \"userName\": \"api.developer@lawvu.com\"\n      },\n      \"modified\": {\n        \"dateUtc\": \"2024-12-25T00:00:00Z\",\n        \"userName\": \"api.developer@lawvu.com\"\n      }\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "9dbf0625-fe16-497a-afa1-6c3b257c8e26",
-              "name": "Bad Request",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "v2",
-                    "fields"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
+                  "id": "c38339a8-5633-4d01-b7bb-a9c89610bb97",
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/fields?$skip=0&$top=25",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "fields"
+                      ],
+                      "query": [
+                        {
+                          "description": "Specifies the number of items to skip",
+                          "key": "$skip",
+                          "value": "0"
+                        },
+                        {
+                          "description": "Specifies the maximum number of items to return",
+                          "key": "$top",
+                          "value": "25"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
                     {
-                      "key": "$skip",
-                      "value": "0"
-                    },
-                    {
-                      "key": "$top",
-                      "value": "25"
+                      "key": "Content-Type",
+                      "value": "application/json"
                     }
                   ],
-                  "variable": []
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"items\": [\n    {\n      \"id\": \"<string,null>\",\n      \"name\": \"<string,null>\",\n      \"type\": \"Option\",\n      \"properties\": {\n        \"userCanAddOption\": \"<boolean,null>\"\n      },\n      \"created\": {\n        \"dateUtc\": \"<dateTime>\",\n        \"userName\": \"<string>\"\n      },\n      \"modified\": {\n        \"dateUtc\": \"<dateTime>\",\n        \"userName\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string,null>\",\n      \"name\": \"<string,null>\",\n      \"type\": \"Boolean\",\n      \"properties\": {\n        \"userCanAddOption\": \"<boolean,null>\"\n      },\n      \"created\": {\n        \"dateUtc\": \"<dateTime>\",\n        \"userName\": \"<string>\"\n      },\n      \"modified\": {\n        \"dateUtc\": \"<dateTime>\",\n        \"userName\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:26:55.000Z",
+                  "updatedAt": "2026-10-21T20:26:55.000Z",
+                  "uid": "35240-c38339a8-5633-4d01-b7bb-a9c89610bb97"
                 },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/problem+json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/problem+json"
-                }
-              ],
-              "body": "{\n  \"detail\": \"string\",\n  \"errors\": {\n    \"key_0\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key_1\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"instance\": \"string\",\n  \"operationId\": \"string\",\n  \"status\": 8588,\n  \"title\": \"string\",\n  \"type\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "a0948b4a-ef8f-418d-92be-75aa3920e0cb",
-              "name": "Not Found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "v2",
-                    "fields"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
+                  "id": "34c0355a-b328-4995-b49d-7e77efe75a53",
+                  "name": "Bad Request",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/problem+json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/fields?$skip=0&$top=25",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "fields"
+                      ],
+                      "query": [
+                        {
+                          "description": "Specifies the number of items to skip",
+                          "key": "$skip",
+                          "value": "0"
+                        },
+                        {
+                          "description": "Specifies the maximum number of items to return",
+                          "key": "$top",
+                          "value": "25"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
                     {
-                      "key": "$skip",
-                      "value": "0"
-                    },
-                    {
-                      "key": "$top",
-                      "value": "25"
+                      "key": "Content-Type",
+                      "value": "application/problem+json"
                     }
                   ],
-                  "variable": []
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detail\": \"<string>\",\n  \"errors\": {\n    \"in9\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"instance\": \"<string>\",\n  \"operationId\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"type\": \"<string>\",\n  \"sint_6\": {}\n}",
+                  "createdAt": "2026-10-21T20:26:55.000Z",
+                  "updatedAt": "2026-10-21T20:26:55.000Z",
+                  "uid": "35240-34c0355a-b328-4995-b49d-7e77efe75a53"
                 },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/problem+json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/problem+json"
+                  "id": "b64c718e-9fc1-441b-82f5-48703ecdb8c3",
+                  "name": "Not Found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/problem+json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/fields?$skip=0&$top=25",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "fields"
+                      ],
+                      "query": [
+                        {
+                          "description": "Specifies the number of items to skip",
+                          "key": "$skip",
+                          "value": "0"
+                        },
+                        {
+                          "description": "Specifies the maximum number of items to return",
+                          "key": "$top",
+                          "value": "25"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/problem+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detail\": \"<string>\",\n  \"instance\": \"<string>\",\n  \"operationId\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"type\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:26:55.000Z",
+                  "updatedAt": "2026-10-21T20:26:55.000Z",
+                  "uid": "35240-b64c718e-9fc1-441b-82f5-48703ecdb8c3"
                 }
               ],
-              "body": "{\n  \"detail\": \"string\",\n  \"instance\": \"string\",\n  \"operationId\": \"string\",\n  \"status\": 8211,\n  \"title\": \"string\",\n  \"type\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "createdAt": "2026-10-21T20:26:55.000Z",
+              "updatedAt": "2026-10-21T20:26:55.000Z",
+              "uid": "35240-2df2f129-498d-4b97-ae7f-e33199f84d88"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "fd140b70-fab4-425d-b2d3-77834bafdd08",
-          "name": "Get field options",
-          "request": {
-            "name": "Get field options",
-            "description": {
-              "content": "Retrieve a list of available options for a field.\n\nSupported field types: MultiOption, Option",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "v2",
-                "fields",
-                ":fieldId",
-                "options"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "$filter",
-                  "value": "<string>",
-                  "description": "Filter the results using OData filter syntax"
-                },
-                {
-                  "disabled": false,
-                  "key": "$skip",
-                  "value": "<integer>",
-                  "description": "Skip the specified number of results"
-                },
-                {
-                  "disabled": false,
-                  "key": "$top",
-                  "value": "<integer>",
-                  "description": "Limit the number of results returned"
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "fieldId",
-                  "description": "(Required) The API name for the field"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "330772b0-dcda-4790-aa55-bf2a6f5c0732",
-              "name": "OK",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "v2",
-                    "fields",
-                    ":fieldId",
-                    "options"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "$filter",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "$skip",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "$top",
-                      "value": "<integer>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "fieldId",
-                      "description": "(Required) The API name for the field"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"items\": [\n    {\n      \"label\": \"Option 1\",\n      \"value\": \"option_1\",\n      \"properties\": null\n    },\n    {\n      \"label\": \"Option 2\",\n      \"value\": \"option_2\",\n      \"properties\": null\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "a2259972-f28f-4ca6-9ee2-05cae7102bc7",
-              "name": "Bad Request",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "v2",
-                    "fields",
-                    ":fieldId",
-                    "options"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "$filter",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "$skip",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "$top",
-                      "value": "<integer>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "fieldId",
-                      "description": "(Required) The API name for the field"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/problem+json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/problem+json"
-                }
-              ],
-              "body": "{\n  \"detail\": \"Options not supported for field type: Text\",\n  \"instance\": \"/fields/my_field\",\n  \"operationId\": \"7edb5d62-f5bf-463b-9410-cdd8b3293d89\",\n  \"status\": 400,\n  \"title\": \"Invalid request\",\n  \"type\": \"https://api-docs.lawvu.com/errors/invalid_request\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "a0ed439b-5833-4ac3-a0c4-c6948e80fede",
-              "name": "Not Found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "v2",
-                    "fields",
-                    ":fieldId",
-                    "options"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "$filter",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "$skip",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "$top",
-                      "value": "<integer>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "fieldId",
-                      "description": "(Required) The API name for the field"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/problem+json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/problem+json"
-                }
-              ],
-              "body": "{\n  \"detail\": \"Cannot retrieve options as the requested field could not be found\",\n  \"instance\": \"/fields/my_field\",\n  \"operationId\": \"7edb5d62-f5bf-463b-9410-cdd8b3293d89\",\n  \"status\": 404,\n  \"title\": \"Resource not found\",\n  \"type\": \"https://api-docs.lawvu.com/errors/resource_not_found\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "533f9b9e-a93e-42b1-b9a9-2165b716ff46",
-          "name": "Add an option to a field",
-          "request": {
-            "name": "Add an option to a field",
-            "description": {
-              "content": "Add a an option for a field.\n\nSupported field types: MultiOption, Option",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "v2",
-                "fields",
-                ":fieldId",
-                "options"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "fieldId",
-                  "description": "(Required) The API name for the field"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"label\": \"<string>\",\n  \"properties\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  }\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "d56d0d3c-d6ca-4ee5-a9fb-e9730968a616",
-              "name": "Created",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "v2",
-                    "fields",
-                    ":fieldId",
-                    "options"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "fieldId",
-                      "description": "(Required) The API name for the field"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"label\": \"Option 1\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Created",
-              "code": 201,
-              "header": [
-                {
-                  "disabled": false,
-                  "description": "Location to retrieve the created resource",
-                  "key": "Location",
-                  "value": "string"
-                },
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"value\": \"option_1\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "231c006f-40b7-4af0-8c9a-8cfa249ac5ea",
-              "name": "Bad Request",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "v2",
-                    "fields",
-                    ":fieldId",
-                    "options"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "fieldId",
-                      "description": "(Required) The API name for the field"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/problem+json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"label\": \"Option 1\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/problem+json"
-                }
-              ],
-              "body": "{\n  \"detail\": \"Field does not support adding options\",\n  \"instance\": \"/fields/my_field\",\n  \"operationId\": \"7edb5d62-f5bf-463b-9410-cdd8b3293d89\",\n  \"status\": 400,\n  \"title\": \"Invalid request\",\n  \"type\": \"https://api-docs.lawvu.com/errors/invalid_request\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "06fc25a9-9609-460d-b36e-054b4c1f15e0",
-              "name": "Forbidden",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "v2",
-                    "fields",
-                    ":fieldId",
-                    "options"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "fieldId",
-                      "description": "(Required) The API name for the field"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/problem+json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"label\": \"Option 1\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/problem+json"
-                }
-              ],
-              "body": "{\n  \"detail\": \"string\",\n  \"instance\": \"string\",\n  \"operationId\": \"string\",\n  \"status\": 8211,\n  \"title\": \"string\",\n  \"type\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "5de7858b-91eb-4dde-b170-63a6bbe38fe1",
-              "name": "Not Found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "v2",
-                    "fields",
-                    ":fieldId",
-                    "options"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "fieldId",
-                      "description": "(Required) The API name for the field"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/problem+json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"label\": \"Option 1\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/problem+json"
-                }
-              ],
-              "body": "{\n  \"detail\": \"Cannot add option as the requested field could not be found\",\n  \"instance\": \"/fields/my_field\",\n  \"operationId\": \"7edb5d62-f5bf-463b-9410-cdd8b3293d89\",\n  \"status\": 404,\n  \"title\": \"Resource not found\",\n  \"type\": \"https://api-docs.lawvu.com/errors/resource_not_found\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "0a3ca5ce-b3c6-41ed-b7f2-12d761fdad30",
-          "name": "Get an option for a field",
-          "request": {
-            "name": "Get an option for a field",
-            "description": {
-              "content": "Retrieve an option for a field based by value\n\nSupported field types: MultiOption, Option",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "v2",
-                "fields",
-                ":fieldId",
-                "options",
-                ":value"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "fieldId",
-                  "description": "(Required) The API name for the field"
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "value",
-                  "description": "(Required) The system generated value for the field option"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "c031f8a3-ba4e-4cab-a435-01600a7c38ff",
-              "name": "OK",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "v2",
-                    "fields",
-                    ":fieldId",
-                    "options",
-                    ":value"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "fieldId",
-                      "description": "(Required) The API name for the field"
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "value",
-                      "description": "(Required) The system generated value for the field option"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"label\": \"Option 1\",\n  \"value\": \"option_1\",\n  \"properties\": null\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "f3278d5d-38a9-4baa-a6e1-ef144f502bc1",
-              "name": "Bad Request",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "v2",
-                    "fields",
-                    ":fieldId",
-                    "options",
-                    ":value"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "fieldId",
-                      "description": "(Required) The API name for the field"
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "value",
-                      "description": "(Required) The system generated value for the field option"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/problem+json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/problem+json"
-                }
-              ],
-              "body": "{\n  \"detail\": \"Field does not support options\",\n  \"instance\": \"/fields/my_field/options/option_1\",\n  \"operationId\": \"7edb5d62-f5bf-463b-9410-cdd8b3293d89\",\n  \"status\": 400,\n  \"title\": \"Invalid request\",\n  \"type\": \"https://api-docs.lawvu.com/errors/invalid_request\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "7b2da234-a54b-4506-99d3-3d384e887537",
-              "name": "Forbidden",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "v2",
-                    "fields",
-                    ":fieldId",
-                    "options",
-                    ":value"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "fieldId",
-                      "description": "(Required) The API name for the field"
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "value",
-                      "description": "(Required) The system generated value for the field option"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/problem+json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/problem+json"
-                }
-              ],
-              "body": "{\n  \"detail\": \"You do not have permission to get this field option\",\n  \"instance\": \"/fields/my_field/options/option_1\",\n  \"operationId\": \"7edb5d62-f5bf-463b-9410-cdd8b3293d89\",\n  \"status\": 403,\n  \"title\": \"Forbidden\",\n  \"type\": \"https://api-docs.lawvu.com/errors/forbidden\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "74346b92-3031-4d6c-b707-1f84bb2f5e81",
-              "name": "Not Found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "v2",
-                    "fields",
-                    ":fieldId",
-                    "options",
-                    ":value"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "fieldId",
-                      "description": "(Required) The API name for the field"
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "value",
-                      "description": "(Required) The system generated value for the field option"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/problem+json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/problem+json"
-                }
-              ],
-              "body": "{\n  \"detail\": \"Field option does not exist\",\n  \"instance\": \"/fields/my_field/options/option_1\",\n  \"operationId\": \"7edb5d62-f5bf-463b-9410-cdd8b3293d89\",\n  \"status\": 404,\n  \"title\": \"Resource not found\",\n  \"type\": \"https://api-docs.lawvu.com/errors/resource_not_found\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "187bbc97-dfef-4f73-ae99-bb2a30b55722",
-          "name": "Update an option on a field",
-          "request": {
-            "name": "Update an option on a field",
-            "description": {
-              "content": "Update an option on a field by value.\n\nSupported field types: MultiOption, Option",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "v2",
-                "fields",
-                ":fieldId",
-                "options",
-                ":value"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "fieldId",
-                  "description": "(Required) The API name for the field"
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "value",
-                  "description": "(Required) The value of the option to update"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/merge-patch+json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/problem+json"
-              }
-            ],
-            "method": "PATCH",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"label\": \"<string>\",\n  \"properties\": {\n    \"key_0\": {},\n    \"key_1\": {},\n    \"key_2\": {}\n  }\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "f2ac5bad-fe30-4347-b782-b667dfb6700b",
-              "name": "No Content",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "v2",
-                    "fields",
-                    ":fieldId",
-                    "options",
-                    ":value"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "fieldId",
-                      "description": "(Required) The API name for the field"
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "value",
-                      "description": "(Required) The value of the option to update"
-                    }
-                  ]
-                },
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"label\": \"Updated Label\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "No Content",
-              "code": 204,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "4cee270c-c9d2-4486-bdff-d25a0b6fc65e",
-              "name": "Bad Request",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "v2",
-                    "fields",
-                    ":fieldId",
-                    "options",
-                    ":value"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "fieldId",
-                      "description": "(Required) The API name for the field"
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "value",
-                      "description": "(Required) The value of the option to update"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/problem+json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"label\": \"Updated Label\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/problem+json"
-                }
-              ],
-              "body": "{\n  \"detail\": \"Field does not support options\",\n  \"instance\": \"/fields/my_field/options/option_1\",\n  \"operationId\": \"7edb5d62-f5bf-463b-9410-cdd8b3293d89\",\n  \"status\": 400,\n  \"title\": \"Invalid request\",\n  \"type\": \"https://api-docs.lawvu.com/errors/invalid_request\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "f59a2f65-887a-4539-9247-f9ecdf8d9df4",
-              "name": "Forbidden",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "v2",
-                    "fields",
-                    ":fieldId",
-                    "options",
-                    ":value"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "fieldId",
-                      "description": "(Required) The API name for the field"
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "value",
-                      "description": "(Required) The value of the option to update"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/problem+json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"label\": \"Updated Label\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/problem+json"
-                }
-              ],
-              "body": "{\n  \"detail\": \"string\",\n  \"instance\": \"string\",\n  \"operationId\": \"string\",\n  \"status\": 8211,\n  \"title\": \"string\",\n  \"type\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "79951dfd-44bf-4e84-9b0c-debe90ac1277",
-              "name": "Not Found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "v2",
-                    "fields",
-                    ":fieldId",
-                    "options",
-                    ":value"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "fieldId",
-                      "description": "(Required) The API name for the field"
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "value",
-                      "description": "(Required) The value of the option to update"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/problem+json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"label\": \"Updated Label\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/problem+json"
-                }
-              ],
-              "body": "{\n  \"detail\": \"Field option does not exist\",\n  \"instance\": \"/fields/my_field/options/option_1\",\n  \"operationId\": \"7edb5d62-f5bf-463b-9410-cdd8b3293d89\",\n  \"status\": 404,\n  \"title\": \"Resource not found\",\n  \"type\": \"https://api-docs.lawvu.com/errors/resource_not_found\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "1a968aea-aba2-47a2-82ab-65474a3f6a72",
-          "name": "Delete an option from a field",
-          "request": {
-            "name": "Delete an option from a field",
-            "description": {
-              "content": "Removes an option from a field by value.\n\nSupported field types: MultiOption, Option",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "v2",
-                "fields",
-                ":fieldId",
-                "options",
-                ":value"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "fieldId",
-                  "description": "(Required) The API name for the field"
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "value",
-                  "description": "(Required) The system generated value for the field option"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/problem+json"
-              }
-            ],
-            "method": "DELETE",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "d596de9b-14fd-4b34-8126-27d21a920c28",
-              "name": "No Content",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "v2",
-                    "fields",
-                    ":fieldId",
-                    "options",
-                    ":value"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "fieldId",
-                      "description": "(Required) The API name for the field"
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "value",
-                      "description": "(Required) The system generated value for the field option"
-                    }
-                  ]
-                },
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "No Content",
-              "code": 204,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "5c4479a5-37ad-4bc8-bb78-d47dad7b62af",
-              "name": "Bad Request",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "v2",
-                    "fields",
-                    ":fieldId",
-                    "options",
-                    ":value"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "fieldId",
-                      "description": "(Required) The API name for the field"
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "value",
-                      "description": "(Required) The system generated value for the field option"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/problem+json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/problem+json"
-                }
-              ],
-              "body": "{\n  \"detail\": \"Field does not support deleting options\",\n  \"instance\": \"/fields/my_field/options/option_1\",\n  \"operationId\": \"7edb5d62-f5bf-463b-9410-cdd8b3293d89\",\n  \"status\": 400,\n  \"title\": \"Invalid request\",\n  \"type\": \"https://api-docs.lawvu.com/errors/invalid_request\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "80bc91b5-3f4f-40b4-8631-118ea2edc372",
-              "name": "Forbidden",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "v2",
-                    "fields",
-                    ":fieldId",
-                    "options",
-                    ":value"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "fieldId",
-                      "description": "(Required) The API name for the field"
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "value",
-                      "description": "(Required) The system generated value for the field option"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/problem+json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/problem+json"
-                }
-              ],
-              "body": "{\n  \"detail\": \"You do not have permission to delete this field option\",\n  \"instance\": \"/fields/my_field/options/option_1\",\n  \"operationId\": \"7edb5d62-f5bf-463b-9410-cdd8b3293d89\",\n  \"status\": 403,\n  \"title\": \"Forbidden\",\n  \"type\": \"https://api-docs.lawvu.com/errors/forbidden\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "35e54e6a-81be-4b90-9509-a3a6fa0e3f39",
-              "name": "Not Found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "v2",
-                    "fields",
-                    ":fieldId",
-                    "options",
-                    ":value"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "fieldId",
-                      "description": "(Required) The API name for the field"
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "value",
-                      "description": "(Required) The system generated value for the field option"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/problem+json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/problem+json"
-                }
-              ],
-              "body": "{\n  \"detail\": \"Field option does not exist\",\n  \"instance\": \"/fields/my_field/options/option_1\",\n  \"operationId\": \"7edb5d62-f5bf-463b-9410-cdd8b3293d89\",\n  \"status\": 404,\n  \"title\": \"Resource not found\",\n  \"type\": \"https://api-docs.lawvu.com/errors/resource_not_found\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "526bb620-489a-4089-815c-129b9abb6ef6",
-          "name": "Get fields",
-          "request": {
-            "name": "Get fields",
-            "description": {
-              "content": "",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "v1",
-                "fields"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "filtering.field",
-                  "value": "<string>",
-                  "description": "Field to filter by (optional)"
-                },
-                {
-                  "disabled": false,
-                  "key": "filtering.operator",
-                  "value": "<string>",
-                  "description": "Operator used for filtering (optional)"
-                },
-                {
-                  "disabled": false,
-                  "key": "filtering.value",
-                  "value": "<string>",
-                  "description": "Value to filter by (optional)"
-                },
-                {
-                  "disabled": false,
-                  "key": "sorting.direction",
-                  "value": "<string>",
-                  "description": "Set the sorting direction"
-                },
-                {
-                  "disabled": false,
-                  "key": "sorting.field",
-                  "value": "<string>",
-                  "description": "Set the sorting fields"
-                },
-                {
-                  "disabled": false,
-                  "key": "take",
-                  "value": "50",
-                  "description": "The maximum number of fields to return<p>Default: 50</p>"
-                },
-                {
-                  "disabled": false,
-                  "key": "skip",
-                  "value": "0",
-                  "description": "<p>Default: 0</p>"
-                },
-                {
-                  "disabled": false,
-                  "key": "search",
-                  "value": ""
-                },
-                {
-                  "disabled": false,
-                  "key": "fieldCategory",
-                  "value": "<string>",
-                  "description": "<p>Options:</p><ul><li>Custom</li><li>Lawvu</li></ul>"
-                }
-              ],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "text/plain"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "8fa42832-c716-45ed-8d5d-848e01c30a00",
-              "name": "Success",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "v1",
-                    "fields"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "filtering.field",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "filtering.operator",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "filtering.value",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "sorting.direction",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "sorting.field",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "take",
-                      "value": "50"
-                    },
-                    {
-                      "key": "skip",
-                      "value": "0"
-                    },
-                    {
-                      "key": "search",
-                      "value": ""
-                    },
-                    {
-                      "key": "fieldCategory",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "text/plain"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": [\n    {\n      \"id\": 1824,\n      \"title\": \"string\",\n      \"description\": \"string\",\n      \"category\": \"Custom\",\n      \"lawvuType\": 9086,\n      \"webMergeFieldName\": \"string\",\n      \"contractCount\": 6907,\n      \"matterCount\": 9730,\n      \"_links\": [\n        {\n          \"name\": \"string\",\n          \"uri\": \"string\",\n          \"methods\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"name\": \"string\",\n          \"uri\": \"string\",\n          \"methods\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ]\n    },\n    {\n      \"id\": 2298,\n      \"title\": \"string\",\n      \"description\": \"string\",\n      \"category\": \"Custom\",\n      \"lawvuType\": 5499,\n      \"webMergeFieldName\": \"string\",\n      \"contractCount\": 7154,\n      \"matterCount\": 2166,\n      \"_links\": [\n        {\n          \"name\": \"string\",\n          \"uri\": \"string\",\n          \"methods\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"name\": \"string\",\n          \"uri\": \"string\",\n          \"methods\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ]\n    }\n  ],\n  \"total\": 6123\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "c34f413b-5407-4621-9db7-fa124904418e",
-          "name": "Get field schema",
-          "request": {
-            "name": "Get field schema",
-            "description": {},
-            "url": {
-              "path": [
-                "v1",
-                "fields",
-                ":fieldId"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<integer>",
-                  "key": "fieldId",
-                  "description": "(Required) e.g. 1234"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "text/plain"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "4957fb99-8958-46d5-9b9b-e691d8f99394",
-              "name": "Success",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "v1",
-                    "fields",
-                    ":fieldId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<integer>",
-                      "key": "fieldId",
-                      "description": "(Required) e.g. 1234"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "text/plain"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": 8307,\n  \"organisationId\": 6036,\n  \"isAlwaysRequired\": true,\n  \"entityColumnName\": \"string\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"category\": \"string\",\n  \"lawvuType\": \"Restricted\",\n  \"webMergeFieldName\": \"string\",\n  \"contractCount\": 2901,\n  \"matterCount\": 3956,\n  \"parameters\": {\n    \"options\": [\n      {\n        \"Value\": \"string\",\n        \"id\": 4625,\n        \"label\": \"string\"\n      },\n      {\n        \"Value\": \"string\",\n        \"id\": 5976,\n        \"label\": \"string\"\n      }\n    ],\n    \"default\": {},\n    \"rangeStart\": 4049.9708499241983,\n    \"rangeEnd\": 1417.114738825588,\n    \"stepSize\": 6572.7369941264915,\n    \"allowExternalUsers\": true,\n    \"canAddOptions\": true\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "ef59e355-a69a-46e5-bdac-66b0c7d92d28",
+          "createdAt": "2026-10-21T20:26:55.000Z",
+          "updatedAt": "2026-10-21T20:26:55.000Z",
+          "uid": "35240-ef59e355-a69a-46e5-bdac-66b0c7d92d28"
         }
       ],
-      "event": []
+      "id": "cdae4783-14af-4fe1-8d2d-5ed0109a9663",
+      "createdAt": "2026-10-21T20:26:55.000Z",
+      "updatedAt": "2026-10-21T20:26:55.000Z",
+      "uid": "35240-cdae4783-14af-4fe1-8d2d-5ed0109a9663"
     }
   ],
-  "event": [],
   "variable": [
     {
-      "type": "string",
-      "value": "https://api-sandbox.lawvu.com/account-apis",
-      "key": "baseUrl"
+      "key": "baseUrl",
+      "value": "https://api-sandbox.lawvu.com"
     }
-  ],
-  "info": {
-    "_postman_id": "0ce3b78b-f20c-4214-8817-b08485cee78c",
-    "name": "LawVu Account Auth Fields API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "Apis for account related resources (authentication, profiles, organisation details etc)",
-      "type": "text/plain"
-    }
-  }
+  ]
 }

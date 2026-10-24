@@ -1,116 +1,350 @@
 {
+  "info": {
+    "_postman_id": "c80fa045-1c26-4d18-b9a7-b6581192f12c",
+    "name": "LawVu Teams API",
+    "description": "The next generation of the LawVu API.\n\nContact Support:\n Name: LawVu Developer Support Team\n Email: developer@lawvu.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:27:21.000Z",
+    "updatedAt": "2026-10-21T20:27:21.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-c80fa045-1c26-4d18-b9a7-b6581192f12c"
+  },
   "item": [
     {
-      "id": "9e9a859c-64e6-4eb6-b46b-f9e16dc0ce63",
-      "name": "Teams",
-      "description": {
-        "content": "",
-        "type": "text/plain"
-      },
+      "name": "v2",
       "item": [
         {
-          "id": "d67b36b8-817d-4a94-8ee5-535be6537c96",
-          "name": "Get teams",
-          "request": {
-            "name": "Get teams",
-            "description": {
-              "content": "Get teams",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "v1",
-                "teams"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "allowAssigment",
-                  "value": "false",
-                  "description": "Only return teams that allow work assignment<p>Default: False</p>"
-                }
-              ],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "text/plain"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "teams",
+          "item": [
             {
-              "id": "7c9ee5a2-24ea-4fb8-be01-5756a1c51af5",
-              "name": "Success",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "v1",
-                    "teams"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
+              "name": "{teamId}",
+              "item": [
+                {
+                  "name": "Get team",
+                  "id": "be9d7afd-0a83-4d3f-bb07-c2dfb318b9a4",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/teams/:teamId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "teams",
+                        ":teamId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "df821c85-d659-4f98-8374-c97b224fb1b2",
+                          "key": "teamId",
+                          "value": "<integer>",
+                          "description": "(Required) The system identifier for the team"
+                        }
+                      ]
+                    },
+                    "description": "Retrieve a team by its identifier"
+                  },
+                  "response": [
                     {
-                      "key": "allowAssigment",
-                      "value": "false"
+                      "id": "7a83a6d0-e991-4d9e-b961-5b88afb14b9f",
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/teams/:teamId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "teams",
+                            ":teamId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "teamId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"allowAssignment\": \"<boolean,null>\",\n  \"id\": \"<integer,null>\",\n  \"name\": \"<string,null>\",\n  \"created\": {\n    \"dateUtc\": \"<dateTime>\",\n    \"userName\": \"<string>\"\n  },\n  \"modified\": {\n    \"dateUtc\": \"<dateTime>\",\n    \"userName\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-21T20:27:21.000Z",
+                      "updatedAt": "2026-10-21T20:27:21.000Z",
+                      "uid": "35240-7a83a6d0-e991-4d9e-b961-5b88afb14b9f"
+                    },
+                    {
+                      "id": "16a1785d-4146-496f-bf7c-3544e4cca5ca",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/problem+json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/teams/:teamId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "teams",
+                            ":teamId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "teamId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/problem+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"detail\": \"<string>\",\n  \"instance\": \"<string>\",\n  \"operationId\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"type\": \"<string>\",\n  \"elit_6b\": {},\n  \"consectetur72f\": {},\n  \"id_5b7\": {}\n}",
+                      "createdAt": "2026-10-21T20:27:21.000Z",
+                      "updatedAt": "2026-10-21T20:27:21.000Z",
+                      "uid": "35240-16a1785d-4146-496f-bf7c-3544e4cca5ca"
                     }
                   ],
-                  "variable": []
-                },
+                  "createdAt": "2026-10-21T20:27:21.000Z",
+                  "updatedAt": "2026-10-21T20:27:21.000Z",
+                  "uid": "35240-be9d7afd-0a83-4d3f-bb07-c2dfb318b9a4"
+                }
+              ],
+              "id": "a781baff-4d9b-42c9-ba21-4e5401e87884",
+              "createdAt": "2026-10-21T20:27:21.000Z",
+              "updatedAt": "2026-10-21T20:27:21.000Z",
+              "uid": "35240-a781baff-4d9b-42c9-ba21-4e5401e87884"
+            },
+            {
+              "name": "Get teams",
+              "id": "6c6b4beb-84ad-4014-bfc5-e181958f7918",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
                 "header": [
                   {
                     "key": "Accept",
-                    "value": "text/plain"
+                    "value": "application/json"
                   }
                 ],
-                "method": "GET",
-                "body": {}
+                "url": {
+                  "raw": "{{baseUrl}}/v2/teams?$filter=<string>&$orderby=<string>&$skip=<integer>&$top=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v2",
+                    "teams"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter the results using OData filter syntax",
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Order the results using OData orderby syntax",
+                      "key": "$orderby",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Skip the specified number of results",
+                      "key": "$skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Limit the number of results returned",
+                      "key": "$top",
+                      "value": "<integer>"
+                    }
+                  ]
+                },
+                "description": "Retrieve a list of teams"
               },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "response": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "id": "bd054bee-f959-4f64-8164-b30121b89d83",
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/teams?$filter=<string>&$orderby=<string>&$skip=<integer>&$top=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "teams"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter the results using OData filter syntax",
+                          "key": "$filter",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Order the results using OData orderby syntax",
+                          "key": "$orderby",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Skip the specified number of results",
+                          "key": "$skip",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Limit the number of results returned",
+                          "key": "$top",
+                          "value": "<integer>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"items\": [\n    {\n      \"allowAssignment\": \"<boolean,null>\",\n      \"id\": \"<integer,null>\",\n      \"name\": \"<string,null>\",\n      \"created\": {\n        \"dateUtc\": \"<dateTime>\",\n        \"userName\": \"<string>\"\n      },\n      \"modified\": {\n        \"dateUtc\": \"<dateTime>\",\n        \"userName\": \"<string>\"\n      }\n    },\n    {\n      \"allowAssignment\": \"<boolean,null>\",\n      \"id\": \"<integer,null>\",\n      \"name\": \"<string,null>\",\n      \"created\": {\n        \"dateUtc\": \"<dateTime>\",\n        \"userName\": \"<string>\"\n      },\n      \"modified\": {\n        \"dateUtc\": \"<dateTime>\",\n        \"userName\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:27:21.000Z",
+                  "updatedAt": "2026-10-21T20:27:21.000Z",
+                  "uid": "35240-bd054bee-f959-4f64-8164-b30121b89d83"
+                },
+                {
+                  "id": "4564eb33-c249-40fd-bd61-18fcc31ae056",
+                  "name": "Bad Request",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/problem+json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/teams?$filter=<string>&$orderby=<string>&$skip=<integer>&$top=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "teams"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter the results using OData filter syntax",
+                          "key": "$filter",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Order the results using OData orderby syntax",
+                          "key": "$orderby",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Skip the specified number of results",
+                          "key": "$skip",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Limit the number of results returned",
+                          "key": "$top",
+                          "value": "<integer>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/problem+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detail\": \"<string>\",\n  \"errors\": {\n    \"aliqua5\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"instance\": \"<string>\",\n  \"operationId\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"type\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:27:21.000Z",
+                  "updatedAt": "2026-10-21T20:27:21.000Z",
+                  "uid": "35240-4564eb33-c249-40fd-bd61-18fcc31ae056"
                 }
               ],
-              "body": "[\n  {\n    \"id\": 1,\n    \"name\": \"Team 1\"\n  },\n  {\n    \"id\": 2,\n    \"name\": \"Team 2\"\n  }\n]",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "createdAt": "2026-10-21T20:27:21.000Z",
+              "updatedAt": "2026-10-21T20:27:21.000Z",
+              "uid": "35240-6c6b4beb-84ad-4014-bfc5-e181958f7918"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "ebfe0eb3-5383-4620-9471-db7dfac41b0c",
+          "createdAt": "2026-10-21T20:27:21.000Z",
+          "updatedAt": "2026-10-21T20:27:21.000Z",
+          "uid": "35240-ebfe0eb3-5383-4620-9471-db7dfac41b0c"
         }
       ],
-      "event": []
+      "id": "35a4852f-dcfb-47c1-9903-763fb8f5f7e2",
+      "createdAt": "2026-10-21T20:27:21.000Z",
+      "updatedAt": "2026-10-21T20:27:21.000Z",
+      "uid": "35240-35a4852f-dcfb-47c1-9903-763fb8f5f7e2"
     }
   ],
-  "event": [],
   "variable": [
     {
-      "type": "string",
-      "value": "https://api-sandbox.lawvu.com/account-apis",
-      "key": "baseUrl"
+      "key": "baseUrl",
+      "value": "https://api-sandbox.lawvu.com"
     }
-  ],
-  "info": {
-    "_postman_id": "f978df70-2bff-4c02-bf35-da9f9bd3dd03",
-    "name": "LawVu Account Auth Teams API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "Apis for account related resources (authentication, profiles, organisation details etc)",
-      "type": "text/plain"
-    }
-  }
+  ]
 }

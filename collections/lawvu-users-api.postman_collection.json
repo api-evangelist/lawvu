@@ -1,257 +1,350 @@
 {
+  "info": {
+    "_postman_id": "6f2d7960-c6b3-41ab-8a12-b811ff15aa91",
+    "name": "LawVu Users API",
+    "description": "The next generation of the LawVu API.\n\nContact Support:\n Name: LawVu Developer Support Team\n Email: developer@lawvu.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:27:27.000Z",
+    "updatedAt": "2026-10-21T20:27:28.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-6f2d7960-c6b3-41ab-8a12-b811ff15aa91"
+  },
   "item": [
     {
-      "id": "9c09818b-b2b3-4b34-8c89-baf90b094e9e",
-      "name": "Users",
-      "description": {
-        "content": "",
-        "type": "text/plain"
-      },
+      "name": "v2",
       "item": [
         {
-          "id": "5f4de7ae-546f-4975-8d08-d0e828170b18",
-          "name": "Search users",
-          "request": {
-            "name": "Search users",
-            "description": {
-              "content": "Returns a list of users based on the filter criteria",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "v1",
-                "users"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
+          "name": "users",
+          "item": [
+            {
+              "name": "{userId}",
+              "item": [
                 {
-                  "disabled": false,
-                  "key": "filter.search",
-                  "value": "<string>",
-                  "description": "Search text (applies to: name & email address)"
-                },
-                {
-                  "disabled": false,
-                  "key": "filter.permission",
-                  "value": "<string>",
-                  "description": "<p>Options:</p><ul><li>CreateMatters</li><li>ContractCreator</li></ul>"
-                },
-                {
-                  "disabled": false,
-                  "key": "filter.activeandinvitedusersonly",
-                  "value": "<boolean>",
-                  "description": "Only users that are active or invited"
-                },
-                {
-                  "disabled": false,
-                  "key": "filter.primaryorganisationid",
-                  "value": "<integer>"
-                },
-                {
-                  "disabled": false,
-                  "key": "filter.activeusersonly",
-                  "value": "<boolean>",
-                  "description": "Only users that are active"
-                },
-                {
-                  "disabled": false,
-                  "key": "filter.uselitequery",
-                  "value": "<boolean>",
-                  "description": "Use a lite query\r\nWhen enabled the response will return only partial information about the user:\r\nUserId, FirstName, LastName, UserFullName and OrganisationName"
+                  "name": "Get user",
+                  "id": "4ee0f35c-cf82-49c1-8195-e6d04c21454f",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/users/:userId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "users",
+                        ":userId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "865ac37b-d681-47a9-9a46-b47a1d3d4108",
+                          "key": "userId",
+                          "value": "<string>",
+                          "description": "(Required) The unique identifier of the user"
+                        }
+                      ]
+                    },
+                    "description": "Retrieve a user by their identifier"
+                  },
+                  "response": [
+                    {
+                      "id": "872e813a-c807-4aca-9430-3bf4f149e886",
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/users/:userId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "users",
+                            ":userId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "userId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string,null>\",\n  \"email\": \"<string,null>\",\n  \"firstName\": \"<string,null>\",\n  \"lastName\": \"<string,null>\",\n  \"organization\": {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\"\n  },\n  \"department\": {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\"\n  },\n  \"directPhone\": \"<string,null>\",\n  \"jobTitle\": \"<string,null>\",\n  \"mobilePhone\": \"<string,null>\",\n  \"role\": \"Standard\",\n  \"status\": \"Pending\",\n  \"created\": {\n    \"dateUtc\": \"<dateTime>\",\n    \"userName\": \"<string>\"\n  },\n  \"modified\": {\n    \"dateUtc\": \"<dateTime>\",\n    \"userName\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-21T20:27:28.000Z",
+                      "updatedAt": "2026-10-21T20:27:28.000Z",
+                      "uid": "35240-872e813a-c807-4aca-9430-3bf4f149e886"
+                    },
+                    {
+                      "id": "8ed02572-6f40-4fe2-a831-8204683dd7c8",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/problem+json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/users/:userId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "users",
+                            ":userId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "userId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/problem+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"detail\": \"<string>\",\n  \"instance\": \"<string>\",\n  \"operationId\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"type\": \"<string>\"\n}",
+                      "createdAt": "2026-10-21T20:27:28.000Z",
+                      "updatedAt": "2026-10-21T20:27:28.000Z",
+                      "uid": "35240-8ed02572-6f40-4fe2-a831-8204683dd7c8"
+                    }
+                  ],
+                  "createdAt": "2026-10-21T20:27:28.000Z",
+                  "updatedAt": "2026-10-21T20:27:28.000Z",
+                  "uid": "35240-4ee0f35c-cf82-49c1-8195-e6d04c21454f"
                 }
               ],
-              "variable": []
+              "id": "b91f02e5-1663-4a94-915e-6e4468a41bb0",
+              "createdAt": "2026-10-21T20:27:28.000Z",
+              "updatedAt": "2026-10-21T20:27:28.000Z",
+              "uid": "35240-b91f02e5-1663-4a94-915e-6e4468a41bb0"
             },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "text/plain"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
             {
-              "id": "d7086e32-e10d-47be-8883-a34bad4c0dbf",
-              "name": "Success",
-              "originalRequest": {
+              "name": "Get users",
+              "id": "e3ec0928-b4a8-44ba-9a6d-03bb9d300eaa",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
                 "url": {
-                  "path": [
-                    "v1",
-                    "users"
-                  ],
+                  "raw": "{{baseUrl}}/v2/users?$filter=<string>&$orderby=<string>&$skip=<integer>&$top=<integer>",
                   "host": [
                     "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v2",
+                    "users"
                   ],
                   "query": [
                     {
-                      "key": "filter.search",
+                      "description": "Filter the results using OData filter syntax",
+                      "key": "$filter",
                       "value": "<string>"
                     },
                     {
-                      "key": "filter.permission",
+                      "description": "Order the results using OData orderby syntax",
+                      "key": "$orderby",
                       "value": "<string>"
                     },
                     {
-                      "key": "filter.activeandinvitedusersonly",
-                      "value": "<boolean>"
-                    },
-                    {
-                      "key": "filter.primaryorganisationid",
+                      "description": "Skip the specified number of results",
+                      "key": "$skip",
                       "value": "<integer>"
                     },
                     {
-                      "key": "filter.activeusersonly",
-                      "value": "<boolean>"
-                    },
-                    {
-                      "key": "filter.uselitequery",
-                      "value": "<boolean>"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "text/plain"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "[\n  {\n    \"id\": \"633182f3-130b-4917-99ba-4c3e88080eb4\",\n    \"userName\": null,\n    \"firstName\": \"Example\",\n    \"lastName\": \"User\",\n    \"organisationName\": null,\n    \"organisationPictureCacheId\": null,\n    \"directPhone\": null,\n    \"mobilePhone\": null,\n    \"email\": \"exampleuser@noemail.com\",\n    \"hasPicture\": false,\n    \"pictureCacheId\": 0,\n    \"invitationSentUtc\": null,\n    \"userFullName\": \"Example User\",\n    \"userInitials\": \"EU\",\n    \"isRemoved\": false,\n    \"isDisabled\": false,\n    \"hourlyRate\": null,\n    \"liveMattersCount\": 277\n  }\n]",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "962f08fc-df6b-4267-b02d-1108b34474f9",
-          "name": "Get user profile",
-          "request": {
-            "name": "Get user profile",
-            "description": {
-              "content": "Returns the profile of a specific user.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "v1",
-                "users",
-                ":id",
-                "profile"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) User Id (e.g. e1bf0987-8844-49ab-a6b6-10562b58e230)"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "text/plain"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "eed33a33-b0d7-4e11-a691-0fa3a91b8e92",
-              "name": "Success",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "v1",
-                    "users",
-                    ":id",
-                    "profile"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) User Id (e.g. e1bf0987-8844-49ab-a6b6-10562b58e230)"
+                      "description": "Limit the number of results returned",
+                      "key": "$top",
+                      "value": "<integer>"
                     }
                   ]
                 },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "text/plain"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                "description": "Retrieve a list of users"
               },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "response": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "id": "1b0338c7-60b7-4d4d-82c2-d06421c94e92",
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/users?$filter=<string>&$orderby=<string>&$skip=<integer>&$top=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "users"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter the results using OData filter syntax",
+                          "key": "$filter",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Order the results using OData orderby syntax",
+                          "key": "$orderby",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Skip the specified number of results",
+                          "key": "$skip",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Limit the number of results returned",
+                          "key": "$top",
+                          "value": "<integer>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"items\": [\n    {\n      \"id\": \"<string,null>\",\n      \"email\": \"<string,null>\",\n      \"firstName\": \"<string,null>\",\n      \"lastName\": \"<string,null>\",\n      \"organization\": {\n        \"id\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"department\": {\n        \"id\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"directPhone\": \"<string,null>\",\n      \"jobTitle\": \"<string,null>\",\n      \"mobilePhone\": \"<string,null>\",\n      \"role\": \"External\",\n      \"status\": \"LockedOut\",\n      \"created\": {\n        \"dateUtc\": \"<dateTime>\",\n        \"userName\": \"<string>\"\n      },\n      \"modified\": {\n        \"dateUtc\": \"<dateTime>\",\n        \"userName\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string,null>\",\n      \"email\": \"<string,null>\",\n      \"firstName\": \"<string,null>\",\n      \"lastName\": \"<string,null>\",\n      \"organization\": {\n        \"id\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"department\": {\n        \"id\": \"<integer>\",\n        \"name\": \"<string>\"\n      },\n      \"directPhone\": \"<string,null>\",\n      \"jobTitle\": \"<string,null>\",\n      \"mobilePhone\": \"<string,null>\",\n      \"role\": \"Standard\",\n      \"status\": \"LockedOut\",\n      \"created\": {\n        \"dateUtc\": \"<dateTime>\",\n        \"userName\": \"<string>\"\n      },\n      \"modified\": {\n        \"dateUtc\": \"<dateTime>\",\n        \"userName\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:27:28.000Z",
+                  "updatedAt": "2026-10-21T20:27:28.000Z",
+                  "uid": "35240-1b0338c7-60b7-4d4d-82c2-d06421c94e92"
+                },
+                {
+                  "id": "811b457e-dfeb-42d6-9bc7-db1d44217bd8",
+                  "name": "Bad Request",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/problem+json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/users?$filter=<string>&$orderby=<string>&$skip=<integer>&$top=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "users"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter the results using OData filter syntax",
+                          "key": "$filter",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Order the results using OData orderby syntax",
+                          "key": "$orderby",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Skip the specified number of results",
+                          "key": "$skip",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Limit the number of results returned",
+                          "key": "$top",
+                          "value": "<integer>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/problem+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detail\": \"<string>\",\n  \"errors\": {\n    \"sit_3e2\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"instance\": \"<string>\",\n  \"operationId\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"type\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:27:28.000Z",
+                  "updatedAt": "2026-10-21T20:27:28.000Z",
+                  "uid": "35240-811b457e-dfeb-42d6-9bc7-db1d44217bd8"
                 }
               ],
-              "body": "{\n  \"id\": \"123-456-789\",\n  \"firstName\": \"Joey\",\n  \"lastName\": \"Tribiani\",\n  \"email\": \"emailaddress@gmail.com\",\n  \"mobilePhone\": \"987654321\",\n  \"directPhone\": \"24680\",\n  \"jobTitle\": \"Worker\",\n  \"departmentId\": 4,\n  \"specialityIds\": [\n    1,\n    2,\n    3\n  ],\n  \"biography\": \"Biography\",\n  \"hourlyRate\": 9.99,\n  \"linkedInUrl\": \"url\",\n  \"organisationId\": 5,\n  \"organisationName\": \"The Workplace\",\n  \"organisationType\": \"Customer\",\n  \"role\": \"Administrator\",\n  \"departmentName\": \"Department\",\n  \"hasPicture\": true,\n  \"pictureCacheId\": 78,\n  \"invitationSentUtc\": \"2025-01-21T00:44:36.422387+00:00\",\n  \"status\": \"LockedOut\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "createdAt": "2026-10-21T20:27:28.000Z",
+              "updatedAt": "2026-10-21T20:27:28.000Z",
+              "uid": "35240-e3ec0928-b4a8-44ba-9a6d-03bb9d300eaa"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "a77c0532-de81-48b5-a444-4739450bcfa4",
+          "createdAt": "2026-10-21T20:27:28.000Z",
+          "updatedAt": "2026-10-21T20:27:28.000Z",
+          "uid": "35240-a77c0532-de81-48b5-a444-4739450bcfa4"
         }
       ],
-      "event": []
+      "id": "269f635f-7133-4124-8a26-da0f949a94cc",
+      "createdAt": "2026-10-21T20:27:28.000Z",
+      "updatedAt": "2026-10-21T20:27:28.000Z",
+      "uid": "35240-269f635f-7133-4124-8a26-da0f949a94cc"
     }
   ],
-  "event": [],
   "variable": [
     {
-      "type": "string",
-      "value": "https://api-sandbox.lawvu.com/account-apis",
-      "key": "baseUrl"
+      "key": "baseUrl",
+      "value": "https://api-sandbox.lawvu.com"
     }
-  ],
-  "info": {
-    "_postman_id": "16635b80-dc9f-4e29-a92f-e02db5f07973",
-    "name": "LawVu Account Auth Users API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "Apis for account related resources (authentication, profiles, organisation details etc)",
-      "type": "text/plain"
-    }
-  }
+  ]
 }
